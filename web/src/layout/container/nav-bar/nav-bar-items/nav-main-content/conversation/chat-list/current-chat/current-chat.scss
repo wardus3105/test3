@@ -1,0 +1,83 @@
+.currentchat-container{
+  width: 70%;
+  margin-left: auto !important;
+}
+
+.currentchat-context{
+  background: var(--color-main2);
+  border-radius: 16px 16px 0 16px;
+  overflow: auto;
+}
+
+
+.currentchat-context .chat-time{
+  font-size: var(--fontsize-default3);
+  line-height: var(--lineheight-default3);
+  color: var(--color-background);
+  opacity: 0.6;
+}
+
+.currentchat-context span:first-child{
+  color: var(--color-background);
+  opacity: 0.95;
+}
+
+
+
+/* ------------------------------------------------ RESPONSIVE ----------------------- */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 767px) { 
+    .currentchat-container{
+        width: 90%;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+  
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+  
+  }
+
+  
+  @media (min-width:1700px){   
+    .currentchat-container{
+        width: 65%;
+    }
+  }
+  
+  @media (min-width:2000px){   
+    .currentchat-container{
+        width: 55%;
+    }
+  }
+  
+  @media (min-width:2350px){   
+    .currentchat-container{
+        width: 45%;
+    }
+  }
+  
+  @media (min-width:4090px){   
+    .currentchat-container{
+        width: 35%;
+    }
+  }
+  
+  @media (min-width:5400px){   
+    .currentchat-container{
+        width: 25%;
+    }
+  } 

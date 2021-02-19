@@ -1,0 +1,83 @@
+.bodypanel-container{
+    position: absolute;
+    background-color: #F5F8FB;
+    padding: 1rem 18rem  0;
+    width: 100%;
+}
+
+
+/* ------------------------------------------------ RESPONSIVE ----------------------- */
+
+/* WIDTH */
+
+@media only screen and (max-width: 600px) {
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    .bodypanel-container{
+        padding: 0 !important;
+    }
+}
+
+
+@media only screen and (width: 1024px) {
+    .bodypanel-container{
+        padding: 1rem 1rem  0 !important;
+    }
+}
+
+@media (max-width:1300px){   
+    .bodypanel-container{
+        padding: 1rem 10rem  0;
+    }
+}
+
+@media (max-width:1160px){   
+    .bodypanel-container{
+        padding: 1rem 6rem  0;
+    }
+}
+
+@media (max-width:920px){   
+    .bodypanel-container{
+        padding: 1rem 2rem  0;
+    }
+}
+
+@media (min-width:1700px){   
+    .bodypanel-container{
+        padding: 1rem 20rem  0;
+    }
+}
+  
+@media (min-width:2000px){   
+    .bodypanel-container{
+        padding: 1rem 28rem  0;
+    }
+}
+  
+@media (min-width:2300px){   
+    .bodypanel-container{
+        padding: 1rem 36rem  0;
+    }
+}
+  
+@media (min-width:3000px){   
+    .bodypanel-container{
+        padding: 1rem 50rem  0;
+    }
+}
+  
+@media (min-width:4090px){   
+    .bodypanel-container{
+        padding: 1rem 90rem  0;
+    }
+}
+  
+@media (min-width:5400px){   
+    .bodypanel-container{
+        padding: 1rem 140rem  0;
+    }
+} 

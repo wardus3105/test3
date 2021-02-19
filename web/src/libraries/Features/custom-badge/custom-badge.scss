@@ -1,0 +1,14 @@
+@import '../../Styles/utils/variables.scss';
+
+.custombadge-container{
+    padding: 0 4px;
+    color: $neutral-white;
+    background: $accent-dodger-blue;
+    border-radius: $border-radius-base-small;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 19px;    
+    text-align: center;
+    text-transform: uppercase;
+}
