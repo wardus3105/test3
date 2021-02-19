@@ -17,15 +17,12 @@ export interface IChat{
     messageType: string,
     messageStatus: string
     userId: string,
-    createdAt: string,
     user: IUser,
-    attachments:IAttachment[],
     chatRoomId?: string
 }
 
 interface IUser{
     userName:string,
-    lastLogin: string,
     status: string
 }
 

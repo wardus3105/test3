@@ -8,6 +8,17 @@ import ChatInputServices from "../../chat-input/main/chat-input.services";
 
 import ChatListStates from "./chat-list.states";
 
+import ReconnectingWebSocket from "reconnecting-websocket";
+
+var sockets: ReconnectingWebSocket[] = [];
+var socket: ReconnectingWebSocket;
+
+const options = {
+    WebSocket: WebSocket, // custom WebSocket constructor
+    connectionTimeout: 1000,
+    maxRetries: 10,
+  };
+
 function ChatListAdapter(chats: any , count: number, page:number , setPage: any , isUpdating: boolean , id: string) {
     const chatlistRef = useRef<HTMLInputElement>(null);
     const location = useLocation();
@@ -21,7 +32,15 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
         roomId, setRoomId
     } = ChatListStates();
 
-    console.log(chats)
+
+    useEffect(() => {
+        console.log('test_init_app...');
+        // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
+        const userId: string = localStorage.getItem("userId") || "";
+        if(userId){
+          pushStreamService.subChat(userId);
+        }
+    }, []);
 
     useLayoutEffect(() =>{
         if(chatlistRef.current){
@@ -71,8 +90,6 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
             createdBy: userid,
             chatRoomMemberList: chatRoomMemberList
         }
-
-        console.log(chatRoom);
     
         await createChatRoom(chatRoom);
     }
@@ -109,6 +126,72 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
     //     })
     //     if (node) observer.current.observe(node)
     // }, [loading, hasMore]);
+
+    const pushStreamService = {  
+        messageReceived: (message: any , userid: string) => {
+            console.log("-----Message Received-----");
+            const messageReceived = JSON.parse(message)
+
+            if(messageReceived.value.user !== userid){
+                const chats = [{
+                    chatRoomId: messageReceived.value.chatId,
+                    message: messageReceived.value.text,
+                    messageStatus: "1",
+                    messageType: "1",
+                    user: {userName: "Huy dz", status: "1"},
+                    userId: messageReceived.value.user
+                }]
+    
+                setChatList(prev =>[ ...prev , ...chats ])
+            }
+
+        },
+    
+        subChat: (userId: string) => {
+            console.log("-----Sub chat-----");
+            console.log(`ws://172.20.50.77:31000/ws?Channels=` + userId);
+            socket = new ReconnectingWebSocket(
+                `ws://172.20.50.77:31000/ws?Channels=` + userId,
+                [],
+                options
+            );
+    
+            socket.onopen = () => {
+                // connection opened
+                console.log("test_Connected");
+                console.log(`test_ws://172.20.50.77:31000/ws?Channels=` + userId);
+            };
+    
+            socket.onmessage = (e) => {
+                console.log("-----on message");
+                pushStreamService.messageReceived(
+                    decodeURIComponent(JSON.parse(e.data).text),
+                    userId
+                );
+            };
+    
+            socket.onerror = (e: any) => {
+                // an error occurred
+                console.log("test_socket_err: ", e);
+            };
+    
+            socket.onclose = (e: any) => {
+                console.log(
+                "test_Socket is closed. Reconnect will be attempted in 1 second.",
+                e.reason
+                );
+            };
+            // sockets.push(ws);
+        },
+        closeSocket: () => {
+          console.log("test_closeSocket");
+          socket.close();
+        },
+        closeAllSocket: () => {
+          console.log("test_closeAllSocket");
+          sockets.map((s) => s.close());
+        },
+    };
 
     return {
         userid,
