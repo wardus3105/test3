@@ -1,0 +1,37 @@
+.imagechat-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.imagechat-container img{
+    border-radius: 0.5rem;
+    width: 150px;
+    height: 100px;
+    margin: 0.3rem 0.2rem 0 0;
+}
+
+.imagechat-current{
+    flex-direction: row-reverse;
+}
+
+
+
+/* ------------------------------------------------ RESPONSIVE ----------------------- */
+
+/* WIDTH */
+
+
+/* @media only screen and (max-width: 600px) {
+    .imagechat-container img{
+        margin: 0.3rem 0.1rem 0 0;
+    }
+} */
+
+/* HEIGHT */
+
+/* 
+@media only screen and (max-height: 500px) {
+    .imagechat-container img{
+        margin: 0.3rem 0.1rem 0 0;
+    }
+} */
