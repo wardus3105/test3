@@ -28,8 +28,8 @@ function ChatListScreen(props: any){
     const showAllMessages = () =>{
         if(chatList && length > 0){
             let datetimeContext = moment();
-            return chatList.map((chat: any , index: number) =>{
-                console.log(chat);
+            const list = [...chatList].reverse();
+            return list.map((chat: any , index: number) =>{
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
 
@@ -40,7 +40,7 @@ function ChatListScreen(props: any){
                     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 }
 
-                const isCurrent: boolean = chat.user.id === userid;
+                const isCurrent: boolean = chat.userId === userid;
                 const eleContext =( 
                     <div className="maincontext">
                         <TextContextChatScreen 

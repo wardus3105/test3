@@ -94,12 +94,14 @@ function App() {
     setHasNavbar((prev) => !prev);
   };
 
-  useEffect(() => {
-    console.log('test_init_app...');
-    // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
-    const userId: string = localStorage.getItem("userId") || "";
-    pushStreamService.subChat(userId);
-  }, []);
+  // useEffect(() => {
+  //   console.log('test_init_app...');
+  //   // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
+  //   const userId: string = localStorage.getItem("userId") || "";
+  //   if(userId){
+  //     pushStreamService.subChat(userId);
+  //   }
+  // }, []);
 
   return (
     <>

@@ -64,13 +64,10 @@ function ChatInputAdapter(props: any) {
                 messageType: "1",
                 messageStatus: "1",
                 userId: userId,
-                createdAt: new Date() + "",
                 user: {
                     userName: "Test 1",
-                    lastLogin: "08:08:00",
                     status: "1"
                 },
-                attachments: [],
                 chatRoomId: id
             }
             
