@@ -24,11 +24,13 @@ function DataNotFoundScreen(props : IDataNotFound) {
   }
 
   return (
-    <div onClick={props?.onClick} className={"datanotfound-container cursor-pointer " + ( props.isPosition ? "datanotfound-container--isposition" : "" )}>
-      <img src={ icon() } alt="" className="datanotfound-icon"/>
-      <h4>
-        { props.text }
-      </h4>
+    <div className={"datanotfound-container " + ( props.isPosition ? "datanotfound-container--isposition" : "" )}>
+      <div className="cursor-pointer">
+        <img src={ icon() } alt="" className="datanotfound-icon" onClick={props?.onClick}  />
+        <h4>
+          { props.text }
+        </h4>
+      </div>
     </div>
   );
 }

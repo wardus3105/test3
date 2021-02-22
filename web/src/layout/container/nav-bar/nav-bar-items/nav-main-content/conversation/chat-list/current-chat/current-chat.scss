@@ -7,20 +7,28 @@
   background: var(--color-main2);
   border-radius: 16px 16px 0 16px;
   overflow: auto;
+  margin-left: auto;
+  max-width: 100%;
+  width: fit-content;
+  width: -moz-fit-content;
+  word-wrap: break-word;
+ 
+  .chat-time{
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;    
+    color: #FFFFFF;
+    
+    opacity: 0.6;
+    margin-left: 28px;
+  }
+
+  span:first-child{
+    color: var(--color-background);
+    opacity: 0.95;
+  }
 }
 
-
-.currentchat-context .chat-time{
-  font-size: var(--fontsize-default3);
-  line-height: var(--lineheight-default3);
-  color: var(--color-background);
-  opacity: 0.6;
-}
-
-.currentchat-context span:first-child{
-  color: var(--color-background);
-  opacity: 0.95;
-}
 
 
 
