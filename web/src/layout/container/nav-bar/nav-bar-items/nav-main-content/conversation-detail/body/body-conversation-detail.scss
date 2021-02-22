@@ -5,6 +5,7 @@
     box-shadow: 0px 1px 5px rgba(194, 198, 201, 0.2);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    position: relative;
 
     .bodyconversationdetail-main-header{
         height: 55px;
@@ -33,6 +34,7 @@
         width: 100%;
         height: calc(100% - var(--height-header-conversationdetail));
         display: flex;
+        position: absolute;
 
         .bodyconversationdetail-main-body-tab{
             overflow-y: auto;
