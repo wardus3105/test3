@@ -10,7 +10,7 @@ const iconrightarrow = require("../../Icons/iconrightarrow2.svg").default;
 
 
 function ImageOverlayScreen(props : IImageOverlay) {
-    const [amountOfMiniImages , setAmountOfMiniImages] = useState<number>(12);
+    const [amountOfMiniImages , setAmountOfMiniImages] = useState<number>(15);
     const [numPage , setNumPage] = useState<number>(1);
     const [mainImage , setMainImage] = useState<IMiniImage>({
         index:-1,
@@ -32,11 +32,11 @@ function ImageOverlayScreen(props : IImageOverlay) {
     useEffect(() =>{
         const windowWidth = window.innerWidth;
         if(windowWidth <= 1024){
-            mainMiniImage.index > 5 && setNumPage(Math.floor(mainMiniImage.index / 5) + 1)
+            mainMiniImage.index > amountOfMiniImages && setNumPage(Math.floor(mainMiniImage.index / amountOfMiniImages) + 1)
         } else{
-            mainMiniImage.index > 12 && setNumPage(Math.floor(mainMiniImage.index / 12) + 1)
+            mainMiniImage.index > amountOfMiniImages && setNumPage(Math.floor(mainMiniImage.index / amountOfMiniImages) + 1)
         }
-    },[])
+    },[setAmountOfMiniImages , amountOfMiniImages , setNumPage , mainMiniImage])
 
     useEffect(() =>{
         window.addEventListener('resize', setAmountMiniImagesByScreen);
@@ -55,7 +55,7 @@ function ImageOverlayScreen(props : IImageOverlay) {
         if(windowWidth <= 1024){
             setAmountOfMiniImages(5)
         } else{
-            setAmountOfMiniImages(12)
+            setAmountOfMiniImages(15)
         }
     }
 

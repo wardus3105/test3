@@ -20,15 +20,13 @@ function ChatInputAdapter(props: any) {
         file , setFile
     } = ChatInputStates()
 
-    // const userid: string = localStorage.getItem('userId') || "";
-
-    // useEffect(() =>{
-    //     window.addEventListener('keydown', pressEnterToSendChat );
+    useEffect(() =>{
+        window.addEventListener('keydown', pressEnterToSendChat );
     
-    //     return() =>{
-    //       window.removeEventListener('keydown', pressEnterToSendChat );
-    //     }
-    // })
+        return() =>{
+          window.removeEventListener('keydown', pressEnterToSendChat );
+        }
+    })
 
     const pressEnterToSendChat = async (e: KeyboardEvent) =>{
         if(e.keyCode === 13 && isFocused){
@@ -39,6 +37,28 @@ function ChatInputAdapter(props: any) {
     useKeyDown(pressEnterToSendChat)
 
     const sendChat = async () =>{
+        let pathFileList: any[] = []
+        if(file){
+            const formData = new FormData();
+            if(file.length === 1){
+                formData.append('fileContent', file[0]);
+                const response = await ChatInputServices().getInstance().sendFile(formData);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    pathFileList = [response.data.data]
+                }
+            } else if(file.length > 1){
+                for (let index = 0; index < file.length; index++) {
+                    formData.append('multiFileContent', file[index]);         
+                }
+                const response = await ChatInputServices().getInstance().sendMultiFile(formData);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    pathFileList= [...response.data.data];
+                }
+            }
+        }
+
+        console.log(pathFileList)
+
         if(message || file){
             // let formData = new FormData();
             // formData.append('chatRoomId', id);
@@ -49,8 +69,8 @@ function ChatInputAdapter(props: any) {
             // formData.append('messageStatus', '0');
             // formData.append('status', '0');
             // if(file){
-            //     for (let index = 0; index < file.length; index++) {
-            //         formData.append('file', file[index]);         
+            //     for (let index = 0; index < pathFileList.length; index++) {
+            //         formData.append('file', pathFileList[index]);         
             //     }
             // }
 
@@ -68,7 +88,8 @@ function ChatInputAdapter(props: any) {
                     userName: "Test 1",
                     status: "1"
                 },
-                chatRoomId: id
+                chatRoomId: id,
+                // attachment
             }
             
             setListMessage([messageSend]);

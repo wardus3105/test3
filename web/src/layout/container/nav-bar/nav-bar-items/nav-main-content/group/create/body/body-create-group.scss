@@ -50,49 +50,54 @@
         border-bottom: 1px solid var(--color-main-border);
     }
 
-    .bodycreategroup-main-body-selecteduser{
-        position: absolute;
-        overflow-y: auto;
-        height: 80%;
-        width: calc(100% - 24px);
-    }
-}
+    .bodycreategroup-main-body{
+        padding:12px 12px 0 12px;
+        height: calc(100% - 52px);
 
-.bodycreategroup-main-body-selecteduserpanel{
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
+        .custominput-container{
+            height: 48px;
+        }
 
-    &:hover{
-        background-color: var(--color-item--active);
-    }
-
-    img{
-        margin-left: auto;
-    }
-
-    p{
-        font-size: var(--fontsize-default2);
-        line-height: var(--lineheight-default2);   
-        color: var(--color-text--dark);
-        margin-left: 0.5rem;
-    }
-
-    span{
-        margin-left: 0.5rem;
-    }
+        .bodycreategroup-main-body-selecteduser{
+            position: absolute;
+            overflow-y: auto;
+            height: calc(100% - 112px);
+            width: calc(100% - 24px);
+            
     
-    .bodycreategroup-main-body-checkbox{
-        transform: scale(1.6);
-        margin-left: auto;
-        margin-right: 1.2rem;
+            .bodycreategroup-main-body-selecteduserpanel{
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid var(--color-main-border);
+                 
+                &:hover{
+                    background-color: var(--color-item--active);
+                }
+            
+                img{
+                    margin-left: auto;
+                }
+            
+                p{
+                    font-size: var(--fontsize-default2);
+                    line-height: var(--lineheight-default2);   
+                    color: var(--color-text--dark);
+                    margin-left: 8px
+                }
+            
+                span{
+                    margin-left: 8px
+                }
+                
+                .bodycreategroup-main-body-checkbox{
+                    transform: scale(1.6);
+                    margin-left: auto;
+                    margin-right: 1.2rem;
+                }
+            }            
+        }
     }
-}            
-
-.bodycreategroup-main-body-separate{
-    height: 1px;
-    background-color: var(--color-main-border);
-    width: 100%;
 }
 
 .addmember-footer-selectedmember .circleavatar-container

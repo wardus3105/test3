@@ -1,5 +1,5 @@
 .notification-container{
-    height: var(--height-notification-container);
+    height: var(--height-notification-container) !important;
 
     .notification-context {
         font-style: normal;
