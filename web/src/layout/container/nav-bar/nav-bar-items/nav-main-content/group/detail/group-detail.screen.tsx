@@ -91,6 +91,21 @@ const miniImageList :IMiniImage[] =[
       author:"Chi Chi556",
       srcImage:"https://wallpaperaccess.com/full/629735.jpg",
   },
+  {
+      index:14,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
+  {
+      index:15,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
+  {
+      index:16,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
 ]
 
 function GroupDetailScreen() {
@@ -186,7 +201,7 @@ function GroupDetailScreen() {
       switch (activeLi) {
         case ENUM_KIND_OF_CONVERSATIONDETAIL.MEMBER:
           return (
-              <div className="bodyconversationdetail-main-body-fileandlink bodyconversationdetail-main-body-tabz">
+              <div className="bodyconversationdetail-main-body-tab bodyconversationdetail-main-body-fileandlink">
                 {
                   showMemberInGroup()
                 }
@@ -194,7 +209,7 @@ function GroupDetailScreen() {
           )
         case ENUM_KIND_OF_CONVERSATIONDETAIL.IMAGE:
           return (
-            <div className="bodyconversationdetail-main-body-image bodyconversationdetail-main-body-tab">
+            <div className="bodyconversationdetail-main-body-tab bodyconversationdetail-main-body-image">
               {
                 miniImageList.map((miniImage: IMiniImage , index: number) => (
                   <img alt="" onClick={ () =>{ toggleOverlay(miniImage) } } src={ miniImage.srcImage } key={ index }></img>
@@ -204,7 +219,7 @@ function GroupDetailScreen() {
           )
         case ENUM_KIND_OF_CONVERSATIONDETAIL.FILE:
           return (
-            <div className="bodyconversationdetail-main-body-fileandlink bodyconversationdetail-main-body-tab">
+            <div className="bodyconversationdetail-main-body-tab bodyconversationdetail-main-body-fileandlink">
               <FileContextChatScreen isFile={ true } isCurrent={ true } context="https://morioh.com/p/b82afe6648dd" datetime=""></FileContextChatScreen>
               <FileContextChatScreen isFile={ true } isCurrent={ true } context="https://morioh.com/p/b82afe6648dd" datetime=""></FileContextChatScreen>
               <FileContextChatScreen isFile={ true } isCurrent={ true } context="https://morioh.com/p/b82afe6648dd" datetime=""></FileContextChatScreen>
@@ -219,7 +234,7 @@ function GroupDetailScreen() {
           )
         case ENUM_KIND_OF_CONVERSATIONDETAIL.LINK:
           return (
-            <div className="bodyconversationdetail-main-body-fileandlink bodyconversationdetail-main-body-tab">
+            <div className="bodyconversationdetail-main-body-tab bodyconversationdetail-main-body-fileandlink">
               <FileContextChatScreen isFile={ false } isCurrent={ true } context="https://morioh.com/p/b82afe6648dd" datetime=""></FileContextChatScreen>
             </div>
           )
