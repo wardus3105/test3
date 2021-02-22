@@ -91,6 +91,21 @@ const miniImageList :IMiniImage[] =[
       author:"Chi Chi556",
       srcImage:"https://wallpaperaccess.com/full/629735.jpg",
   },
+  {
+      index:14,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
+  {
+      index:15,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
+  {
+      index:16,
+      author:"Chi Chi556",
+      srcImage:"https://wallpaperaccess.com/full/629735.jpg",
+  },
 ]
 
 function GroupDetailScreen() {

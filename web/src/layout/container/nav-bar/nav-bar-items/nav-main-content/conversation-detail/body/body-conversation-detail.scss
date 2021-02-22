@@ -55,6 +55,11 @@
                         width: 100%;
                         cursor: pointer;
                         object-fit: cover;
+                        aspect-ratio: 1 / 1;
+
+                        &:hover {
+                            opacity: 0.8;
+                        }
                     }
                 }
             
