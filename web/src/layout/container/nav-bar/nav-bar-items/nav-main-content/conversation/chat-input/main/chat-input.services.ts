@@ -41,10 +41,22 @@ const ChatInputServices = () => {
                 })
                 .then((res)=> res)
                 .catch((err) => console.log(err))
+            },
+            sendFile: async (formData: FormData) => {
+                return axios({
+                    method:"POST",
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.SEND_FILE}`,
+                    headers: { 
+                        "content-type": 'multipart/form-data',
+                    },
+                    data: formData,
+                    timeout:30000  
+                })
+                .then((res)=> res)
+                .catch((err) => console.log(err))
             }
         }
-
-        
+  
     };
     
     return {

@@ -7,4 +7,5 @@ export const URL_PATHS={
     GET_CHATLIST:"api/chat/get-messages",
     POST_CHATROOM:"api/chat-rooms",
     SEND_MESSAGE:"api/chat/send-message",
+    SEND_FILE:"api/attachment",
 }

@@ -39,45 +39,52 @@ function ChatInputAdapter(props: any) {
     useKeyDown(pressEnterToSendChat)
 
     const sendChat = async () =>{
-        if(message || file){
-            // let formData = new FormData();
-            // formData.append('chatRoomId', id);
-            // formData.append('userId', userid);
-            // formData.append('message', message);
-            // formData.append('parentId', '');
-            // formData.append('messageType', '0');
-            // formData.append('messageStatus', '0');
-            // formData.append('status', '0');
-            // if(file){
-            //     for (let index = 0; index < file.length; index++) {
-            //         formData.append('file', file[index]);         
-            //     }
-            // }
+        console.log(file[0])
+        const formData = new FormData();
+        formData.append('fileContent', file[0]);
+        const response = await ChatInputServices().getInstance().sendFile(formData);
 
-            // // await ChatInputServices().getInstance().postMessage(formData);
-            // setMessage("")
+        console.log(response)
+        
+        // if(message || file){
+        //     // let formData = new FormData();
+        //     // formData.append('chatRoomId', id);
+        //     // formData.append('userId', userid);
+        //     // formData.append('message', message);
+        //     // formData.append('parentId', '');
+        //     // formData.append('messageType', '0');
+        //     // formData.append('messageStatus', '0');
+        //     // formData.append('status', '0');
+        //     // if(file){
+        //     //     for (let index = 0; index < file.length; index++) {
+        //     //         formData.append('file', file[index]);         
+        //     //     }
+        //     // }
 
-            const userId = localStorage.getItem('userId') || "";
+        //     // // await ChatInputServices().getInstance().postMessage(formData);
+        //     // setMessage("")
 
-            let messageSend: IChat = {
-                message: message,
-                messageType: "1",
-                messageStatus: "1",
-                userId: userId,
-                user: {
-                    userName: "Test 1",
-                    status: "1"
-                },
-                chatRoomId: id
-            }
+        //     const userId = localStorage.getItem('userId') || "";
+
+        //     let messageSend: IChat = {
+        //         message: message,
+        //         messageType: "1",
+        //         messageStatus: "1",
+        //         userId: userId,
+        //         user: {
+        //             userName: "Test 1",
+        //             status: "1"
+        //         },
+        //         chatRoomId: id
+        //     }
             
-            setListMessage([messageSend]);
-            console.log(messageSend);
-            const response = await ChatInputServices().getInstance().sendMessage(messageSend);
-            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setMessage("")
-            }
-        }
+        //     setListMessage([messageSend]);
+        //     console.log(messageSend);
+        //     const response = await ChatInputServices().getInstance().sendMessage(messageSend);
+        //     if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+        //         setMessage("")
+        //     }
+        // }
     }
 
     function cb (pathFileListTemp: string[]){

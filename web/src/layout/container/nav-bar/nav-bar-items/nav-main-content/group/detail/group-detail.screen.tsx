@@ -176,7 +176,6 @@ function GroupDetailScreen() {
                 }
               </div>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
           </>
         )}) 
     }
