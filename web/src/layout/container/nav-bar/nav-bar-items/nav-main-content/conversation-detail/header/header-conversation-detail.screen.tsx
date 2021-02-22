@@ -25,7 +25,7 @@ function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
                     </span>
                 </div>
             </div>
-            <div className="headerconversationdetail-main">
+            <div className="headerconversationdetail-main container">
                 <div className="headerconversationdetail-avatar">
                     <CircleAvatarScreen
                         src={ props.srcImage }

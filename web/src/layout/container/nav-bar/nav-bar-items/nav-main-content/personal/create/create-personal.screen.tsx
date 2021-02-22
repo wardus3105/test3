@@ -58,8 +58,9 @@ function CreatePersonalScreen() {
         <div></div>
       </div>
 
-      <div className={"bodypanel-container bodycreatepersonal-container"}>
-        <div className={"bodycreategroup-main "}>
+      <div className={"bodypanel-container"}>
+          <div className="bodypanel-detail-container bodycreatepersonal-container">
+        <div className={"bodycreategroup-main"}>
           <span className="subheading-semibold padding-12">
             Chọn người trò chuyện
           </span>
@@ -80,6 +81,7 @@ function CreatePersonalScreen() {
             ></InfiniteScrollCompanyMemberListScreen>
           </div>
         </div>
+          </div>
       </div>
     </>
   );
