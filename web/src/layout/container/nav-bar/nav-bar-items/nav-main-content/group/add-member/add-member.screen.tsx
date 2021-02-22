@@ -43,7 +43,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="1" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 1) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(2) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -55,7 +54,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="2" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 2) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(3) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -67,7 +65,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="3" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 3) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(4) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -79,7 +76,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="4" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 4) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(5) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -91,7 +87,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="5" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 5) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(6) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -103,7 +98,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="6" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 6) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(7) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -115,7 +109,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="7" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 7) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(8) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }
@@ -127,7 +120,6 @@ function AddMemberScreen() {
               <p>Trung Đức</p>
               <input type="checkbox" name="8" className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUserList.some((id: number) => id === 8) } ></input>
             </div>
-            <div className="bodycreategroup-main-body-separate"></div>
             <div className="bodycreategroup-main-body-selecteduserpanel" onClick={ () => { setSelectedUser(9) } }>
               <CircleAvatarScreen src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
               isOnline={ true }

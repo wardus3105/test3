@@ -1,12 +1,13 @@
+import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
-import { useEffect } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
-import { IChat } from "../../main/conversation.props";
+import { IAttachment, IChat } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
+import path from 'path';
 
 function ChatInputAdapter(props: any) {
     const { responseMess , id , setListMessage, listMessage } = props;
@@ -20,16 +21,6 @@ function ChatInputAdapter(props: any) {
         file , setFile
     } = ChatInputStates()
 
-    // const userid: string = localStorage.getItem('userId') || "";
-
-    // useEffect(() =>{
-    //     window.addEventListener('keydown', pressEnterToSendChat );
-    
-    //     return() =>{
-    //       window.removeEventListener('keydown', pressEnterToSendChat );
-    //     }
-    // })
-
     const pressEnterToSendChat = async (e: KeyboardEvent) =>{
         if(e.keyCode === 13 && isFocused){
             sendChat()
@@ -39,24 +30,39 @@ function ChatInputAdapter(props: any) {
     useKeyDown(pressEnterToSendChat)
 
     const sendChat = async () =>{
+        let attachments: IAttachment[] = []
+        if(file){
+            const formData = new FormData();
+            if(file.length === 1){
+                formData.append('fileContent', file[0]);
+                const response = await ChatInputServices().getInstance().sendFile(formData);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    attachments = [{
+                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                        name:response.data.data
+                    }]
+                }
+            } else if(file.length > 1){
+                for (let index = 0; index < file.length; index++) {
+                    formData.append('multiFileContent', file[index]);         
+                }
+                const response = await ChatInputServices().getInstance().sendMultiFile(formData);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    const pathFileList = response.data.data;
+
+                    for (let index = 0; index < pathFileList.length; index++){
+                        const attachment = {
+                            contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                            name:pathFileList[index]
+                        }
+                        attachments.push(attachment)
+                    }
+                }
+            }
+        }
+
+
         if(message || file){
-            // let formData = new FormData();
-            // formData.append('chatRoomId', id);
-            // formData.append('userId', userid);
-            // formData.append('message', message);
-            // formData.append('parentId', '');
-            // formData.append('messageType', '0');
-            // formData.append('messageStatus', '0');
-            // formData.append('status', '0');
-            // if(file){
-            //     for (let index = 0; index < file.length; index++) {
-            //         formData.append('file', file[index]);         
-            //     }
-            // }
-
-            // // await ChatInputServices().getInstance().postMessage(formData);
-            // setMessage("")
-
             const userId = localStorage.getItem('userId') || "";
 
             let messageSend: IChat = {
@@ -68,15 +74,22 @@ function ChatInputAdapter(props: any) {
                     userName: "Test 1",
                     status: "1"
                 },
-                chatRoomId: id
+                chatRoomId: id,
+                createdAt: new Date(),
+                attachments:attachments
             }
             
             setListMessage([messageSend]);
-            console.log(messageSend);
+
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setMessage("")
+  
             }
+
+            setMessage("")
+            setFile(null)
+            setHasImage(false)
+            setPathFileList([])
         }
     }
 

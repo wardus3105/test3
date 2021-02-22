@@ -5,7 +5,7 @@
 
     .guestchat-left{
         /* flex:1 */
-        align-self: flex-end;
+        // align-self: flex-end;
         cursor: pointer;
     }
     
@@ -13,14 +13,21 @@
         flex: 8;
 
         .chat-time{
-            font-size: var(--fontsize-default3);
-            line-height: var(--lineheight-default3);
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 18px;
+            
             color: #757575;
+            margin-left: 28px;
         }
     }
 
     .guestchat-maincontext{
         display: flex;
+        width: fit-content;
+        width: -moz-fit-content;
+        word-wrap: break-word;
         
         .guestchat-icon-horizontal3dots{
             height: 21px;

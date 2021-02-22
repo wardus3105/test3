@@ -22,17 +22,9 @@ const ChatInputServices = () => {
 
             sendMessage: async (message: IChat) => {
                 console.log("-----Sended-----", message)
-                // return await postInstance(URL_PATHS.SEND_MESSAGE , {
-                //     params:{
-                //         message:message,
-                //     }
-                // })
-                // .then((res)=> res)
-                // .catch((err) => console.log(err))
-
                 return axios({
                     method:"POST",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.SEND_MESSAGE}`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_MESSAGE}`,
                     headers: { 
                         "content-type": 'application/json',
                     },
@@ -41,10 +33,35 @@ const ChatInputServices = () => {
                 })
                 .then((res)=> res)
                 .catch((err) => console.log(err))
+            },
+            sendFile: async (formData: FormData) => {
+                return axios({
+                    method:"POST",
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_FILE}`,
+                    headers: { 
+                        "content-type": 'multipart/form-data',
+                    },
+                    data: formData,
+                    timeout:30000  
+                })
+                .then((res)=> res)
+                .catch((err) => console.log(err))
+            },
+            sendMultiFile: async (formData: FormData) => {
+                return axios({
+                    method:"POST",
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_MULTIFILE}`,
+                    headers: { 
+                        "content-type": 'multipart/form-data',
+                    },
+                    data: formData,
+                    timeout:30000  
+                })
+                .then((res)=> res)
+                .catch((err) => console.log(err))
             }
         }
-
-        
+  
     };
     
     return {

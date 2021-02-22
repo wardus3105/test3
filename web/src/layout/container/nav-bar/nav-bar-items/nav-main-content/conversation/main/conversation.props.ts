@@ -18,7 +18,9 @@ export interface IChat{
     messageStatus: string
     userId: string,
     user: IUser,
-    chatRoomId?: string
+    chatRoomId?: string,
+    attachments?: IAttachment[],
+    createdAt: any,
 }
 
 interface IUser{
@@ -26,10 +28,8 @@ interface IUser{
     status: string
 }
 
-interface IAttachment{
-    contentType: string,
+export interface IAttachment{
+    contentType: number,
     name: string,
-    type: string,
-    status: string
 }
 

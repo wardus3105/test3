@@ -26,22 +26,20 @@ function CreatePersonalScreen() {
     if (length > 0) {
       return memberList.map((member: ICompanyMember, index: number) => {
         return (
-          <div key={index}>
-            <div
-              className="bodycreategroup-main-body-selecteduserpanel"
-              onClick={() => {}}
-            >
-              <CircleAvatarScreen
-                src={member.avatar}
-                isOnline={member.status === ENUM_KIND_OF_STATUS.ACTIVE}
-                class="img-48"
-                width=""
-                height=""
-                hasCursor={true}
-              ></CircleAvatarScreen>
-              <p>{member.lastName + " " + member.firstName}</p>
-            </div>
-            <div className="bodycreategroup-main-body-separate"></div>
+          <div
+          className="bodycreategroup-main-body-selecteduserpanel"
+          onClick={() => {}}
+          key={ index }
+          >
+            <CircleAvatarScreen
+              src={member.avatar}
+              isOnline={member.status === ENUM_KIND_OF_STATUS.ACTIVE}
+              class="img-48"
+              width=""
+              height=""
+              hasCursor={true}
+            ></CircleAvatarScreen>
+            <p>{member.lastName + " " + member.firstName}</p>
           </div>
         );
       });
@@ -60,8 +58,9 @@ function CreatePersonalScreen() {
         <div></div>
       </div>
 
-      <div className={"bodypanel-container bodycreatepersonal-container"}>
-        <div className={"bodycreategroup-main "}>
+      <div className={"bodypanel-container"}>
+          <div className="bodypanel-detail-container bodycreatepersonal-container">
+        <div className={"bodycreategroup-main"}>
           <span className="subheading-semibold padding-12">
             Chọn người trò chuyện
           </span>
@@ -82,6 +81,7 @@ function CreatePersonalScreen() {
             ></InfiniteScrollCompanyMemberListScreen>
           </div>
         </div>
+          </div>
       </div>
     </>
   );

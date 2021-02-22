@@ -74,45 +74,39 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
 
 
     const clickFirstMessage = async ()  => {
-        let pathList = location.pathname.split("/");
-        const id = pathList[2];
+        // let pathList = location.pathname.split("/");
+        // const id = pathList[2];
 
-        let chatRoomMemberList = [
-            {userId: userid},
-            {userId: id}
-        ];
+        // let chatRoomMemberList = [
+        //     {userId: userid},
+        //     {userId: id}
+        // ];
         
-        let chatRoom = {
-            avatar: "url",
-            title: "Chat riêng",
-            slogan: "Room này tạo ra để 2 người chat",
-            type: 0,
-            createdBy: userid,
-            chatRoomMemberList: chatRoomMemberList
-        }
+        // let chatRoom = {
+        //     avatar: "url",
+        //     title: "Chat riêng",
+        //     slogan: "Room này tạo ra để 2 người chat",
+        //     type: 0,
+        //     createdBy: userid,
+        //     chatRoomMemberList: chatRoomMemberList
+        // }
     
-        await createChatRoom(chatRoom);
+        // await createChatRoom(chatRoom);
+
+        const chats = [{
+            chatRoomId: roomId,
+            message: "Xin chào",
+            messageStatus: "1",
+            messageType: "1",
+            user: {userName: "Huy dz", status: "1"},
+            userId: userid
+        }]
+
+        setChatList(prev =>[ ...prev , ...chats ])
     }
 
     const { handleScroll } = useScroll( page , setPage , count , isUpdating , chatlistRef , true )
 
-    const roomid = useIdInPath()
-
-    const sendHello = async () =>{
-        let formData = new FormData();
-        formData.append('chatRoomId', roomid);
-        formData.append('userId', userid);
-        formData.append('message', "Xin chào");
-        formData.append('parentId', '');
-        formData.append('messageType', '0');
-        formData.append('messageStatus', '0');
-        formData.append('status', '0');
-
-        const response = await ChatInputServices().getInstance().postMessage(formData);
-        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-            
-        }
-    }
 
     // const observer = useRef<any>();
     // const lastMessageRef = useCallback(node => {

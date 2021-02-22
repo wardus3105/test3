@@ -6,7 +6,7 @@ import './data-not-found.scss';
 const iconnotfounddata = require('../../Icons/iconnotfounddata.svg').default;
 const iconnotfoundchat = require('../../Icons/iconnotfoundchat.svg').default;
 const iconnotfoundnoti = require('../../Icons/iconnotfoundnoti.svg').default;
-const iconnotfoundmessage = require('../../Icons/iconnotfoundmessage.svg').default;
+// const iconnotfoundmessage = require('../../Icons/iconnotfoundmessage.svg').default;
 
 function DataNotFoundScreen(props : IDataNotFound) {
 
@@ -19,16 +19,18 @@ function DataNotFoundScreen(props : IDataNotFound) {
       case ENUM_KIND_OF_NOTFOUNDICON.NOTI:
         return iconnotfoundnoti;
       case ENUM_KIND_OF_NOTFOUNDICON.MESSAGE:
-        return iconnotfoundmessage;   
+        return '/images/sayhi.png';   
     }
   }
 
   return (
-    <div onClick={props?.onClick} className={"datanotfound-container cursor-pointer " + ( props.isPosition ? "datanotfound-container--isposition" : "" )}>
-      <img src={ icon() } alt="" className="datanotfound-icon"/>
-      <h4>
-        { props.text }
-      </h4>
+    <div className={"datanotfound-container " + ( props.isPosition ? "datanotfound-container--isposition" : "" )}>
+      <div className="cursor-pointer">
+        <img src={ icon() } alt="" className="datanotfound-icon" onClick={props?.onClick}  />
+        <h4>
+          { props.text }
+        </h4>
+      </div>
     </div>
   );
 }
