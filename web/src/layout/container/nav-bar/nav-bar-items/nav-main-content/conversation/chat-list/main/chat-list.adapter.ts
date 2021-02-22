@@ -138,7 +138,7 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
                     message: messageReceived.value.text,
                     messageStatus: "1",
                     messageType: "1",
-                    user: {userName: "Huy dz", status: "1"},
+                    user: {userName: "chat.app6", status: "1"},
                     userId: messageReceived.value.user
                 }]
     
