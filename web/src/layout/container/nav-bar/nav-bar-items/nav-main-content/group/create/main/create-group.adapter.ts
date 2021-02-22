@@ -16,7 +16,6 @@ function CreateGroupAdapter(){
 
     useEffect(() => {
         const userId = localStorage.getItem('userId') || "";
-        console.log(userId)
         setCreateBy(userId);
     },[setCreateBy])
 
@@ -40,34 +39,40 @@ function CreateGroupAdapter(){
             return warning("Bạn chưa chọn thành viên")
         }
 
-        if(createBy && title && memberIdList){
-            const memberidList = [...memberIdList];
-            const chatRoomMemberList = memberidList.map((memberid: string) => {
-                const obj = {
-                    userId:memberid
+        const formData = new FormData();
+        formData.append('fileContent', avatar);
+        const response = await CreateGroupService().getInstance().sendFile(formData);
+        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+            const avatarId = response.data.data;
+
+            if(createBy && title && memberIdList){
+                const memberidList = [...memberIdList];
+                const chatRoomMemberList = memberidList.map((memberid: string) => {
+                    const obj = {
+                        userId:memberid
+                    }
+                    return obj;
+                })
+                
+                const formData = new FormData();
+
+                formData.append("avatar" , avatarId);
+                formData.append("createdBy" , createBy);
+                formData.append("title" , title);
+                formData.append("chatRoomMemberList" , JSON.stringify(chatRoomMemberList));
+                formData.append("slogan" , slogan);
+                formData.append("type" , "1");
+
+                const response = await CreateGroupService().getInstance().createGroup(formData);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    setTitle("");
+                    setMemberIdList([])
+                    setAvatar(null)
+                    setAvatarTemp([])
                 }
-                return obj;
-            })
-            
-            const formData = new FormData();
-
-            // formData.append("avatar" , avatar);
-            formData.append("avatar" , 'avatar');
-            formData.append("createdBy" , createBy);
-            formData.append("title" , title);
-            formData.append("chatRoomMemberList" , JSON.stringify(chatRoomMemberList));
-            formData.append("slogan" , slogan);
-            formData.append("type" , "1");
-
-            const response = await CreateGroupService().getInstance().createGroup(formData);
-            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setTitle("");
-                setMemberIdList([])
-                setAvatar(null)
-                setAvatarTemp([])
+            } else{
+                console.log("Error")
             }
-        } else{
-            console.log("Error")
         }
     }
 

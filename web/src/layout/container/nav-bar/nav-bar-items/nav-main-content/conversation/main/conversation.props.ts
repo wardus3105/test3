@@ -18,7 +18,8 @@ export interface IChat{
     messageStatus: string
     userId: string,
     user: IUser,
-    chatRoomId?: string
+    chatRoomId?: string,
+    attachment?: IAttachment[]
 }
 
 interface IUser{
