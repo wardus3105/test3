@@ -17,7 +17,7 @@ function TextContextChatScreen(props : any){
                 return <></>;
             })
         }
-        return <span>
+        return <span className="body-regular">
             {context}
         </span>;
     }
@@ -25,9 +25,7 @@ function TextContextChatScreen(props : any){
     if(context){
         return (
             <div className={ "padding-12 " + (props.isCurrent ? "currentchat-context" : "guestchat-context") }>
-                <span>
-                    { showContext() }                   
-                </span>
+                { showContext() }    
                 <span className="chat-time">
                     { props.datetime }
                 </span>

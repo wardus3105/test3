@@ -67,15 +67,15 @@ function ChatInputScreen(props: any){
                 <img src={ iconGimFile } alt="gim" onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover"></img>
 
                 <CustomInputScreen 
-                setValue={ setMessage } 
-                value={ message } 
-                placeHolder="Nhập nội dung bình luận" 
-                class="" 
-                style={ styleCustomInput } 
-                setIsMultiline={ setIsMultilineText } 
-                isMultiline={ true } 
-                isTextArea={ false }
-                setIsFocused={ setIsFocused }
+                    setValue={ setMessage } 
+                    value={ message } 
+                    placeHolder="Nhập nội dung bình luận" 
+                    class="" 
+                    style={ styleCustomInput } 
+                    setIsMultiline={ setIsMultilineText } 
+                    isMultiline={ true } 
+                    isTextArea={ false }
+                    setIsFocused={ setIsFocused }
                 ></CustomInputScreen>
                 
                 <img src={ iconSendMessage } alt="send data" onClick={ sendChat } className="cursor-pointer icon-svg--hover"></img>

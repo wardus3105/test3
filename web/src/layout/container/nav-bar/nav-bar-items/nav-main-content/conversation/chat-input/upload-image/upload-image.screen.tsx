@@ -9,10 +9,12 @@ function UploadImageScreen(props: any) {
     <div 
       className={"uploadimage-container " + props.class} 
       style={{ backgroundImage : `url(${ props.pathFile })` , width: props.width , height: props.height}}
-      onClick={ () =>{ props.removePathFile(props.pathFile) }}
     >
-      <div className="uploadimage-icon-delete-panel flex-center cursor-pointer">
-          <img src={ iconDeleteDisabled } alt=""></img>
+      <div 
+        className="uploadimage-icon-delete-panel flex-center cursor-pointer"
+        onClick={ () =>{ props.removePathFile(props.pathFile) }}
+      >
+          <img src={ iconDeleteDisabled } alt="" className="img-16"></img>
       </div>
     </div> 
   );

@@ -56,7 +56,7 @@ function DescriptionChatScreen(props: IDescriptionChatComp) {
             }
           </span>
         </div>
-        <div className="descriptionchat-context-bottom">
+        <div className={ "descriptionchat-context-bottom " + ( hasRead ? "" : "unread" ) } >
           <p className={ "text-overflow-ellipsis width-200 " + ( hasRead ? "body-reglar-hinted " : "body-bold" ) }>
             {
               lastMessage ? lastMessage : ""

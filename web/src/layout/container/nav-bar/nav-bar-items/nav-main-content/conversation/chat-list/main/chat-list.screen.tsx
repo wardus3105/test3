@@ -29,6 +29,7 @@ function ChatListScreen(props: any){
         if(chatList && length > 0){
             let datetimeContext = moment();
             const list = [...chatList].reverse();
+            console.log(list)
             return list.map((chat: any , index: number) =>{
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
@@ -48,11 +49,15 @@ function ChatListScreen(props: any){
                             context={ chat.message }
                             datetime={ getTimePeriod(chat.createdAt) }
                         ></TextContextChatScreen>
-                        {/* <ImageContextChatScreen
-                        isCurrent={ isCurrent }
-                        context={ chat.attachments }
-                        datetime={ getTimePeriod(chat.createdAt) }
-                        ></ImageContextChatScreen> */}
+                        {
+                            chat.attachments && (
+                                <ImageContextChatScreen
+                                    isCurrent={ isCurrent }
+                                    context={ chat.attachments }
+                                    datetime={ getTimePeriod(chat.createdAt) }
+                                ></ImageContextChatScreen>
+                            )
+                        }
                     </div>
 
                 )
@@ -74,8 +79,8 @@ function ChatListScreen(props: any){
                 }
                 return (
                     <div key={ index }>
-                        { eleDatetime }
                         { eleMainContext }
+                        { eleDatetime }
                     </div>
                 )
             })
