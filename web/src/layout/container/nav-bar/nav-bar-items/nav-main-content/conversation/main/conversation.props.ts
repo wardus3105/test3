@@ -14,7 +14,7 @@ export interface IConversation{
 }
 export interface IChat{
     message: string,
-    messageType: string,
+    messageType: number,
     messageStatus: string
     userId: string,
     user: IUser,
@@ -25,11 +25,13 @@ export interface IChat{
 
 interface IUser{
     userName:string,
-    status: string
+    status: string,
+    id?:string,
 }
 
 export interface IAttachment{
     contentType: number,
     name: string,
+    type: number,
 }
 

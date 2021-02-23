@@ -9,5 +9,5 @@ export interface IGuestChat{
     context: string,
     children: React.ReactNode,
     responseMess: IResponseMess,
-    setResponseMess:any
+    setResponseMess:any,
 }

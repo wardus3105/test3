@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import useScroll from "../../../../../../../../libraries/Hooks/useScroll";
 import ChatListServices from "./chat-list.services";
@@ -21,7 +20,6 @@ const options = {
 
 function ChatListAdapter(chats: any , count: number, page:number , setPage: any , isUpdating: boolean , id: string) {
     const chatlistRef = useRef<HTMLInputElement>(null);
-    const location = useLocation();
 
     const {createChatRoom} = ChatListServices();
 
@@ -38,8 +36,8 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
         // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
         const userId: string = localStorage.getItem("userId") || "";
         if(userId){
-          pushStreamService.subChat(userId);
-        }
+        //   pushStreamService.subChat(userId);
+        }   
     }, []);
 
     useLayoutEffect(() =>{
@@ -69,40 +67,28 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
             setChatList(chats)
             setIsMainLoading(false);
         }
-
     }, [ chats ])
 
 
     const clickFirstMessage = async ()  => {
-        // let pathList = location.pathname.split("/");
-        // const id = pathList[2];
 
-        // let chatRoomMemberList = [
-        //     {userId: userid},
-        //     {userId: id}
-        // ];
-        
-        // let chatRoom = {
-        //     avatar: "url",
-        //     title: "Chat riêng",
-        //     slogan: "Room này tạo ra để 2 người chat",
-        //     type: 0,
-        //     createdBy: userid,
-        //     chatRoomMemberList: chatRoomMemberList
-        // }
-    
-        // await createChatRoom(chatRoom);
-
-        const chats = [{
+        const chats = {
             chatRoomId: roomId,
             message: "Xin chào",
             messageStatus: "1",
             messageType: "1",
-            user: {userName: "Huy dz", status: "1"},
-            userId: userid
-        }]
+            user: {userName: "Huy dz", status: "1" , id: userid},
+            userId: userid,
+            createdAt: new Date(),
+            attachments:[]
+        }
 
-        setChatList(prev =>[ ...prev , ...chats ])
+        setChatList(prev =>[ ...prev , chats ])
+
+        const response = await ChatInputServices().getInstance().sendMessage(chats);
+        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+
+        }
     }
 
     const { handleScroll } = useScroll( page , setPage , count , isUpdating , chatlistRef , true )

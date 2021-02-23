@@ -43,8 +43,7 @@ function CreateGroupAdapter(){
         formData.append('fileContent', avatar);
         const response = await CreateGroupService().getInstance().sendFile(formData);
         if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-            const avatarId = response.data.data;
-
+            const avatarId = response.data.data[0].guid;
             if(createBy && title && memberIdList){
                 const memberidList = [...memberIdList];
                 const chatRoomMemberList = memberidList.map((memberid: string) => {
@@ -69,6 +68,7 @@ function CreateGroupAdapter(){
                     setMemberIdList([])
                     setAvatar(null)
                     setAvatarTemp([])
+                    setSlogan("")
                 }
             } else{
                 console.log("Error")

@@ -33,46 +33,36 @@ function ChatInputAdapter(props: any) {
         let attachments: IAttachment[] = []
         if(file){
             const formData = new FormData();
-            if(file.length === 1){
-                formData.append('fileContent', file[0]);
-                const response = await ChatInputServices().getInstance().sendFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    attachments = [{
-                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
-                        name:response.data.data
-                    }]
-                }
-            } else if(file.length > 1){
-                for (let index = 0; index < file.length; index++) {
-                    formData.append('multiFileContent', file[index]);         
-                }
-                const response = await ChatInputServices().getInstance().sendMultiFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    const pathFileList = response.data.data;
+            for (let index = 0; index < file.length; index++) {
+                formData.append('fileContent', file[index]);         
+            }
+            const response = await ChatInputServices().getInstance().sendFile(formData);
+            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                const pathFileList = response.data.data;
 
-                    for (let index = 0; index < pathFileList.length; index++){
-                        const attachment = {
-                            contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
-                            name:pathFileList[index]
-                        }
-                        attachments.push(attachment)
+                for (let index = 0; index < pathFileList.length; index++){
+                    const attachment = {
+                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                        name:pathFileList[index].guid,
+                        type:ENUM_KIND_OF_ATTACHMENT.IMAGE
                     }
+                    attachments.push(attachment)
                 }
             }
         }
-
 
         if(message || file){
             const userId = localStorage.getItem('userId') || "";
 
             let messageSend: IChat = {
                 message: message,
-                messageType: "1",
+                messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
                 messageStatus: "1",
                 userId: userId,
                 user: {
                     userName: "Test 1",
-                    status: "1"
+                    status: "1",
+                    id:userId
                 },
                 chatRoomId: id,
                 createdAt: new Date(),
@@ -120,11 +110,8 @@ function ChatInputAdapter(props: any) {
             case ENUM_KIND_OF_MESSAGE.TEXT:
                 eleResult = context;
                 break;
-            case ENUM_KIND_OF_MESSAGE.IMAGE:
-                eleResult = "Ảnh";
-                break;
-            case ENUM_KIND_OF_MESSAGE.FILE:
-                eleResult = "File";
+            case ENUM_KIND_OF_MESSAGE.ATTACHMENT:
+                eleResult = "file";
                 break;
             case ENUM_KIND_OF_MESSAGE.LINK:
                 eleResult = "Link";

@@ -1,9 +1,9 @@
 import moment from "moment";
 
-export default function getTimePeriod(time:string){
+export default function getTimePeriodFromNow(time:string){
     if(time){
         const lastTime = moment(time);
-        const  now = moment();
+        const now = moment();
         const duration = moment.duration(now.diff(lastTime));
     
         const daysBetween2Dates = duration.asDays();
@@ -23,3 +23,4 @@ export default function getTimePeriod(time:string){
     
     return "";
 }
+

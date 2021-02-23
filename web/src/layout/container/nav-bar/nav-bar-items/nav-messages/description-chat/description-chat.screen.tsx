@@ -6,8 +6,6 @@ import DescriptionChatAdapter from "./description-chat.adapter";
 import { IDescriptionChatComp } from "./description-chat.props";
 import "./description-chat.scss";
 
-const iconUnread = require("../../../../../../libraries/Icons/unread.svg").default;
-
 function DescriptionChatScreen(props: IDescriptionChatComp) {
   const {
     descriptionChat,
@@ -31,7 +29,8 @@ function DescriptionChatScreen(props: IDescriptionChatComp) {
         <CircleAvatarScreen
           class="img-48"
           src={ getApiUrl(descriptionChat.avatar) }
-          isOnline={ true }
+          isOnline={ isOnline }
+          hasCursor
         />
       </div>
       <div className={"descriptionchat-context " + ( hasRead ? " " : "unread" )}>
