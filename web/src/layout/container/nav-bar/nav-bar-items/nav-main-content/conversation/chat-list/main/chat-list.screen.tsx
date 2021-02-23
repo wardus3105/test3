@@ -29,34 +29,37 @@ function ChatListScreen(props: any){
     const length = chatList.length;
     const showAllMessages = () =>{
         if(chatList && length > 0){
-            let datetimeContext = moment();
+            let datetimeContext = new Date();
             const list = [...chatList].reverse();
+            console.log(list)
             return list.map((chat: any , index: number) =>{
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
-                let shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
-                const isCurrent: boolean = chat.userId === userid;
-                const createAt = moment(chat.createdAt);
+                let shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
+                const isCurrent: boolean = chat.user.id === userid;
+                const createAt = new Date(chat.createdAt);
 
-                if(isCurrent){
-                    let haveSameTime = haveSameTimePeriod(datetimeContext , createAt)
+                if(isCurrent && index > 0){
+                    let haveSameTime = haveSameTimePeriod(createAt , datetimeContext)
                     if(haveSameTime){
-                        shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
+                        shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
     
                         if(index < list.length - 1){
-                            const haveSameTime2 = haveSameTimePeriod(moment(list[index + 1].createdAt) , createAt)
+                            const haveSameTime2 = haveSameTimePeriod(new Date(list[index + 1].createdAt) , createAt)
                             if(haveSameTime2){
                                 shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
                             }
+                        } else if(index === list.length - 1){
+                            shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
                         }
                     }
                 }
 
                 datetimeContext = createAt;
-                const haveSameDay = datetimeContext.startOf('day').isSame(createAt.startOf('day'));
-                if(!haveSameDay){
-                    eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
-                }
+                // const haveSameDay = datetimeContext.startOf('day').isSame(createAt.startOf('day'));
+                // if(!haveSameDay){
+                //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
+                // }
 
                 const eleContext =( 
                     <div className="maincontext">

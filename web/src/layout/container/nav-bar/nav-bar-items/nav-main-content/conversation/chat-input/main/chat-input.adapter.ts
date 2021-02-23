@@ -43,7 +43,8 @@ function ChatInputAdapter(props: any) {
                 for (let index = 0; index < pathFileList.length; index++){
                     const attachment = {
                         contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
-                        name:pathFileList[index].guid
+                        name:pathFileList[index].guid,
+                        type:ENUM_KIND_OF_ATTACHMENT.IMAGE
                     }
                     attachments.push(attachment)
                 }
@@ -55,12 +56,13 @@ function ChatInputAdapter(props: any) {
 
             let messageSend: IChat = {
                 message: message,
-                messageType: "1",
+                messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
                 messageStatus: "1",
                 userId: userId,
                 user: {
                     userName: "Test 1",
-                    status: "1"
+                    status: "1",
+                    id:userId
                 },
                 chatRoomId: id,
                 createdAt: new Date(),
@@ -108,11 +110,8 @@ function ChatInputAdapter(props: any) {
             case ENUM_KIND_OF_MESSAGE.TEXT:
                 eleResult = context;
                 break;
-            case ENUM_KIND_OF_MESSAGE.IMAGE:
-                eleResult = "Ảnh";
-                break;
-            case ENUM_KIND_OF_MESSAGE.FILE:
-                eleResult = "File";
+            case ENUM_KIND_OF_MESSAGE.ATTACHMENT:
+                eleResult = "file";
                 break;
             case ENUM_KIND_OF_MESSAGE.LINK:
                 eleResult = "Link";

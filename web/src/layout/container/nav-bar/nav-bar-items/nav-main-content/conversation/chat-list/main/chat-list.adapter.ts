@@ -96,7 +96,7 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
             message: "Xin chào",
             messageStatus: "1",
             messageType: "1",
-            user: {userName: "Huy dz", status: "1"},
+            user: {userName: "Huy dz", status: "1" , id: userid},
             userId: userid
         }]
 
