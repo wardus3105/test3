@@ -15,11 +15,35 @@
         }
 
         .addmember-selectedmember-main{
+            display: flex;
+            flex-direction: column;
             position: relative;
             /* height: calc(100% - 45px); */
             height: 480px;
             width: 100%;
             overflow-y: auto;
+            padding-top: 5px;
+            > div {
+                display: flex;
+                min-height: 44px;
+                align-items: center;
+                flex-direction: row;
+                border-bottom: 1px solid #E6E8EB;
+
+                > p {
+                    padding-left: 12px;
+                }
+
+                > input {
+                    width: 16px;
+                    height: 16px;
+                    margin-left: auto;
+                }
+            }
+
+            > div:last-of-type {
+                border-bottom: none;
+            }
         }
     }
 

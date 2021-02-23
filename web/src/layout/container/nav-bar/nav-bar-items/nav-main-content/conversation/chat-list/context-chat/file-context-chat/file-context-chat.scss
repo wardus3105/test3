@@ -5,7 +5,7 @@
     border: 1px solid #B3B8C2;
     box-sizing: border-box;
     border-radius: 6px;
-    padding: 0.4rem;
+    padding: 10px;
     display: flex;
     width: 100%;
 }
@@ -15,17 +15,28 @@
     justify-content: space-between;
     width: 100%;
     margin-left: 0.5rem;
+
+    > .filechat-context {
+        > .app-mainfont {
+            > h5 {
+                font-size: 12px;
+                line-height: 18px;
+                color: #808999;
+            }
+        }
+    }
 }
 
 .filechat-context h5{
     font-size: 14px;
 }
 
+
 .filechat-iconbutton{
     display: flex;
     padding: 0.5rem;
 
-    background-color: #d4d8e6;
+    background-color: #EEF0F7;
     border-radius: 4px;
 }
 
