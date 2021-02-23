@@ -31,7 +31,7 @@ function DescriptionChatScreen(props: IDescriptionChatComp) {
         <CircleAvatarScreen
           class="img-48"
           src={ getApiUrl(descriptionChat.avatar) }
-          isOnline={ true }
+          isOnline={ isOnline }
         />
       </div>
       <div className={"descriptionchat-context " + ( hasRead ? " " : "unread" )}>

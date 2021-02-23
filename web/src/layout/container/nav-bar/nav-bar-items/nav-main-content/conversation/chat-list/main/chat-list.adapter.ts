@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import useScroll from "../../../../../../../../libraries/Hooks/useScroll";
 import ChatListServices from "./chat-list.services";
@@ -21,7 +20,6 @@ const options = {
 
 function ChatListAdapter(chats: any , count: number, page:number , setPage: any , isUpdating: boolean , id: string) {
     const chatlistRef = useRef<HTMLInputElement>(null);
-    const location = useLocation();
 
     const {createChatRoom} = ChatListServices();
 
@@ -38,8 +36,8 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
         // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
         const userId: string = localStorage.getItem("userId") || "";
         if(userId){
-          pushStreamService.subChat(userId);
-        }
+        //   pushStreamService.subChat(userId);
+        }   
     }, []);
 
     useLayoutEffect(() =>{

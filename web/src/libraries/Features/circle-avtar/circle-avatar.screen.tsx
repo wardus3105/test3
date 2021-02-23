@@ -2,12 +2,11 @@ import React from 'react';
 import './circle-avatar.scss';
 import { ICircleAvatar } from './circle-avatar.props';
 
-const iconUserOnline = require('../../Icons/user-online.svg').default;
 const iconDeleteDisabled = require('../../Icons/delete-disabled.svg').default;
 
 function CircleAvatarScreen(props : ICircleAvatar) {
 
-  let { src } = props;
+  let { src , isOnline } = props;
 
   if(!src){
     src = "https://cdn.dribbble.com/users/2199928/screenshots/11532918/shot-cropped-1590177932366.png?compress=1&resize=400x300";
@@ -24,7 +23,7 @@ function CircleAvatarScreen(props : ICircleAvatar) {
   return (
     <>
       <div 
-        className={"circleavatar-container " + props.class} 
+        className={ "circleavatar-container " + props.class + (isOnline ? " isOnline" : "") } 
         style={ styleInline }
         onClick={ props.onClick && props.onClick }
       >

@@ -5,12 +5,14 @@ import TextContextChatScreen from '../context-chat/text-context-chat/text-contex
 import CurrentChatScreen from '../current-chat/current-chat.screen';
 import GuestChatScreen from '../guest-chat/guest-chat.screen';
 import DatetimeContextChatScreen from '../context-chat/datetime-context-chat/datetime-context-chat.screen';
-import getTimePeriod from '../../../../../../../../libraries/Functions/get-time-period';
+import getTimePeriodFromNow from '../../../../../../../../libraries/Functions/get-time-period-from-now';
 import './chat-list.scss';
 import ChatListAdapter from './chat-list.adapter';
 import moment from "moment";
 import DataNotFoundScreen from '../../../../../../../../libraries/Features/data-not-found/data-not-found.screen';
 import { ENUM_KIND_OF_NOTFOUNDICON } from '../../../../../../../../libraries/Enum/not-found-icon';
+import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-time-period-between-times';
+import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
 
 function ChatListScreen(props: any){
     const { chats , count , page , setPage , isUpdating , id , hasSearch } = props;
@@ -29,32 +31,47 @@ function ChatListScreen(props: any){
         if(chatList && length > 0){
             let datetimeContext = moment();
             const list = [...chatList].reverse();
-            console.log(list)
             return list.map((chat: any , index: number) =>{
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
-
+                let shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
+                const isCurrent: boolean = chat.userId === userid;
                 const createAt = moment(chat.createdAt);
-                const areEqual = datetimeContext.startOf('day').isSame(createAt.startOf('day'));
-                if(!areEqual){
-                    datetimeContext = createAt;
+
+                if(isCurrent){
+                    let haveSameTime = haveSameTimePeriod(datetimeContext , createAt)
+                    if(haveSameTime){
+                        shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
+    
+                        if(index < list.length - 1){
+                            const haveSameTime2 = haveSameTimePeriod(moment(list[index + 1].createdAt) , createAt)
+                            if(haveSameTime2){
+                                shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
+                            }
+                        }
+                    }
+                }
+
+                datetimeContext = createAt;
+                const haveSameDay = datetimeContext.startOf('day').isSame(createAt.startOf('day'));
+                if(!haveSameDay){
                     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 }
 
-                const isCurrent: boolean = chat.userId === userid;
                 const eleContext =( 
                     <div className="maincontext">
                         <TextContextChatScreen 
                             isCurrent={ isCurrent }
                             context={ chat.message }
-                            datetime={ getTimePeriod(chat.createdAt) }
+                            datetime={ getTimePeriodFromNow(chat.createdAt) }
+                            shape={ shape }
                         ></TextContextChatScreen>
                         {
                             chat.attachments && (
                                 <ImageContextChatScreen
                                     isCurrent={ isCurrent }
                                     context={ chat.attachments }
-                                    datetime={ getTimePeriod(chat.createdAt) }
+                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
                                 ></ImageContextChatScreen>
                             )
                         }

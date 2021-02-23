@@ -1,7 +1,7 @@
 import useWindowSize from "../../../../../../libraries/Hooks/useWindowSize";
 import { IDescriptionChatComp } from "./description-chat.props";
 import { ENUM_KIND_OF_CHATROOM } from "../../../../../../libraries/Enum/chat-room";
-import getTimePeriod from "../../../../../../libraries/Functions/get-time-period";
+import getTimePeriodFromNow from "../../../../../../libraries/Functions/get-time-period-from-now";
 import { ENUM_KIND_OF_STATUS } from "../../../../../../libraries/Enum/status";
 
 
@@ -10,7 +10,7 @@ function DescriptionChatAdapter(props: IDescriptionChatComp) {
 
     const { descriptionChat , activedDescriptionChat , onClick } = props;
 
-    const createdAt = getTimePeriod(descriptionChat.createdAt);
+    const createdAt = getTimePeriodFromNow(descriptionChat.createdAt);
     const lastMessage = descriptionChat.lastMessage;
 
     const isGroup = descriptionChat.type === ENUM_KIND_OF_CHATROOM.GROUP;

@@ -4,7 +4,6 @@ export const URL_PATHS={
     POST_CHATROOM:"api/chat-rooms",
     POST_MESSAGE:"api/chat/send-message",
     POST_FILE:"api/attachment",
-    POST_MULTIFILE:"api/attachment/multiple-file",
 
     GET_CONVERSATIONLIST_BYQUERY:"search-chat-room/1",
     GET_COMPANYMEMBERLIST_BYQUERY:"search-user",

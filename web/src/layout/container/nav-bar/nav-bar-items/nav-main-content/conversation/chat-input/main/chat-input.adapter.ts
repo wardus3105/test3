@@ -33,34 +33,22 @@ function ChatInputAdapter(props: any) {
         let attachments: IAttachment[] = []
         if(file){
             const formData = new FormData();
-            if(file.length === 1){
-                formData.append('fileContent', file[0]);
-                const response = await ChatInputServices().getInstance().sendFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    attachments = [{
-                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
-                        name:response.data.data
-                    }]
-                }
-            } else if(file.length > 1){
-                for (let index = 0; index < file.length; index++) {
-                    formData.append('multiFileContent', file[index]);         
-                }
-                const response = await ChatInputServices().getInstance().sendMultiFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    const pathFileList = response.data.data;
+            for (let index = 0; index < file.length; index++) {
+                formData.append('fileContent', file[index]);         
+            }
+            const response = await ChatInputServices().getInstance().sendFile(formData);
+            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                const pathFileList = response.data.data;
 
-                    for (let index = 0; index < pathFileList.length; index++){
-                        const attachment = {
-                            contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
-                            name:pathFileList[index]
-                        }
-                        attachments.push(attachment)
+                for (let index = 0; index < pathFileList.length; index++){
+                    const attachment = {
+                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                        name:pathFileList[index].guid
                     }
+                    attachments.push(attachment)
                 }
             }
         }
-
 
         if(message || file){
             const userId = localStorage.getItem('userId') || "";
