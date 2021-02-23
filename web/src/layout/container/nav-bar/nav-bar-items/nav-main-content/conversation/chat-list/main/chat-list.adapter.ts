@@ -67,40 +67,28 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
             setChatList(chats)
             setIsMainLoading(false);
         }
-
     }, [ chats ])
 
 
     const clickFirstMessage = async ()  => {
-        // let pathList = location.pathname.split("/");
-        // const id = pathList[2];
 
-        // let chatRoomMemberList = [
-        //     {userId: userid},
-        //     {userId: id}
-        // ];
-        
-        // let chatRoom = {
-        //     avatar: "url",
-        //     title: "Chat riêng",
-        //     slogan: "Room này tạo ra để 2 người chat",
-        //     type: 0,
-        //     createdBy: userid,
-        //     chatRoomMemberList: chatRoomMemberList
-        // }
-    
-        // await createChatRoom(chatRoom);
-
-        const chats = [{
+        const chats = {
             chatRoomId: roomId,
             message: "Xin chào",
             messageStatus: "1",
             messageType: "1",
             user: {userName: "Huy dz", status: "1" , id: userid},
-            userId: userid
-        }]
+            userId: userid,
+            createdAt: new Date(),
+            attachments:[]
+        }
 
-        setChatList(prev =>[ ...prev , ...chats ])
+        setChatList(prev =>[ ...prev , chats ])
+
+        const response = await ChatInputServices().getInstance().sendMessage(chats);
+        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+
+        }
     }
 
     const { handleScroll } = useScroll( page , setPage , count , isUpdating , chatlistRef , true )
@@ -130,7 +118,7 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
                     message: messageReceived.value.text,
                     messageStatus: "1",
                     messageType: "1",
-                    user: {userName: "Huy dz", status: "1"},
+                    user: {userName: "chat.app6", status: "1"},
                     userId: messageReceived.value.user
                 }]
     

@@ -80,89 +80,125 @@ const pushStreamService = {
     console.log('test_messageReceived_1' + JSON.stringify(newMessage));
     if (HyperUtils.isNotEmpty(newMessage)) {
       switch (newMessage.type) {
+        // case PushStreamTypes.NEW_MESSENGER: {
+        //   let mes: IHyperMessage = {};
+        //   let user: User = {};
+        //   if (newMessage && newMessage.value) {
+        //     user.id = newMessage.value?.user?.id;
+        //     user._id = newMessage.value?.user?.id;
+        //     user.username = newMessage.value?.user?.username;
+        //     user.avatar_url = 'https://placeimg.com/960/540/any';
+        //     mes._id = newMessage.value?.id;
+        //     mes.chatId = newMessage.value?.chatId;
+        //     mes.createdAt = newMessage.value?.modifiedDate;
+        //     mes.type = newMessage.value?.type;
+        //     mes.user = user;
+        //     mes.path = newMessage.value?.path;
+        //     mes.reply = newMessage.value?.replyMess;
+        //     mes.fileExtension = newMessage.value?.fileExtension;
+        //     mes.attachment = newMessage.value.attachment;
+
+        //     if (newMessage.value.type === KindOfMsg.TYPE_IMAGE) {
+        //       mes.image = `http://172.16.40.43:9000/preview/+${newMessage.value?.path}`;
+        //       mes.text = newMessage?.value?.message;
+        //     } else {
+        //       mes.text = newMessage?.value?.message;
+        //     }
+        //   }
+
+        //   const state = store?.getState();
+        //   const myId = state.userInfo?.user?.id;
+        //   switch (mes?.type) {
+        //     case KindOfMsg.TYPE_VIDEO_CALL_INCOMING:
+        //       const otherId = user.id || user._id;
+        //       console.log('test_TYPE_VIDEO_CALL_INCOMING:', otherId, '__', myId);
+        //       if (myId != otherId) {
+        //         NavigationService.navigate(IncomingCallScreen, {
+        //           type: KindOfMsg.TYPE_VIDEO_CALL_INCOMING,
+        //           user: user,
+        //           chatInfo: mes,
+        //           timeStart: newMessage?.value?.timeStart,
+        //         });
+        //       }
+        //       break;
+        //     case KindOfMsg.TYPE_VIDEO_CALL_ACCEPT:
+        //       console.log(
+        //         'test_TYPE_VIDEO_CALL_ACCEPT: ',
+        //         newMessage,
+        //         ', isMe: ',
+        //         myId === newMessage.value?.receiverId
+        //       );
+        //       if (myId === newMessage.value?.receiverId) {
+        //         NavigationService.navigate(VideoCallScreen, {
+        //           chatInfo: {
+        //             ...state.userInfo?.user,
+        //             ...{ chatId: newMessage.value?.chatId },
+        //             ...{ senderId: newMessage.value?.senderId },
+        //           },
+        //           link: newMessage.value?.link,
+        //         });
+        //       }
+        //       break;
+        //     case KindOfMsg.TYPE_VIDEO_CALL_DENY:
+        //       console.log('test_TYPE_VIDEO_CALL_DENY: ', newMessage);
+        //       if (myId === newMessage.value?.receiverId) {
+        //         StatusBar.setBarStyle('dark-content');
+        //         NavigationService.pop();
+        //       }
+        //       break;
+        //     case KindOfMsg.TYPE_VIDEO_CALL_FINISH:
+        //       console.log('test_TYPE_VIDEO_CALL_FINISH: ', newMessage, ', myId: ', myId);
+        //       StatusBar.setBarStyle('dark-content');
+        //       if (myId === newMessage.value?.receiverId) {
+        //         NavigationService.pop();
+        //       } else {
+        //         NavigationService.popMany(2);
+        //       }
+        //       break;
+        //     default:
+        //       EventBus.getInstance().post({
+        //         type: EventBusName.INCOMING_MESSAGE,
+        //         payload: mes,
+        //       });
+        //       break;
+        //   }
+
+        //   break;
+        // }
         case PushStreamTypes.NEW_MESSENGER: {
           let mes: IHyperMessage = {};
           let user: User = {};
           if (newMessage && newMessage.value) {
-            user.id = newMessage.value?.user?.id;
-            user._id = newMessage.value?.user?.id;
-            user.username = newMessage.value?.user?.username;
-            user.avatar_url = 'https://placeimg.com/960/540/any';
-            mes._id = newMessage.value?.id;
+            // user.id = newMessage.value?.user?.id;
+            // user._id = newMessage.value?.user?.id;
+            // user.username = newMessage.value?.user?.username;
+            // user.avatar_url = 'https://placeimg.com/960/540/any';
+            user.id = newMessage.value?.user
+            user._id = newMessage.value?.user;
+            user.username = 'web';
+
+            // mes._id = newMessage.value?.id;
+            mes._id = HyperUtils.genRandomID(16);
             mes.chatId = newMessage.value?.chatId;
-            mes.createdAt = newMessage.value?.modifiedDate;
-            mes.type = newMessage.value?.type;
+            mes.createdAt = newMessage.value?.createdAt;
+            // mes.type = newMessage.value?.type;
             mes.user = user;
-            mes.path = newMessage.value?.path;
-            mes.reply = newMessage.value?.replyMess;
-            mes.fileExtension = newMessage.value?.fileExtension;
-            mes.attachment = newMessage.value.attachment;
+            // mes.path = newMessage.value?.path;
+            // mes.reply = newMessage.value?.replyMess;
+            // mes.fileExtension = newMessage.value?.fileExtension;
+            // mes.attachment = newMessage.value.attachment;
 
-            if (newMessage.value.type === KindOfMsg.TYPE_IMAGE) {
-              mes.image = `http://172.16.40.43:9000/preview/+${newMessage.value?.path}`;
-              mes.text = newMessage?.value?.message;
-            } else {
-              mes.text = newMessage?.value?.message;
-            }
+            // if (newMessage.value.type === KindOfMsg.TYPE_IMAGE) {
+            //   mes.image = `http://172.16.40.43:9000/preview/+${newMessage.value?.path}`;
+            //   mes.text = newMessage?.value?.message;
+            // } else {
+              mes.text = newMessage?.value?.text;
+            // }
           }
-
-          const state = store?.getState();
-          const myId = state.userInfo?.user?.id;
-          switch (mes?.type) {
-            case KindOfMsg.TYPE_VIDEO_CALL_INCOMING:
-              const otherId = user.id || user._id;
-              console.log('test_TYPE_VIDEO_CALL_INCOMING:', otherId, '__', myId)
-              if (myId != otherId) {
-                NavigationService.navigate(IncomingCallScreen, {
-                  type: KindOfMsg.TYPE_VIDEO_CALL_INCOMING,
-                  user: user,
-                  chatInfo: mes,
-                  timeStart: newMessage?.value?.timeStart,
-                });
-              }
-              break;
-            case KindOfMsg.TYPE_VIDEO_CALL_ACCEPT:
-              console.log(
-                'test_TYPE_VIDEO_CALL_ACCEPT: ',
-                newMessage,
-                ', isMe: ',
-                myId === newMessage.value?.receiverId
-              );
-              if (myId === newMessage.value?.receiverId) {
-                NavigationService.navigate(VideoCallScreen, {
-                  chatInfo: {
-                    ...state.userInfo?.user,
-                    ...{ chatId: newMessage.value?.chatId },
-                    ...{ senderId: newMessage.value?.senderId },
-                  },
-                  link: newMessage.value?.link,
-                });
-              }
-              break;
-            case KindOfMsg.TYPE_VIDEO_CALL_DENY:
-              console.log('test_TYPE_VIDEO_CALL_DENY: ', newMessage);
-              if (myId === newMessage.value?.receiverId) {
-                StatusBar.setBarStyle('dark-content');
-                NavigationService.pop();
-              }
-              break;
-            case KindOfMsg.TYPE_VIDEO_CALL_FINISH:
-              console.log('test_TYPE_VIDEO_CALL_FINISH: ', newMessage, ', myId: ', myId);
-              StatusBar.setBarStyle('dark-content');
-              if (myId === newMessage.value?.receiverId) {
-                NavigationService.pop();
-              }else{
-                NavigationService.popMany(2)
-              }
-              break;
-            default:
-              EventBus.getInstance().post({
-                type: EventBusName.INCOMING_MESSAGE,
-                payload: mes,
-              });
-              break;
-          }
-
+          EventBus.getInstance().post({
+            type: EventBusName.INCOMING_MESSAGE,
+            payload: mes,
+          });
           break;
         }
         case PushStreamTypes.UPDATED_STATUS_USER:

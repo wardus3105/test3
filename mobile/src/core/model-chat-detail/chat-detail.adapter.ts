@@ -244,15 +244,24 @@ export class ChatDetailAdapter {
     // if (replyData && replyData.isReply) {
     //   sendReplyId = replyData.itemMessage && replyData.itemMessage._id;
     // }
-    //longdq
 
     if (chatId) {
-      sendReplyId = this.ChatDetailContainer.state.currentMessage?._id || '';
+      // TODO
+      // sendReplyId = this.ChatDetailContainer.state.currentMessage?._id || '';
+      // const postData = {
+      //   chatId: ,
+      //   message: newMessages[0].text,
+      //   replyId: sendReplyId,
+      //   type: typeMsg,
+      // };
+
       const postData = {
-        chatId: chatId,
+        chatRoomId: chatId,
         message: newMessages[0].text,
-        replyId: sendReplyId,
-        type: typeMsg,
+        messageStatus: '1',
+        messageType: '1',
+        user: { userName: 'Test 1', status: '1' },
+        userId: '7JBbXOtJhieqbSpq0k00103E',
       };
 
       console.log('test_param: ', postData);

@@ -12,11 +12,12 @@ export const URL_PATHS = {
   UPDATE_DEVICE_ID: '/api/update-device',
   LIST_ROOM_CHAT: '/api/chat-rooms',
   // SEARCH_USER: '/api/all-user',
+  INSERT_MESSAGE: '/api/chat/send-message',
+
 
   UPDATE_STATUS_USER: '/users/updateStatus',
   LIST_USER: '/users/suggests',
   LIST_MESSAGE: '/messengers/suggestByChat',
-  INSERT_MESSAGE: '/messengers/insert',
   CREATE_GROUP: '/chats/addChat',
   REQUEST_TO_USER: '/chats/requestToUser',
   CREATE_ROM_CHAT: '/chats/createRoom',
