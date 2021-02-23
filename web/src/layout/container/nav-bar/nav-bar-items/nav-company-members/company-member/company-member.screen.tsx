@@ -19,11 +19,12 @@ function CompanyMemberScreen(props: ICompanyMember) {
     
     return (
       <CircleAvatarScreen
-        class=""
+        class="img-48"
         width={ widthAva }
         height={ heightAva }
         src={props.avatar}
-        isOnline={props.status === ENUM_KIND_OF_STATUS.ACTIVE}
+        isOnline={ props.status === ENUM_KIND_OF_STATUS.ACTIVE }
+        hasCursor
       />
     );
   };
