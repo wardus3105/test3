@@ -54,7 +54,13 @@ function HeaderConversationScreen(props: any){
                             onChange={ (e:any) =>{ setQuery(e.target.value)} }
                             hasClearText={ true }
                         ></CustomInputScreen>
-                        <CustomButtonScreen text="Đóng" onClick={ onSearch } class="secondary"></CustomButtonScreen>
+                        {/* <CustomButtonScreen text="Đóng" onClick={ onSearch } class="secondary"></CustomButtonScreen> */}
+                        <button    
+                            onClick={ onSearch } 
+                            className="btn-outline margin-left-4"
+                        >
+                            Đóng
+                        </button>
                     </div>
                 )
             }

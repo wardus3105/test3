@@ -6,20 +6,26 @@ function GuestChatAdapter(props : IGuestChat){
     const history = useHistory();
 
     const redirectToDetailUser = () =>{
-        history.push("/personal/detail/" + props.id);
+        history.push("/personal/detail/" + props.roomId);
     }
 
-    const setResponseMess = () =>{
-        props.setResponseMess(props.user.userName , props.context , props.kindOfMess)
+    const setResponMess = () =>{
+        const { messageId , context , type , user:{ userName } , setRespondedMess } = props;
+        setRespondedMess({
+            messageId,
+            context,
+            type,
+            userName
+        })
     }
 
     const copyText = () =>{
-        props.kindOfMess === ENUM_KIND_OF_MESSAGE.TEXT && navigator.clipboard.writeText(props.context)
+        props.type === ENUM_KIND_OF_MESSAGE.TEXT && navigator.clipboard.writeText(props.context)
     }
 
     return {
         redirectToDetailUser,
-        setResponseMess,
+        setResponMess,
         copyText
     }
 }

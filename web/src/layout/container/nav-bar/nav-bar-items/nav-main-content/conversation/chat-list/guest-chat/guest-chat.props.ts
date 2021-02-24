@@ -1,13 +1,11 @@
-import { IResponseMess } from "../../main/conversation.props";
 import { IUser } from "../main/chat-list.props";
 
-
 export interface IGuestChat{
-    id:number,
+    roomId:string,
     user: IUser,
-    kindOfMess: number,
+    type: string,
     context: string,
     children: React.ReactNode,
-    responseMess: IResponseMess,
-    setResponseMess:any,
+    setRespondedMess:any,
+    messageId: string
 }
