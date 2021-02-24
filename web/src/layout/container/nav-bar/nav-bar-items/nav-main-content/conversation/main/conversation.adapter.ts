@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { ENUM_KIND_OF_CHATROOM } from "../../../../../../../libraries/Enum/chat-room";
-import { IChat, IConversation } from "./conversation.props";
+import { IConversation } from "./conversation.props";
 import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath";
 import ConversationServices from "./conversation.services";
 import ConversationStates from "./conversation.states";
-import { ENUM_KIND_OF_STATUS } from "../../../../../../../libraries/Enum/status";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../libraries/Enum/status-code";
 
 function ConversationAdapter() {
     const history = useHistory();
+    const roomId = useIdInPath()
 
     const {
         query , setQuery,
@@ -18,27 +17,11 @@ function ConversationAdapter() {
         page , setPage,
         count , setCount,
         isUpdating, setIsUpdating,
-        isGroup, setIsGroup, listMessage, setListMessage,
+        isGroup, setIsGroup,
+        listMessage, setListMessage,
+        hasUploadImages, setHasUploadImages,
+        responseMess, setResponseMess,
     } = ConversationStates()
-
-    const roomid = useIdInPath()
-
-    // useEffect(() => {
-    //     let message: IChat = {
-    //         message: "Test 1",
-    //         messageType: "1",
-    //         messageStatus: "1",
-    //         userId: "Test",
-    //         createdAt: "08:08:00",
-    //         user: {
-    //             userName: "Test 1",
-    //             lastLogin: "08:08:00",
-    //             status: "1"
-    //         },
-    //         attachments: []
-    //     }
-    //     setListMessage([message]); 
-    // }, [setListMessage ]);
 
     useEffect(() => {
         !hasSearch && setQuery("");
@@ -47,16 +30,13 @@ function ConversationAdapter() {
     useEffect(() => {
         const getData = async () => {
             // setIsUpdating(true)
-            const response = await ConversationServices().getInstance().getConversationList(roomid , page);
+            const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                // console.log(response)
-                // setConversation(response.data.result[0]);
-                // setIsGroup(response.data.result[0].type  === ENUM_KIND_OF_CHATROOM.GROUP);
-                // setCount(response.data.count);
                 setListMessage(response.data.data)
             }
-            var conversation: IConversation = {
-                id: roomid,
+
+            const conversation: IConversation = {
+                id: roomId,
                 title: "test",
                 status: "1",
                 avatar: "",
@@ -69,7 +49,7 @@ function ConversationAdapter() {
         }
 
         getData();
-    }, [ setConversation , roomid , page , setCount , setIsUpdating , setIsGroup , setListMessage ]);
+    }, [ setConversation , roomId , page , setCount , setIsUpdating , setIsGroup , setListMessage ]);
 
     const onSearch = () =>{
         setHasSearch(prev => !prev)
@@ -87,8 +67,12 @@ function ConversationAdapter() {
         count,
         page , setPage,
         isUpdating,
-        isGroup, listMessage, setListMessage,
-        redirectToDetail
+        isGroup, 
+        listMessage, setListMessage,
+        hasUploadImages, setHasUploadImages,
+        redirectToDetail,
+        responseMess, setResponseMess,
+        roomId
     }
 }
 

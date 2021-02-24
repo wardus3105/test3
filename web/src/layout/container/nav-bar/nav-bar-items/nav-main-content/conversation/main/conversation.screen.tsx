@@ -8,7 +8,6 @@ import './conversation.scss';
 import { ENUM_KIND_OF_STATUS } from '../../../../../../../libraries/Enum/status';
 import GroupConversationScreen from '../../group/conversation/group-conversation.screen';
 import PersonalConversationScreen from '../../personal/conversation/personal-conversation.screen';
-import useIdInPath from '../../../../../../../libraries/Hooks/useIdInPath';
 
 function ConversationScreen(){
     const {
@@ -19,8 +18,12 @@ function ConversationScreen(){
         count,
         page , setPage,
         isUpdating,
-        isGroup, listMessage, setListMessage,
-        redirectToDetail
+        isGroup,
+        listMessage, setListMessage,
+        hasUploadImages, setHasUploadImages,
+        redirectToDetail,
+        responseMess, setResponseMess,
+        roomId
     } = ConversationAdapter();
 
     let eleOptionHeader = null;
@@ -30,13 +33,10 @@ function ConversationScreen(){
         eleOptionHeader = PersonalConversationScreen()
     }
 
-    const roomId = useIdInPath()
+    return (
+        <div className="conversation-container">
 
-    // if(conversation){
-        return (
-            <div className="conversation-container">
-    
-                <HeaderConversationScreen
+            <HeaderConversationScreen
                 id={ conversation?.id }
                 title={ conversation?.title }
                 avatar={ conversation?.avatar }
@@ -47,32 +47,36 @@ function ConversationScreen(){
                 onSearch={ onSearch }
                 setQuery={ setQuery }
                 onClickAvatar={ () =>{ redirectToDetail(conversation?.id || "") } }
-                ></HeaderConversationScreen>
-    
-                {
-                    hasSearch && (
-                        <SearchChatScreen query={ query }></SearchChatScreen>
-                    )
-                }
-                
-                <ChatListScreen
-                    id={ roomId }
-                    chats={ listMessage }
-                    hasSearch={ hasSearch }
-                    count={ count }
-                    page={ page }
-                    setPage={ setPage }
-                    isUpdating={ isUpdating }
-                ></ChatListScreen>
-                
-                <ChatInputScreen listMessage={listMessage} setListMessage={setListMessage} id={ conversation?.id }></ChatInputScreen>
-            </div>
-        )
-    // }
+            ></HeaderConversationScreen>
 
-    // return (
-    //     <div></div>
-    // )
+            {
+                hasSearch && (
+                    <SearchChatScreen query={ query }></SearchChatScreen>
+                )
+            }
+            
+            <ChatListScreen
+                roomIdz={ roomId }
+                chats={ listMessage }
+                hasSearch={ hasSearch }
+                count={ count }
+                page={ page }
+                setPage={ setPage }
+                isUpdating={ isUpdating }
+                setResponseMess={ setResponseMess }
+            ></ChatListScreen>
+            
+            <ChatInputScreen 
+                listMessage={ listMessage}  
+                setListMessage={ setListMessage } 
+                id={ conversation?.id }
+                hasUploadImages= { hasUploadImages }
+                setHasUploadImages= { setHasUploadImages }
+                responseMess={ responseMess }
+                setResponseMess={ setResponseMess }
+            ></ChatInputScreen>
+        </div>
+    )
 
 
 }

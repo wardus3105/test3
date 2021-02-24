@@ -1,8 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import useScroll from "../../../../../../../../libraries/Hooks/useScroll";
-import ChatListServices from "./chat-list.services";
-import useIdInPath from "../../../../../../../../libraries/Hooks/useIdInPath";
 import ChatInputServices from "../../chat-input/main/chat-input.services";
 
 import ChatListStates from "./chat-list.states";
@@ -18,10 +16,10 @@ const options = {
     maxRetries: 10,
   };
 
-function ChatListAdapter(chats: any , count: number, page:number , setPage: any , isUpdating: boolean , id: string) {
+function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
 
-    const {createChatRoom} = ChatListServices();
+    const { chats , count , page , setPage , isUpdating , roomIdz , setHasUploadImages } = props;
 
     const {
         isMainLoading, setIsMainLoading,
@@ -59,11 +57,11 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
 
 
     useEffect(() => {
-        if(roomId === id){
-            setChatList(prev =>[ ...prev , ...chats ])
+        if(roomId === roomIdz){
+            setChatList(prev =>[ ...chats , ...prev ])
             setIsMainLoading(false);
         } else{
-            setRoomId(id);
+            setRoomId(roomIdz);
             setChatList(chats)
             setIsMainLoading(false);
         }
@@ -83,7 +81,7 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
             attachments:[]
         }
 
-        setChatList(prev =>[ ...prev , chats ])
+        setChatList(prev =>[ chats , ...prev ])
 
         const response = await ChatInputServices().getInstance().sendMessage(chats);
         if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
@@ -122,7 +120,7 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
                     userId: messageReceived.value.user
                 }]
     
-                setChatList(prev =>[ ...prev , ...chats ])
+                setChatList(prev =>[ ...chats , ...prev ])
             }
 
         },

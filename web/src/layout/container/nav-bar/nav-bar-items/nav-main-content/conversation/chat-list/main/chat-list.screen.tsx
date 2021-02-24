@@ -14,7 +14,7 @@ import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
 
 function ChatListScreen(props: any){
-    const { chats , count , page , setPage , isUpdating , id , hasSearch } = props;
+    const { chats , count , page , setPage , isUpdating , roomIdz , hasSearch , setResponseMess } = props;
 
     const {
         userid,
@@ -23,15 +23,14 @@ function ChatListScreen(props: any){
         chatList,
         handleScroll,
         clickFirstMessage
-    } = ChatListAdapter(chats , count , page , setPage , isUpdating , id)
+    } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomIdz })
 
     const length = chatList.length;
     const showAllMessages = () =>{
         if(chatList && length > 0){
-            const list = [...chatList].reverse();
-            console.log(list)
+            const list = [...chatList]
             let datetimeContext = new Date(list[0].createdAt);
-            let prevShape = 69;
+
             return list.map((chat: any , index: number) =>{
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
@@ -39,7 +38,7 @@ function ChatListScreen(props: any){
                 const isCurrent: boolean = chat.user.id === userid;
                 const createAt = new Date(chat.createdAt);
 
-                if(isCurrent && index > 0){
+                if(isCurrent){
                     let haveSameTime = haveSameTimePeriod(datetimeContext , createAt)
                     if(haveSameTime){
                         shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
@@ -47,16 +46,33 @@ function ChatListScreen(props: any){
                         if(index < list.length - 1){
                             const haveSameTime2 = haveSameTimePeriod(createAt , new Date(list[index + 1].createdAt))
                             if(haveSameTime2){
-                                shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
+                                if(index === 0) {
+                                    shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
+                                } else{
+                                    shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
+                                }
                             } else {
                                 shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
                             }
                         } else {
                             shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
                         }
+                    } else {
+                        shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
+
+                        if(index < list.length - 1){
+                            const haveSameTime2 = haveSameTimePeriod(createAt , new Date(list[index + 1].createdAt))
+                            if(haveSameTime2){
+                                shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
+                            } else {
+                                shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
+                            }
+                        }else {
+                            shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
+                        }
                     }
                 }
-                prevShape = shape;
+
                 datetimeContext = createAt;
                 // const haveSameDay = datetimeContext.startOf('day').isSame(createAt.startOf('day'));
                 // if(!haveSameDay){
@@ -92,10 +108,12 @@ function ChatListScreen(props: any){
                 } else{
                     eleMainContext = (
                         <GuestChatScreen
-                            id={ id }
-                            kindOfMess={ 0 }
+                            roomId={ roomIdz }
+                            type={ chat.messageType }
                             user={ chat.user } 
-                            context={ chat.context }
+                            context={ chat.message }
+                            setResponseMess={ setResponseMess }
+                            messageId = { chat.id }
                         >
                             { eleContext }
                         </GuestChatScreen>
