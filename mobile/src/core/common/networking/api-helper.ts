@@ -1,32 +1,30 @@
-import { SUCCESS } from './status';
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-unused-vars
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import env from 'react-native-config';
-import AsyncStorageHelpers, { StorageKey } from '../../../helpers/async-storage-helpers';
-import { Alert, Keyboard } from 'react-native';
-import { translate } from 'res/languages';
-import { TOKEN_EXPIRED } from './status';
-import { any } from 'prop-types';
-import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
-import { showAlert, TYPE } from 'libraries/dropdown-alert';
+// import { showAlert, TYPE } from 'libraries/dropdown-alert';
+// import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
+// import { Alert } from 'react-native';
+// import env from 'react-native-config';
+// import { translate } from 'res/languages';
+// import AsyncStorageHelpers, { StorageKey } from '../../../helpers/async-storage-helpers';
 import { LoginMobileResponse } from '../../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { SUCCESS, TOKEN_EXPIRED } from './status';
 
 const instance = axios.create({
-  baseURL: `${env.API_HOST}`,
+  baseURL: `http://172.20.50.77:3001`,
   timeout: 20 * 1000,
 });
 
 instance.interceptors.request.use((_config) => requestHandler(_config));
 
 const requestHandler = (request: AxiosRequestConfig) => {
-  if (__DEV__) {
-    console.log(
-      `Request API - ${request.method?.toUpperCase()}: ${request.baseURL}${request.url}`,
-      request.params,
-      request.data
-    );
-  }
+  // if (__DEV__) {
+  console.log(
+    `Request API - ${request.method?.toUpperCase()}: ${request.baseURL}${request.url}`,
+    request.params,
+    request.data
+  );
+  // }
 
   return request;
 };
@@ -37,17 +35,17 @@ instance.interceptors.response.use(
 );
 
 const errorHandler = (error: any) => {
-  if (__DEV__) {
-    console.log(error);
-  }
+  // if (__DEV__) {
+  console.log(error);
+  // }
   // eslint-disable-next-line prefer-promise-reject-errors
   return Promise.reject({ ...error });
 };
 
 const successHandler = (response: AxiosResponse) => {
-  if (__DEV__) {
-    console.log(`Response API: ${response.config.url}`, response.data);
-  }
+  // if (__DEV__) {
+  console.log(`Response API: ${response.config.url}`, response.data);
+  // }
   return response.data;
 };
 
@@ -78,7 +76,7 @@ async function fetch(url: string, params?: any, isAuth?: boolean, isRaw?: boolea
 }
 
 async function post(url: string, data?: any, isAuth?: boolean, isRaw?: boolean) {
-  let headers = null;
+  let headers: any = null;
   if (isAuth) {
     headers = await createHeader();
   }
@@ -210,36 +208,40 @@ async function postForm(url: string, data: any, isAuth?: boolean) {
     .catch((error) => error);
 }
 
+// TODO
 // Get Token
 async function createHeader(): Promise<object> {
-  const setting: any = await getUserInfo();
-  return {
-    Authorization: `Bearer ${setting ? setting.token : ''}`,
-  };
+  // const setting: any = await getUserInfo();
+  // return {
+  //   Authorization: `Bearer ${setting ? setting.token : ''}`,
+  // };
+  return {};
 }
 
-export async function getUserInfo(): Promise<LoginMobileResponse> {
-  const data: string = (await AsyncStorageHelpers.get(StorageKey.USER_INFO)) as string;
-  const setting: any = JSON.parse(data);
-  return setting;
-}
+// export async function getUserInfo(): Promise<LoginMobileResponse> {
+//   const data: string = (await AsyncStorageHelpers.get(StorageKey.USER_INFO)) as string;
+//   const setting: any = JSON.parse(data);
+//   return setting;
+// }
 
 export async function removeUser(): Promise<void> {
-  await AsyncStorageHelpers.remove(StorageKey.USER_INFO);
-  return Promise.resolve();
+  // await AsyncStorageHelpers.remove(StorageKey.USER_INFO);
+  // return Promise.resolve();
 }
 
+// TODO
 export function checkToken(res: any) {
-  if (res && res.code === TOKEN_EXPIRED) {
-    return new Promise<Object>((resolve, reject) => {
-      Alert.alert(
-        translate('notify'),
-        translate('tokenInvalid'),
-        [{ text: translate('common.yes'), onPress: () => {} }],
-        { cancelable: false }
-      );
-    });
-  } else return res;
+  // if (res && res.code === TOKEN_EXPIRED) {
+  //   return new Promise<Object>((resolve, reject) => {
+  //     Alert.alert(
+  //       translate('notify'),
+  //       translate('tokenInvalid'),
+  //       [{ text: translate('common.yes'), onPress: () => {} }],
+  //       { cancelable: false }
+  //     );
+  //   });
+  // } else return res;
+  return '';
 }
 
 //Process request
@@ -250,13 +252,13 @@ function processRequestRespository(
   isShowAlert: boolean = true,
   isShowLoading: boolean = true
 ) {
-  isShowLoading && showLoading();
+  // isShowLoading && showLoading();
   reqPromise
     .then((data) => {
-      hideLoading();
+      // hideLoading();
       switch (data?.status) {
         case SUCCESS:
-          isShowAlert && showAlert(TYPE.SUCCESS, translate('warning.success'), data.message);
+          // isShowAlert && showAlert(TYPE.SUCCESS, translate('warning.success'), data.message);
           onSuccess && onSuccess(data.data);
           break;
         default:
@@ -267,10 +269,10 @@ function processRequestRespository(
       onSuccess && onSuccess(data.data);
     })
     .catch((e) => {
-      hideLoading();
+      // hideLoading();
       console.log('tes_err_data_ex: ', e);
 
-      isShowAlert && showAlert(TYPE.WARN, translate('warning.warning'), e.message);
+      // isShowAlert && showAlert(TYPE.WARN, translate('warning.warning'), e.message);
       onfail && onfail(e);
     });
 }
@@ -282,13 +284,13 @@ function processRequestTrustRespository(
   isShowAlert: boolean = true,
   isShowLoading: boolean = true
 ) {
-  isShowLoading && showLoading();
+  // isShowLoading && showLoading();
   reqPromise
     .then((data) => {
-      hideLoading();
+      // hideLoading();
       switch (data?.status) {
         case SUCCESS:
-          isShowAlert && showAlert(TYPE.SUCCESS, translate('warning.success'), data.message);
+          // isShowAlert && showAlert(TYPE.SUCCESS, translate('warning.success'), data.message);
           onSuccess && onSuccess(data);
           break;
         default:
@@ -299,10 +301,10 @@ function processRequestTrustRespository(
       onSuccess && onSuccess(data);
     })
     .catch((e) => {
-      hideLoading();
+      // hideLoading();
       console.log('tes_err_data_ex: ', e);
 
-      isShowAlert && showAlert(TYPE.WARN, translate('warning.warning'), e.message);
+      // isShowAlert && showAlert(TYPE.WARN, translate('warning.warning'), e.message);
       onfail && onfail(e);
     });
 }

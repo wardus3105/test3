@@ -12,11 +12,21 @@ import { HeaderTypes } from 'types/header-types';
 import { INewUserChat } from 'types/message';
 import { User } from '../../../types/user';
 import { ListUserChatAdapter } from 'core/model-list-user-chat/list-user-chat.adapter';
-import { ListUserChatProps } from 'core/model-list-user-chat/list-user-chat.props';
+import { ListUserChatProps, ListChatModel } from 'core/model-list-user-chat/list-user-chat.props';
 import { ListUserChatStates } from 'core/model-list-user-chat/list-user-chat.states';
 import { ListChatComponent } from './components/list-chat/list-chat.component';
 import { SearchTouchComponent } from './components/search-touch/search-touch.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import NavigationService from 'routers/navigation-service';
+import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
+import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
+import {
+  ChatDetailScreen,
+  IncomingCallScreen,
+  NewMessageScreen,
+  ProfileScreen,
+  SearchScreen,
+} from 'routers/screen-name';
 
 export default class ListUserChatContainer extends React.PureComponent<
   ListUserChatProps,
@@ -46,7 +56,7 @@ export default class ListUserChatContainer extends React.PureComponent<
     // this.ListUserChatAdapter.getListUser();
     this.ListUserChatAdapter.getListChat();
     //TODO: video call
-    this.ListUserChatAdapter.getInfoVideoCall();
+    this.getInfoVideoCall();
   };
 
   componentWillUnmount() {
@@ -84,7 +94,7 @@ export default class ListUserChatContainer extends React.PureComponent<
             case EventBusName.INCOMING_MESSAGE:
               const msg: IMessage = res.payload;
               let new_data = [...this.state.dataListChat];
-              new_data.push(msg)
+              new_data.push(msg);
               // const index_item = new_data.map((item) => item?.id).indexOf(msg?.chatId);
               // if (index_item != -1 && new_data[index_item] && new_data[index_item].messengers[0]) {
               //   const new_item = { ...new_data[index_item] };
@@ -92,7 +102,7 @@ export default class ListUserChatContainer extends React.PureComponent<
               //   new_data.splice(index_item, 1);
               //   new_data.splice(0, 0, new_item);
               // }
-              
+
               //Check new user
               // const exist_user = new_data.map((item) => item?.contact?.id).indexOf(msg?.user?._id);
               // if (exist_user === -1) {
@@ -136,6 +146,44 @@ export default class ListUserChatContainer extends React.PureComponent<
     );
   };
 
+  goToProfile = () => {
+    NavigationService.navigate(ProfileScreen, {
+      user: this.props.userInfo.user,
+    });
+  };
+
+  goToSearch = () => {
+    NavigationService.navigate(SearchScreen);
+  };
+
+  goToNewMess = () => {
+    NavigationService.navigate(NewMessageScreen);
+  };
+
+  goToNotifi = () => {
+    // NavigationService.navigate(IncomingCallScreen);
+  };
+
+  goToChatDetail = (item: ListChatModel) => {
+    console.log('test_item_chat_dtl: ', item);
+    NavigationService.navigate(ChatDetailScreen, {
+      chatInfo: { data: item, type: TypeParam.FORM_MESSAGE },
+    });
+  };
+
+  getInfoVideoCall = async () => {
+    console.log('test_video_call_0: ');
+    const data: string = (await AsyncStorageHelpers.get(StorageKey.VIDEO_CALL_INFO)) as string;
+    const info: any = JSON.parse(data);
+
+    NavigationService.navigate(IncomingCallScreen, {
+      type: info?.data?.type,
+      user: JSON.parse(info?.data?.user || ''),
+      chatInfo: JSON.parse(info?.data?.chatInfo || ''),
+    });
+    console.log('test_video_call: ', JSON.parse(info?.data?.user));
+  };
+
   render() {
     const { dataListUser, dataListChat } = this.state;
     const { userInfo } = this.props;
@@ -143,18 +191,18 @@ export default class ListUserChatContainer extends React.PureComponent<
       <ContainerComponent headerType={HeaderTypes.NONE} style={{ flex: 1 }}>
         <UserInfoComponent
           userInfo={userInfo && userInfo.user}
-          goToProfile={this.ListUserChatAdapter.goToProfile}
-          goToNewMess={this.ListUserChatAdapter.goToNewMess}
-          goToNotifi={this.ListUserChatAdapter.goToNotifi}
+          goToProfile={this.goToProfile}
+          goToNewMess={this.goToNewMess}
+          goToNotifi={this.goToNotifi}
         />
-        <SearchTouchComponent goToSearch={this.ListUserChatAdapter.goToSearch} />
+        <SearchTouchComponent goToSearch={this.goToSearch} />
         {/* <ListUserComponent
           dataListUser={dataListUser}
           goToChatDetail={this.ListUserChatAdapter.goToChatDetail}
         /> */}
         <ListChatComponent
           dataListChat={dataListChat}
-          goToChatDetail={this.ListUserChatAdapter.goToChatDetail}
+          goToChatDetail={this.goToChatDetail}
           loading={this.state.loading}
           onEndReached={this.ListUserChatAdapter.onEndReached}
           onRefresh={this.ListUserChatAdapter.onRefresh}
