@@ -1,9 +1,10 @@
+import moment from 'moment';
 import React from 'react';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/shape_of_message';
 import './text-context-chat.scss';
 
 function TextContextChatScreen(props : any){
-    const { context , datetime } = props;
+    const { context , datetime , time , index } = props;
 
     const showContext = () =>{
         const rows = context.split("\n");
@@ -41,7 +42,8 @@ function TextContextChatScreen(props : any){
             <div className={ "padding-12 " + (props.isCurrent ? "currentchat-context " : "guestchat-context ") + getClassByShape() }>
                 { showContext() }    
                 <span className="chat-time">
-                    { datetime }
+                    { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index }
+                    {/* { datetime } */}
                 </span>
             </div> 
         )
