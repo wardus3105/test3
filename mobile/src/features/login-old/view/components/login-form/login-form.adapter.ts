@@ -3,8 +3,8 @@
 */
 import { LoginFormComponent } from './login-form.component';
 import { showLoading } from '../../../../../libraries/loading/loading-modal';
-import { processRequestRespository } from 'core/networking/api-helper';
-import LoginOldServices from 'core/model-login-old/login-old.services';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import LoginOldServices from 'features/login-old/model-login-old/login-old.services';
 import { HyperUtils } from '../../../../../helpers/hyper/hyper-utils';
 import { async } from 'rxjs';
 import asyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';

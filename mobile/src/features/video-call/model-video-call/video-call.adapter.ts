@@ -1,5 +1,5 @@
 import IncomingCallServices from 'core/model-incoming-call/incoming-call.services';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import { KindOfMsg } from 'types/message';
 import VideoCallContainer from '../view/video-call.screen';
 import NavigationService from 'routers/navigation-service';

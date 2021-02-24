@@ -2,7 +2,7 @@
     Created by longdq
 */
 
-import EventBus, { EventBusName, EventBusType } from 'global/event-bus';
+import EventBus, { EventBusName, EventBusType } from 'core/common/event-bus';
 import { ContainerComponent } from 'libraries/main/container/container.component';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text, Image } from 'react-native';

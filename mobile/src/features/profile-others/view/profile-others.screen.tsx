@@ -12,6 +12,7 @@ import * as React from 'react';
 import { Image, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import NavigationService from 'routers/navigation-service';
 import colors from 'res/colors';
 import svgs from 'res/svgs';
 
@@ -80,13 +81,17 @@ export default class ProfileOthersContainer extends React.PureComponent<
 
   SecondRoute = () => <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />;
 
+  goBack = () => {
+    NavigationService.goBack();
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <AppStatusBarComponent />
         <View style={styles.wrapInfo}>
           <View style={styles.wrapHeader}>
-            <HyperButtonComponent onPress={this.ProfileOthersAdapter.goBack} img={svgs.ic_back} />
+            <HyperButtonComponent onPress={this.goBack} img={svgs.ic_back} />
             <View style={{ flexDirection: 'row' }}>
               <View style={{ marginRight: 24 }}>
                 <HyperButtonComponent img={svgs.ic_message} />

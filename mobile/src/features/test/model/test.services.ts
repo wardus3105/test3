@@ -3,7 +3,7 @@
     Created by thaolt
 */
 
-import { fetch, post, put, deletes } from "core/networking/api-helper"
+import { fetch, post, put, deletes } from "core/common/networking/api-helper"
 
 export default class TestServices {
   private static instance: TestServices;

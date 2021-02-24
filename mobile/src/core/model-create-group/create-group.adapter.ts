@@ -2,16 +2,14 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import CreateGroupContainer from '../../features/create-group/view/create-group.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
-import CreateGroupServices from './create-group.services';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import EventBus, { EventBusName } from 'core/common/event-bus';
+import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
+import NavigationService from 'routers/navigation-service';
 import { User } from 'types/user';
 import { itemDataCheck } from '../../features/create-group/view/components/search-list-user/item-list-user/item-list-user.component';
-import NavigationService from 'routers/navigation-service';
-import EventBus, { EventBusName } from 'global/event-bus';
-import { shadow } from 'react-native-paper';
-import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
+import CreateGroupContainer from '../../features/create-group/view/create-group.screen';
+import CreateGroupServices from './create-group.services';
 
 export class CreateGroupAdapter {
   CreateGroupContainer: CreateGroupContainer;

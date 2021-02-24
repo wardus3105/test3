@@ -1,12 +1,14 @@
 import env from 'env';
-import { DAY_NAMES } from 'global/constants';
 import I18n from 'i18n-js';
 import { showAlert, TYPE } from 'libraries/dropdown-alert';
 import moment, { Moment } from 'moment';
-import { Dimensions, Linking, PixelRatio, Platform } from 'react-native';
+import { Dimensions, Linking, PixelRatio, Platform, Alert } from 'react-native';
 import { translate } from 'res/languages';
-import { TIME_VALUE } from './time-hepplers';
 import { DimensionHelpers } from './dimension-helpers';
+import { TIME_VALUE } from './time-hepplers';
+import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
+import NavigationService from 'routers/navigation-service';
+import { AuthenNavigator } from 'routers/screen-name';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 function getDomain() {
@@ -262,14 +264,6 @@ const converDateStartToHourAndDate = (dateStart: string) => {
   };
 };
 
-const getNameOfDay = (dateStart: string) => {
-  const FORMAT = 'hh:mm:ss DD/MM/YYYY';
-  const weekDay = moment(dateStart, FORMAT).weekday();
-  const now = moment().weekday();
-  if (weekDay === now) return 'Hôm Nay';
-  return DAY_NAMES[weekDay];
-};
-
 const formatMY = (time: Moment = moment()) => {
   return time.format('MM/YYYY');
 };
@@ -437,6 +431,30 @@ export const capitalizeWords = (str: string): string => {
   }
 };
 
+/**
+ * Logout
+ */
+export const logout = (forceLogout = false, func: any) => {
+  Alert.alert(
+    translate('warning.title'),
+    translate('logout.content'),
+    [
+      { text: translate('common.yes'), onPress: () => clearUserInfo(func) },
+      { text: translate('common.no'), onPress: () => console.log('no') },
+    ],
+    { cancelable: true }
+  );
+};
+const clearUserInfo = async (func: any) => {
+  // showLoading();
+  await AsyncStorageHelpers.remove(StorageKey.USER_INFO);
+  // await AsyncStorageHelpers.remove(StorageKey.DEVICE_INFO);
+  // Remove user redux
+  func();
+  // hideLoading();
+  NavigationService.reset(AuthenNavigator);
+};
+
 export {
   isBlank,
   _formatPrice,
@@ -453,7 +471,6 @@ export {
   isValiEmpty,
   isImageCache,
   converDateStartToHourAndDate,
-  getNameOfDay,
   formatMY,
   dateFromMY,
   formatDMY,

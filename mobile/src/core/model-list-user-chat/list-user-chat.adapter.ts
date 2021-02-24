@@ -2,27 +2,22 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import ListUserChatContainer from '../../features/list-user-chat/view/list-user-chat.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
-import ListUserChatServices from './list-user-chat.services';
-import { ListChatModel } from './list-user-chat.props';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
+import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
+import { pushStreamService } from 'helpers/hyper/push-stream-service';
 import NavigationService from 'routers/navigation-service';
 import {
-  SearchScreen,
   ChatDetailScreen,
-  AuthenNavigator,
-  ProfileScreen,
-  NewMessageScreen,
   IncomingCallScreen,
+  NewMessageScreen,
+  ProfileScreen,
+  SearchScreen
 } from 'routers/screen-name';
 import { User } from 'types/user';
-import { Alert } from 'react-native';
-import { translate } from 'res/languages';
-import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
-import { showLoading, hideLoading } from '../../libraries/loading/loading-modal';
-import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
-import { pushStreamService } from 'helpers/hyper/push-stream-service';
+import ListUserChatContainer from '../../features/list-user-chat/view/list-user-chat.screen';
+import { ListChatModel } from './list-user-chat.props';
+import ListUserChatServices from './list-user-chat.services';
 
 export class ListUserChatAdapter {
   ListUserChatContainer: ListUserChatContainer;
@@ -138,40 +133,16 @@ export class ListUserChatAdapter {
 
   // };
 
-  getInfoVideoCall = async() =>{
-    console.log('test_video_call_0: ')
+  getInfoVideoCall = async () => {
+    console.log('test_video_call_0: ');
     const data: string = (await AsyncStorageHelpers.get(StorageKey.VIDEO_CALL_INFO)) as string;
     const info: any = JSON.parse(data);
-    
+
     NavigationService.navigate(IncomingCallScreen, {
       type: info?.data?.type,
       user: JSON.parse(info?.data?.user || ''),
       chatInfo: JSON.parse(info?.data?.chatInfo || ''),
     });
-    console.log('test_video_call: ', JSON.parse(info?.data?.user))
-  }
+    console.log('test_video_call: ', JSON.parse(info?.data?.user));
+  };
 }
-
-/**
- * Logout
- */
-export const logout = (forceLogout = false, func: any) => {
-  Alert.alert(
-    translate('warning.title'),
-    translate('logout.content'),
-    [
-      { text: translate('common.yes'), onPress: () => clearUserInfo(func) },
-      { text: translate('common.no'), onPress: () => console.log('no') },
-    ],
-    { cancelable: true }
-  );
-};
-const clearUserInfo = async (func: any) => {
-  showLoading();
-  await AsyncStorageHelpers.remove(StorageKey.USER_INFO);
-  // await AsyncStorageHelpers.remove(StorageKey.DEVICE_INFO);
-  // Remove user redux
-  func();
-  hideLoading();
-  NavigationService.reset(AuthenNavigator);
-};

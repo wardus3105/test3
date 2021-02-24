@@ -8,7 +8,7 @@ import NavigationService from 'routers/navigation-service';
 import { VideoCallScreen } from 'routers/screen-name';
 import { KindOfMsg } from '../../types/message';
 import { StatusVideoCallParams } from '../../features/video-call/model-video-call/video-call.props';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import IncomingCallServices from './incoming-call.services';
 import { HyperUtils } from 'helpers/hyper/hyper-utils';
 import { showAlert, TYPE } from '../../libraries/dropdown-alert/index';

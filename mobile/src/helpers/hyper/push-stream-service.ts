@@ -1,20 +1,13 @@
 // import { store } from '../redux/store/store';
 // import { showMessage } from 'react-native-flash-message';
-import ReconnectingWebSocket from 'reconnecting-websocket';
-// import { ApiService } from '../service/ApiService';
-
-import { HyperUtils } from './hyper-utils';
-import { User } from '../../types/user';
-import EventBus, { EventBusName } from '../../global/event-bus';
-import { post } from 'core/networking/api-helper';
 import env from 'react-native-config';
-import { IHyperMessage, INewUserChat, KindOfMsg } from '../../types/message';
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import EventBus, { EventBusName } from '../../core/common/event-bus';
+import { IHyperMessage, INewUserChat } from '../../types/message';
 import { PushStreamTypes } from '../../types/push-stream-types';
-import store from 'redux/store';
-import { IncomingCallScreen, VideoCallScreen } from 'routers/screen-name';
-import NavigationService from 'routers/navigation-service';
-import JitsiMeet from 'react-native-jitsi-meet';
-import { StatusBar } from 'react-native';
+import { User } from '../../types/user';
+// import { ApiService } from '../service/ApiService';
+import { HyperUtils } from './hyper-utils';
 
 var sockets: ReconnectingWebSocket[] = [];
 var socket: ReconnectingWebSocket;

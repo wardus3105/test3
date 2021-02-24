@@ -4,7 +4,7 @@
 
 import { Dispatch } from 'redux';
 import SearchContainer from '../view/search.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import SearchServices from './search.services';
 import { User } from 'types/user';
 import NavigationService from 'routers/navigation-service';

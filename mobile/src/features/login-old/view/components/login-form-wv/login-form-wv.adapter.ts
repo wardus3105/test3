@@ -1,9 +1,9 @@
 /* 
     Created by thaolt
 */
-import LoginOldServices from 'core/model-login-old/login-old.services';
+import LoginOldServices from 'features/login-old/model-login-old/login-old.services';
 import { showAlert, TYPE } from 'libraries/dropdown-alert';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import { WebViewMessageEvent, WebViewNavigation } from 'react-native-webview';
 import { translate } from 'res/languages';
 import { hideLoading } from '../../../../../libraries/loading/loading-modal';

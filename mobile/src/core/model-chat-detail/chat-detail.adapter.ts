@@ -2,7 +2,7 @@
     Created by longdq
 */
 
-import { processRequestRespository, deletes } from 'core/networking/api-helper';
+import { processRequestRespository, deletes } from 'core/common/networking/api-helper';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavigationService from 'routers/navigation-service';
 import { IncomingCallScreen } from 'routers/screen-name';

@@ -1,4 +1,4 @@
-import LoginOldServices from 'core/model-login-old/login-old.services';
+import LoginOldServices from 'features/login-old/model-login-old/login-old.services';
 import { LoginMobileResponse } from 'features/login-old/view/components/login-form-wv/login-form-wv.props';
 import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
@@ -7,7 +7,7 @@ import { UPDATE_USER } from 'redux/actions';
 import NavigationService from 'routers/navigation-service';
 import { BottomTab } from 'routers/screen-name';
 import { HyperUtils } from '../../helpers/hyper/hyper-utils';
-import { SUCCESS, CREATED } from '../../core/networking/status';
+import { SUCCESS, CREATED } from '../../core/common/networking/status';
 
 export function* loginMobileSaga(action: any) {
   const params = action?.data;

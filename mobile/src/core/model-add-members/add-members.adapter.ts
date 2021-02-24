@@ -2,13 +2,12 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import AddMembersContainer from '../../features/add-members/view/add-members.screen';
-import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
-import { processRequestRespository } from 'core/networking/api-helper';
-import AddMembersServices from './add-members.services';
-import { User } from 'types/user';
+// import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import { itemDataCheck } from 'features/create-group/view/components/search-list-user/item-list-user/item-list-user.component';
+import { User } from 'types/user';
+import AddMembersContainer from '../../features/add-members/view/add-members.screen';
+import AddMembersServices from './add-members.services';
 
 export class AddMembersAdapter {
   AddMembersContainer: AddMembersContainer;
@@ -50,7 +49,7 @@ export class AddMembersAdapter {
   searchUser = () => {
     const text = this.AddMembersContainer.state.txt;
     const { page, ITEM_PAGE } = this.AddMembersContainer;
-    showLoading();
+    // showLoading();
     this.AddMembersContainer.setState({
       loading: true,
     });
@@ -63,7 +62,7 @@ export class AddMembersAdapter {
     this.AddMembersContainer.setState({
       loading: false,
     });
-    hideLoading();
+    // hideLoading();
     this.AddMembersContainer.setState({
       dataSearchUser: [...this.AddMembersContainer.state.dataSearchUser, ...res],
     });
@@ -140,7 +139,7 @@ export class AddMembersAdapter {
         chatId: chatId,
         members: listIdUser,
       };
-      showLoading();
+      // showLoading();
       processRequestRespository(
         AddMembersServices.getInstance().addMembers(dataPost),
         this.createGrSuccess
@@ -160,7 +159,7 @@ export class AddMembersAdapter {
   };
 
   createGrSuccess = (res: any) => {
-    hideLoading();
+    // hideLoading();
     if (res) {
       // NavigationService.popMany(2);
       // EventBus.getInstance().post({

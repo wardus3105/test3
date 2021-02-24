@@ -10,7 +10,7 @@ import App from './app.tsx';
 import messaging from '@react-native-firebase/messaging';
 import navigationServices from './src/routers/navigation-service';
 import { IncomingCallScreen } from 'routers/screen-name';
-import EventBus, { EventBusName } from './src/global/event-bus';
+import EventBus, { EventBusName } from './src/core/common/event-bus';
 import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 
 console.disableYellowBox = true;

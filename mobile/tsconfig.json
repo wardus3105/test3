@@ -18,7 +18,7 @@
             "configs": ["src/configs/*"],
             "helpers": ["src/helpers/*"],
             "libraries": ["src/libraries/*"],
-            "networking": ["src/core/networking/*"],
+            "networking": ["src/core/common/networking/*"],
             "reduxs": ["src/redux/*"],
             "res": ["src/res/*"],
             "routers": ["src/routers/*"],

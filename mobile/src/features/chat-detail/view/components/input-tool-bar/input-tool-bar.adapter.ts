@@ -1,6 +1,6 @@
 import ChatDetailServices from 'core/model-chat-detail/chat-detail.services';
 import { HyperUtils } from 'helpers/hyper/hyper-utils';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
 import DocumentPicker from 'react-native-document-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 /* 

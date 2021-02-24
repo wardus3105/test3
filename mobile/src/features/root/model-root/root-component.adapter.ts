@@ -1,7 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorageHelpers from 'helpers/async-storage-helpers';
 import { HyperUtils } from 'helpers/hyper/hyper-utils';
-import { getUserInfo, processRequestRespository } from 'core/networking/api-helper';
+import { getUserInfo, processRequestRespository } from 'core/common/networking/api-helper';
 import { AppStateStatus } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { setI18nConfig } from 'res/languages';

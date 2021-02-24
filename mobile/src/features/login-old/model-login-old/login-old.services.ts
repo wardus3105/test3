@@ -1,14 +1,14 @@
 import {
   LoginMobileRequestCas,
   SyncUserIHCMeRequest,
-} from '../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+} from '../view/components/login-form-wv/login-form-wv.props';
 /* 
     Created by thaolt
 */
 
-import { fetch, post, put, deletes } from 'core/networking/api-helper';
-import { URL_PATHS } from '../networking/url-paths';
-import { LoginMobileRequest } from '../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { fetch, post, put, deletes } from 'core/common/networking/api-helper';
+import { URL_PATHS } from '../../../core/common/networking/url-paths';
+import { LoginMobileRequest } from '../view/components/login-form-wv/login-form-wv.props';
 import { GetTGTRequest } from './login-old.props';
 
 export default class LoginOldServices {

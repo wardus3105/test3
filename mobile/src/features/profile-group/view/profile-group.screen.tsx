@@ -14,10 +14,12 @@ import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'reac
 import { SvgXml } from 'react-native-svg';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import NavigationService from 'routers/navigation-service';
 import colors from 'res/colors';
 import { translate } from 'res/languages';
 import svgs from 'res/svgs';
 import { ListUserGroupComponent } from './components/list-user-group/list-user-group.component';
+import { AddMembersScreen } from 'routers/screen-name';
 
 export default class ProfileGroupContainer extends React.PureComponent<
   ProfileGroupProps,
@@ -56,6 +58,14 @@ export default class ProfileGroupContainer extends React.PureComponent<
     StatusBar.setBackgroundColor(colors.white);
     StatusBar.setBarStyle('dark-content');
   }
+
+  goToAddMembers = () => {
+    const chatId = this.chatInfo && this.chatInfo.id;
+    NavigationService.navigate(AddMembersScreen, { chatId: chatId });
+  };
+  goBack = () => {
+    NavigationService.goBack();
+  };
 
   renderTabBar = (props) => (
     <TabBar

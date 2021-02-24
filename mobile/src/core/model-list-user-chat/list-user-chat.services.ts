@@ -2,8 +2,8 @@
     Created by longdq
 */
 
-import { fetch, post, put, deletes } from 'core/networking/api-helper';
-import { URL_PATHS } from '../networking/url-paths';
+import { fetch, post, put, deletes } from 'core/common/networking/api-helper';
+import { URL_PATHS } from '../common/networking/url-paths';
 
 export default class ListUserChatServices {
   private static instance: ListUserChatServices;

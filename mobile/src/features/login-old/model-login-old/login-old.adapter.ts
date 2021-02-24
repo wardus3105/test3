@@ -2,20 +2,15 @@
     Created by thaolt
 */
 
-import { Dispatch } from 'redux';
-import LoginOldContainer from '../../features/login-old/view/login-old.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
-import LoginOldServices from './login-old.services';
-import { URL_PATHS } from 'core/networking/url-paths';
-import { GetTokenResponse } from './login-old.props';
-import Axios from 'axios';
-import RNFetchBlob from 'rn-fetch-blob';
+import { URL_PATHS } from 'core/common/networking/url-paths';
+import asyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 import { Platform } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import { translate } from 'res/languages';
-import asyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
-import { User2 } from '../../types/user';
-import { string } from 'prop-types';
+import RNFetchBlob from 'rn-fetch-blob';
+import LoginOldContainer from 'features/login-old/view/login-old.screen';
+import { User2 } from 'types/user';
+import { GetTokenResponse } from './login-old.props';
 var HTMLParser = require('fast-html-parser');
 
 export class LoginOldAdapter {

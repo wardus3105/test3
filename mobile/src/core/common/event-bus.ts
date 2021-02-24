@@ -35,7 +35,6 @@ export default class EventBus {
   }
 
   post(event: EventBusType) {
-    console.log(event, 'haha, hoho, ......');
     this.eventSubject.next(event);
   }
 }

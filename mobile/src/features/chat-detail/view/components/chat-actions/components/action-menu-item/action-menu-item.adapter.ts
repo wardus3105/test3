@@ -3,7 +3,7 @@
 */
 import { ActionMenuItemComponent } from './action-menu-item.component';
 import { MenuItem } from '../action-menu/action-menu.props';
-import EventBus, { EventBusName } from 'global/event-bus';
+import EventBus, { EventBusName } from 'core/common/event-bus';
 
 export class ActionMenuItemAdapter {
   private ActionMenuItemComponent: ActionMenuItemComponent;

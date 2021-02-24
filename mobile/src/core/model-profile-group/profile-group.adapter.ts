@@ -2,14 +2,11 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import ProfileGroupContainer from '../view/profile-group.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import ProfileGroupContainer from 'features/profile-group/view/profile-group.screen';
+import { User } from 'types/user';
 import ProfileGroupServices from './profile-group.services';
 import { ModelInfoGr } from './profile-group.states';
-import { User } from 'types/user';
-import navigationService from 'routers/navigation-service';
-import { AddMembersScreen } from 'routers/screen-name';
 
 export class ProfileGroupAdapter {
   ProfileGroupContainer: ProfileGroupContainer;
@@ -18,14 +15,6 @@ export class ProfileGroupAdapter {
   }
 
   goToChatDetail = () => {};
-
-  goToAddMembers = () => {
-    const chatId = this.ProfileGroupContainer.chatInfo && this.ProfileGroupContainer.chatInfo.id;
-    navigationService.navigate(AddMembersScreen, { chatId: chatId });
-  };
-  goBack = () => {
-    navigationService.goBack();
-  };
 
   getInfo = () => {
     const chatId = this.ProfileGroupContainer.chatInfo && this.ProfileGroupContainer.chatInfo.id;

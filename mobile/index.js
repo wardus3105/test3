@@ -2,16 +2,13 @@
  * @format
  */
 
+// import { name as appName } from './app.json';
+import messaging from '@react-native-firebase/messaging';
+import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 import { AppRegistry, Linking } from 'react-native';
 import codePush from 'react-native-code-push';
 import 'react-native-gesture-handler';
 import App from './app.tsx';
-// import { name as appName } from './app.json';
-import messaging from '@react-native-firebase/messaging';
-import navigationServices from './src/routers/navigation-service';
-import { IncomingCallScreen } from 'routers/screen-name';
-import EventBus, { EventBusName } from './src/global/event-bus';
-import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 
 console.disableYellowBox = true;
 

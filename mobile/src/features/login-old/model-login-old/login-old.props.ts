@@ -1,7 +1,7 @@
 import {
   LoginMobileRequest,
   LoginMobileResponse
-} from '../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+} from '../view/components/login-form-wv/login-form-wv.props';
 
 
 export interface LoginOldProps {

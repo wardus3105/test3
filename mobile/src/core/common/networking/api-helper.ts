@@ -3,14 +3,14 @@ import { SUCCESS } from './status';
 // eslint-disable-next-line no-unused-vars
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import env from 'react-native-config';
-import AsyncStorageHelpers, { StorageKey } from '../../helpers/async-storage-helpers';
+import AsyncStorageHelpers, { StorageKey } from '../../../helpers/async-storage-helpers';
 import { Alert, Keyboard } from 'react-native';
 import { translate } from 'res/languages';
 import { TOKEN_EXPIRED } from './status';
 import { any } from 'prop-types';
 import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
 import { showAlert, TYPE } from 'libraries/dropdown-alert';
-import { LoginMobileResponse } from '../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { LoginMobileResponse } from '../../../features/login-old/view/components/login-form-wv/login-form-wv.props';
 
 const instance = axios.create({
   baseURL: `${env.API_HOST}`,

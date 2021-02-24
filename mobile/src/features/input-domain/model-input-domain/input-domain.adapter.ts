@@ -4,7 +4,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 */
 
 import { Dispatch } from 'redux';
-import InputDomainContainer from '../../features/input-domain/view/input-domain.screen';
+import InputDomainContainer from '../view/input-domain.screen';
 import navigationService from 'routers/navigation-service';
 import { LoginOldScreen } from 'routers/screen-name';
 import asyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
@@ -13,7 +13,7 @@ import AsyncStorageHelpers from 'helpers/async-storage-helpers';
 import { showMessage } from 'react-native-flash-message';
 import { translate } from 'res/languages';
 import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
-import { URL_PATHS } from '../networking/url-paths';
+import { URL_PATHS } from '../../../core/common/networking/url-paths';
 
 var HTMLParser = require('fast-html-parser');
 

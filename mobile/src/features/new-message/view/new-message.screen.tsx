@@ -12,7 +12,11 @@ import { HeaderTypes } from 'types/header-types';
 import { NewGroupComponent } from './components/new-group/new-group.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchListUserComponent } from './components/search-list-user/search-list-user.component';
+import NavigationService from 'routers/navigation-service';
 import { translate } from 'res/languages';
+import { ChatDetailScreen, CreateGroupScreen } from 'routers/screen-name';
+import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
+import { User } from 'types/user';
 
 export default class NewMessageContainer extends React.PureComponent<
   NewMessageProps,
@@ -38,6 +42,16 @@ export default class NewMessageContainer extends React.PureComponent<
     this.NewMessageAdapter.searchUser();
   };
 
+  goToChatDetail = (item: User) => {
+    NavigationService.navigate(ChatDetailScreen, {
+      chatInfo: { data: item, type: TypeParam.FROM_USER },
+    });
+  };
+
+  goToCreateGr = () => {
+    NavigationService.navigate(CreateGroupScreen);
+  };
+
   render() {
     const { dataSearchUser } = this.state;
 
@@ -47,11 +61,11 @@ export default class NewMessageContainer extends React.PureComponent<
         title={translate('newMess.newMess')}
         headerType={HeaderTypes.BACK_TITLE}
       >
-        <NewGroupComponent goToCreateGr={this.NewMessageAdapter.goToCreateGr} />
+        <NewGroupComponent goToCreateGr={this.goToCreateGr} />
         <SearchComponent search={this.NewMessageAdapter.setTxtSearch} />
         <SearchListUserComponent
           dataSearchUser={dataSearchUser}
-          goToChatDetail={this.NewMessageAdapter.goToChatDetail}
+          goToChatDetail={this.goToChatDetail}
           loading={this.state.loading}
           onEndReached={this.NewMessageAdapter.onEndReached}
           onRefresh={this.NewMessageAdapter.onRefresh}

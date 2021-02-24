@@ -2,8 +2,8 @@
     Created by longdq
 */
 
-import { fetch, post, put, deletes } from 'core/networking/api-helper';
-import { URL_PATHS } from 'core/networking/url-paths';
+import { fetch, post, put, deletes } from 'core/common/networking/api-helper';
+import { URL_PATHS } from 'core/common/networking/url-paths';
 
 export default class AddMembersServices {
   private static instance: AddMembersServices;

@@ -4,9 +4,9 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { LoginOldAdapter } from 'core/model-login-old/login-old.adapter';
-import { LoginOldProps } from 'core/model-login-old/login-old.props';
-import { LoginOldStates } from 'core/model-login-old/login-old.states';
+import { LoginOldAdapter } from 'features/login-old/model-login-old/login-old.adapter';
+import { LoginOldProps } from 'features/login-old/model-login-old/login-old.props';
+import { LoginOldStates } from 'features/login-old/model-login-old/login-old.states';
 import { LoginFormWvComponent } from './components/login-form-wv/login-form-wv.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 

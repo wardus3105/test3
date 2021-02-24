@@ -9,9 +9,11 @@ import { ProfileAdapter } from 'core/model-profile/profile.adapter';
 import { ProfileProps } from 'core/model-profile/profile.props';
 import { ProfileStates } from 'core/model-profile/profile.states';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
+import NavigationService from 'routers/navigation-service';
 import colors from 'res/colors';
 import { AppStatusBarComponent } from 'libraries/main/container/app-status-bar/app-status-bar.component';
 import { User } from '../../../types/user';
+import { logout } from 'helpers/utils';
 
 export default class ProfileContainer extends React.PureComponent<ProfileProps, ProfileStates> {
   ProfileAdapter: ProfileAdapter;
@@ -36,15 +38,19 @@ export default class ProfileContainer extends React.PureComponent<ProfileProps, 
     StatusBar.setBarStyle('dark-content');
   }
 
+  goBack = () => {
+    NavigationService.goBack();
+  };
+
+  logout = () => {
+    logout(undefined, this.props.removeUserInfoAction);
+  };
+
   render() {
     return (
       <View>
         <AppStatusBarComponent />
-        <ProfileInfoComponent
-          userInfo={this.user}
-          logout={this.ProfileAdapter.logout}
-          goBack={this.ProfileAdapter.goBack}
-        />
+        <ProfileInfoComponent userInfo={this.user} logout={this.logout} goBack={this.goBack} />
       </View>
     );
   }

@@ -2,20 +2,17 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import ListMembersContainer from '../../features/list-members/view/list-members.screen';
-import {
-  ProfileScreen,
-  SearchScreen,
-  NewMessageScreen,
-  ChatDetailScreen,
-} from 'routers/screen-name';
-import NavigationService from 'routers/navigation-service';
-import { processRequestRespository } from 'core/networking/api-helper';
-import ListMembersServices from './list-members.services';
-import { User } from 'types/user';
 import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
-import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
+import NavigationService from 'routers/navigation-service';
+import {
+  ChatDetailScreen, NewMessageScreen, ProfileScreen,
+  SearchScreen
+} from 'routers/screen-name';
+import { User } from 'types/user';
+import ListMembersContainer from '../../features/list-members/view/list-members.screen';
+import ListMembersServices from './list-members.services';
 
 export class ListMembersAdapter {
   ListMembersContainer: ListMembersContainer;

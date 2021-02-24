@@ -5,9 +5,9 @@
 import * as React from 'react';
 import { View, StyleSheet, Image, Text, Dimensions, Platform } from 'react-native';
 import { ContainerComponent } from 'libraries/main/container/container.component';
-import { InputDomainAdapter } from 'core/model-input-domain/input-domain.adapter';
-import { InputDomainProps } from 'core/model-input-domain/input-domain.props';
-import { InputDomainStates } from 'core/model-input-domain/input-domain.states';
+import { InputDomainAdapter } from 'features/input-domain/model-input-domain/input-domain.adapter';
+import { InputDomainProps } from 'features/input-domain/model-input-domain/input-domain.props';
+import { InputDomainStates } from 'features/input-domain/model-input-domain/input-domain.states';
 import images from 'res/images';
 import { HeaderTypes } from 'types/header-types';
 import colors from 'res/colors';

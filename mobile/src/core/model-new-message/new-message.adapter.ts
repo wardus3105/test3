@@ -2,27 +2,17 @@
     Created by longdq
 */
 
-import { Dispatch } from 'redux';
-import NewMessageContainer from '../../features/new-message/view/new-message.screen';
-import { processRequestRespository } from 'core/networking/api-helper';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+// import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
 import { User } from 'types/user';
+import NewMessageContainer from '../../features/new-message/view/new-message.screen';
 import NewMessageServices from './new-message.services';
-import NavigationService from 'routers/navigation-service';
-import { CreateGroupScreen, ChatDetailScreen } from 'routers/screen-name';
-import { TypeParam } from 'core/model-chat-detail/chat-detail.props';
-import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
 
 export class NewMessageAdapter {
   NewMessageContainer: NewMessageContainer;
   constructor(container: NewMessageContainer) {
     this.NewMessageContainer = container;
   }
-
-  goToChatDetail = (item: User) => {
-    NavigationService.navigate(ChatDetailScreen, {
-      chatInfo: { data: item, type: TypeParam.FROM_USER },
-    });
-  };
 
   onRefresh = () => {
     this.NewMessageContainer.page = 1;
@@ -46,7 +36,7 @@ export class NewMessageAdapter {
   searchUser = () => {
     const text = this.NewMessageContainer.state.txt;
     const { page, ITEM_PAGE } = this.NewMessageContainer;
-    showLoading();
+    // showLoading();
     this.NewMessageContainer.setState({
       loading: true,
     });
@@ -80,13 +70,9 @@ export class NewMessageAdapter {
     this.NewMessageContainer.setState({
       loading: false,
     });
-    hideLoading();
+    // hideLoading();
     this.NewMessageContainer.setState({
       dataSearchUser: [...this.NewMessageContainer.state.dataSearchUser, ...res],
     });
-  };
-
-  goToCreateGr = () => {
-    NavigationService.navigate(CreateGroupScreen);
   };
 }

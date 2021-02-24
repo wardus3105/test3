@@ -1,8 +1,8 @@
 /*
     Created by longdq
 */
-import { post, postFile, deletes } from 'core/networking/api-helper';
-import { URL_PATHS } from 'core/networking/url-paths';
+import { post, postFile, deletes } from 'core/common/networking/api-helper';
+import { URL_PATHS } from 'core/common/networking/url-paths';
 import { RemoveMessageParams } from './chat-detail.props';
 
 export default class ChatDetailServices {

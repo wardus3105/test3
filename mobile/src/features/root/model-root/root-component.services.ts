@@ -2,8 +2,8 @@
     Created by thaolt
 */
 
-import { fetch, post, put, deletes } from 'core/networking/api-helper';
-import { URL_PATHS } from 'core/networking/url-paths';
+import { fetch, post, put, deletes } from 'core/common/networking/api-helper';
+import { URL_PATHS } from 'core/common/networking/url-paths';
 import { UpdateDeviceInfoRequest } from './root-component.props';
 import { User } from '../../../types/user';
 
