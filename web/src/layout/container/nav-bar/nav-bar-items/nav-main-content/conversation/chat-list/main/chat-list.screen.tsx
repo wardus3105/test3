@@ -12,9 +12,10 @@ import DataNotFoundScreen from '../../../../../../../../libraries/Features/data-
 import { ENUM_KIND_OF_NOTFOUNDICON } from '../../../../../../../../libraries/Enum/not-found-icon';
 import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-time-period-between-times';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
+import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
 function ChatListScreen(props: any){
-    const { chats , count , page , setPage , isUpdating , roomIdz , hasSearch , setResponseMess } = props;
+    const { chats , count , page , setPage , isUpdating , roomId , hasSearch , setRespondedMess , respondedMess } = props;
 
     const {
         userid,
@@ -23,7 +24,7 @@ function ChatListScreen(props: any){
         chatList,
         handleScroll,
         clickFirstMessage
-    } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomIdz })
+    } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomId , setRespondedMess })
 
     const length = chatList.length;
     const showAllMessages = () =>{
@@ -38,7 +39,7 @@ function ChatListScreen(props: any){
                 const isCurrent: boolean = chat.user.id === userid;
                 const createAt = new Date(chat.createdAt);
 
-                if(isCurrent){
+                if(isCurrent && chat.messageType === ENUM_KIND_OF_MESSAGE.TEXT){
                     let haveSameTime = haveSameTimePeriod(datetimeContext , createAt)
                     if(haveSameTime){
                         shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
@@ -108,11 +109,11 @@ function ChatListScreen(props: any){
                 } else{
                     eleMainContext = (
                         <GuestChatScreen
-                            roomId={ roomIdz }
+                            roomId={ roomId }
                             type={ chat.messageType }
                             user={ chat.user } 
                             context={ chat.message }
-                            setResponseMess={ setResponseMess }
+                            setRespondedMess={ setRespondedMess }
                             messageId = { chat.id }
                         >
                             { eleContext }
@@ -130,7 +131,14 @@ function ChatListScreen(props: any){
     }
     if(length > 0){
         return (
-            <div className={ "chatlist-container " + (hasSearch ? " chatlist-container-hassearch" : "") } onScroll={ handleScroll } ref={ chatlistRef }>            
+            <div 
+                className= { "chatlist-container " + 
+                            (hasSearch ? "chatlist-container-hassearch " : "") + 
+                            (respondedMess ? "chatlist-container-hasrespondedmess" : "")
+                        } 
+                onScroll={ handleScroll } 
+                ref={ chatlistRef }
+            >            
                 {
                     isMainLoading ? (
                         <div className="chatlist-loader">

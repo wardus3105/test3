@@ -42,8 +42,8 @@ function TextContextChatScreen(props : any){
             <div className={ "padding-12 " + (props.isCurrent ? "currentchat-context " : "guestchat-context ") + getClassByShape() }>
                 { showContext() }    
                 <span className="chat-time">
-                    { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index }
-                    {/* { datetime } */}
+                    {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                    { datetime }
                 </span>
             </div> 
         )

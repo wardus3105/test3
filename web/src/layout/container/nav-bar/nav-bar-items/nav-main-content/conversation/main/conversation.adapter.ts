@@ -9,7 +9,7 @@ import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../libraries/Enum/st
 function ConversationAdapter() {
     const history = useHistory();
     const roomId = useIdInPath()
-
+    console.log(roomId);
     const {
         query , setQuery,
         hasSearch , setHasSearch,
@@ -20,7 +20,7 @@ function ConversationAdapter() {
         isGroup, setIsGroup,
         listMessage, setListMessage,
         hasUploadImages, setHasUploadImages,
-        responseMess, setResponseMess,
+        respondedMess, setRespondedMess
     } = ConversationStates()
 
     useEffect(() => {
@@ -29,7 +29,8 @@ function ConversationAdapter() {
 
     useEffect(() => {
         const getData = async () => {
-            // setIsUpdating(true)
+            setIsUpdating(true)
+            
             const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
                 setListMessage(response.data.data)
@@ -71,7 +72,7 @@ function ConversationAdapter() {
         listMessage, setListMessage,
         hasUploadImages, setHasUploadImages,
         redirectToDetail,
-        responseMess, setResponseMess,
+        respondedMess, setRespondedMess,
         roomId
     }
 }

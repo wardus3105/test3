@@ -6,9 +6,10 @@ import { IAttachment, IChat } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
+import { useEffect } from 'react';
 
 function ChatInputAdapter(props: any) {
-    const { responseMess , id , setListMessage, listMessage , hasUploadImages ,  setHasUploadImages } = props;
+    const { respondedMess , setListMessage , hasUploadImages ,  setHasUploadImages , roomId , setRespondedMess } = props;
 
     const  {
         pathFileList , setPathFileList,
@@ -24,16 +25,16 @@ function ChatInputAdapter(props: any) {
         }
     }
 
-    useKeyDown(pressEnterToSendChat)
+    useKeyDown(pressEnterToSendChat);
+
+    useEffect(() => {
+        setHasUploadImages(false);
+        setFile(null)
+        setPathFileList([])
+    }, [ roomId ])
 
     const sendChat = async () =>{
         const userId = localStorage.getItem('userId') || "";
-
-        let parentId = ""
-
-        if(responseMess){
-            parentId = responseMess.messageId
-        }
 
         if(message){
             let messageSend: IChat = {
@@ -46,17 +47,22 @@ function ChatInputAdapter(props: any) {
                     status: "1",
                     id:userId
                 },
-                chatRoomId: id,
+                chatRoomId: roomId,
                 createdAt: new Date(),
                 attachments:[],
-                parentId: parentId,
+            }
+
+            if(respondedMess){
+                messageSend = { ...messageSend, parentId: respondedMess.messageId }
             }
 
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
                 setMessage("")
+                setRespondedMess()
 
                 setListMessage([messageSend]);
+
             }
         }
 
@@ -68,8 +74,6 @@ function ChatInputAdapter(props: any) {
             }
 
             let response = await ChatInputServices().getInstance().sendFile(formData);
-
-            console.log(response);
 
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
                 const pathFileList = response.data.data;
@@ -93,10 +97,13 @@ function ChatInputAdapter(props: any) {
                         status: "1",
                         id:userId
                     },
-                    chatRoomId: id,
+                    chatRoomId: roomId,
                     createdAt: new Date(),
                     attachments:attachments,
-                    parentId: parentId,
+                }
+
+                if(respondedMess){
+                    messageSend = { ...messageSend, parentId: respondedMess.messageId }
                 }
     
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
@@ -104,6 +111,7 @@ function ChatInputAdapter(props: any) {
                     setFile(null)
                     setPathFileList([])
                     setHasUploadImages(false)
+                    setRespondedMess()
 
                     setListMessage([messageSend]);
                 }
@@ -131,8 +139,8 @@ function ChatInputAdapter(props: any) {
         }
     }
 
-    const showContextResponseMess = () =>{
-        const { type , context } = responseMess;
+    const showContextRespondedMess = () =>{
+        const { type , context } = respondedMess;
         switch (type) {
             case ENUM_KIND_OF_MESSAGE.TEXT:
                 return context;
@@ -152,7 +160,7 @@ function ChatInputAdapter(props: any) {
         const space = " ";
         let result = containerClass;
 
-        if(hasUploadImages || responseMess){
+        if(hasUploadImages || respondedMess){
             result += space + extensionClass + space + hasResponseMessClass
         }else{
             if(isMultilineText){
@@ -163,9 +171,9 @@ function ChatInputAdapter(props: any) {
     } 
 
     return {
-        responseMess,
+        respondedMess,
         classNameChatInput,
-        showContextResponseMess,
+        showContextRespondedMess,
         hasUploadImages,
         pathFileList,
         handleFileSelect,
@@ -174,7 +182,7 @@ function ChatInputAdapter(props: any) {
         message , setMessage,
         sendChat,
         setIsFocused,
-        listMessage ,  setListMessage
+        setListMessage
     }
 }
 

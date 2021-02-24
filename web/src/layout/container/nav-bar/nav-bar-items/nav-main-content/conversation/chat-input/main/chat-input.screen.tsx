@@ -18,13 +18,10 @@ const styleCustomInput = {
 }
 
 function ChatInputScreen(props: any){
-
-
-
     const {
-        responseMess,
+        respondedMess,
         classNameChatInput,
-        showContextResponseMess,
+        showContextRespondedMess,
         hasUploadImages,
         pathFileList,
         handleFileSelect,
@@ -38,18 +35,18 @@ function ChatInputScreen(props: any){
     return (
         <div className={ classNameChatInput() }>
             {
-                responseMess && (
+                respondedMess && (
                     <div className="chatinput-responseMess">
                         <div>
                             <span className="app-mainfont">
                                 Trả lời 
-                                <span className="chatinput-responseMess-username"> { responseMess.userName } </span>
+                                <span className="chatinput-responseMess-username"> { respondedMess.userName } </span>
                             </span>
                             <p className="chatinput-responseMess-context  text-overflow-ellipsis app-mainfont">
-                                { showContextResponseMess() }
+                                { showContextRespondedMess() }
                             </p>
                         </div>
-                        <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setResponseMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img>
+                        <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img>
                     </div>
                 )
             }

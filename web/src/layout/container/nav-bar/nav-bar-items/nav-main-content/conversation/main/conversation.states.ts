@@ -11,7 +11,7 @@ function ConversationStates() {
     const [hasSearch , setHasSearch] = useState<boolean>(false);
     const [conversation , setConversation] = useState<IConversation>();
     const [listMessage, setListMessage] = useState<IChat[]>([]);
-    const [responseMess, setResponseMess] = useState<IResponseMess>();
+    const [respondedMess, setRespondedMess] = useState<IResponseMess>();
     
     return {
         page , setPage,
@@ -23,7 +23,7 @@ function ConversationStates() {
         isGroup, setIsGroup,
         listMessage, setListMessage , 
         hasUploadImages, setHasUploadImages,
-        responseMess, setResponseMess,
+        respondedMess, setRespondedMess
     }
 }
 

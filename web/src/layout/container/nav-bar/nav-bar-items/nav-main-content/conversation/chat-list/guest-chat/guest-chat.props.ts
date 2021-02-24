@@ -6,6 +6,6 @@ export interface IGuestChat{
     type: string,
     context: string,
     children: React.ReactNode,
-    setResponseMess:any,
+    setRespondedMess:any,
     messageId: string
 }

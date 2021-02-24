@@ -22,7 +22,7 @@ function ConversationScreen(){
         listMessage, setListMessage,
         hasUploadImages, setHasUploadImages,
         redirectToDetail,
-        responseMess, setResponseMess,
+        respondedMess, setRespondedMess,
         roomId
     } = ConversationAdapter();
 
@@ -56,24 +56,24 @@ function ConversationScreen(){
             }
             
             <ChatListScreen
-                roomIdz={ roomId }
+                roomId={ roomId }
                 chats={ listMessage }
                 hasSearch={ hasSearch }
                 count={ count }
                 page={ page }
                 setPage={ setPage }
                 isUpdating={ isUpdating }
-                setResponseMess={ setResponseMess }
+                respondedMess={ respondedMess }
+                setRespondedMess={ setRespondedMess }
             ></ChatListScreen>
             
             <ChatInputScreen 
-                listMessage={ listMessage}  
                 setListMessage={ setListMessage } 
-                id={ conversation?.id }
+                roomId={ roomId }
                 hasUploadImages= { hasUploadImages }
                 setHasUploadImages= { setHasUploadImages }
-                responseMess={ responseMess }
-                setResponseMess={ setResponseMess }
+                respondedMess={ respondedMess }
+                setRespondedMess={ setRespondedMess }
             ></ChatInputScreen>
         </div>
     )

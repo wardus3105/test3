@@ -19,19 +19,18 @@ const options = {
 function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
 
-    const { chats , count , page , setPage , isUpdating , roomIdz , setHasUploadImages } = props;
+    const { chats , count , page , setPage , isUpdating , roomId , setRespondedMess } = props;
 
     const {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
         chatList, setChatList,
-        roomId, setRoomId
+        roomIdz, setRoomIdz
     } = ChatListStates();
 
 
     useEffect(() => {
-        console.log('test_init_app...');
-        // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
+            console.log('test_init_app...');
         const userId: string = localStorage.getItem("userId") || "";
         if(userId){
         //   pushStreamService.subChat(userId);
@@ -40,7 +39,7 @@ function ChatListAdapter(props: any) {
 
     useLayoutEffect(() =>{
         if(chatlistRef.current){
-            if(page === 1){
+            if(page === 1 && !isUpdating){
                 chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight;
             } else{
                 if(!isUpdating){
@@ -48,28 +47,37 @@ function ChatListAdapter(props: any) {
                 }
             }
         } 
-    } , [ page , isUpdating])
+    } , [ page , isUpdating , setRoomIdz])
 
     useEffect(() => {
         const userId = localStorage.getItem('userId') || "";
         setUserid(userId);
     }, [ setUserid ])
 
+    // useEffect(() => {
+    //     setChatList(chats)
+    //     setIsMainLoading(false);
+    //     setResponseMess()
+    // }, [ roomId ])
+
+    // useEffect(() => {
+    //     setChatList(prev =>[ ...chats , ...prev ])
+    // }, [ chats ,setChatList ])
 
     useEffect(() => {
         if(roomId === roomIdz){
             setChatList(prev =>[ ...chats , ...prev ])
-            setIsMainLoading(false);
         } else{
-            setRoomId(roomIdz);
+            setRoomIdz(roomId);
             setChatList(chats)
-            setIsMainLoading(false);
+            setRespondedMess()
         }
+
+        setIsMainLoading(false);
     }, [ chats ])
 
 
     const clickFirstMessage = async ()  => {
-
         const chats = {
             chatRoomId: roomId,
             message: "Xin chào",

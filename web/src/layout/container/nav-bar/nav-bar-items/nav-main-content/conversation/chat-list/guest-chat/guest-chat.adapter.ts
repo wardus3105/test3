@@ -10,8 +10,8 @@ function GuestChatAdapter(props : IGuestChat){
     }
 
     const setResponMess = () =>{
-        const { messageId , context , type , user:{ userName } , setResponseMess } = props;
-        setResponseMess({
+        const { messageId , context , type , user:{ userName } , setRespondedMess } = props;
+        setRespondedMess({
             messageId,
             context,
             type,
