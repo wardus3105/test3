@@ -4,11 +4,14 @@ import "./libraries/Styles/base/hyper-input.scss";
 import "./libraries/Styles/base/hyper-common.scss";
 import "./libraries/Styles/base/hyper-list.scss";
 import "./libraries/Styles/base/hyper-button.scss";
+import VideoConference from "./libraries/Features/video-call/video-call.screen";
+
 import HeaderScreen from "./layout/header/header.screen";
 import BodyScreen from "./layout/container/body.screen";
 import "font-awesome/css/font-awesome.min.css";
 
 import ReconnectingWebSocket from "reconnecting-websocket";
+import VideoCallsScreen from "./features/video-calls/video-calls.screen";
 
 
 var sockets: ReconnectingWebSocket[] = [];
@@ -22,6 +25,14 @@ const options = {
 
 function App() {
   const [hasNavbar, setHasNavbar] = useState<boolean>(true);
+  const [hasVideo, setHasVideo] = useState<boolean>(false);
+
+  useEffect(() =>{
+      console.log(window.location.pathname)
+      if (window.location.pathname.indexOf('video-call')>-1){
+        setHasVideo(true)
+      }
+  } , [])
 
   const pushStreamService = {
     // subAllChats: (userChats: User[]) => {
@@ -102,7 +113,14 @@ function App() {
   //     pushStreamService.subChat(userId);
   //   }
   // }, []);
-
+  
+  if(hasVideo){
+    return (
+      <>
+        <VideoConference ></VideoConference>
+      </>
+    );
+  }
   return (
     <>
       <HeaderScreen toggleNavbar={toggleNavbar}></HeaderScreen>
