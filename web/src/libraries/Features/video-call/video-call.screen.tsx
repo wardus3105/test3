@@ -23,7 +23,7 @@ const VideoConference = () => {
    } = jitsiVidelCall()
 
    const setStateJitsi = (value:any)=>{
-      setJitsi(value);
+      setJitsi(value); 
     }
     const data={
         roomName:roomName,

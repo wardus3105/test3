@@ -21,7 +21,7 @@ function PersonalConversationScreen() {
     var roomId=useIdInPath(2);
     var roomName=Math.floor(Math.random() * 1000000);
     const clickCallVideo=()=>{              
-        window.open("http://localhost:3000/video-call?chatRoomID="+roomId+"&roomName="+roomName+"&userId="+localStorage.getItem('userId'),"_blank","width=1000,height=1000");   
+        window.open("http://localhost:3000/video-call?chatRoomID="+roomId+"&roomName="+roomName+"&userId="+localStorage.getItem('userId'),"_blank","width=1000,height=1000");    
     }
     const listEles = [
         {
