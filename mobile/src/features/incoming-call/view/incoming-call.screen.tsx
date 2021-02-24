@@ -15,6 +15,7 @@ import { IncomingHeaderUserComponent } from './components/incoming-header-user/i
 import { IncommingFooterComponent } from './components/incomming-footer/incomming-footer.component';
 import { OutgoingFooterComponent } from './components/outgoing-footer/outgoing-footer.component';
 import { ChatInfoParams } from 'core/model-chat-detail/chat-detail.props';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 
 export default class IncomingCallContainer extends React.PureComponent<
   IncomingCallProps,
@@ -26,15 +27,17 @@ export default class IncomingCallContainer extends React.PureComponent<
   chatInfo: ChatInfoParams;
   timeStart: string;
   //Local States
-
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
   constructor(props: IncomingCallProps) {
     super(props);
     this.IncomingCallAdapter = new IncomingCallAdapter(this);
     this.state = {};
-    this.userInfo = props.navigation.getParam('user');
-    this.typeCall = props.navigation.getParam('type') ;
-    this.chatInfo = props.navigation.getParam('chatInfo') || {};
-    this.timeStart = props.navigation.getParam('timeStart') || 0;
+    
+    this.navigation = props.navigation
+    this.userInfo = this.navigation.getParam('user');
+    this.typeCall = this.navigation.getParam('type') ;
+    this.chatInfo = this.navigation.getParam('chatInfo') || {};
+    this.timeStart = this.navigation.getParam('timeStart') || 0;
 
     console.log('test_video_call_user: ', this.userInfo, '__',this.typeCall);
   }

@@ -32,6 +32,7 @@ import { HyperButtonComponent } from 'libraries/hyper-button/hyper-button.compon
 import svgs from 'res/svgs';
 import { ChatActionsComponent } from './components/chat-actions/chat-actions.component';
 import { ReplyMessageComponent } from './components/chat-actions/components/reply-message/reply-message.component';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 
 export default class ChatDetailContainer extends React.PureComponent<
   ChatDetailProps,
@@ -47,7 +48,7 @@ export default class ChatDetailContainer extends React.PureComponent<
   //Local States
 
   refChatActionsComponent = React.createRef<ChatActionsComponent>();
-
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
   constructor(props: ChatDetailProps) {
     super(props);
     this.ChatDetailAdapter = new ChatDetailAdapter(this);
@@ -56,21 +57,21 @@ export default class ChatDetailContainer extends React.PureComponent<
       currentMessage: null,
       showHi: false,
     };
-    const { navigation } = this.props;
-    this.chatInfo = navigation.getParam('chatInfo');
+    
+    this.navigation = props.navigation
+    this.chatInfo = this.navigation.getParam('chatInfo');
   }
 
   componentDidMount = () => {
     this.onEventBusSubscribe();
-    this.didFocus = this.props.navigation.addListener('didFocus', () => {
+    this.didFocus = this.navigation.addListener('didFocus', () => {
       if (Platform.OS === 'android') {
         setTimeout(() => {
           StatusBar.setBarStyle('dark-content');
         }, 500);
       }
     });
-    const { navigation } = this.props;
-    this.chatInfo = navigation.getParam('chatInfo');
+    this.chatInfo = this.navigation.getParam('chatInfo');
     console.log('test_chatInfo_1: ', this.chatInfo);
     if (this.chatInfo && this.chatInfo.type === TypeParam.FORM_MESSAGE) {
       this.roomId = this.chatInfo?.data?.id;
@@ -161,7 +162,7 @@ export default class ChatDetailContainer extends React.PureComponent<
 
   render() {
     const { dataListMessage, currentMessage } = this.state;
-    const { navigation, userInfo } = this.props;
+    const { userInfo } = this.props;
     return (
       <ContainerComponent
         headerType={HeaderTypes.CHAT_DETAIL}

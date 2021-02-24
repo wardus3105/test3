@@ -4,6 +4,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet, Text, SafeAreaView, StatusBar } from 'react-native';
+import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 import { ProfileAdapter } from 'core/model-profile/profile.adapter';
 import { ProfileProps } from 'core/model-profile/profile.props';
 import { ProfileStates } from 'core/model-profile/profile.states';
@@ -15,12 +16,14 @@ import { User } from '../../../types/user';
 export default class ProfileContainer extends React.PureComponent<ProfileProps, ProfileStates> {
   ProfileAdapter: ProfileAdapter;
   user: User = null;
-
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
   constructor(props: ProfileProps) {
     super(props);
     this.ProfileAdapter = new ProfileAdapter(this);
     this.state = {};
-    this.user = props.navigation.getParam('user');
+
+    this.navigation = props.navigation;
+    this.user = this.navigation.getParam('user');
   }
 
   componentDidMount() {

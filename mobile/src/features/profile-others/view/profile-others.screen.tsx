@@ -2,18 +2,18 @@
     Created by longdq
 */
 
-import * as React from 'react';
-import { View, StyleSheet, StatusBar, Image, Text, Dimensions } from 'react-native';
-import { ContainerComponent } from 'libraries/main/container/container.component';
 import { ProfileOthersAdapter } from 'core/model-profile-others/profile-others.adapter';
 import { ProfileOthersProps } from 'core/model-profile-others/profile-others.props';
 import { ProfileOthersStates } from 'core/model-profile-others/profile-others.states';
-import { AppStatusBarComponent } from 'libraries/main/container/app-status-bar/app-status-bar.component';
-import colors from 'res/colors';
 import { HyperButtonComponent } from 'libraries/hyper-button/hyper-button.component';
-import svgs from 'res/svgs';
+import { AppStatusBarComponent } from 'libraries/main/container/app-status-bar/app-status-bar.component';
 import { NotifiOnOffComponent } from 'libraries/notifi-on-off/notifi-on-off.component';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import * as React from 'react';
+import { Image, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { TabBar, TabView } from 'react-native-tab-view';
+import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import colors from 'res/colors';
+import svgs from 'res/svgs';
 
 export default class ProfileOthersContainer extends React.PureComponent<
   ProfileOthersProps,
@@ -22,12 +22,13 @@ export default class ProfileOthersContainer extends React.PureComponent<
   ProfileOthersAdapter: ProfileOthersAdapter;
   //Local States
   info: any;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
 
   constructor(props: ProfileOthersProps) {
     super(props);
     this.ProfileOthersAdapter = new ProfileOthersAdapter(this);
-    const { navigation } = this.props;
-    this.info = navigation.getParam('user');
+    this.navigation = props.navigation
+    this.info = this.navigation.getParam('user');
   }
 
   componentDidMount() {

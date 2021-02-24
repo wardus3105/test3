@@ -13,6 +13,7 @@ import { translate } from 'res/languages';
 import { ListUserCheckComponent } from './components/list-user-check/list-user-check.component';
 import { SearchListUserComponent } from './components/search-list-user/search-list-user.component';
 import { SearchComponent } from './components/search/search.component';
+import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 
 export default class AddMembersContainer extends React.PureComponent<
   AddMembersProps,
@@ -27,7 +28,8 @@ export default class AddMembersContainer extends React.PureComponent<
   constructor(props: AddMembersProps) {
     super(props);
     this.AddMembersAdapter = new AddMembersAdapter(this);
-    const { navigation } = this.props;
+    const navigation: NavigationScreenProp<NavigationState, NavigationParams> = this.props
+      .navigation;
     this.chatId = navigation.getParam('chatId');
     this.state = {
       dataSearchUser: [],

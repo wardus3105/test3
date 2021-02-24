@@ -2,22 +2,22 @@
     Created by longdq
 */
 
-import * as React from 'react';
-import { View, StyleSheet, Image, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { ContainerComponent } from 'libraries/main/container/container.component';
+import { ChatInfoParams } from 'core/model-chat-detail/chat-detail.props';
 import { ProfileGroupAdapter } from 'core/model-profile-group/profile-group.adapter';
 import { ProfileGroupProps } from 'core/model-profile-group/profile-group.props';
 import { ProfileGroupStates } from 'core/model-profile-group/profile-group.states';
-import { AppStatusBarComponent } from 'libraries/main/container/app-status-bar/app-status-bar.component';
 import { HyperButtonComponent } from 'libraries/hyper-button/hyper-button.component';
+import { AppStatusBarComponent } from 'libraries/main/container/app-status-bar/app-status-bar.component';
 import { NotifiOnOffComponent } from 'libraries/notifi-on-off/notifi-on-off.component';
-import { TabView, TabBar } from 'react-native-tab-view';
-import colors from 'res/colors';
-import svgs from 'res/svgs';
-import { ChatInfoParams } from 'core/model-chat-detail/chat-detail.props';
-import { ListUserGroupComponent } from './components/list-user-group/list-user-group.component';
+import * as React from 'react';
+import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import { TabBar, TabView } from 'react-native-tab-view';
+import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import colors from 'res/colors';
 import { translate } from 'res/languages';
+import svgs from 'res/svgs';
+import { ListUserGroupComponent } from './components/list-user-group/list-user-group.component';
 
 export default class ProfileGroupContainer extends React.PureComponent<
   ProfileGroupProps,
@@ -26,12 +26,13 @@ export default class ProfileGroupContainer extends React.PureComponent<
   ProfileGroupAdapter: ProfileGroupAdapter;
   //Local States
   chatInfo: ChatInfoParams;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
 
   constructor(props: ProfileGroupProps) {
     super(props);
     this.ProfileGroupAdapter = new ProfileGroupAdapter(this);
-    const { navigation } = this.props;
-    this.chatInfo = navigation.getParam('chatInfo');
+    this.navigation = props.navigation
+    this.chatInfo = this.navigation.getParam('chatInfo');
     this.state = {
       index: 0,
       routes: [

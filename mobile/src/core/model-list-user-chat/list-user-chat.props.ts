@@ -2,13 +2,9 @@
     Created by longdq
 */
 
-import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 import { LoginMobileResponse } from 'features/login-old/view/components/login-form-wv/login-form-wv.props';
-import { StatusUserTypes } from 'types/user';
-import { User } from '../../types/user';
 
 export interface ListUserChatProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
   userInfo: LoginMobileResponse;
   getListChat: () => void;
   dataListChat: MessengerModel[];
