@@ -134,12 +134,11 @@ function ChatListScreen(props: any){
         return (
             <div 
                 className= { "chatlist-container " + 
-                            (hasSearch ? "chatlist-container-hassearch " : "") + 
-                            (respondedMess ? "chatlist-container-hasrespondedmess" : "")
+                            (hasSearch ? "chatlist-container-hassearch " : "")
                         } 
                 onScroll={ handleScroll } 
                 ref={ chatlistRef }
-                style={{ bottom:`${bottom}px !important` }}
+                style={{ bottom: `${bottom}px` }}
             >            
                 {
                     isMainLoading ? (
