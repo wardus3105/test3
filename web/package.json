@@ -13,6 +13,7 @@
     "@types/requirejs": "^2.1.32",
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
+    "env-cmd": "^10.1.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
@@ -36,6 +37,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:dev": "env-cmd -f .env.development react-scripts start",
+    "start:test": "env-cmd -f .env.test react-scripts start",
+    "start:prod": "env-cmd -f .env.production react-scripts start",
+    "build:dev": "env-cmd -f .env.development react-scripts build",
+    "build:test": "env-cmd -f .env.test react-scripts build",
+    "build:prod": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

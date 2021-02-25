@@ -33,7 +33,7 @@ function ChatInputScreen(props: any){
     } = ChatInputAdapter(props)
     
     return (
-        <div className={ classNameChatInput() }>
+        <div className={ classNameChatInput() } id="chat-input">
             {
                 respondedMess && (
                     <div className="chatinput-responseMess">

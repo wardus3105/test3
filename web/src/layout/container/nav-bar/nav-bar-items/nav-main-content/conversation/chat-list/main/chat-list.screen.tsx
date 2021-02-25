@@ -23,7 +23,8 @@ function ChatListScreen(props: any){
         chatlistRef,
         chatList,
         handleScroll,
-        clickFirstMessage
+        clickFirstMessage,
+        bottom
     } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomId , setRespondedMess })
 
     const length = chatList.length;
@@ -138,6 +139,7 @@ function ChatListScreen(props: any){
                         } 
                 onScroll={ handleScroll } 
                 ref={ chatlistRef }
+                style={{ bottom:`${bottom}px !important` }}
             >            
                 {
                     isMainLoading ? (
