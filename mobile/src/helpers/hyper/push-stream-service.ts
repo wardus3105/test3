@@ -185,7 +185,7 @@ const pushStreamService = {
             //   mes.image = `http://172.16.40.43:9000/preview/+${newMessage.value?.path}`;
             //   mes.text = newMessage?.value?.message;
             // } else {
-              mes.text = newMessage?.value?.text;
+              mes.text = newMessage?.value?.message;
             // }
           }
           EventBus.getInstance().post({

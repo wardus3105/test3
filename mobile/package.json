@@ -12,7 +12,7 @@
     "-------build-staging-------": "-------staging-------",
     "android-staging-debug": "ENVFILE=.env.staging react-native run-android --variant=stagingDebug",
     "android-staging-release": "cd android && ENVFILE=.env.staging ./gradlew assembleStaging",
-    "ios-staging-debug": "react-native run-ios --simulator=\"iPhone 11\" --scheme \"WorkTalkV2-staging\"",
+    "ios-staging-debug": "react-native run-ios --simulator=\"iPhone 11\"  --scheme \"WorkTalkV2-staging\"",
     "-------build-production-------": "-------production-------",
     "android-production-debug": "ENVFILE=.env.production react-native run-android --variant=productionDebug",
     "android-production-release": "cd android && ENVFILE=.env.production ./gradlew assembleProduction",

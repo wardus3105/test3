@@ -241,7 +241,7 @@ export function checkToken(res: any) {
   //     );
   //   });
   // } else return res;
-  return '';
+  return res;
 }
 
 //Process request
