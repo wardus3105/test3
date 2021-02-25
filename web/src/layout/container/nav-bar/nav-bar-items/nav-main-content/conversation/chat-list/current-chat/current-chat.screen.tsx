@@ -5,7 +5,7 @@ import CurrentChatAdapter from './current-chat.adapter';
 import { ICurrentChat } from './current-chat.props';
 import './current-chat.scss';
 
-const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
+// const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
 const iconShareArrowLeftLine = require('../../../../../../../../libraries/Icons/share-arrow-left-line.svg').default;
 const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides-square.svg').default;
 const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
@@ -37,14 +37,16 @@ function CurrentChatScreen(props: ICurrentChat) {
         listEles={listEles}
         onClosePopup={onClosePopup}
     ></DetailPopupScreen>);
-    return (
 
+    return (
         <div className={"currentchat-container"}>
-            <MainPopupScreen context={eleDetailPopup}>
-                <div className="currentchat-icon-horizontal3dots">
-                    <img src={iconMoreHorizontal} alt="horizontal 3 dots" className="cursor-pointer"></img>
-                </div>
+
+            <MainPopupScreen context={ eleDetailPopup }> 
+                <div className="currentchat-icon cursor-pointer img-24 flex-center margin-right-8">
+                    <div className="vertical3dots"></div>
+                </div> 
             </MainPopupScreen>
+
             { props.children}
         </div>
     )

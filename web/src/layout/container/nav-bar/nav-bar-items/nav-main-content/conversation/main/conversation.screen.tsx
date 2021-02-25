@@ -63,7 +63,6 @@ function ConversationScreen(){
                 page={ page }
                 setPage={ setPage }
                 isUpdating={ isUpdating }
-                respondedMess={ respondedMess }
                 setRespondedMess={ setRespondedMess }
             ></ChatListScreen>
             

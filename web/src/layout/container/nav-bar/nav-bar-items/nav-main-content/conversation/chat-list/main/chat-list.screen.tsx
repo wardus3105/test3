@@ -15,7 +15,7 @@ import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess, respondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess } = props;
 
     const {
         userid,
@@ -83,37 +83,39 @@ function ChatListScreen(props: any) {
 
                 const eleContext = (
                     <div className="maincontext">
-                        <TextContextChatScreen
-                            isCurrent={isCurrent}
-                            context={chat.message}
-                            datetime={getTimePeriodFromNow(chat.createdAt)}
-                            shape={shape}
-                            time={chat.createdAt}
-                            index={index}
-                        ></TextContextChatScreen>
                         {
-                            chat.attachments && (
+                            chat.attachments.length > 0 ? (
                                 <ImageContextChatScreen
                                     isCurrent={isCurrent}
                                     context={chat.attachments}
                                     datetime={getTimePeriodFromNow(chat.createdAt)}
                                 ></ImageContextChatScreen>
+                            ) : (
+                                <TextContextChatScreen
+                                    isCurrent={isCurrent}
+                                    context={chat.message}
+                                    datetime={getTimePeriodFromNow(chat.createdAt)}
+                                    shape={shape}
+                                    time={chat.createdAt}
+                                    index={index}
+                                ></TextContextChatScreen>
                             )
                         }
                     </div>
 
                 )
                 if (isCurrent) {
-                    eleMainContext = 
-                    <CurrentChatScreen
-                        roomId={roomId}
-                        type={chat.messageType}
-                        context={chat.message}
-                        setRespondedMess={setRespondedMess}
-                        messageId={chat.id}
-                    >
-                        {eleContext}
-                    </CurrentChatScreen>
+                    eleMainContext = (
+                        <CurrentChatScreen
+                            roomId={roomId}
+                            type={chat.messageType}
+                            context={chat.message}
+                            setRespondedMess={setRespondedMess}
+                            messageId={chat.id}
+                        >
+                            {eleContext}
+                        </CurrentChatScreen>
+                    )
                 } else {
                     eleMainContext = (
                         <GuestChatScreen

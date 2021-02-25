@@ -39,7 +39,7 @@ function TextContextChatScreen(props : any){
 
     if(context){
         return (
-            <div className={ "padding-12 " + (props.isCurrent ? "currentchat-context " : "guestchat-context ") + getClassByShape() }>
+            <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
                 { showContext() }    
                 <span className="chat-time">
                     {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
