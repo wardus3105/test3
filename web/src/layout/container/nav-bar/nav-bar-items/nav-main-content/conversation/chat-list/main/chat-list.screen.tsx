@@ -14,8 +14,8 @@ import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
-function ChatListScreen(props: any){
-    const { chats , count , page , setPage , isUpdating , roomId , hasSearch , setRespondedMess , respondedMess } = props;
+function ChatListScreen(props: any) {
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess, respondedMess } = props;
 
     const {
         userid,
@@ -28,29 +28,29 @@ function ChatListScreen(props: any){
     } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomId , setRespondedMess })
 
     const length = chatList.length;
-    const showAllMessages = () =>{
-        if(chatList && length > 0){
+    const showAllMessages = () => {
+        if (chatList && length > 0) {
             const list = [...chatList]
             let datetimeContext = new Date(list[0].createdAt);
 
-            return list.map((chat: any , index: number) =>{
+            return list.map((chat: any, index: number) => {
                 let eleMainContext = <></>;
                 let eleDatetime = <></>;
                 let shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
                 const isCurrent: boolean = chat.user.id === userid;
                 const createAt = new Date(chat.createdAt);
 
-                if(isCurrent && chat.messageType === ENUM_KIND_OF_MESSAGE.TEXT){
-                    let haveSameTime = haveSameTimePeriod(datetimeContext , createAt)
-                    if(haveSameTime){
+                if (isCurrent && chat.messageType === ENUM_KIND_OF_MESSAGE.TEXT) {
+                    let haveSameTime = haveSameTimePeriod(datetimeContext, createAt)
+                    if (haveSameTime) {
                         shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
-    
-                        if(index < list.length - 1){
-                            const haveSameTime2 = haveSameTimePeriod(createAt , new Date(list[index + 1].createdAt))
-                            if(haveSameTime2){
-                                if(index === 0) {
+
+                        if (index < list.length - 1) {
+                            const haveSameTime2 = haveSameTimePeriod(createAt, new Date(list[index + 1].createdAt))
+                            if (haveSameTime2) {
+                                if (index === 0) {
                                     shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
-                                } else{
+                                } else {
                                     shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.CENTER;
                                 }
                             } else {
@@ -62,14 +62,14 @@ function ChatListScreen(props: any){
                     } else {
                         shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
 
-                        if(index < list.length - 1){
-                            const haveSameTime2 = haveSameTimePeriod(createAt , new Date(list[index + 1].createdAt))
-                            if(haveSameTime2){
+                        if (index < list.length - 1) {
+                            const haveSameTime2 = haveSameTimePeriod(createAt, new Date(list[index + 1].createdAt))
+                            if (haveSameTime2) {
                                 shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.BOTTOM;
                             } else {
                                 shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
                             }
-                        }else {
+                        } else {
                             shape = ENUM_KIND_OF_SHAPE_OF_MESSAGE.TOP;
                         }
                     }
@@ -81,56 +81,63 @@ function ChatListScreen(props: any){
                 //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 // }
 
-                const eleContext =( 
+                const eleContext = (
                     <div className="maincontext">
-                        <TextContextChatScreen 
-                            isCurrent={ isCurrent }
-                            context={ chat.message }
-                            datetime={ getTimePeriodFromNow(chat.createdAt) }
-                            shape={ shape }
-                            time={ chat.createdAt }
-                            index = { index }
+                        <TextContextChatScreen
+                            isCurrent={isCurrent}
+                            context={chat.message}
+                            datetime={getTimePeriodFromNow(chat.createdAt)}
+                            shape={shape}
+                            time={chat.createdAt}
+                            index={index}
                         ></TextContextChatScreen>
                         {
                             chat.attachments && (
                                 <ImageContextChatScreen
-                                    isCurrent={ isCurrent }
-                                    context={ chat.attachments }
-                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
+                                    isCurrent={isCurrent}
+                                    context={chat.attachments}
+                                    datetime={getTimePeriodFromNow(chat.createdAt)}
                                 ></ImageContextChatScreen>
                             )
                         }
                     </div>
 
                 )
-                if(isCurrent){
-                    eleMainContext = <CurrentChatScreen>
-                        { eleContext }
+                if (isCurrent) {
+                    eleMainContext = 
+                    <CurrentChatScreen
+                        roomId={roomId}
+                        type={chat.messageType}
+                        context={chat.message}
+                        setRespondedMess={setRespondedMess}
+                        messageId={chat.id}
+                    >
+                        {eleContext}
                     </CurrentChatScreen>
-                } else{
+                } else {
                     eleMainContext = (
                         <GuestChatScreen
-                            roomId={ roomId }
-                            type={ chat.messageType }
-                            user={ chat.user } 
-                            context={ chat.message }
-                            setRespondedMess={ setRespondedMess }
-                            messageId = { chat.id }
+                            roomId={roomId}
+                            type={chat.messageType}
+                            user={chat.user}
+                            context={chat.message}
+                            setRespondedMess={setRespondedMess}
+                            messageId={chat.id}
                         >
-                            { eleContext }
+                            { eleContext}
                         </GuestChatScreen>
                     )
                 }
                 return (
-                    <div key={ index }>
-                        { eleMainContext }
-                        { eleDatetime }
-                    </div>
+                    <>
+                        { eleMainContext}
+                        { eleDatetime}
+                    </>
                 )
             })
         }
     }
-    if(length > 0){
+    if (length > 0) {
         return (
             <div 
                 className= { "chatlist-container " + 
@@ -146,27 +153,27 @@ function ChatListScreen(props: any){
                             <LoadingSpinnerScreen class="loader-big"></LoadingSpinnerScreen>
                         </div>
                     ) : (
-                        <div className="chatlist-main">
-                            {
-                                showAllMessages()
-                            }
-                            {
-                                length < count && <LoadingSpinnerScreen class="loader-small"></LoadingSpinnerScreen>
-                            }
-                        </div>
-                    )
+                            <div className="chatlist-main">
+                                {
+                                    showAllMessages()
+                                }
+                                {
+                                    length < count && <LoadingSpinnerScreen class="loader-small"></LoadingSpinnerScreen>
+                                }
+                            </div>
+                        )
                 }
             </div>
         )
     }
 
     return (
-        <div className="chatlist-container" >            
+        <div className="chatlist-container" >
             {
-                <DataNotFoundScreen onClick={ clickFirstMessage } isPosition={ false } icon={ ENUM_KIND_OF_NOTFOUNDICON.MESSAGE } text="Nhấn để xin chào"></DataNotFoundScreen>
+                <DataNotFoundScreen onClick={clickFirstMessage} isPosition={false} icon={ENUM_KIND_OF_NOTFOUNDICON.MESSAGE} text="Nhấn để xin chào"></DataNotFoundScreen>
             }
         </div>
-    ) 
+    )
 
 }
 

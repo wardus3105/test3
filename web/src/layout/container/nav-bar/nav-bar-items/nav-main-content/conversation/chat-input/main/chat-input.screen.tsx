@@ -40,7 +40,7 @@ function ChatInputScreen(props: any){
                         <div>
                             <span className="app-mainfont">
                                 Trả lời 
-                                <span className="chatinput-responseMess-username"> { respondedMess.userName } </span>
+                                <span className="chatinput-responseMess-username"> { respondedMess.userName ? respondedMess.userName : "chính bạn"  } </span>
                             </span>
                             <p className="chatinput-responseMess-context  text-overflow-ellipsis app-mainfont">
                                 { showContextRespondedMess() }
