@@ -1,18 +1,18 @@
-.currentchat-context{
+.currentchat-text{
 
     &.currentchat-center{
-        border-radius: 16px 0 0 16px    ;
-        -webkit-border-radius: 16px 0 0 16px    ;
-        -moz-border-radius: 16px 0 0 16px    ;
-        -ms-border-radius: 16px 0 0 16px    ;
-        -o-border-radius: 16px 0 0 16px    ;
+        border-radius: 16px 0 0 16px !important;
+        -webkit-border-radius: 16px 0 0 16px !important;
+        -moz-border-radius: 16px 0 0 16px !important;
+        -ms-border-radius: 16px 0 0 16px !important;
+        -o-border-radius: 16px 0 0 16px !important;
     }
 
     &.currentchat-bottom{
-        border-radius: 16px 0 16px 16px    ;
-        -webkit-border-radius: 16px 0 16px 16px    ;
-        -moz-border-radius: 16px 0 16px 16px    ;
-        -ms-border-radius: 16px 0 16px 16px    ;
-        -o-border-radius: 16px 0 16px 16px    ;
-}
+        border-radius: 16px 0 16px 16px !important;
+        -webkit-border-radius: 16px 0 16px 16px !important;
+        -moz-border-radius: 16px 0 16px 16px !important;
+        -ms-border-radius: 16px 0 16px 16px !important;
+        -o-border-radius: 16px 0 16px 16px !important;
+    }
 }

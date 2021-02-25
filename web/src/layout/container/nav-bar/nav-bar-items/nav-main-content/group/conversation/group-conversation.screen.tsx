@@ -55,8 +55,11 @@ function GroupConversationScreen() {
             <MainPopupScreen context={ eleDetailPopup }>
                 <div>
                     <TooltipScreen context="Chức năng khác">
-                        <div>
+                        {/* <div >
                             <img src={ iconMoreVertical } alt="3 dots" className="cursor-pointer"></img>
+                        </div> */}
+                        <div className="img-24 flex-center cursor-pointer icon-svg--hover">
+                            <div className="vertical3dots"></div>
                         </div>
                     </TooltipScreen>
                 </div>

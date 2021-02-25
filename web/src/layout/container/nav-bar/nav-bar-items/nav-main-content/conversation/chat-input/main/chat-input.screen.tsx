@@ -33,14 +33,14 @@ function ChatInputScreen(props: any){
     } = ChatInputAdapter(props)
     
     return (
-        <div className={ classNameChatInput() }>
+        <div className={ classNameChatInput() } id="chat-input">
             {
                 respondedMess && (
                     <div className="chatinput-responseMess">
                         <div>
                             <span className="app-mainfont">
                                 Trả lời 
-                                <span className="chatinput-responseMess-username"> { respondedMess.userName } </span>
+                                <span className="chatinput-responseMess-username"> { respondedMess.userName ? respondedMess.userName : "chính bạn"  } </span>
                             </span>
                             <p className="chatinput-responseMess-context  text-overflow-ellipsis app-mainfont">
                                 { showContextRespondedMess() }
