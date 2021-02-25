@@ -13,7 +13,7 @@ const MainPopupScreen = (props: any) =>{
       trigger={
         props.children
       }
-      position={['bottom left', 'bottom center']}
+      position={['bottom left', 'bottom center' , 'bottom right']}
       closeOnDocumentClick={ true }
       closeOnEscape={ true }
       arrow={ false }

@@ -3,9 +3,9 @@
     background-position: center;
     background-size: cover;
     position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 7px;
+    min-width: 64px;
+    height: 64px;
+    border-radius: 8px;
     position: relative;
     z-index: 999;
 
@@ -16,12 +16,16 @@
         width: 30%;
         height: 30%;
         position: absolute;
-        right: -20%;
-        top: -10%;
+        right: -24%;
+        top: -12%;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
-    
+        
         &:hover{
-        background-color: rgb(224, 216, 216);
+            background-color: rgb(224, 216, 216);
+        }
+
+        img{
+            object-fit: cover;
         }
     }
 }

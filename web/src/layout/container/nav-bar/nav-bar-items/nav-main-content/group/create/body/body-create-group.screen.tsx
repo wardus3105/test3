@@ -33,15 +33,14 @@ function BodyCreateGroupScreen(props: any) {
 
   const iconpanel = ENUM_KIND_OF_ICONPANEL.CREATE_GROUP;
 
-  const { createChatRoom } = props;
-
-
+  const { createChatRoom, changeSearch, textSearch } = props;
 
   const showSelectedUserPanel = (memberList: ICompanyMember[]) =>{
     const length = memberList.length
     if(length > 0){
       return memberList.map((member: ICompanyMember , index: number) =>{
-        return  <div key={ index } className="bodycreategroup-main-body-selecteduserpanel cursor-pointer" onClick={ () => { setSelectedUser(member.id) } }>
+        return <div key={ index }>   
+                <div className="bodycreategroup-main-body-selecteduserpanel cursor-pointer" onClick={ () => { setSelectedUser(member.id) } }>
                   <CircleAvatarScreen 
                   src={ member.avatar }
                   isOnline={ member.status === ENUM_KIND_OF_STATUS.ACTIVE }
@@ -55,6 +54,8 @@ function BodyCreateGroupScreen(props: any) {
                   </p>
                   <input type="checkbox" name={ member.id } className="bodycreategroup-main-body-checkbox" onChange={ setSelectedUserByCheckbox } checked={ selectedUseridList.some((id: string) => id === member.id) } ></input>
                 </div>
+                <div className="bodycreategroup-main-body-separate"></div>
+              </div>
       })
     }
   }
@@ -80,13 +81,21 @@ function BodyCreateGroupScreen(props: any) {
       <div className={"bodycreategroup-main " + (hasFooter ? "bodycreategroup-main--hasfooter" : "")}>
         <span className="subheading-semibold padding-12">Chọn thành viên</span>
         <div className="bodycreategroup-main-body padding-12">
-          <CustomInputScreen style={ styleCustomInput } hasClearText={ true } placeHolder="Nhập tên người cần tìm kiếm" class="" isMultiline={ false }  isTextArea={ false }></CustomInputScreen>
+          <CustomInputScreen style={ styleCustomInput } 
+            hasClearText={ true } 
+            placeHolder="Nhập tên người cần tìm kiếm" 
+            class="" 
+            isMultiline={ false }  
+            isTextArea={ false }
+            onChange={changeSearch}
+          ></CustomInputScreen>
 
           <InfiniteScrollCompanyMemberListScreen
             className={ "bodycreategroup-main-body-selecteduser" }
             showCompanyMemberList={ showSelectedUserPanel }
             iconpanel = { iconpanel }
             setCompanyMemList={ setCompanyMemList }
+            textSearch={textSearch}
           ></InfiniteScrollCompanyMemberListScreen>
         </div>
       </div>

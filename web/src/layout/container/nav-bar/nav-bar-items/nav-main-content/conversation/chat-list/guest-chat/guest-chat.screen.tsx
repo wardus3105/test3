@@ -1,7 +1,5 @@
 import React from 'react';
 import CircleAvatarScreen from '../../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
-import { connect } from "react-redux";
-import { setResponseMess } from "../../../../../../../../redux/Actions/ResponseMess.action";
 import MainPopupScreen from '../../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
 import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import './guest-chat.scss';
@@ -14,17 +12,18 @@ const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides
 const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 
 function GuestChatScreen(props : IGuestChat){
-    const {
-        redirectToDetailUser,
-        setResponseMess,
-        copyText
-    } = GuestChatAdapter(props);
 
     const { user , children } = props;
 
+    const {
+        redirectToDetailUser,
+        setResponMess,
+        copyText
+    } = GuestChatAdapter(props);
+
     const listEles = [
         {
-            onClick: setResponseMess,
+            onClick: setResponMess,
             icon: iconShareArrowLeftLine,
             text: "Trả lời"
         },
@@ -48,10 +47,10 @@ function GuestChatScreen(props : IGuestChat){
     return (
         <div className="guestchat-container margin-4">
             <CircleAvatarScreen
-            src={ user.avatar }
-            class="guestchat-left img-32"
-            isOnline={ false }
-            onClick={ redirectToDetailUser }
+                src={ user.avatar }
+                class="guestchat-left img-32"
+                isOnline={ false }
+                onClick={ redirectToDetailUser }
             ></CircleAvatarScreen>
             <div className="guestchat-right margin-left-8">
                 <span className="subtitle-regular margin-left-12">
@@ -62,8 +61,8 @@ function GuestChatScreen(props : IGuestChat){
                     { children }
                     
                     <MainPopupScreen context={ eleDetailPopup }> 
-                        <div className="guestchat-icon-horizontal3dots">
-                            <img src={ iconMoreHorizontal } alt="horizontal 3 dots" className="cursor-pointer"></img>
+                        <div className="guestchat-icon cursor-pointer flex-center img-24">
+                            <div className="vertical3dots"></div>
                         </div>
                     </MainPopupScreen>
 
@@ -73,16 +72,4 @@ function GuestChatScreen(props : IGuestChat){
     )
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        responseMess: state.responseMess,
-    }
-}
-  
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        setResponseMess: (name:string , context: string , kindOfMess: number) => dispatch(setResponseMess(name , context , kindOfMess)),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuestChatScreen)
+export default GuestChatScreen;

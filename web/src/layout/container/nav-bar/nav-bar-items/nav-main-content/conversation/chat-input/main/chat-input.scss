@@ -1,77 +1,92 @@
-
-.chatinput-container{
+.chatinput-container {
   position: absolute;
   bottom: 0;
-  /* height: 8%; */
-  height: 60px;
   width: 100%;
-  padding: 0 0.6rem;
+  padding: 0.6rem;
   display: flex;
   border-top: 1px solid var(--color-main-border);
   background-color: var(--color-background);
+  min-height: 60px;
+
+  .custominput-container {
+    flex-grow: 1; /* default 0 */
+    margin: 0 1rem;
+  }
 }
 
-.chatinput-main{
+.chatinput-main {
   width: 100%;
   display: flex;
   align-items: center;
+
+  .emoji-mart {
+    position: absolute;
+    right: 40px;
+    bottom: 70px;
+
+    .emoji-mart-search-icon {
+      display: none;
+    }
+
+    .emoji-mart-preview {
+      display: none;
+    }
+
+    button:hover {
+      background: none;
+    }
+  }
+
+  .icon-emoji {
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+    bottom: 13px;
+  }
 }
 
-.chatinput-responseMess{
+.chatinput-responseMess {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 0.5rem;
   position: relative;
+  .app-mainfont {
+    font-size: var(--fontsize-default3);
+    line-height: var(--lineheight-default3);
+    color: var(--color-text--gray);
+  }
+  &-username {
+    font-weight: var(--fontweight-default2);
+    font-size: var(--fontsize-default3);
+    line-height: var(--lineheight-default3);
+    color: var(--color-text--gray);
+  }
+  &-context {
+    // position: absolute;
+    // width: 40%;
+  }
+  &-icon-cancel {
+    align-self: flex-start;
+  }
 }
-
-.chatinput-responseMess .app-mainfont{
-  font-size: var(--fontsize-default3);
-  line-height: var(--lineheight-default3);
-  color: var(--color-text--gray);
-}
-
-.chatinput-responseMess-username{
-  font-weight: var(--fontweight-default2);
-  font-size: var(--fontsize-default3);
-  line-height: var(--lineheight-default3);
-  color: var(--color-text--gray);
-}
-
-.chatinput-responseMess-context{
-  position: absolute;
-  width: 40%;
-}
-
-.chatinput--hasresponseMess{
+.chatinput--hasresponseMess {
   flex-direction: column;
 }
 
-.chatinput-extension{
-  height: 20% !important;
-  padding: 0.6rem;
-}
+// .chatinput-extension {
+//   height: 160px !important;
+//   padding: 0.6rem;
+// }
 
-.chatinput-container .custominput-container{
-    flex-grow: 1; /* default 0 */
-    margin: 0 1rem;
-}
-
-.chatinput-responseMess-icon-cancel{
-  align-self: flex-start;
-}
-
-.chatinput-uploadimages{
+.chatinput-uploadimages {
   padding: 1rem 0;
   display: flex;
   justify-content: flex-start;
-  overflow: auto;
-  flex-wrap: wrap;
-
+  overflow-x: auto;
 }
 
-.chatinput-uploadimages div{
+.chatinput-uploadimages div {
   margin-right: 10px;
-  margin-bottom: 10px;
 }

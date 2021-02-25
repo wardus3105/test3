@@ -5,4 +5,5 @@ export interface IInfiniteScrollCompanyMemberList{
     iconpanel:number,
     className: string,
     setCompanyMemList?:any,
+    textSearch?: string
 }

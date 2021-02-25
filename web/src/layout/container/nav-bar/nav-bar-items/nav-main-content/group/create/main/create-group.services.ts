@@ -22,6 +22,20 @@ const CreateGroupService = () => {
                 .then((res)=> res)
                 .catch((err) => console.log(err))
             },
+            getCompanyMemberListSearch: async (text: string) => {
+                const response =  await axios({
+                    method: "POST",
+                    url: `http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_COMPANYMEMBERLIST_SEARCH}`,
+                    data: {
+                        text: text
+                    }
+                })
+                .then((res)=>  res)
+                .catch((err) => console.log(err))
+
+                return response;
+            },
+
             sendFile: async (formData: FormData) => {
                 return axios({
                     method:"POST",

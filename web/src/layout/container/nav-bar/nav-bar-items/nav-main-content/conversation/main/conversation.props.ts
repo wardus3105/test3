@@ -1,7 +1,9 @@
 
 export interface IResponseMess {
-    kindOfMess: number,
-    context: string,    
+    messageId: string;
+    type: number,
+    context: string,   
+    userName: string 
 }
 
 export interface IConversation{
@@ -19,18 +21,20 @@ export interface IChat{
     userId: string,
     user: IUser,
     chatRoomId?: string,
-    attachment?: IAttachment[]
+    attachments?: IAttachment[],
+    createdAt: any,
+    parentId?: string,
 }
 
 interface IUser{
     userName:string,
-    status: string
+    status: string,
+    id?:string,
 }
 
-interface IAttachment{
+export interface IAttachment{
     contentType: string,
     name: string,
     type: string,
-    status: string
 }
 

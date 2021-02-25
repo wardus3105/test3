@@ -1,177 +1,206 @@
+import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
-import { IChat } from "../../main/conversation.props";
+import { IAttachment, IChat } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
 
 function ChatInputAdapter(props: any) {
-    const { responseMess , id , setListMessage, listMessage } = props;
+    const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess } = props;
 
-    const  {
-        pathFileList , setPathFileList,
-        hasImage , setHasImage,
+    const {
+        pathFileList, setPathFileList,
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile
+        file , setFile,
+        isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
-    useEffect(() =>{
-        window.addEventListener('keydown', pressEnterToSendChat );
-    
-        return() =>{
-          window.removeEventListener('keydown', pressEnterToSendChat );
-        }
-    })
-
-    const pressEnterToSendChat = async (e: KeyboardEvent) =>{
-        if(e.keyCode === 13 && isFocused){
+    const pressEnterToSendChat = async (e: KeyboardEvent) => {
+        if (e.keyCode === 13 && isFocused) {
             sendChat()
         }
     }
 
-    useKeyDown(pressEnterToSendChat)
+    useKeyDown(pressEnterToSendChat);
 
-    const sendChat = async () =>{
-        let pathFileList: any[] = []
-        if(file){
-            const formData = new FormData();
-            if(file.length === 1){
-                formData.append('fileContent', file[0]);
-                const response = await ChatInputServices().getInstance().sendFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    pathFileList = [response.data.data]
-                }
-            } else if(file.length > 1){
-                for (let index = 0; index < file.length; index++) {
-                    formData.append('multiFileContent', file[index]);         
-                }
-                const response = await ChatInputServices().getInstance().sendMultiFile(formData);
-                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                    pathFileList= [...response.data.data];
-                }
-            }
+    useEffect(() => {
+        setHasUploadImages(false);
+        setFile(null)
+        setPathFileList([])
+    }, [roomId])
+
+    const sendChat = async () => {
+        const userId = localStorage.getItem('userId') || "";
+        let messageSend: IChat = {
+            message: '',
+            messageType: '',
+            messageStatus: "1",
+            userId: userId,
+            user: {
+                userName: "Test 1",
+                status: "1",
+                id: userId
+            },
+            chatRoomId: roomId,
+            createdAt: new Date(),
+            attachments: [],
         }
-
-        console.log(pathFileList)
-
-        if(message || file){
-            // let formData = new FormData();
-            // formData.append('chatRoomId', id);
-            // formData.append('userId', userid);
-            // formData.append('message', message);
-            // formData.append('parentId', '');
-            // formData.append('messageType', '0');
-            // formData.append('messageStatus', '0');
-            // formData.append('status', '0');
-            // if(file){
-            //     for (let index = 0; index < pathFileList.length; index++) {
-            //         formData.append('file', pathFileList[index]);         
-            //     }
-            // }
-
-            // // await ChatInputServices().getInstance().postMessage(formData);
-            // setMessage("")
-
-            const userId = localStorage.getItem('userId') || "";
-
-            let messageSend: IChat = {
-                message: message,
-                messageType: "1",
-                messageStatus: "1",
-                userId: userId,
-                user: {
-                    userName: "Test 1",
-                    status: "1"
-                },
-                chatRoomId: id,
-                // attachment
+        if (message) {
+            messageSend.message = message;
+            messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
+            if (respondedMess) {
+                messageSend = { ...messageSend, parentId: respondedMess.messageId }
             }
-            
-            setListMessage([messageSend]);
-            console.log(messageSend);
+
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
-            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                 setMessage("")
+                setRespondedMess()
+
+                setListMessage([messageSend]);
+
+            }
+        }
+
+        if (file) {
+            let attachments: IAttachment[] = []
+            const formData = new FormData();
+            for (let index = 0; index < file.length; index++) {
+                formData.append('fileContent', file[index]);
+            }
+
+            let response = await ChatInputServices().getInstance().sendFile(formData);
+
+            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                const pathFileList = response.data.data;
+
+                for (let index = 0; index < pathFileList.length; index++) {
+                    // const attachment = {
+                    //     contentType: ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                    //     name: pathFileList[index].guid,
+                    //     type: ENUM_KIND_OF_ATTACHMENT.IMAGE
+                    // }
+                    attachments.push({
+                        contentType: ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                        name: pathFileList[index].guid,
+                        type: ENUM_KIND_OF_ATTACHMENT.IMAGE
+                    })
+                }
+                messageSend.messageType = ENUM_KIND_OF_MESSAGE.ATTACHMENT;
+                messageSend.attachments = attachments;
+                // let messageSend: IChat = {
+                //     message: "",
+                //     messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
+                //     messageStatus: "1",
+                //     userId: userId,
+                //     user: {
+                //         userName: "Test 1",
+                //         status: "1",
+                //         id:userId
+                //     },
+                //     chatRoomId: roomId,
+                //     createdAt: new Date(),
+                //     attachments:attachments,
+                // }
+
+                if (respondedMess) {
+                    messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                }
+
+                response = await ChatInputServices().getInstance().sendMessage(messageSend);
+                if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                    setFile(null)
+                    setPathFileList([])
+                    setHasUploadImages(false)
+                    setRespondedMess()
+
+                    setListMessage([messageSend]);
+                }
             }
         }
     }
 
-    function cb (pathFileListTemp: string[]){
+    const cb = (pathFileListTemp: string[]) => {
         setPathFileList(pathFileListTemp);
-        setHasImage(true);
+        setHasUploadImages(true)
     }
 
-    const fileSelector = buildFileSelector(true , cb , setFile)
-
+    const fileSelector = buildFileSelector(true, cb, setFile)
 
     const handleFileSelect = (e: any) => {
         e.preventDefault();
         fileSelector.click();
     }
 
-    const removePathFile = (pathFilez: string) =>{
+    const removePathFile = (pathFilez: string) => {
         const list = pathFileList.filter(item => item !== pathFilez);
         setPathFileList(list);
-        if(list.length === 0){
-            setHasImage(false);
+        if (list.length === 0) {
+            setHasUploadImages(false)
         }
     }
 
-    const showContextResponseMess = (kindOfMess: number , context: string) =>{
-        let eleResult = "";
-        switch (kindOfMess) {
+    const showContextRespondedMess = () => {
+        const { type, context } = respondedMess;
+        switch (type) {
             case ENUM_KIND_OF_MESSAGE.TEXT:
-                eleResult = context;
-                break;
-            case ENUM_KIND_OF_MESSAGE.IMAGE:
-                eleResult = "Ảnh";
-                break;
-            case ENUM_KIND_OF_MESSAGE.FILE:
-                eleResult = "File";
-                break;
+                return context;
+            case ENUM_KIND_OF_MESSAGE.ATTACHMENT:
+                return "File";
             case ENUM_KIND_OF_MESSAGE.LINK:
-                eleResult = "Link";
-                break;
+                return "Link";
             default:
-                break;
+                return ""
         }
-        return eleResult;
     }
 
-    const classNameChatInput = () =>{
-        const  containerClass = "chatinput-container";
+    const classNameChatInput = () => {
+        const containerClass = "chatinput-container";
         const extensionClass = "chatinput-extension";
         const hasResponseMessClass = "chatinput--hasresponseMess";
         const space = " ";
         let result = containerClass;
 
-        if(responseMess.isActive || hasImage){
+        if (hasUploadImages || respondedMess) {
             result += space + extensionClass + space + hasResponseMessClass
-        }else{
-            if(isMultilineText){
-                result += space + extensionClass 
+        } else {
+            if (isMultilineText) {
+                result += space + extensionClass
             }
         }
         return result;
-    } 
+    }
+
+    const addEmoji = (event: any) => {
+        console.log(event)
+
+        let sym = event.unified.split('-')
+        let codesArray: any = []
+        sym.forEach((el: any) => codesArray.push('0x' + el))
+        let emoji: string = String.fromCodePoint(...codesArray)
+        setMessage((prev) => prev + emoji);
+
+        console.log(message + emoji)
+    }
 
     return {
-        responseMess,
+        respondedMess,
         classNameChatInput,
-        showContextResponseMess,
-        hasImage,
+        showContextRespondedMess,
+        hasUploadImages,
         pathFileList,
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage,
-        sendChat,
-        setIsFocused, setListMessage, listMessage
+        message , setMessage, sendChat,
+        setIsFocused, setListMessage,
+        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     }
 }
 
