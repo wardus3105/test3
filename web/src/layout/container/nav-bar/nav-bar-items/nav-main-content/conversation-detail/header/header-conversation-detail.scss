@@ -76,19 +76,27 @@
 
                 > p {
                     padding-top: 5px;
+                    font-size: 13px;
+                    color: #4D5971;
+                    line-height: 20px; 
+                    font-style: normal;
+                    font-weight: normal; 
                 }
            }
        }
     }
-
-    
+  
 }
 
 /* ------------------------------------------------ RESPONSIVE ----------------------- */
 
 
 /* HEIGHT */
-
+ @media(max-width:1024px) {
+       .headerconversationdetail-container {
+           padding: 8px 0 15px;
+       }
+   } 
 @media only screen and (min-height: 520px) and (max-height: 600px) and (max-width: 319px) {
     .headerconversationdetail-avatar-image{
         display: none;

@@ -59,22 +59,46 @@ export default class ListUserChatContainer extends React.PureComponent<
         if (res.payload) {
           console.log('test_messageReceived_event_bus: ', res.payload);
           switch (res.type) {
+            // TODO
+            // case EventBusName.INCOMING_MESSAGE:
+            //   const msg: IMessage = res.payload;
+            //   let new_data = [...this.state.dataListChat];
+            //   const index_item = new_data.map((item) => item?.id).indexOf(msg?.chatId);
+            //   if (index_item != -1 && new_data[index_item] && new_data[index_item].messengers[0]) {
+            //     const new_item = { ...new_data[index_item] };
+            //     new_item.messengers[0].message = msg?.text;
+            //     new_data.splice(index_item, 1);
+            //     new_data.splice(0, 0, new_item);
+            //   }
+            //   //Check new user
+            //   const exist_user = new_data.map((item) => item?.contact?.id).indexOf(msg?.user?._id);
+            //   if (exist_user === -1) {
+            //     this.ListUserChatAdapter.getListChat();
+            //     return;
+            //   }
+            //   //Sort
+            //   this.setState({
+            //     dataListChat: new_data,
+            //   });
+            //   break;
             case EventBusName.INCOMING_MESSAGE:
               const msg: IMessage = res.payload;
               let new_data = [...this.state.dataListChat];
-              const index_item = new_data.map((item) => item?.id).indexOf(msg?.chatId);
-              if (index_item != -1 && new_data[index_item] && new_data[index_item].messengers[0]) {
-                const new_item = { ...new_data[index_item] };
-                new_item.messengers[0].message = msg?.text;
-                new_data.splice(index_item, 1);
-                new_data.splice(0, 0, new_item);
-              }
+              new_data.push(msg)
+              // const index_item = new_data.map((item) => item?.id).indexOf(msg?.chatId);
+              // if (index_item != -1 && new_data[index_item] && new_data[index_item].messengers[0]) {
+              //   const new_item = { ...new_data[index_item] };
+              //   new_item.messengers[0].message = msg?.text;
+              //   new_data.splice(index_item, 1);
+              //   new_data.splice(0, 0, new_item);
+              // }
+              
               //Check new user
-              const exist_user = new_data.map((item) => item?.contact?.id).indexOf(msg?.user?._id);
-              if (exist_user === -1) {
-                this.ListUserChatAdapter.getListChat();
-                return;
-              }
+              // const exist_user = new_data.map((item) => item?.contact?.id).indexOf(msg?.user?._id);
+              // if (exist_user === -1) {
+              //   this.ListUserChatAdapter.getListChat();
+              //   return;
+              // }
               //Sort
               this.setState({
                 dataListChat: new_data,
