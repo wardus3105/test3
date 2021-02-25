@@ -150,10 +150,10 @@ function CompanyMemberListAdapter(){
 
         
     const redirectToChatDetail = (id: string) => {
-        let kind = "personal";
+        let kind = "p";
         const userId: string = localStorage.getItem('userId') || "";
         // pushStreamService.subChat(userId);
-        createChatRoom(userId);
+        // createChatRoom(userId);
         history.push(`/${kind}/${id}`);
 
     };

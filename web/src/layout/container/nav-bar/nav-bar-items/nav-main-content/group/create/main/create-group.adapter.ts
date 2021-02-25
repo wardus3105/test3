@@ -1,17 +1,21 @@
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import ToastifyAdapter from "../../../../../../../../libraries/Features/toastify/toastify.adapter";
 import CreateGroupService from "./create-group.services";
 import CreateGroupStates from "./create-group.states";
 
 function CreateGroupAdapter(){
+    const history = useHistory();
+
     const {
         title , setTitle,
         avatar , setAvatar,
         avatarTemp , setAvatarTemp,
         createBy , setCreateBy,
         memberIdList , setMemberIdList,
-        slogan , setSlogan
+        slogan , setSlogan,
+        textSearch, setTextSearch,
     } = CreateGroupStates()
 
     useEffect(() => {
@@ -65,11 +69,21 @@ function CreateGroupAdapter(){
                 setMemberIdList([])
                 setAvatar(null)
                 setAvatarTemp([])
+                var chatRoom = response.data.data;
+                if (chatRoom) {
+                    history.push("/g/" + chatRoom.id);
+                }
+
             }
         } else{
             console.log("Error")
         }
     }
+
+    const changeSearch = async (event: any) => {
+        setTextSearch(event.target.value)
+    }
+
 
     return {
         createChatRoom,
@@ -77,7 +91,9 @@ function CreateGroupAdapter(){
         setAvatar,
         avatarTemp , setAvatarTemp,
         memberIdList , setMemberIdList,
-        slogan , setSlogan
+        slogan , setSlogan,
+        textSearch, setTextSearch,
+        changeSearch
     }
 }
 

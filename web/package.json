@@ -13,6 +13,7 @@
     "@types/requirejs": "^2.1.32",
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
+    "emoji-mart": "^3.0.1",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
@@ -58,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/emoji-mart": "^3.0.4",
     "@types/react-redux": "^7.1.11"
   }
 }

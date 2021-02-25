@@ -13,7 +13,8 @@ function CreateGroupScreen() {
     setAvatar,
     avatarTemp , setAvatarTemp,
     memberIdList , setMemberIdList,
-    slogan , setSlogan
+    slogan , setSlogan,
+    changeSearch, textSearch
   } = CreateGroupAdapter()
 
   return (
@@ -32,6 +33,8 @@ function CreateGroupScreen() {
           createChatRoom={ createChatRoom }
           memberIdList={ memberIdList }
           setMemberIdList={ setMemberIdList }
+          changeSearch = {changeSearch}
+          textSearch = {textSearch}
         ></BodyCreateGroupScreen>
     </>
   );

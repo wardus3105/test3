@@ -6,6 +6,8 @@ import { unactiveResponseMess } from "../../../../../../../../redux/Actions/Resp
 import UploadImageScreen from '../upload-image/upload-image.screen';
 import './chat-input.scss';
 import ChatInputAdapter from './chat-input.adapter';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker, Emoji } from 'emoji-mart'
 
 const iconSmileCircle = require('../../../../../../../../libraries/Icons/smile-circle.svg').default;
 const iconGimFile = require('../../../../../../../../libraries/Icons/gim-file.svg').default;
@@ -34,6 +36,7 @@ function ChatInputScreen(props: any){
         message , setMessage,
         sendChat,
         setIsFocused,
+        addEmoji
     } = ChatInputAdapter(props)
     
     return (
@@ -67,16 +70,18 @@ function ChatInputScreen(props: any){
                 <img src={ iconGimFile } alt="gim" onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover"></img>
 
                 <CustomInputScreen 
-                setValue={ setMessage } 
-                value={ message } 
-                placeHolder="Nhập nội dung bình luận" 
-                class="" 
-                style={ styleCustomInput } 
-                setIsMultiline={ setIsMultilineText } 
-                isMultiline={ true } 
-                isTextArea={ false }
-                setIsFocused={ setIsFocused }
+                    setValue={ setMessage } 
+                    value={ message } 
+                    placeHolder="Nhập nội dung bình luận" 
+                    class="" 
+                    style={ styleCustomInput } 
+                    setIsMultiline={ setIsMultilineText } 
+                    isMultiline={ true } 
+                    isTextArea={ false }
+                    setIsFocused={ setIsFocused }
                 ></CustomInputScreen>
+                
+                <Picker onSelect={addEmoji} />
                 
                 <img src={ iconSendMessage } alt="send data" onClick={ sendChat } className="cursor-pointer icon-svg--hover"></img>
             </div>

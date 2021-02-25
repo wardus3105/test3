@@ -6,6 +6,7 @@ import CustomInputScreen from "../../../../../../../libraries/Features/custom-in
 import GoBackButtonScreen from "../../../../../../../libraries/Features/goback-button/goback-button.screen";
 import { ICompanyMember } from "../../../nav-company-members/company-member/company-member.props";
 import InfiniteScrollCompanyMemberListScreen from "../../../nav-company-members/infinite-scroll/infinite-scroll-company-member-list.screen";
+import CreatePersonalAdapter from "./create-personal.adapter";
 
 import "./create-personal.scss";
 
@@ -21,6 +22,10 @@ const styleCustomInput = {
 };
 
 function CreatePersonalScreen() {
+  const {
+    createChatRoom, companyMemberList, changeSearch
+  } = CreatePersonalAdapter();
+
   const showCompanyMember = (memberList: ICompanyMember[]) => {
     const length = memberList.length;
     if (length > 0) {
@@ -29,7 +34,7 @@ function CreatePersonalScreen() {
           <div key={index}>
             <div
               className="bodycreategroup-main-body-selecteduserpanel"
-              onClick={() => {}}
+              onClick={() => createChatRoom(member.id)}
             >
               <CircleAvatarScreen
                 src={member.avatar}
@@ -73,11 +78,12 @@ function CreatePersonalScreen() {
               class=""
               isMultiline={false}
               isTextArea={false}
+              onChange={changeSearch}
             ></CustomInputScreen>
 
             <InfiniteScrollCompanyMemberListScreen
               className={"bodycreategroup-main-body-selecteduser"}
-              showCompanyMemberList={showCompanyMember}
+              showCompanyMemberList={() => showCompanyMember(companyMemberList)}
               iconpanel={iconpanel}
             ></InfiniteScrollCompanyMemberListScreen>
           </div>

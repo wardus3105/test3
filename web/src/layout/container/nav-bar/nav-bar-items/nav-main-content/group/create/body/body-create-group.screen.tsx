@@ -33,9 +33,7 @@ function BodyCreateGroupScreen(props: any) {
 
   const iconpanel = ENUM_KIND_OF_ICONPANEL.CREATE_GROUP;
 
-  const { createChatRoom } = props;
-
-
+  const { createChatRoom, changeSearch, textSearch } = props;
 
   const showSelectedUserPanel = (memberList: ICompanyMember[]) =>{
     const length = memberList.length
@@ -83,13 +81,21 @@ function BodyCreateGroupScreen(props: any) {
       <div className={"bodycreategroup-main " + (hasFooter ? "bodycreategroup-main--hasfooter" : "")}>
         <span className="subheading-semibold padding-12">Chọn thành viên</span>
         <div className="bodycreategroup-main-body padding-12">
-          <CustomInputScreen style={ styleCustomInput } hasClearText={ true } placeHolder="Nhập tên người cần tìm kiếm" class="" isMultiline={ false }  isTextArea={ false }></CustomInputScreen>
+          <CustomInputScreen style={ styleCustomInput } 
+            hasClearText={ true } 
+            placeHolder="Nhập tên người cần tìm kiếm" 
+            class="" 
+            isMultiline={ false }  
+            isTextArea={ false }
+            onChange={changeSearch}
+          ></CustomInputScreen>
 
           <InfiniteScrollCompanyMemberListScreen
             className={ "bodycreategroup-main-body-selecteduser" }
             showCompanyMemberList={ showSelectedUserPanel }
             iconpanel = { iconpanel }
             setCompanyMemList={ setCompanyMemList }
+            textSearch={textSearch}
           ></InfiniteScrollCompanyMemberListScreen>
         </div>
       </div>

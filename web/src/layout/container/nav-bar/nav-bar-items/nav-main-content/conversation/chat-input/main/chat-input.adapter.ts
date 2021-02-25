@@ -137,7 +137,19 @@ function ChatInputAdapter(props: any) {
             }
         }
         return result;
-    } 
+    }
+
+    const addEmoji = (event: any) => {
+        console.log(event)
+
+        let sym = event.unified.split('-')
+        let codesArray: any = []
+        sym.forEach((el: any) => codesArray.push('0x' + el))
+        let emoji: string = String.fromCodePoint(...codesArray)
+        setMessage((prev) => prev + emoji);
+
+        console.log(message + emoji)
+    }
 
     return {
         responseMess,
@@ -150,7 +162,8 @@ function ChatInputAdapter(props: any) {
         setIsMultilineText,
         message , setMessage,
         sendChat,
-        setIsFocused, setListMessage, listMessage
+        setIsFocused, setListMessage, listMessage,
+        addEmoji
     }
 }
 
