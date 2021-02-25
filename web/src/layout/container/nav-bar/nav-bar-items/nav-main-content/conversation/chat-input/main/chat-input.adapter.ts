@@ -1,12 +1,13 @@
 import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
+
+import { useEffect, useRef } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
 import { IAttachment, IChat } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
-import { useEffect } from 'react';
 
 function ChatInputAdapter(props: any) {
     const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess } = props;
@@ -16,7 +17,8 @@ function ChatInputAdapter(props: any) {
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file, setFile
+        file , setFile,
+        isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
     const pressEnterToSendChat = async (e: KeyboardEvent) => {
@@ -175,6 +177,18 @@ function ChatInputAdapter(props: any) {
         return result;
     }
 
+    const addEmoji = (event: any) => {
+        console.log(event)
+
+        let sym = event.unified.split('-')
+        let codesArray: any = []
+        sym.forEach((el: any) => codesArray.push('0x' + el))
+        let emoji: string = String.fromCodePoint(...codesArray)
+        setMessage((prev) => prev + emoji);
+
+        console.log(message + emoji)
+    }
+
     return {
         respondedMess,
         classNameChatInput,
@@ -184,10 +198,9 @@ function ChatInputAdapter(props: any) {
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message, setMessage,
-        sendChat,
-        setIsFocused,
-        setListMessage
+        message , setMessage, sendChat,
+        setIsFocused, setListMessage,
+        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     }
 }
 

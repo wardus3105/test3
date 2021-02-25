@@ -113,6 +113,33 @@ function App() {
   //     pushStreamService.subChat(userId);
   //   }
   // }, []);
+
+  // useEffect(() => {
+  //   console.log('Token...');
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   const token: any = urlParams.get('token');
+
+  //   localStorage.setItem('access_token', token);
+    
+  //   console.log(token);
+  //   const getProfile = async () => {
+  //     await axios({
+  //       method: "POST",
+  //       url: `http://localhost.ihcm.vn:8088/ihcm/api/employee/detailProfile`,
+  //       headers: { 
+  //         "content-type": 'application/json',
+  //         'Authorization': 'Bearer ' + token
+  //       },
+  //       data: {},
+  //       timeout:30000  
+  //   })
+  //   .then((res) => console.log("Res...: " + res))
+  //   .catch((err) => console.log(err))
+  //   };
+ 
+  //   getProfile();
+  // }, []);
+
   
   if(hasVideo){
     return (

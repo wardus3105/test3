@@ -9,6 +9,12 @@ function DescriptionChatListServices() {
     function init() {
         return {
             getDescriptionChatList : async (page: number) => {
+                // console.log('Token...');
+                // const urlParams = new URLSearchParams(window.location.search);
+                // const token = urlParams.get('token');
+                
+                // console.log(token);
+
                 return await getInstance(URL_PATHS.GET_CONVERSATIONLIST , {
                     params:{
                         page:page,

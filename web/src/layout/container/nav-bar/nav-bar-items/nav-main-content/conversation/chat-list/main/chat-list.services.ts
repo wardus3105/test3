@@ -12,7 +12,7 @@ function ChatListServices() {
     const createChatRoom = (formData: any) => {
         return axios({
             method:"POST",
-            url:`http://${process.env.REACT_APP_IPADDRESS_API}/api/chat-rooms"`,
+            url:`http://${process.env.REACT_APP_IPADDRESS_API}/api/chat-rooms`,
             headers: { 
                 "content-type": 'application/json',
             },

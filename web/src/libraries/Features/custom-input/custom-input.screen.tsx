@@ -1,3 +1,4 @@
+import { ReactComponent } from '*.svg';
 import React, { ChangeEvent } from 'react';
 import CustomInputAdapter from './custom-input.adapter';
 import { ICustomInput } from './custom-input.props';
