@@ -10,6 +10,9 @@ import VideoConference from '../../../../../../../libraries/Features/video-call/
 import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath"
 import { useLocation } from "react-router-dom";
 
+import ReconnectingWebSocket from 'reconnecting-websocket';
+
+import PersonalConversationAdapter from './personal-conversation.adapter'
 const iconVolumeOff = require('../../../../../../../libraries/Icons/volume-off.svg').default;
 const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
 const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
@@ -17,11 +20,48 @@ const iconTrashDeleteBin = require('../../../../../../../libraries/Icons/trash-d
 const iconVideoCircleLine = require('../../../../../../../libraries/Icons/video-circle-line.svg').default;
 
 
+var sockets: ReconnectingWebSocket[] = [];
+var socket: ReconnectingWebSocket;
+
+const options = {
+    WebSocket: WebSocket, // custom WebSocket constructor
+    connectionTimeout: 1000,
+    maxRetries: 10,
+};
+
+socket = new ReconnectingWebSocket(
+    `ws://172.20.50.77:31000/ws?Channels=` + localStorage.getItem('userId'),
+    [],
+    options
+ );
+ 
+ socket.onopen = () => {
+    // connection opened
+    console.log("test_Connected");
+    console.log(`test_ws://172.20.50.77:31000/ws?Channels=` + localStorage.getItem('userId'));
+ };
+
 function PersonalConversationScreen() {
     var roomId=useIdInPath(2);
     var roomName=Math.floor(Math.random() * 1000000);
+    
+    React.useEffect(() => {
+        socket.onmessage = (message) => {
+            var json=JSON.parse(decodeURIComponent(JSON.parse(message.data).text));
+            if(localStorage.getItem('userId')!==json.value.userId){
+                window.open(window.location.protocol+"/video-call?roomName="+roomId+"&userId="+localStorage.getItem('userId')+"&isCall=0","_blank","width=1000,height=1000");    
+            }
+       };
+    });
+    // const {
+    //     pushStreamService
+    //  } = PersonalConversationAdapter()
+
+
+    //  pushStreamService.subChat(localStorage.getItem('userId'));
+
     const clickCallVideo=()=>{              
-        window.open("http://localhost:3000/video-call?chatRoomID="+roomId+"&roomName="+roomName+"&userId="+localStorage.getItem('userId'),"_blank","width=1000,height=1000");    
+        window.open(window.location.protocol+"/video-call?roomName="+roomId+"&userId="+localStorage.getItem('userId')+"&isCall=1","_blank","width=1000,height=1000");    
     }
     const listEles = [
         {
