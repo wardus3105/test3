@@ -73,6 +73,11 @@
     @include mix-border-radius($border-radius-base-small);
 }
 
+.img-104 {
+    width: 104px;
+    height: 104px;
+}
+
 .margin-4 {
     margin: 4px !important;
 }
@@ -378,6 +383,48 @@
     align-items: center !important; 
 }
 
-.icon-svg--hover:hover{
-   filter: invert(46%) sepia(91%) saturate(3200%) hue-rotate(207deg) brightness(101%) contrast(101%);
+.icon-svg--hover{
+    &:hover{
+        filter: invert(46%) sepia(91%) saturate(3200%) hue-rotate(207deg) brightness(101%) contrast(101%);
+    }
+}
+
+.vertical3dots{
+    position: relative;
+    background-color: #4d5970;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    height: 5px;
+    width: 5px;
+
+    &::before{
+        content:"";
+        background-color: #4d5970;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        height: 5px;
+        width: 5px;
+        position: absolute;
+        top: 8px;    
+    }
+
+    &::after{
+        content:"";
+        background-color: #4d5970;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        height: 5px;
+        width: 5px;
+        position: absolute;
+        bottom: 8px;       
+    }
 }

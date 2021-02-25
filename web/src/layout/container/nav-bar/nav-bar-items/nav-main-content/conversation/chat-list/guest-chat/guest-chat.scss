@@ -29,17 +29,14 @@
         width: -moz-fit-content;
         word-wrap: break-word;
         
-        .guestchat-icon-horizontal3dots{
-            height: 21px;
-            width: 21px;
-            align-self: center;
-            padding: 0 0 0 0.6rem;
+        .guestchat-icon{
+            margin: auto 0 auto 16px;
             opacity: 0;
         }
     }
 }
 
-.guestchat-context{
+.guestchat-text{
     background: var(--color-background2);
     border-radius: 16px 16px 16px 0;
     mix-blend-mode: normal;
@@ -48,8 +45,8 @@
     width: 100%;
 }
 
-.guestchat-maincontext:hover .guestchat-icon-horizontal3dots,
-.guestchat-icon-horizontal3dots:hover
+.guestchat-maincontext:hover .guestchat-icon,
+.guestchat-icon:hover
 {
     opacity: 1;
 }
@@ -61,7 +58,7 @@
     .guestchat-container{
         width: 100%;
     }
-    .guestchat-icon-horizontal3dots:active{
+    .vertical3dots:active{
         opacity: 1;
     }
     

@@ -7,6 +7,7 @@ function CreateGroupStates(){
     const [avatar , setAvatar] = useState<any>(null);
     const [createBy , setCreateBy] = useState<string>("");
     const [memberIdList , setMemberIdList] = useState<string[]>([]);
+    const [textSearch, setTextSearch] = useState("");
 
     return {
         title , setTitle,
@@ -14,7 +15,8 @@ function CreateGroupStates(){
         avatarTemp , setAvatarTemp,
         createBy , setCreateBy,
         memberIdList , setMemberIdList,
-        slogan , setSlogan
+        slogan , setSlogan,
+        textSearch, setTextSearch,
     }
 }
 

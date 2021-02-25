@@ -6,13 +6,15 @@ function ChatInputStates() {
     const [isMultilineText, setIsMultilineText] = useState<Boolean>(false);
     const [isFocused, setIsFocused] = useState<Boolean>(false);
     const [message, setMessage] = useState<string>("");
+    const [isVisibleEmojiPicker, setVisibleEmojiPicker] = useState<Boolean>(false);
 
     return {
         pathFileList , setPathFileList,
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile
+        file , setFile,
+        isVisibleEmojiPicker, setVisibleEmojiPicker
     }
 }
 
