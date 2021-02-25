@@ -2,32 +2,41 @@
 import React from "react";
 import { URL_PATHS } from '../../../../src/helpers/networking/url-paths';
 import axios from "axios";
+import { ENUM_KIND_OF_VIDEO_CALL } from '../../Enum/video-call'
+import jitsiState from "./video-call.state"
+import { IChat } from "../../../layout/container/nav-bar/nav-bar-items/nav-main-content/conversation/main/conversation.props"
+
+
 var config = require('./config.js')
 var interfaceConfig = require('./interface_config.js')
-const Jitsi = () =>{
-    
+const Jitsi = () => {
+    const {
+        jitsi, setJitsi,
+        roomId, setRoomId,
+        roomName, setRoomName,
+        userId, setUserId
+    } = jitsiState()
+
     const loadJitsiScript = () => {
         let resolveLoadJitsiScriptPromise: any | null = null;
-    
+
         const loadJitsiScriptPromise = new Promise(resolve => {
-          resolveLoadJitsiScriptPromise = resolve;
+            resolveLoadJitsiScriptPromise = resolve;
         });
-        
+
         const script = document.createElement("script");
-        script.src = "https://meet.jit.si/external_api.js";
+        script.src = ENUM_KIND_OF_VIDEO_CALL.LINK_JITSI_MEET_JS;
         script.async = true;
         script.onload = () => resolveLoadJitsiScriptPromise(true);
         document.body.appendChild(script);
-    
+
         return loadJitsiScriptPromise;
     };
 
-    const initialiseJitsi = async (props:any) => {
-
-        const { roomName , width , height,displayName,email,setJitsi } = props;
-    
+    const initialiseJitsi = async (props: any) => {
+        const { roomName, width, height, displayName, email, setJitsi } = props;
         if (!window.JitsiMeetExternalAPI) {
-          await loadJitsiScript();
+            await loadJitsiScript();
         }
 
         // //const a=window.open("https://meet.hyperlogy.com/" + roomName, "", "width=1000,height=1000");
@@ -35,9 +44,9 @@ const Jitsi = () =>{
         // a.document.write("<div id='jitsi-video-container'></div>")
         // // a.document.getElementById("jitsi-video-container")
 
-        const _jitsi = new window.JitsiMeetExternalAPI("meet.hyperlogy.com", {
+        const _jitsi = new window.JitsiMeetExternalAPI(ENUM_KIND_OF_VIDEO_CALL.LINK_JITSI_MEET, {
             roomName: roomName,
-            // width: width,
+            width: width,
             // height: height,            
             // userInfo: {
             //     email: 'email@jitsiexamplemail.com',
@@ -49,43 +58,36 @@ const Jitsi = () =>{
                 videoInput: '<deviceLabel>'
             },
             configOverwrite: { startWithAudioMuted: true },
-            interfaceConfigOverwrite:interfaceConfig,
+            interfaceConfigOverwrite: interfaceConfig,
             parentNode: document.getElementById("jitsi-container-id")
             //parentNode: a.document.getElementById('jitsi-video-container'),
         });
-    
+
         _jitsi.executeCommand('displayName', displayName);
         _jitsi.executeCommand('email', email);
 
         setJitsi(_jitsi);
     };
-    
-    const sendMessage= async (message: IChat) => {
-        console.log("-----Sended---- vinh-", message)
-        // return await postInstance(URL_PATHS.SEND_MESSAGE , {
-        //     params:{
-        //         message:message,
-        //     }
-        // })
-        // .then((res)=> res)
-        // .catch((err) => console.log(err))
 
+    const sendMessage = async (message: IChat) => {
         return axios({
-            method:"POST",
-            url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.SEND_MESSAGE}`,
-            headers: { 
+            method: "POST",
+            url: `http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_MESSAGE}`,
+            headers: {
                 "content-type": 'application/json',
             },
             data: message,
-            timeout:30000  
+            timeout: 30000
         })
-        .then((res)=> console.log(res))
-        .catch((err) => console.log(err))
+            .then((res) => res)
+            .catch((err) => console.log(err))
+
     }
 
-    return { 
+    return {
         sendMessage,
         initialiseJitsi
+                
     }
 }
 export default Jitsi
