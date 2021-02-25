@@ -101,9 +101,12 @@ function PersonalConversationScreen() {
             <MainPopupScreen context={ eleDetailPopup }>
                 <div>
                     <TooltipScreen position={ ['top center'] } context="Chức năng khác">
-                        <div>
-                            <img src={ iconMoreVertical } alt="3 dots" className="cursor-pointer icon-svg--hover"></img>
+                        <div className="img-24 flex-center cursor-pointer icon-svg--hover">
+                            <div className="vertical3dots " ></div>
                         </div>
+                        {/* <div>
+                            <img src={ iconMoreVertical } alt="3 dots" className="cursor-pointer icon-svg--hover"></img>
+                        </div> */}
                     </TooltipScreen>
                 </div>
             </MainPopupScreen>

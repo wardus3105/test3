@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import useScroll from "../../../../../../../../libraries/Hooks/useScroll";
 import ChatInputServices from "../../chat-input/main/chat-input.services";
-
 import ChatListStates from "./chat-list.states";
 
 import ReconnectingWebSocket from "reconnecting-websocket";
@@ -25,12 +24,19 @@ function ChatListAdapter(props: any) {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
         chatList, setChatList,
-        roomIdz, setRoomIdz
+        roomIdz, setRoomIdz,
+        bottom , setBottom
     } = ChatListStates();
 
+    useEffect(() => {
+        const eleChatInput = document.getElementById("chat-input");
+        if(eleChatInput){
+            setBottom(eleChatInput.offsetHeight.toString());
+        }
+    })
 
     useEffect(() => {
-            console.log('test_init_app...');
+        console.log('test_init_app...');
         const userId: string = localStorage.getItem("userId") || "";
         if(userId){
         //   pushStreamService.subChat(userId);
@@ -54,16 +60,6 @@ function ChatListAdapter(props: any) {
         setUserid(userId);
     }, [ setUserid ])
 
-    // useEffect(() => {
-    //     setChatList(chats)
-    //     setIsMainLoading(false);
-    //     setResponseMess()
-    // }, [ roomId ])
-
-    // useEffect(() => {
-    //     setChatList(prev =>[ ...chats , ...prev ])
-    // }, [ chats ,setChatList ])
-
     useEffect(() => {
         if(roomId === roomIdz){
             setChatList(prev =>[ ...chats , ...prev ])
@@ -75,7 +71,6 @@ function ChatListAdapter(props: any) {
 
         setIsMainLoading(false);
     }, [ chats ])
-
 
     const clickFirstMessage = async ()  => {
         const chats = {
@@ -186,7 +181,8 @@ function ChatListAdapter(props: any) {
         chatList,
         handleScroll,
         isUpdating,
-        clickFirstMessage
+        clickFirstMessage,
+        bottom
     };
 }
 

@@ -9,7 +9,7 @@ import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../libraries/Enum/st
 function ConversationAdapter() {
     const history = useHistory();
     const roomId = useIdInPath()
-    console.log(roomId);
+
     const {
         query , setQuery,
         hasSearch , setHasSearch,

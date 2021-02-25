@@ -61,8 +61,8 @@ function GuestChatScreen(props : IGuestChat){
                     { children }
                     
                     <MainPopupScreen context={ eleDetailPopup }> 
-                        <div className="guestchat-icon-horizontal3dots">
-                            <img src={ iconMoreHorizontal } alt="horizontal 3 dots" className="cursor-pointer"></img>
+                        <div className="guestchat-icon cursor-pointer flex-center img-24">
+                            <div className="vertical3dots"></div>
                         </div>
                     </MainPopupScreen>
 
