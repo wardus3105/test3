@@ -1,19 +1,19 @@
+import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
 import { useEffect, useRef } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
-import { IChat } from "../../main/conversation.props";
+import { IAttachment, IChat } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
 
 function ChatInputAdapter(props: any) {
-    const { responseMess , id , setListMessage, listMessage } = props;
+    const { respondedMess , setListMessage , hasUploadImages ,  setHasUploadImages , roomId , setRespondedMess } = props;
 
     const  {
         pathFileList , setPathFileList,
-        hasImage , setHasImage,
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
@@ -21,73 +21,112 @@ function ChatInputAdapter(props: any) {
         isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
-    // const userid: string = localStorage.getItem('userId') || "";
-
-    // useEffect(() =>{
-    //     window.addEventListener('keydown', pressEnterToSendChat );
-    
-    //     return() =>{
-    //       window.removeEventListener('keydown', pressEnterToSendChat );
-    //     }
-    // })
-
     const pressEnterToSendChat = async (e: KeyboardEvent) =>{
         if(e.keyCode === 13 && isFocused){
             sendChat()
         }
     }
 
-    useKeyDown(pressEnterToSendChat)
+    useKeyDown(pressEnterToSendChat);
+
+    useEffect(() => {
+        setHasUploadImages(false);
+        setFile(null)
+        setPathFileList([])
+    }, [ roomId ])
 
     const sendChat = async () =>{
-        if(message || file){
-            // let formData = new FormData();
-            // formData.append('chatRoomId', id);
-            // formData.append('userId', userid);
-            // formData.append('message', message);
-            // formData.append('parentId', '');
-            // formData.append('messageType', '0');
-            // formData.append('messageStatus', '0');
-            // formData.append('status', '0');
-            // if(file){
-            //     for (let index = 0; index < file.length; index++) {
-            //         formData.append('file', file[index]);         
-            //     }
-            // }
+        const userId = localStorage.getItem('userId') || "";
 
-            // // await ChatInputServices().getInstance().postMessage(formData);
-            // setMessage("")
-
-            const userId = localStorage.getItem('userId') || "";
-
+        if(message){
             let messageSend: IChat = {
                 message: message,
-                messageType: "1",
+                messageType: ENUM_KIND_OF_MESSAGE.TEXT + "",
                 messageStatus: "1",
                 userId: userId,
                 user: {
                     userName: "Test 1",
-                    status: "1"
+                    status: "1",
+                    id:userId
                 },
-                chatRoomId: id
+                chatRoomId: roomId,
+                createdAt: new Date(),
+                attachments:[],
             }
-            
-            setListMessage([messageSend]);
-            console.log(messageSend);
+
+            if(respondedMess){
+                messageSend = { ...messageSend, parentId: respondedMess.messageId }
+            }
+
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
                 setMessage("")
+                setRespondedMess()
+
+                setListMessage([messageSend]);
+
+            }
+        }
+
+        if(file){
+            let attachments: IAttachment[] = []
+            const formData = new FormData();
+            for (let index = 0; index < file.length; index++) {
+                formData.append('fileContent', file[index]);         
+            }
+
+            let response = await ChatInputServices().getInstance().sendFile(formData);
+
+            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                const pathFileList = response.data.data;
+
+                for (let index = 0; index < pathFileList.length; index++){
+                    const attachment = {
+                        contentType:ENUM_KIND_OF_ATTACHMENT.IMAGE,
+                        name:pathFileList[index].guid,
+                        type:ENUM_KIND_OF_ATTACHMENT.IMAGE
+                    }
+                    attachments.push(attachment)
+                }
+
+                let messageSend: IChat = {
+                    message: "",
+                    messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
+                    messageStatus: "1",
+                    userId: userId,
+                    user: {
+                        userName: "Test 1",
+                        status: "1",
+                        id:userId
+                    },
+                    chatRoomId: roomId,
+                    createdAt: new Date(),
+                    attachments:attachments,
+                }
+
+                if(respondedMess){
+                    messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                }
+    
+                response = await ChatInputServices().getInstance().sendMessage(messageSend);
+                if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+                    setFile(null)
+                    setPathFileList([])
+                    setHasUploadImages(false)
+                    setRespondedMess()
+
+                    setListMessage([messageSend]);
+                }
             }
         }
     }
 
-    function cb (pathFileListTemp: string[]){
+    const cb = (pathFileListTemp: string[]) =>{
         setPathFileList(pathFileListTemp);
-        setHasImage(true);
+        setHasUploadImages(true)
     }
 
     const fileSelector = buildFileSelector(true , cb , setFile)
-
 
     const handleFileSelect = (e: any) => {
         e.preventDefault();
@@ -98,29 +137,22 @@ function ChatInputAdapter(props: any) {
         const list = pathFileList.filter(item => item !== pathFilez);
         setPathFileList(list);
         if(list.length === 0){
-            setHasImage(false);
+            setHasUploadImages(false)
         }
     }
 
-    const showContextResponseMess = (kindOfMess: number , context: string) =>{
-        let eleResult = "";
-        switch (kindOfMess) {
+    const showContextRespondedMess = () =>{
+        const { type , context } = respondedMess;
+        switch (type) {
             case ENUM_KIND_OF_MESSAGE.TEXT:
-                eleResult = context;
-                break;
-            case ENUM_KIND_OF_MESSAGE.IMAGE:
-                eleResult = "Ảnh";
-                break;
-            case ENUM_KIND_OF_MESSAGE.FILE:
-                eleResult = "File";
-                break;
+                return context;
+            case ENUM_KIND_OF_MESSAGE.ATTACHMENT:
+                return "File";
             case ENUM_KIND_OF_MESSAGE.LINK:
-                eleResult = "Link";
-                break;
+                return "Link";
             default:
-                break;
+                return ""
         }
-        return eleResult;
     }
 
     const classNameChatInput = () =>{
@@ -130,7 +162,7 @@ function ChatInputAdapter(props: any) {
         const space = " ";
         let result = containerClass;
 
-        if(responseMess.isActive || hasImage){
+        if(hasUploadImages || respondedMess){
             result += space + extensionClass + space + hasResponseMessClass
         }else{
             if(isMultilineText){
@@ -153,16 +185,16 @@ function ChatInputAdapter(props: any) {
     }
 
     return {
-        responseMess,
+        respondedMess,
         classNameChatInput,
-        showContextResponseMess,
-        hasImage,
+        showContextRespondedMess,
+        hasUploadImages,
         pathFileList,
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
         message , setMessage, sendChat,
-        setIsFocused, setListMessage, listMessage,
+        setIsFocused, setListMessage,
         addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     }
 }

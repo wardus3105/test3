@@ -6,10 +6,10 @@ import './image-context-chat.scss';
 
 function ImageContextChatScreen(props : IImageContextChat){
     const list = ImageContextChatAdapter(props) || [];
-
     const showImages = () =>{
         return list.map((image: any , index: number) =>{
-            return <img src={ getApiUrl(image.path) } alt="" key={index}></img>
+            const url = getApiUrl(image.name)
+            return <img src={ url } alt="" key={index}></img>
         })
     }
 

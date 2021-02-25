@@ -36,7 +36,7 @@ function FileContextChatScreen(props : IFileChat){
                         </a>
                     </h5>
                     <div className="app-mainfont">
-                        <h5>5678kb</h5>
+                        <h5>{ props.fileSize}</h5>
                     </div>
                 </div>
                 <div className="filechat-iconbutton">

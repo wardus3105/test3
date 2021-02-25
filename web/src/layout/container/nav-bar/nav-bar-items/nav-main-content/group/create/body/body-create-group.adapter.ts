@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import BodyCreateGroupStates from "./body-create-group.states";
 
 function BodyCreateGroupAdapter(props: any){
@@ -10,6 +11,12 @@ function BodyCreateGroupAdapter(props: any){
 
   const selectedUseridList = props.memberIdList;
   const setSelectedUseridList = props.setMemberIdList;
+
+  useEffect(() => {
+      if(selectedUseridList.length === 0){
+        setHasFooter(false);
+      }
+  } , [selectedUseridList , setHasFooter])
 
 
   const setSelectedUserByCheckbox = (e: any) =>{

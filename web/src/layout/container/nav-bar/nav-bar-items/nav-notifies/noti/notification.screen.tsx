@@ -2,7 +2,7 @@ import React from 'react';
 import { ENUM_KIND_OF_NOTIFICATION } from '../../../../../../libraries/Enum/notification';
 import CircleAvatarScreen from '../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
 import decodeHTML from '../../../../../../libraries/Functions/decode-html';
-import getTimePeriod from '../../../../../../libraries/Functions/get-time-period';
+import getTimePeriodFromNow from '../../../../../../libraries/Functions/get-time-period-from-now';
 import useWindowSize from '../../../../../../libraries/Hooks/useWindowSize';
 import { INotification } from './notification.props';
 import './notification.scss';
@@ -78,7 +78,7 @@ function NotificationScreen(props: INotification) {
                         <span>{ decodeHTML(context()) }</span>
                     </div>
                     <span className="notification-time">
-                        { getTimePeriod(props.time) } 
+                        { getTimePeriodFromNow(props.time) } 
                     </span>
                 </div>
             </div>

@@ -17,24 +17,15 @@
     }
 }
 
-.bodyconversationdetail-main-body-fileandlink {
-    .bodycreategroup-main-body-selecteduserpanel {
-        height: 66px;
-        display: block;
-    
-        .circleavatar-container {
-            float: left;
-        }
-    
-        .memberName {
-            float: left;
-            line-height: 44px;
-        }
-    
-        .bodycreategroup-main-body-option {
-            float: right;
-            line-height: 66px;
-            cursor: pointer;
-        }
-    }
+.bodycreategroup-main-body-selecteduserpanel{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E6E8EB;
+    padding: 5px 0px;
+}
+.body-main-detail-group-member-username{
+    font-size: 16px;
+    line-height: 23px;
+    padding: 0px 10px;
+    width: 100%;
 }

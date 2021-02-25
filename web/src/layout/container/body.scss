@@ -9,6 +9,7 @@
     .body-left{
         position: relative;  
         width: var(--width-navbar);
+        min-width: 50px;
         height: 100%;
     }
     

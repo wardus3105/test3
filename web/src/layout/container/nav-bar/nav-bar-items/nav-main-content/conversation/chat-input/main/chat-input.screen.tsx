@@ -1,8 +1,5 @@
 import React, { useRef, useState } from 'react';
 import CustomInputScreen from '../../../../../../../../libraries/Features/custom-input/custom-input.screen';
-
-import { connect } from "react-redux";
-import { unactiveResponseMess } from "../../../../../../../../redux/Actions/ResponseMess.action";
 import UploadImageScreen from '../upload-image/upload-image.screen';
 import './chat-input.scss';
 import ChatInputAdapter from './chat-input.adapter';
@@ -32,10 +29,10 @@ function ChatInputScreen(props: any){
     });
 
     const {
-        responseMess,
+        respondedMess,
         classNameChatInput,
-        showContextResponseMess,
-        hasImage,
+        showContextRespondedMess,
+        hasUploadImages,
         pathFileList,
         handleFileSelect,
         removePathFile,
@@ -48,26 +45,26 @@ function ChatInputScreen(props: any){
     return (
         <div ref={ref} className={ classNameChatInput() }>
             {
-                responseMess.isActive && (
+                respondedMess && (
                     <div className="chatinput-responseMess">
                         <div>
                             <span className="app-mainfont">
                                 Trả lời 
-                                <span className="chatinput-responseMess-username"> { responseMess.name } </span>
+                                <span className="chatinput-responseMess-username"> { respondedMess.userName } </span>
                             </span>
                             <p className="chatinput-responseMess-context  text-overflow-ellipsis app-mainfont">
-                                { showContextResponseMess(responseMess.kindOfMess , responseMess.context) }
+                                { showContextRespondedMess() }
                             </p>
                         </div>
-                        <img src={ iconDeleteDisabled } alt="gim" onClick={ props.unactiveResponseMess } className="chatinput-responseMess-icon-cancel cursor-pointer"></img>
+                        <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img>
                     </div>
                 )
             }
             {
-                hasImage && (
+                hasUploadImages && (
                     <div className="chatinput-uploadimages">
                         {
-                            pathFileList.map((pathFile: string , index: number) => <UploadImageScreen pathFile={ pathFile } class="" removePathFile={ removePathFile }></UploadImageScreen>)
+                            pathFileList.map((pathFile: string , index: number) => <UploadImageScreen key={ index } pathFile={ pathFile } class="" removePathFile={ removePathFile }></UploadImageScreen>)
                         }
                     </div>
                 )
@@ -101,19 +98,7 @@ function ChatInputScreen(props: any){
     )
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        responseMess: state.responseMess,
-    }
-}
-  
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        unactiveResponseMess: () => dispatch(unactiveResponseMess()),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatInputScreen)
+export default ChatInputScreen;
 
 
 

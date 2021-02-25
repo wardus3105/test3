@@ -1,9 +1,6 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../../libraries/Enum/status-code";
 import useScroll from "../../../../../../../../libraries/Hooks/useScroll";
-import ChatListServices from "./chat-list.services";
-import useIdInPath from "../../../../../../../../libraries/Hooks/useIdInPath";
 import ChatInputServices from "../../chat-input/main/chat-input.services";
 
 import ChatListStates from "./chat-list.states";
@@ -19,32 +16,30 @@ const options = {
     maxRetries: 10,
   };
 
-function ChatListAdapter(chats: any , count: number, page:number , setPage: any , isUpdating: boolean , id: string) {
+function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
-    const location = useLocation();
 
-    const {createChatRoom} = ChatListServices();
+    const { chats , count , page , setPage , isUpdating , roomId , setRespondedMess } = props;
 
     const {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
         chatList, setChatList,
-        roomId, setRoomId
+        roomIdz, setRoomIdz
     } = ChatListStates();
 
 
     useEffect(() => {
-        console.log('test_init_app...');
-        // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
+            console.log('test_init_app...');
         const userId: string = localStorage.getItem("userId") || "";
         if(userId){
-          pushStreamService.subChat(userId);
-        }
+        //   pushStreamService.subChat(userId);
+        }   
     }, []);
 
     useLayoutEffect(() =>{
         if(chatlistRef.current){
-            if(page === 1){
+            if(page === 1 && !isUpdating){
                 chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight;
             } else{
                 if(!isUpdating){
@@ -52,67 +47,58 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
                 }
             }
         } 
-    } , [ page , isUpdating])
+    } , [ page , isUpdating , setRoomIdz])
 
     useEffect(() => {
         const userId = localStorage.getItem('userId') || "";
         setUserid(userId);
     }, [ setUserid ])
 
+    // useEffect(() => {
+    //     setChatList(chats)
+    //     setIsMainLoading(false);
+    //     setResponseMess()
+    // }, [ roomId ])
+
+    // useEffect(() => {
+    //     setChatList(prev =>[ ...chats , ...prev ])
+    // }, [ chats ,setChatList ])
 
     useEffect(() => {
-        if(roomId === id){
-            setChatList(prev =>[ ...prev , ...chats ])
-            setIsMainLoading(false);
+        if(roomId === roomIdz){
+            setChatList(prev =>[ ...chats , ...prev ])
         } else{
-            setRoomId(id);
+            setRoomIdz(roomId);
             setChatList(chats)
-            setIsMainLoading(false);
+            setRespondedMess()
         }
 
+        setIsMainLoading(false);
     }, [ chats ])
 
 
     const clickFirstMessage = async ()  => {
-        let pathList = location.pathname.split("/");
-        const id = pathList[2];
-
-        let chatRoomMemberList = [
-            {userId: userid},
-            {userId: id}
-        ];
-        
-        let chatRoom = {
-            avatar: "url",
-            title: "Chat riêng",
-            slogan: "Room này tạo ra để 2 người chat",
-            type: 0,
-            createdBy: userid,
-            chatRoomMemberList: chatRoomMemberList
+        const chats = {
+            chatRoomId: roomId,
+            message: "Xin chào",
+            messageStatus: "1",
+            messageType: "1",
+            user: {userName: "Huy dz", status: "1" , id: userid},
+            userId: userid,
+            createdAt: new Date(),
+            attachments:[]
         }
-    
-        await createChatRoom(chatRoom);
+
+        setChatList(prev =>[ chats , ...prev ])
+
+        const response = await ChatInputServices().getInstance().sendMessage(chats);
+        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+
+        }
     }
 
     const { handleScroll } = useScroll( page , setPage , count , isUpdating , chatlistRef , true )
 
-    const roomid = useIdInPath()
-
-    const sendHello = async () =>{
-        let formData = new FormData();
-        formData.append('chatRoomId', roomid);
-        formData.append('userId', userid);
-        formData.append('message', "Xin chào");
-        formData.append('parentId', '');
-        formData.append('messageType', '0');
-        formData.append('messageStatus', '0');
-        formData.append('status', '0');
-
-        const response = await ChatInputServices().getInstance().postMessage(formData);
-        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-            
-        }
-    }
 
     // const observer = useRef<any>();
     // const lastMessageRef = useCallback(node => {
@@ -138,11 +124,11 @@ function ChatListAdapter(chats: any , count: number, page:number , setPage: any 
                     message: messageReceived.value.text,
                     messageStatus: "1",
                     messageType: "1",
-                    user: {userName: "Huy dz", status: "1"},
+                    user: {userName: "chat.app6", status: "1"},
                     userId: messageReceived.value.user
                 }]
     
-                setChatList(prev =>[ ...prev , ...chats ])
+                setChatList(prev =>[ ...chats , ...prev ])
             }
 
         },

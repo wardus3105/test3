@@ -41,6 +41,8 @@ function CustomInputScreen(props : ICustomInput) {
           onClick={ props.onClick } 
           onChange={ (e: ChangeEvent<any>) => changeValue2(e) }
           required={ true } 
+          onFocus={ () =>{ setIsFocused && setIsFocused(true) }}
+          onBlur={ () =>{ setIsFocused && setIsFocused(false) }}
           style={ props.style }
         /> 
       }

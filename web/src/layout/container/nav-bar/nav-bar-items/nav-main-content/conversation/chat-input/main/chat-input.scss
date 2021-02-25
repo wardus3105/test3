@@ -74,7 +74,7 @@
 }
 
 .chatinput-extension{
-  height: 20% !important;
+  height: 160px !important;
   padding: 0.6rem;
 }
 
@@ -91,12 +91,9 @@
   padding: 1rem 0;
   display: flex;
   justify-content: flex-start;
-  overflow: auto;
-  flex-wrap: wrap;
-
+  overflow-x: auto;
 }
 
 .chatinput-uploadimages div{
   margin-right: 10px;
-  margin-bottom: 10px;
 }

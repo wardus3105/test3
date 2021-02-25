@@ -9,16 +9,16 @@
 
     &--active{
         background-color: var(--color-main4);
-    }
 
-    &--active:before{
-        content:"";
-        position:absolute;
-        left:0;
-        width:3px;
-        height:100%;
-        background-color: var(--color-main3);
-        border-radius:0 5px 5px 0;
+        &:before{
+            content:"";
+            position:absolute;
+            left:0;
+            width:3px;
+            height:100%;
+            background-color: var(--color-main3);
+            border-radius:0 5px 5px 0;
+        }
     }
 
     &.hasNotification {
@@ -54,6 +54,10 @@
             background-color: var(--color-main4);
             border-left: none;
             border-bottom: 2px solid var(--color-main3);
+
+            &:before{
+                display: none;
+            }
         } 
     }
 }
