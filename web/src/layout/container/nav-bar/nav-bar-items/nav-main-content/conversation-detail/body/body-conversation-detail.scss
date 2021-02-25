@@ -1,6 +1,6 @@
 .bodyconversationdetail-container{
-    top: 220px;
-    height: calc(100% - 220px);
+    top: 280px;
+    height: calc(100% - 280px);
 
     .bodyconversationdetail-main{
         background-color: var(--color-background);
@@ -64,6 +64,8 @@
 
 .bodyconversationdetail-main-body-fileandlink {
     row-gap: 5px; 
+    width: 100%;
+    overflow-y: auto;
 
     .filechat-container {
         width: 98%;

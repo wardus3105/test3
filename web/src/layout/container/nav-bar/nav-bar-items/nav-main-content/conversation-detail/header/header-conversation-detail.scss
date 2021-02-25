@@ -1,12 +1,13 @@
 .headerconversationdetail-container{
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 280px;
     padding: 0.5rem;
 
     .headerconversationdetail-top{
         display: flex;
         justify-content: space-between;
+        height: 60px;
     }
 
     .headerconversationdetail-avatar{
@@ -32,9 +33,10 @@
         }
        .headerconversationdetail-option{
             display: flex;
+            margin-top: 25px;
         
-            div{
-                margin: 0 0.5rem; 
+            div {
+                margin: 0 3rem; 
                 width: 100px;
         
                 p{
@@ -54,6 +56,11 @@
                 padding: 0.8rem;
             }
         }   
+    }
+
+    .headerconversationdetail-title {
+        height: 60px;
+        text-align: center;
     }
 }
 
@@ -107,7 +114,7 @@
 
 @media only screen and (max-width: 1024px) {
     .headerconversationdetail-option div{
-        margin: 0 0.6rem;
+        margin: 0 0.5rem !important;
         width: 70px;
 
         p{

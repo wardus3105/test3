@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import CustomInputScreen from '../../../../../../../../libraries/Features/custom-input/custom-input.screen';
 
 import { connect } from "react-redux";
@@ -8,6 +8,8 @@ import './chat-input.scss';
 import ChatInputAdapter from './chat-input.adapter';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker, Emoji } from 'emoji-mart'
+import {ReactComponent as IconSmileCircle} from '../../../../../../../../libraries/Icons/smile-circle.svg'
+import useOutsideClick from '../../../../../../../../libraries/Features/click-outside/click-outside';
 
 const iconSmileCircle = require('../../../../../../../../libraries/Icons/smile-circle.svg').default;
 const iconGimFile = require('../../../../../../../../libraries/Icons/gim-file.svg').default;
@@ -15,7 +17,7 @@ const iconSendMessage = require('../../../../../../../../libraries/Icons/send-me
 const iconDeleteDisabled = require('../../../../../../../../libraries/Icons/delete-disabled.svg').default;
 
 const styleCustomInput = {
-    backgroundImage:`url('${ iconSmileCircle }')`,
+    // backgroundImage:`url('${ iconSmileCircle }')`,
     backgroundPosition:'99% 50%',
     padding:'10px 35px 10px 10px',
     borderRadius:'8px',
@@ -23,6 +25,11 @@ const styleCustomInput = {
 }
 
 function ChatInputScreen(props: any){
+    const ref = useRef<HTMLInputElement | null>(null)
+
+    useOutsideClick(ref, () => {
+        setVisibleEmojiPicker(false);
+    });
 
     const {
         responseMess,
@@ -33,14 +40,13 @@ function ChatInputScreen(props: any){
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage,
-        sendChat,
+        message , setMessage,sendChat,
         setIsFocused,
-        addEmoji
+        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputAdapter(props)
     
     return (
-        <div className={ classNameChatInput() }>
+        <div ref={ref} className={ classNameChatInput() }>
             {
                 responseMess.isActive && (
                     <div className="chatinput-responseMess">
@@ -81,7 +87,13 @@ function ChatInputScreen(props: any){
                     setIsFocused={ setIsFocused }
                 ></CustomInputScreen>
                 
-                <Picker onSelect={addEmoji} />
+                <div ref={ref}>
+                    <Picker onSelect={addEmoji} style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} />
+                </div>
+                
+                <div ref={ref} className="icon-emoji">
+                    <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleEmojiPicker(true)} />
+                </div>
                 
                 <img src={ iconSendMessage } alt="send data" onClick={ sendChat } className="cursor-pointer icon-svg--hover"></img>
             </div>

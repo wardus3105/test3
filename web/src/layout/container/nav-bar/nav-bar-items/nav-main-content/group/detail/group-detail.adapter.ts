@@ -32,10 +32,19 @@ function GroupDetailAdapter() {
     useEffect(() => {
         const getData = async () => {
             const response = await GroupDetailServices().getInstance().getGroupDetail(roomId);
-            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                const result = response.data.result;
-                setMemberInGroup(result.chatroom_member);
-                setGroupDetail(result.chatroom)
+            if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                console.log(response);
+                const result = response.data.result[0];
+                if (result !== null && result !== undefined) {
+                    var listChatRoomMemberRes = result.chat_room_members;
+                    console.log(listChatRoomMemberRes);
+                    let memberList: any = [];
+                    listChatRoomMemberRes.map((member:any , index:number) => {
+                        memberList.push(member.user);
+                    })
+                    setMemberInGroup(memberList);
+                    setGroupDetail(result);
+                }
             }
         }
         getData();

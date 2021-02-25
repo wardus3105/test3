@@ -1,6 +1,6 @@
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
 import { IChat } from "../../main/conversation.props";
@@ -17,7 +17,8 @@ function ChatInputAdapter(props: any) {
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile
+        file , setFile,
+        isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
     // const userid: string = localStorage.getItem('userId') || "";
@@ -160,10 +161,9 @@ function ChatInputAdapter(props: any) {
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage,
-        sendChat,
+        message , setMessage, sendChat,
         setIsFocused, setListMessage, listMessage,
-        addEmoji
+        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     }
 }
 

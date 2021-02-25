@@ -149,14 +149,14 @@ function GroupDetailScreen() {
           <>
             <div className="bodycreategroup-main-body-selecteduserpanel">
               <CircleAvatarScreen 
-              src={ member.user.avatar }
+              src={ member.avatar }
               isOnline={ member.status === ENUM_KIND_OF_STATUS.ACTIVE }
               class=""
               width="44px"
               height="44px"
               ></CircleAvatarScreen>
-              <p>
-                { member.user.user_name }
+              <p className="memberName">
+                { member.firstName + member.lastName }
               </p>
               { 
                 isAdmin ?

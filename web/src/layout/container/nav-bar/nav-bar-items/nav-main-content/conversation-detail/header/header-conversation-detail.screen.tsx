@@ -14,21 +14,23 @@ function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
         <GoBackButtonScreen></GoBackButtonScreen>
       </div>
       <div className="headerconversationdetail-avatar">
-          <h4>
-            {
-              props.name
-            }
-          </h4>
-          <span>
-            {
-              props.title
-            }
-          </span>
+          <div className="headerconversationdetail-title">
+            <h4>
+              {
+                props.name
+              }
+            </h4>
+            <span>
+              {
+                props.title
+              }
+            </span>
+          </div>
 
           <CircleAvatarScreen
             src={ props.srcImage }
-           isOnline={false}
-            class={"headerconversationdetail-avatar-image img-40"}
+            isOnline={false}
+            class={"headerconversationdetail-avatar-image img-104 margin-top-4"}
           ></CircleAvatarScreen>
 
           <div className="headerconversationdetail-option">

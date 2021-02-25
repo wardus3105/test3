@@ -28,6 +28,17 @@
     .emoji-mart-preview {
       display: none;
     }
+
+    button:hover {
+      background: none;
+    }
+  }
+
+  .icon-emoji {
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+    bottom: 13px;
   }
 }
 
