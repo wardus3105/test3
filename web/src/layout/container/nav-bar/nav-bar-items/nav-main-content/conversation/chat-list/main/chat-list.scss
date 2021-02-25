@@ -3,7 +3,7 @@
   top: var(--height-header-conversationdetail);
   bottom: 60px;
   width: 100%;
-  padding: 10px 7%;
+  padding: 12px 10%;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -11,6 +11,10 @@
 
   &-hassearch{
     top: 120px;
+  }
+
+  &-hasrespondedmess{
+    bottom: 120px;
   }
 
   .chatlist-loader{

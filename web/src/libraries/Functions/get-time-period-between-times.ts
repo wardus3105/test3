@@ -1,15 +1,8 @@
-import moment from "moment";
-
-export default function haveSameTimePeriod(time1: any , time2: any){
-    if(time1 && time2){
-        const start = time1.getTime();
-        const end = time2.getTime();
-        
-        const diff = end - start;
-        const seconds = Math.floor(diff / 1000 % 60);
-
-        console.log(seconds);
-
+export default function haveSameTimePeriod(startTime: Date, endTime: Date){
+    if(startTime && endTime){
+        const start = startTime.getTime();
+        const end = endTime.getTime(); 
+        const seconds = Math.abs(end - start) / 1000;
         if(seconds < 60){
             return true;
         }
