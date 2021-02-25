@@ -9,7 +9,6 @@ import jitsiState from '../../../../../../../libraries/Features/video-call/video
 import VideoConference from '../../../../../../../libraries/Features/video-call/video-call.screen'
 import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath"
 import { useLocation } from "react-router-dom";
-
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import PersonalConversationAdapter from './personal-conversation.adapter'
@@ -18,6 +17,7 @@ const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vert
 const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
 const iconTrashDeleteBin = require('../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 const iconVideoCircleLine = require('../../../../../../../libraries/Icons/video-circle-line.svg').default;
+
 
 
 var sockets: ReconnectingWebSocket[] = [];
@@ -44,15 +44,16 @@ socket = new ReconnectingWebSocket(
 function PersonalConversationScreen() {
     var roomId=useIdInPath(2);
     var roomName=Math.floor(Math.random() * 1000000);
-    
-    React.useEffect(() => {
-        socket.onmessage = (message) => {
-            var json=JSON.parse(decodeURIComponent(JSON.parse(message.data).text));
-            if(localStorage.getItem('userId')!==json.value.userId){
-                window.open(window.location.protocol+"/video-call?roomName="+roomId+"&userId="+localStorage.getItem('userId')+"&isCall=0","_blank","width=1000,height=1000");    
-            }
-       };
-    });
+
+    // React.useEffect(() => {
+    //     socket.onmessage = (message) => {
+    //         debugger
+    //         var json=JSON.parse(decodeURIComponent(JSON.parse(message.data).text));
+    //         if(localStorage.getItem('userId')!==json.value.userId){
+    //             // window.open(window.location.protocol+"/video-call?roomName="+json.value.chatRoomId+"&userId="+localStorage.getItem('userId')+"&isCall=0","_blank","width=1000,height=1000");    
+    //         }
+    //    };
+    // });
     // const {
     //     pushStreamService
     //  } = PersonalConversationAdapter()
@@ -61,8 +62,10 @@ function PersonalConversationScreen() {
     //  pushStreamService.subChat(localStorage.getItem('userId'));
 
     const clickCallVideo=()=>{              
-        window.open(window.location.protocol+"/video-call?roomName="+roomId+"&userId="+localStorage.getItem('userId')+"&isCall=1","_blank","width=1000,height=1000");    
+         window.open(window.location.protocol+"/video-call?roomName="+roomId+"&userId="+localStorage.getItem('userId')+"&isCall=1","_blank","width=1000,height=1000"); 
     }
+
+
     const listEles = [
         {
             onClick: null,
