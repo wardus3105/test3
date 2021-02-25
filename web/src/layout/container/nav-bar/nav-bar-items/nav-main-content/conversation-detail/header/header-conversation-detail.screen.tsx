@@ -15,12 +15,12 @@ function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
                 <div className="detail-title">
                     <h4>
                         {
-                            "Team Hyperlogy" 
+                            props.name 
                         }
                     </h4>
                     <span>
                         {
-                            "150 Thanh vien" 
+                            props.title 
                         }
                     </span>
                 </div>
