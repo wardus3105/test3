@@ -182,7 +182,8 @@ function ChatListAdapter(props: any) {
         handleScroll,
         isUpdating,
         clickFirstMessage,
-        bottom
+        bottom,
+        setChatList
     };
 }
 

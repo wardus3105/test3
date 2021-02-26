@@ -70,9 +70,11 @@ function ChatInputAdapter(props: any) {
 
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
             if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                const data = response.data.data;
+                messageSend = { ...messageSend , id: data.id };
+
                 setMessage("")
                 setRespondedMess()
-
                 setListMessage([messageSend]);
             }
         }
@@ -103,20 +105,7 @@ function ChatInputAdapter(props: any) {
                 }
                 messageSend.messageType = ENUM_KIND_OF_MESSAGE.ATTACHMENT;
                 messageSend.attachments = attachments;
-                // let messageSend: IChat = {
-                //     message: "",
-                //     messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
-                //     messageStatus: "1",
-                //     userId: userId,
-                //     user: {
-                //         userName: "Test 1",
-                //         status: "1",
-                //         id:userId
-                //     },
-                //     chatRoomId: roomId,
-                //     createdAt: new Date(),
-                //     attachments:attachments,
-                // }
+
 
                 if (respondedMess) {
                     messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
@@ -134,6 +123,9 @@ function ChatInputAdapter(props: any) {
 
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                    const data = response.data.data;
+                    messageSend = { ...messageSend , id: data.id };
+
                     setFile(null)
                     setPathFileList([])
                     setHasUploadImages(false)

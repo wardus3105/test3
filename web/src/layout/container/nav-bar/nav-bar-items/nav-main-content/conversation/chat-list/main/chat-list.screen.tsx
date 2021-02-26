@@ -24,7 +24,8 @@ function ChatListScreen(props: any) {
         chatList,
         handleScroll,
         clickFirstMessage,
-        bottom
+        bottom,
+        setChatList
     } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomId , setRespondedMess })
 
     const length = chatList.length;
@@ -115,6 +116,7 @@ function ChatListScreen(props: any) {
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
                             userId={ userid }
+                            setChatList={ setChatList }
                         >
                             {eleContext}
                         </CurrentChatScreen>

@@ -5,7 +5,7 @@ import CurrentChatServices from "./current-chat.services";
 
 function CurrentChatAdapter(props: ICurrentChat) {
 
-    const { messageId , context , type  , setRespondedMess , roomId , userId } = props;
+    const { messageId , context , type  , setRespondedMess , roomId , userId , setChatList } = props;
 
     const setResponMess = () => {
         setRespondedMess({
@@ -36,11 +36,9 @@ function CurrentChatAdapter(props: ICurrentChat) {
             attachments: []
         }
 
-        console.log(messageSend)
-
         const response = await CurrentChatServices().getInstance().removeMessage(messageSend);
         if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
-            console.log(response)
+            setChatList((prev: any) => prev.filter((chat:any) => chat.id !== messageId))
         }
     }
 
