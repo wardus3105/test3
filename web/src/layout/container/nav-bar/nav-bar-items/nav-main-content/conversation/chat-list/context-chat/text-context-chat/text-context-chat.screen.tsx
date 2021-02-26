@@ -4,7 +4,7 @@ import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../../librar
 import './text-context-chat.scss';
 
 function TextContextChatScreen(props : any){
-    const { context , datetime , time , index } = props;
+    const { context , datetime , time , index , respondedMess } = props;
 
     const showContext = () =>{
         const rows = context.split("\n");
@@ -39,13 +39,23 @@ function TextContextChatScreen(props : any){
 
     if(context){
         return (
-            <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
-                { showContext() }    
-                <span className="chat-time">
-                    {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                    { datetime }
-                </span>
-            </div> 
+            <div className="textcontext-container">
+                {
+                    respondedMess && (
+                        <div className="textcontext-respondedmess">
+                            { respondedMess.context }
+                        </div>
+                    )
+                }
+                <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
+                    { showContext() }    
+                    <span className="chat-time">
+                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                        { datetime }
+                    </span>
+                </div>
+            </div>
+ 
         )
     }
 

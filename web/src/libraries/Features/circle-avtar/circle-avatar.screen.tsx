@@ -15,8 +15,8 @@ function CircleAvatarScreen(props : ICircleAvatar) {
   const styleInline = { 
     backgroundImage : `url(${src})` , 
     backgroundColor:"#d7e4e2",
-    width: props.width , 
-    height: props.height,
+    minWidth: props.width , 
+    minHeight: props.height,
     cursor: props.hasCursor ? "pointer" : "initial"
   };
 

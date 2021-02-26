@@ -41,6 +41,7 @@
     "start:dev": "env-cmd -f .env.development react-scripts start",
     "start:test": "env-cmd -f .env.test react-scripts start",
     "start:prod": "env-cmd -f .env.production react-scripts start",
+    "start:home": "env-cmd -f .env.home react-scripts start",
     "build:dev": "env-cmd -f .env.development react-scripts build",
     "build:test": "env-cmd -f .env.test react-scripts build",
     "build:prod": "env-cmd -f .env.production react-scripts build",

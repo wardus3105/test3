@@ -9,7 +9,7 @@ import './header-conversation-detail.scss';
 function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
 
     return (
-        <div className="headerconversationdetail-container">
+        <div className="headerconversationdetail-container padding-16">
             <div className="headerconversationdetail-top">
                 <GoBackButtonScreen></GoBackButtonScreen>
                 <div className="detail-title">

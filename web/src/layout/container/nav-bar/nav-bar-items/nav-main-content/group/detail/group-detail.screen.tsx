@@ -24,7 +24,7 @@ import ImageOverlayScreen from '../../../../../../../libraries/Features/image-ov
 const iconUserLineAdd = require("../../../../../../../libraries/Icons/user-line-add.svg").default;
 const iconSignoutRight = require("../../../../../../../libraries/Icons/signout-right.svg").default;
 const iconTrashDeleteBin = require("../../../../../../../libraries/Icons/trash-delete-bin.svg").default;
-const iconMoreVertical = require("../../../../../../../libraries/Icons/more-vertical.svg").default;
+// const iconMoreVertical = require("../../../../../../../libraries/Icons/more-vertical.svg").default;
 const iconUserLine = require("../../../../../../../libraries/Icons/user-line.svg").default;
 const iconChatMessage2Line = require("../../../../../../../libraries/Icons/chat-message-2-line.svg").default;
 const iconEyesShowVisible = require("../../../../../../../libraries/Icons/eyes-show-visible.svg").default;
@@ -100,21 +100,26 @@ function GroupDetailScreen() {
                 width="44px"
                 height="44px"
               ></CircleAvatarScreen>
-              <p className="body-main-detail-group-member-username">
-                {member.user.userName}
+              <div className="body-main-detail-group-member-username">
+                <span>
+                  { member.user.userName }
+                </span>
                 {
-                  isAdmin ?
-                    <CustomBadgeScreen text="admin" class="admin"></CustomBadgeScreen>
-                    : <></>
+                  isAdmin && (
+                    <CustomBadgeScreen text="admin" class="margin-left-8"></CustomBadgeScreen>
+                  )
                 }
-              </p>
+              </div>
               <div className="bodycreategroup-main-body-option">
                 {
                   isAdmin ?
                     <></>
                     : <MainPopupScreen context={eleDetailPopup}>
-                      <div>
+                      {/* <div>
                         <img src={iconMoreVertical} className="descriptionchatlist-icon-penedit" alt="" />
+                      </div> */}
+                        <div className="cursor-pointer flex-center img-24">
+                          <div className="vertical3dots"></div>
                       </div>
                     </MainPopupScreen>
                 }
@@ -236,8 +241,10 @@ function GroupDetailScreen() {
 
         </div>
         <div className="popupsignoutgroup-button">
-          <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen>
-          <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen>
+          <button onClick={close} className="btn-outline" >Hủy</button>
+          <button>Xác nhận</button>
+          {/* <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen> */}
+          {/* <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen> */}
         </div>
       </div>
     )

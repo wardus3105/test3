@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import CustomInputScreen from '../../../../../../../../libraries/Features/custom-input/custom-input.screen';
 import UploadImageScreen from '../upload-image/upload-image.screen';
 import './chat-input.scss';
 import ChatInputAdapter from './chat-input.adapter';
 import 'emoji-mart/css/emoji-mart.css'
-import { Picker, Emoji } from 'emoji-mart'
+import { Picker } from 'emoji-mart'
 import {ReactComponent as IconSmileCircle} from '../../../../../../../../libraries/Icons/smile-circle.svg'
-import useOutsideClick from '../../../../../../../../libraries/Features/click-outside/click-outside';
+import useOutsideClick from '../../../../../../../../libraries/Hooks/useOutsideClick';
 
-const iconSmileCircle = require('../../../../../../../../libraries/Icons/smile-circle.svg').default;
+// const iconSmileCircle = require('../../../../../../../../libraries/Icons/smile-circle.svg').default;
 const iconGimFile = require('../../../../../../../../libraries/Icons/gim-file.svg').default;
 const iconSendMessage = require('../../../../../../../../libraries/Icons/send-message.svg').default;
 const iconDeleteDisabled = require('../../../../../../../../libraries/Icons/delete-disabled.svg').default;
@@ -37,7 +37,8 @@ function ChatInputScreen(props: any){
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage,sendChat,
+        message , setMessage,
+        sendChat,
         setIsFocused,
         addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputAdapter(props)

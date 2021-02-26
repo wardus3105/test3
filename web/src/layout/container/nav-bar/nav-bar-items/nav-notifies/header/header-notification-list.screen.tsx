@@ -61,7 +61,10 @@ function HeaderNotificationListScreen(props: any) {
                     <MainPopupScreen context={ eleDetailPopup }>
                         <div>
                             <TooltipScreen context="Tạo tin nhắn">
-                                <img src={ iconMoreVertical } className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover" alt=""/>
+                                <div className="img-24 flex-center cursor-pointer icon-svg--hover">
+                                    <div className="vertical3dots"></div>
+                                </div>
+                                {/* <img src={ iconMoreVertical } className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover" alt=""/> */}
                             </TooltipScreen>
                         </div>
                     </MainPopupScreen>

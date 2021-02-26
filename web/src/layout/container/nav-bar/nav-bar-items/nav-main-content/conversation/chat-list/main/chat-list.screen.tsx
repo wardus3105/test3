@@ -15,7 +15,7 @@ import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess , respondedMess } = props;
 
     const {
         userid,
@@ -92,17 +92,17 @@ function ChatListScreen(props: any) {
                                 ></ImageContextChatScreen>
                             ) : (
                                 <TextContextChatScreen
-                                    isCurrent={isCurrent}
-                                    context={chat.message}
-                                    datetime={getTimePeriodFromNow(chat.createdAt)}
-                                    shape={shape}
-                                    time={chat.createdAt}
-                                    index={index}
+                                    isCurrent={ isCurrent }
+                                    context={ chat.message }
+                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
+                                    shape={ shape }
+                                    time={ chat.createdAt }
+                                    index={ index }
+                                    respondedMess={ chat.respondedMess }
                                 ></TextContextChatScreen>
                             )
                         }
                     </div>
-
                 )
                 if (isCurrent) {
                     eleMainContext = (

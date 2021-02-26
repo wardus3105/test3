@@ -5,7 +5,7 @@ import TooltipScreen from '../../../../../../../libraries/Features/tooltip/toolt
 
 
 const iconVolumeOff = require('../../../../../../../libraries/Icons/volume-off.svg').default;
-const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
+// const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
 const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
 const iconTrashDeleteBin = require('../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 const iconSignoutRight = require('../../../../../../../libraries/Icons/signout-right.svg').default;

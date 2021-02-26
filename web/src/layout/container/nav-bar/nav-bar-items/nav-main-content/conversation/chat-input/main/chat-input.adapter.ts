@@ -1,10 +1,10 @@
 import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
-import { IAttachment, IChat } from "../../main/conversation.props";
+import { IAttachment } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
@@ -37,7 +37,7 @@ function ChatInputAdapter(props: any) {
 
     const sendChat = async () => {
         const userId = localStorage.getItem('userId') || "";
-        let messageSend: IChat = {
+        let messageSend: any = {
             message: '',
             messageType: '',
             messageStatus: "1",
@@ -49,13 +49,19 @@ function ChatInputAdapter(props: any) {
             },
             chatRoomId: roomId,
             createdAt: new Date(),
-            attachments: [],
+            attachments: []
         }
         if (message) {
             messageSend.message = message;
             messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
             if (respondedMess) {
-                messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                messageSend = { ...messageSend, parentId: respondedMess.messageId , respondedMess:{
+                        messageId: respondedMess.messageId,
+                        type: respondedMess.type,
+                        context: respondedMess.context,
+                        userName: respondedMess.userName,
+                    }   
+                }
             }
 
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
@@ -64,7 +70,6 @@ function ChatInputAdapter(props: any) {
                 setRespondedMess()
 
                 setListMessage([messageSend]);
-
             }
         }
 
@@ -110,7 +115,13 @@ function ChatInputAdapter(props: any) {
                 // }
 
                 if (respondedMess) {
-                    messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                    messageSend = { ...messageSend, parentId: respondedMess.messageId , respondedMess:{
+                            messageId: respondedMess.messageId,
+                            type: respondedMess.type,
+                            context: respondedMess.context,
+                            userName: respondedMess.userName,
+                        }
+                    }
                 }
 
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
