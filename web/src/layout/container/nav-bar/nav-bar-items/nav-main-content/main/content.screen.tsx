@@ -11,7 +11,6 @@ import GroupDetailScreen from '../group/detail/group-detail.screen';
 import CreatePersonalScreen from '../personal/create/create-personal.screen';
 import { ENUM_KIND_OF_NOTFOUNDICON } from '../../../../../../libraries/Enum/not-found-icon';
 import DataNotFoundScreen from '../../../../../../libraries/Features/data-not-found/data-not-found.screen';
-import VideoConference from '../../../../../../libraries/Features/video-call/video-call.screen'
  
 function ContentScreen() {
   return (

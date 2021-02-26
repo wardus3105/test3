@@ -23,7 +23,8 @@ function ConversationScreen(){
         hasUploadImages, setHasUploadImages,
         redirectToDetail,
         respondedMess, setRespondedMess,
-        roomId
+        roomId,
+        editedMess, setEditedMess
     } = ConversationAdapter();
 
     let eleOptionHeader = null;
@@ -64,6 +65,7 @@ function ConversationScreen(){
                 setPage={ setPage }
                 isUpdating={ isUpdating }
                 setRespondedMess={ setRespondedMess }
+                setEditedMess={ setEditedMess }
             ></ChatListScreen>
             
             <ChatInputScreen 
@@ -73,6 +75,8 @@ function ConversationScreen(){
                 setHasUploadImages= { setHasUploadImages }
                 respondedMess={ respondedMess }
                 setRespondedMess={ setRespondedMess }
+                editedMess={ editedMess }
+                setEditedMess={ setEditedMess }
             ></ChatInputScreen>
         </div>
     )

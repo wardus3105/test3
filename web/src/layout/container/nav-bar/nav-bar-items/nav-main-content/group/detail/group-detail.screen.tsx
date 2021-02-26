@@ -8,29 +8,22 @@ import ConversationDetailScreen from '../../conversation-detail/main/conversatio
 import FileContextChatScreen from '../../conversation/chat-list/context-chat/file-context-chat/file-context-chat.screen';
 
 import GroupDetailAdapter from './group-detail.adapter';
-import { IMiniImage } from '../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.props';
 import { ENUM_KIND_OF_STATUS } from '../../../../../../../libraries/Enum/status';
 import CircleAvatarScreen from '../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
 import CustomBadgeScreen from '../../../../../../../libraries/Features/custom-badge/custom-badge.screen';
 import MainPopupScreen from '../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
 import DetailPopupScreen from '../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import { ENUM_KIND_OF_CONVERSATIONDETAIL } from '../../../../../../../libraries/Enum/conversation-detail';
-import CustomButtonScreen from '../../../../../../../libraries/Features/custom-button/custom-button.screen';
 import ModalScreen from '../../../../../../../libraries/Features/modal/modal.screen';
 import IconCirclePanel from '../../../../../../../libraries/Features/icon-circle-panel/icon-circle-panel.screen';
 import getApiUrl from '../../../../../../../libraries/Functions/get-api-url';
 import ImageOverlayScreen from '../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
+import { IconChatMessage2Line, IconEyesShowVisible, IconTrashDeleteBin, IconUserLine } from '../../../../../../../libraries/Icons/icon.screen';
 
 const iconUserLineAdd = require("../../../../../../../libraries/Icons/user-line-add.svg").default;
 const iconSignoutRight = require("../../../../../../../libraries/Icons/signout-right.svg").default;
 const iconTrashDeleteBin = require("../../../../../../../libraries/Icons/trash-delete-bin.svg").default;
-const iconMoreVertical = require("../../../../../../../libraries/Icons/more-vertical.svg").default;
-const iconUserLine = require("../../../../../../../libraries/Icons/user-line.svg").default;
-const iconChatMessage2Line = require("../../../../../../../libraries/Icons/chat-message-2-line.svg").default;
-const iconEyesShowVisible = require("../../../../../../../libraries/Icons/eyes-show-visible.svg").default;
 const iconBellNotificationOn = require("../../../../../../../libraries/Icons/bell-notification-on.svg").default;
-
-
 
 function GroupDetailScreen() {
 
@@ -53,25 +46,25 @@ function GroupDetailScreen() {
   const listEles = [
     {
       onClick: null,
-      icon: iconUserLine,
+      icon: <IconUserLine></IconUserLine>,
       text: "Chỉ định là admin",
       eleContext: null,
     },
     {
       onClick: null,
-      icon: iconChatMessage2Line,
+      icon: <IconChatMessage2Line></IconChatMessage2Line>,
       text: "Nhắn tin",
       eleContext: null,
     },
     {
       onClick: null,
-      icon: iconEyesShowVisible,
+      icon: <IconEyesShowVisible></IconEyesShowVisible>,
       text: "Xem thông tin cá nhân",
       eleContext: null,
     },
     {
       onClick: null,
-      icon: iconTrashDeleteBin,
+      icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
       text: "Xóa khỏi nhóm",
       eleContext: null,
     },
@@ -100,21 +93,26 @@ function GroupDetailScreen() {
                 width="44px"
                 height="44px"
               ></CircleAvatarScreen>
-              <p className="body-main-detail-group-member-username">
-                {member.user.userName}
+              <div className="body-main-detail-group-member-username">
+                <span>
+                  { member.user.userName }
+                </span>
                 {
-                  isAdmin ?
-                    <CustomBadgeScreen text="admin" class="admin"></CustomBadgeScreen>
-                    : <></>
+                  isAdmin && (
+                    <CustomBadgeScreen text="admin" class="margin-left-8"></CustomBadgeScreen>
+                  )
                 }
-              </p>
+              </div>
               <div className="bodycreategroup-main-body-option">
                 {
                   isAdmin ?
                     <></>
                     : <MainPopupScreen context={eleDetailPopup}>
-                      <div>
+                      {/* <div>
                         <img src={iconMoreVertical} className="descriptionchatlist-icon-penedit" alt="" />
+                      </div> */}
+                        <div className="cursor-pointer flex-center img-24">
+                          <div className="vertical3dots"></div>
                       </div>
                     </MainPopupScreen>
                 }
@@ -236,8 +234,10 @@ function GroupDetailScreen() {
 
         </div>
         <div className="popupsignoutgroup-button">
-          <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen>
-          <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen>
+          <button onClick={close} className="btn-outline" >Hủy</button>
+          <button>Xác nhận</button>
+          {/* <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen> */}
+          {/* <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen> */}
         </div>
       </div>
     )

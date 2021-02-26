@@ -7,12 +7,9 @@ import GuestChatAdapter from './guest-chat.adapter';
 import { IGuestChat } from './guest-chat.props';
 import {ReactComponent as IconSmileCircle} from '../../../../../../../../libraries/Icons/smile-circle.svg'
 import { Picker } from 'emoji-mart'
-import useOutsideClick from '../../../../../../../../libraries/Features/click-outside/click-outside'
+import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
+import useOutsideClick from '../../../../../../../../libraries/Hooks/useOutsideClick';
 
-const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
-const iconShareArrowLeftLine = require('../../../../../../../../libraries/Icons/share-arrow-left-line.svg').default;
-const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides-square.svg').default;
-const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 
 function GuestChatScreen(props : IGuestChat){
     const ref: any = useRef<HTMLInputElement | null>(null)
@@ -38,17 +35,17 @@ function GuestChatScreen(props : IGuestChat){
     const listEles = [
         {
             onClick: setResponMess,
-            icon: iconShareArrowLeftLine,
+            icon: <IconShareArrowLeftLine></IconShareArrowLeftLine>,
             text: "Trả lời"
         },
         {
             onClick: copyText,
-            icon: iconSlidesSquare,
+            icon: <IconSlidesSquare></IconSlidesSquare>,
             text: "Sao chép"
         },
         {
             onClick: null,
-            icon: iconTrashDeleteBin,
+            icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
             text: "Xóa"
         },
     ];

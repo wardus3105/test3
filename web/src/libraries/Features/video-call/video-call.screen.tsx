@@ -43,7 +43,7 @@ const VideoConference = () => {
    }
 
    React.useEffect(() => {
-      if (isCall == "1") {
+      if (isCall === "1") {
          let messageSend: IChat =
          {
             message: "Cuộc gọi đến",

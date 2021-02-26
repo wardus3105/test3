@@ -5,6 +5,8 @@ import ChatInputServices from "../../chat-input/main/chat-input.services";
 import ChatListStates from "./chat-list.states";
 
 import ReconnectingWebSocket from "reconnecting-websocket";
+import { IMiniImage } from "../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.props";
+import ChatListServices from "./chat-list.services";
 
 var sockets: ReconnectingWebSocket[] = [];
 var socket: ReconnectingWebSocket;
@@ -13,24 +15,27 @@ const options = {
     WebSocket: WebSocket, // custom WebSocket constructor
     connectionTimeout: 1000,
     maxRetries: 10,
-  };
+};
 
 function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
 
-    const { chats , count , page , setPage , isUpdating , roomId , setRespondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, setRespondedMess } = props;
 
     const {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
         chatList, setChatList,
         roomIdz, setRoomIdz,
-        bottom , setBottom
+        bottom, setBottom,
+        isOpenOverlay, setIsOpenOverlay,
+        mainImage, setMainImage,
+        miniImageList, setMiniImageList
     } = ChatListStates();
 
     useEffect(() => {
         const eleChatInput = document.getElementById("chat-input");
-        if(eleChatInput){
+        if (eleChatInput) {
             setBottom(eleChatInput.offsetHeight.toString());
         }
     })
@@ -38,61 +43,61 @@ function ChatListAdapter(props: any) {
     useEffect(() => {
         console.log('test_init_app...');
         const userId: string = localStorage.getItem("userId") || "";
-        if(userId){
-        //   pushStreamService.subChat(userId);
-        }   
+        if (userId) {
+            //   pushStreamService.subChat(userId);
+        }
     }, []);
 
-    useLayoutEffect(() =>{
-        if(chatlistRef.current){
-            if(page === 1 && !isUpdating){
+    useLayoutEffect(() => {
+        if (chatlistRef.current) {
+            if (page === 1 && !isUpdating) {
                 chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight;
-            } else{
-                if(!isUpdating){
+            } else {
+                if (!isUpdating) {
                     chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight / 2;
                 }
             }
-        } 
-    } , [ page , isUpdating , setRoomIdz])
+        }
+    }, [page, isUpdating, setRoomIdz])
 
     useEffect(() => {
         const userId = localStorage.getItem('userId') || "";
         setUserid(userId);
-    }, [ setUserid ])
+    }, [setUserid])
 
     useEffect(() => {
-        if(roomId === roomIdz){
-            setChatList(prev =>[ ...chats , ...prev ])
-        } else{
+        if (roomId === roomIdz) {
+            setChatList(prev => [...chats, ...prev])
+        } else {
             setRoomIdz(roomId);
             setChatList(chats)
             setRespondedMess()
         }
 
         setIsMainLoading(false);
-    }, [ chats ])
+    }, [chats])
 
-    const clickFirstMessage = async ()  => {
+    const clickFirstMessage = async () => {
         const chats = {
             chatRoomId: roomId,
             message: "Xin chào",
             messageStatus: "1",
             messageType: "1",
-            user: {userName: "Huy dz", status: "1" , id: userid},
+            user: { userName: "Huy dz", status: "1", id: userid },
             userId: userid,
             createdAt: new Date(),
-            attachments:[]
+            attachments: []
         }
 
-        setChatList(prev =>[ chats , ...prev ])
+        setChatList(prev => [chats, ...prev])
 
         const response = await ChatInputServices().getInstance().sendMessage(chats);
-        if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
+        if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
 
         }
     }
 
-    const { handleScroll } = useScroll( page , setPage , count , isUpdating , chatlistRef , true )
+    const { handleScroll } = useScroll(page, setPage, count, isUpdating, chatlistRef, true)
 
 
     // const observer = useRef<any>();
@@ -108,26 +113,26 @@ function ChatListAdapter(props: any) {
     //     if (node) observer.current.observe(node)
     // }, [loading, hasMore]);
 
-    const pushStreamService = {  
-        messageReceived: (message: any , userid: string) => {
+    const pushStreamService = {
+        messageReceived: (message: any, userid: string) => {
             console.log("-----Message Received-----");
             const messageReceived = JSON.parse(message)
 
-            if(messageReceived.value.user !== userid){
+            if (messageReceived.value.user !== userid) {
                 const chats = [{
                     chatRoomId: messageReceived.value.chatId,
                     message: messageReceived.value.text,
                     messageStatus: "1",
                     messageType: "1",
-                    user: {userName: "chat.app6", status: "1"},
+                    user: { userName: "chat.app6", status: "1" },
                     userId: messageReceived.value.user
                 }]
-    
-                setChatList(prev =>[ ...chats , ...prev ])
+
+                setChatList(prev => [...chats, ...prev])
             }
 
         },
-    
+
         subChat: (userId: string) => {
             console.log("-----Sub chat-----");
             console.log(`ws://172.20.50.77:31000/ws?Channels=` + userId);
@@ -136,13 +141,13 @@ function ChatListAdapter(props: any) {
                 [],
                 options
             );
-    
+
             socket.onopen = () => {
                 // connection opened
                 console.log("test_Connected");
                 console.log(`test_ws://172.20.50.77:31000/ws?Channels=` + userId);
             };
-    
+
             socket.onmessage = (e) => {
                 console.log("-----on message");
                 pushStreamService.messageReceived(
@@ -150,29 +155,50 @@ function ChatListAdapter(props: any) {
                     userId
                 );
             };
-    
+
             socket.onerror = (e: any) => {
                 // an error occurred
                 console.log("test_socket_err: ", e);
             };
-    
+
             socket.onclose = (e: any) => {
                 console.log(
-                "test_Socket is closed. Reconnect will be attempted in 1 second.",
-                e.reason
+                    "test_Socket is closed. Reconnect will be attempted in 1 second.",
+                    e.reason
                 );
             };
             // sockets.push(ws);
         },
         closeSocket: () => {
-          console.log("test_closeSocket");
-          socket.close();
+            console.log("test_closeSocket");
+            socket.close();
         },
         closeAllSocket: () => {
-          console.log("test_closeAllSocket");
-          sockets.map((s) => s.close());
+            console.log("test_closeAllSocket");
+            sockets.map((s) => s.close());
         },
     };
+    const toggleOverlay = (miniImage: IMiniImage) => {
+        setIsOpenOverlay(prev => !prev);
+        setMainImage(miniImage);
+    }
+    const closeImageOverlayByEscKey = (e: KeyboardEvent) => {
+        if (e.keyCode === 27) {
+            setIsOpenOverlay(false);
+        }
+    }
+    useEffect(() => {
+        const getData = async () => {
+            const response = await ChatListServices().getInstance().getAttachmentImageGroupDetail(roomId);
+            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                const result = response.data.data;
+                setMiniImageList(result);
+            }
+        }
+        getData();
+    }, [setMiniImageList, roomId])
+
+
 
     return {
         userid,
@@ -182,7 +208,12 @@ function ChatListAdapter(props: any) {
         handleScroll,
         isUpdating,
         clickFirstMessage,
-        bottom
+        bottom,
+        setChatList,
+        isOpenOverlay,
+        mainImage,
+        miniImageList,
+        toggleOverlay
     };
 }
 

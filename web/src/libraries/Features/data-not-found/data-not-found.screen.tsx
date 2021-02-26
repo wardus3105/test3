@@ -2,34 +2,32 @@ import React from 'react';
 import { ENUM_KIND_OF_NOTFOUNDICON } from '../../Enum/not-found-icon';
 import { IDataNotFound } from './data-not-found.props';
 import './data-not-found.scss';
-
-const iconnotfounddata = require('../../Icons/iconnotfounddata.svg').default;
-const iconnotfoundchat = require('../../Icons/iconnotfoundchat.svg').default;
-const iconnotfoundnoti = require('../../Icons/iconnotfoundnoti.svg').default;
-// const iconnotfoundmessage = require('../../Icons/iconnotfoundmessage.svg').default;
+import { ReactComponent as IconNotFoundData } from '../../Icons/iconnotfounddata.svg';
+import { ReactComponent as IconNotFoundChat } from '../../Icons/iconnotfoundchat.svg';
+import { ReactComponent as IconNotFoundNoti } from '../../Icons/iconnotfoundnoti.svg';
 
 function DataNotFoundScreen(props : IDataNotFound) {
 
-  const icon = () =>{
+  const getIcon = () =>{
     switch (props.icon) {
       case ENUM_KIND_OF_NOTFOUNDICON.CHAT:
-        return iconnotfoundchat;
+        return <IconNotFoundChat className="datanotfound-icon" onClick={props?.onClick}></IconNotFoundChat>;
       case ENUM_KIND_OF_NOTFOUNDICON.DATA:
-        return iconnotfounddata;
+        return <IconNotFoundData className="datanotfound-icon" onClick={props?.onClick}></IconNotFoundData>;
       case ENUM_KIND_OF_NOTFOUNDICON.NOTI:
-        return iconnotfoundnoti;
+        return <IconNotFoundNoti className="datanotfound-icon" onClick={props?.onClick}></IconNotFoundNoti>;
       case ENUM_KIND_OF_NOTFOUNDICON.MESSAGE:
-        return '/images/sayhi.png';   
+        return <img src={ '/images/sayhi.png' } alt="" className="datanotfound-icon" onClick={props?.onClick}  />;   
     }
   }
 
   return (
     <div className={"datanotfound-container " + ( props.isPosition ? "datanotfound-container--isposition" : "" )}>
       <div className="cursor-pointer">
-        <img src={ icon() } alt="" className="datanotfound-icon" onClick={props?.onClick}  />
-        <h4>
+        { getIcon() }
+        <span>
           { props.text }
-        </h4>
+        </span>
       </div>
     </div>
   );

@@ -3,9 +3,7 @@ import Joyride from 'react-joyride';
 import GuidedTourStates from './guided-tour.states';
 import './guided-tour.scss';
 
-import { ReactComponent as IconSetupWizard } from "../../libraries/Icons/setup-wizard.svg";
-import { ReactComponent as IconCelebrationRafiki } from "../../libraries/Icons/celebration-rafiki.svg";
-import { ReactComponent as IconDeleteDisabled } from "../../libraries/Icons/delete-disabled.svg";
+import { IconCelebrationRafiki, IconDeleteDisabled, IconSetupWizard } from '../../libraries/Icons/icon.screen';
 
 const eleFirstStep = (
   <div className="guidedtour-stepincenter">

@@ -1,6 +1,6 @@
 export interface IconPanelModel{
     isActive: boolean,
-    srcImg: string,
+    eleIcon: any,
     contextToolTip: string,
     onClick:any,
     className?:string,

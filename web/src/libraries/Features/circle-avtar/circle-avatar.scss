@@ -4,7 +4,7 @@
     background-position: center;
     background-size: cover;
     position: relative;
-    margin: auto;
+
     &.isOnline:after {
         content: "";
         position:absolute;

@@ -1,11 +1,7 @@
 import React from 'react';
 import { IFileChat } from './link-context-chat.props';
 import './file-context-chat.scss';
-
-const iconLink = require('../../../../../../../../../libraries/Icons/link.svg').default;
-const iconDownloadSaveUpload = require('../../../../../../../../../libraries/Icons/download-save-upload.svg').default;
-const iconShareArrowSquare = require('../../../../../../../../../libraries/Icons/share-arrow-square.svg').default;
-const iconGimFile = require('../../../../../../../../../libraries/Icons/gim-file.svg').default;
+import { IconDownloadSaveUpload, IconGimFile, IconLink, IconShareArrowSquare } from '../../../../../../../../../libraries/Icons/icon.screen';
 
 function LinkContextChatScreen(props: IFileChat) {
 
@@ -27,11 +23,17 @@ function LinkContextChatScreen(props: IFileChat) {
 
     return (
         <div className="linkchat-container">
-            <img src={props.isFile ? iconGimFile : iconLink} alt="link" className="linkchat-container-image cursor-pointer icon-svg--hover"></img>
+            {
+                props.isFile ? (
+                    <IconGimFile className="linkchat-container-image cursor-pointer icon-svg--hover"></IconGimFile>
+                ) : (
+                    <IconLink className="linkchat-container-image cursor-pointer icon-svg--hover"></IconLink>
+                )
+            }
             <div className="linkchat-maincontext">
                 <div className="linkchat-context">
                     <h5 className="width-200 text-overflow-ellipsis">
-                        <a href={props.context} target="_blank" >
+                        <a href={props.context} target="_blank" rel="noreferrer">
                             {props.context}
                         </a>
                     </h5>
@@ -40,12 +42,13 @@ function LinkContextChatScreen(props: IFileChat) {
                     </div>
                 </div>
                 <div className="linkchat-iconbutton">
-                    <img
-                        src={props.isFile ? iconDownloadSaveUpload : iconShareArrowSquare}
-                        alt="link"
-                        className="cursor-pointer"
-                        onClick={() => { redirectWeb(props.context) }}
-                    ></img>
+                {
+                    props.isFile ? (
+                        <IconDownloadSaveUpload className="cursor-pointer" onClick={ () =>{ redirectWeb(props.context)} }></IconDownloadSaveUpload>
+                    ) : (
+                        <IconShareArrowSquare className="cursor-pointer" onClick={ () =>{ redirectWeb(props.context)} }></IconShareArrowSquare>
+                    )
+                }
                 </div>
             </div>
 
