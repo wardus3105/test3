@@ -13,13 +13,15 @@ const MainPopupScreen = (props: any) =>{
       trigger={
         props.children
       }
+      offsetY={props.offsetY ? props.offsetY : 0}
+      offsetX={props.offsetX? props.offsetX : 0}
       position={['bottom left', 'bottom center' , 'bottom right']}
       closeOnDocumentClick={ true }
       closeOnEscape={ true }
       arrow={ false }
       repositionOnResize={ true }
     >
-      <div className="mainpopup-container">
+      <div className={"mainpopup-container " + (props.customStyle ? props.customStyle : '')}>
         {
           props.context(closePopup)
         }

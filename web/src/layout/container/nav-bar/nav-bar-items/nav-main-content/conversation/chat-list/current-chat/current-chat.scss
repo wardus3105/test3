@@ -12,7 +12,9 @@
   .maincontext{
     align-items: center;
     justify-content: flex-end;
-    display: flex;
+    // display: flex;
+
+    // display: flex;
     max-width: 100%;
     
     .currentchat-text{
@@ -21,8 +23,8 @@
       overflow: auto;
       margin: 2px 0 2px auto ;
       max-width: 100%;
-      width: fit-content;
-      width: -moz-fit-content;
+      // width: fit-content;
+      // width: -moz-fit-content;
       word-wrap: break-word;
      
       .chat-time{
@@ -40,7 +42,9 @@
         opacity: 0.95;
       }
     }
+
   }
+
 }
 
 .currentchat-container:hover .currentchat-icon,

@@ -18,7 +18,7 @@ const styleCustomInput = {
 }
 
 function ChatInputScreen(props: any){
-    const ref = useRef<HTMLInputElement | null>(null)
+    const ref: any = useRef<HTMLInputElement | null>(null)
 
     useOutsideClick(ref, () => {
         setVisibleEmojiPicker(false);
@@ -90,11 +90,14 @@ function ChatInputScreen(props: any){
                     setIsFocused={ setIsFocused }
                 ></CustomInputScreen>
                 
-                <div ref={ref}>
-                    <Picker onSelect={addEmoji} style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} />
-                </div>
-                
                 <div ref={ref} className="icon-emoji">
+                    <Picker 
+                        onSelect={addEmoji} 
+                        style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} 
+                        showPreview={false}
+                        showSkinTones={false}
+                        set={'facebook'}
+                    />
                     <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleEmojiPicker(true)} />
                 </div>
                 

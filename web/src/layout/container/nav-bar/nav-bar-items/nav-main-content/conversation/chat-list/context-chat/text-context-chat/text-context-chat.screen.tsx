@@ -42,36 +42,41 @@ function TextContextChatScreen(props : any){
 
     if(context){
         return (
-            <div className="textcontext-container">
-                {
-                    respondedMess && (
-                        <>
-                            {
-                                isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
-                            }
-                            <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
-                                <span className="margin-left-8">
-                                    {/* Nội dung phản hồi */}
-                                    { respondedMess.message }
-                                </span>
+            <>
+                {/* <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }> */}
+                    <div className="textcontext-container">
+                        {
+                            respondedMess && (
+                                <>
+                                    {
+                                        isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
+                                    }
+                                    <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
+                                        <span className="margin-left-8">
+                                            {/* Nội dung phản hồi */}
+                                            { respondedMess.message }
+                                        </span>
 
-                                <span className="chat-time">
-                                    {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                    { getTimePeriodFromNow(respondedMess.createdAt) }
-                                </span>
-                            </div>
-                        </>
+                                        <span className="chat-time">
+                                            {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                                            { getTimePeriodFromNow(respondedMess.createdAt) }
+                                        </span>
+                                    </div>
+                                </>
 
-                    )
-                }
-                <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
-                    { showContext() }    
-                    <span className="chat-time">
-                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                        { datetime }
-                    </span>
-                </div>
-            </div>
+                            )
+                        }
+                    </div>
+                    <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
+                            { showContext() }    
+                            <span className="chat-time">
+                                {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                                { datetime }
+                            </span>
+                        </div>
+                    <div className={"reaction-icon"}>😀1</div>
+                {/* </div> */}
+            </>
  
         )
     }
