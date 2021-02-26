@@ -1,8 +1,6 @@
 import React from 'react';
+import { IconDeleteDisabled } from '../../../../../../../../libraries/Icons/icon.screen';
 import './upload-image.scss';
-
-const iconDeleteDisabled = require('../../../../../../../../libraries/Icons/delete-disabled.svg').default;
-
 
 function UploadImageScreen(props: any) {
   return (
@@ -14,7 +12,7 @@ function UploadImageScreen(props: any) {
         className="uploadimage-icon-delete-panel flex-center cursor-pointer"
         onClick={ () =>{ props.removePathFile(props.pathFile) }}
       >
-          <img src={ iconDeleteDisabled } alt="" className="img-16"></img>
+          <IconDeleteDisabled className="img-16"></IconDeleteDisabled>
       </div>
     </div> 
   );

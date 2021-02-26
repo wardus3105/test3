@@ -5,6 +5,7 @@ import MainPopupScreen from '../../../../../../../libraries/Features/popup/main-
 import TooltipScreen from '../../../../../../../libraries/Features/tooltip/tooltip.screen';
 import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath"
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import { IconSearchLoupe } from '../../../../../../../libraries/Icons/icon.screen';
 
 const iconVolumeOff = require('../../../../../../../libraries/Icons/volume-off.svg').default;
 // const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
@@ -91,9 +92,10 @@ function PersonalConversationScreen() {
                 </div>
             </TooltipScreen>
             <TooltipScreen context="Tìm kiếm">
-                <div>
+                {/* <div>
                     <img src={ iconSearchLoupe } alt="search" onClick={ onSearch } className="cursor-pointer icon-svg--hover"></img>
-                </div>
+                </div> */}
+                <IconSearchLoupe onClick={ onSearch } className="cursor-pointer icon-svg--hover"></IconSearchLoupe>
             </TooltipScreen>
             <MainPopupScreen context={ eleDetailPopup }>
                 <div>

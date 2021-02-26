@@ -2,7 +2,7 @@
     max-width: 100%;
 
     .textcontext-respondedmess{
-        float:right;
+        margin-left: auto;
         width: fit-content;
         background: #F2F3F4;
         position: relative;
@@ -35,7 +35,6 @@
     }
     
     .currentchat-text{
-        float:right;
         position: relative;
 
         &.currentchat-center{

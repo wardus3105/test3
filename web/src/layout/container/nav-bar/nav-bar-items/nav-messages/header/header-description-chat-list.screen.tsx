@@ -6,6 +6,7 @@ import TooltipScreen from '../../../../../../libraries/Features/tooltip/tooltip.
 import HeaderDescriptionChatListAdapter from './header-description-chat-list.adapter';
 import './header-description-chat-list.scss';
 
+import { ReactComponent as IconPenEdit } from '../../../../../../libraries/Icons/pen-edit.svg';
 const iconPenEdit = require('../../../../../../libraries/Icons/pen-edit.svg').default;
 
 function HeaderDescriptionChatListScreen() {
@@ -39,7 +40,8 @@ function HeaderDescriptionChatListScreen() {
       <MainPopupScreen context={ eleDetailPopup }>
         <div>
           <TooltipScreen context="Tạo tin nhắn">
-              <img src={ iconPenEdit } className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover step4" alt=""/>
+              <IconPenEdit className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover step4"></IconPenEdit>
+              {/* <img src={ iconPenEdit } className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover step4" alt=""/> */}
           </TooltipScreen>
         </div>
       </MainPopupScreen>

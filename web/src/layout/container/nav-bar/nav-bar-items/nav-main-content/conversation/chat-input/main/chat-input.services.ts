@@ -21,7 +21,6 @@ const ChatInputServices = () => {
             },
 
             sendMessage: async (message: IChat) => {
-                console.log("-----Sended-----", message)
                 return axios({
                     method:"POST",
                     url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_MESSAGE}`,
@@ -34,6 +33,7 @@ const ChatInputServices = () => {
                 .then((res)=> res)
                 .catch((err) => console.log(err))
             },
+
             sendFile: async (formData: FormData) => {
                 return axios({
                     method:"POST",

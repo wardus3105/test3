@@ -9,6 +9,9 @@ export const URL_PATHS={
     GET_CHATLIST:"api/chat/get-messages",
     POST_CHATROOM:"api/chat-rooms",
     POST_MESSAGE:"api/chat/send-message",
+    PUT_REMOVE_MESSAGE:"api/chat/remove-message",
+    PUT_UPDATE_MESSAGE:"api/chat/update-message",
+
     POST_FILE:"api/attachment",
 
     GET_CONVERSATIONLIST_BYQUERY:"search-chat-room/1",

@@ -55,11 +55,15 @@ function ChatInputAdapter(props: any) {
             messageSend.message = message;
             messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
             if (respondedMess) {
-                messageSend = { ...messageSend, parentId: respondedMess.messageId , respondedMess:{
-                        messageId: respondedMess.messageId,
-                        type: respondedMess.type,
-                        context: respondedMess.context,
-                        userName: respondedMess.userName,
+                messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
+                        createdAt: new Date(),
+                        id:  respondedMess.messageId,
+                        message: respondedMess.context,
+                        messageStatus: "1",
+                        messageType:respondedMess.type,
+                        parentId: "",
+                        status: "0",
+                        user:{ userName:respondedMess.userName}
                     }   
                 }
             }
@@ -115,12 +119,16 @@ function ChatInputAdapter(props: any) {
                 // }
 
                 if (respondedMess) {
-                    messageSend = { ...messageSend, parentId: respondedMess.messageId , respondedMess:{
-                            messageId: respondedMess.messageId,
-                            type: respondedMess.type,
-                            context: respondedMess.context,
-                            userName: respondedMess.userName,
-                        }
+                    messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
+                        createdAt: new Date(),
+                        id:  respondedMess.messageId,
+                        message: respondedMess.context,
+                        messageStatus: "1",
+                        messageType:respondedMess.type,
+                        parentId: "",
+                        status: "0",
+                        user:{ userName:respondedMess.userName}
+                        }   
                     }
                 }
 

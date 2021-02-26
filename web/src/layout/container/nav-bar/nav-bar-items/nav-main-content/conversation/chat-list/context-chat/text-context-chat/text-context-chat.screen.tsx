@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/shape_of_message';
+import getTimePeriodFromNow from '../../../../../../../../../libraries/Functions/get-time-period-from-now';
 import './text-context-chat.scss';
 
 function TextContextChatScreen(props : any){
@@ -42,16 +43,21 @@ function TextContextChatScreen(props : any){
             <div className="textcontext-container">
                 {
                     respondedMess && (
-                        <div className="textcontext-respondedmess">
-                            <span>
-                                { respondedMess.context }
-                            </span>
+                        <>
+                            <p>Bạn đã trời lời { respondedMess.user.userName }</p>
+                            <div className="textcontext-respondedmess">
+                                <span className="margin-left-8">
+                                    {/* Nội dung phản hồi */}
+                                    { respondedMess.message }
+                                </span>
 
-                            <span className="chat-time">
-                                {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                { datetime }
-                            </span>
-                        </div>
+                                <span className="chat-time">
+                                    {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                                    { getTimePeriodFromNow(respondedMess.createdAt) }
+                                </span>
+                            </div>
+                        </>
+
                     )
                 }
                 <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>

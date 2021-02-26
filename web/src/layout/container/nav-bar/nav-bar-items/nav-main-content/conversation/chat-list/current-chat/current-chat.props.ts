@@ -5,5 +5,6 @@ export interface ICurrentChat {
     context: string,
     children: React.ReactNode,
     setRespondedMess:any,
-    messageId: string
+    messageId: string,
+    userId: string,
 }

@@ -81,6 +81,8 @@ function ChatListScreen(props: any) {
                 //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 // }
 
+                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null) ;
+
                 const eleContext = (
                     <div className="maincontext">
                         {
@@ -98,7 +100,7 @@ function ChatListScreen(props: any) {
                                     shape={ shape }
                                     time={ chat.createdAt }
                                     index={ index }
-                                    respondedMess={ chat.respondedMess }
+                                    respondedMess={ respondedMess }
                                 ></TextContextChatScreen>
                             )
                         }
@@ -112,6 +114,7 @@ function ChatListScreen(props: any) {
                             context={chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
+                            userId={ userid }
                         >
                             {eleContext}
                         </CurrentChatScreen>
@@ -131,10 +134,10 @@ function ChatListScreen(props: any) {
                     )
                 }
                 return (
-                    <>
+                    <div key={ index }>
                         { eleMainContext}
                         { eleDatetime}
-                    </>
+                    </div>
                 )
             })
         }

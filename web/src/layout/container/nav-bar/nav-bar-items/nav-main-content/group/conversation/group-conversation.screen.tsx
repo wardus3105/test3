@@ -2,11 +2,15 @@ import React from 'react';
 import DetailPopupScreen from '../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import MainPopupScreen from '../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
 import TooltipScreen from '../../../../../../../libraries/Features/tooltip/tooltip.screen';
+import { IconSearchLoupe } from '../../../../../../../libraries/Icons/icon.screen';
 
+// import { ReactComponent as IconSearchLoupe } from '../../../../../../../libraries/Icons/search-loupe.svg';
+import { ReactComponent as IconVolumeOff } from '../../../../../../../libraries/Icons/volume-off.svg';
+import { ReactComponent as IconTrashDeleteBin } from '../../../../../../../libraries/Icons/search-loupe.svg';
+// import { ReactComponent as IconSearchLoupe } from '../../../../../../../libraries/Icons/search-loupe.svg';
+// import { ReactComponent as IconSearchLoupe } from '../../../../../../../libraries/Icons/search-loupe.svg';
 
 const iconVolumeOff = require('../../../../../../../libraries/Icons/volume-off.svg').default;
-// const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
-const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
 const iconTrashDeleteBin = require('../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 const iconSignoutRight = require('../../../../../../../libraries/Icons/signout-right.svg').default;
 const iconInformationInforLine = require('../../../../../../../libraries/Icons/information-infor-line.svg').default;
@@ -16,7 +20,7 @@ function GroupConversationScreen() {
     const listEles = [
         {
             onClick: null,
-            icon: iconSearchLoupe,
+            icon: <IconSearchLoupe></IconSearchLoupe>,
             text: "Tìm kiếm"
         },
         {
@@ -49,7 +53,8 @@ function GroupConversationScreen() {
         <>
             <TooltipScreen context="Tìm kiếm">
                 <div>
-                    <img src={ iconSearchLoupe } alt="search" onClick={ onSearch } className="cursor-pointer"></img>
+                    <IconSearchLoupe onClick={ onSearch } className="cursor-pointer"></IconSearchLoupe>
+                    {/* <img src={ iconSearchLoupe } alt="search" onClick={ onSearch } className="cursor-pointer"></img> */}
                 </div>
             </TooltipScreen>
             <MainPopupScreen context={ eleDetailPopup }>
@@ -64,6 +69,8 @@ function GroupConversationScreen() {
                     </TooltipScreen>
                 </div>
             </MainPopupScreen>
+
+            <IconSearchLoupe></IconSearchLoupe>
         </>
     );
 

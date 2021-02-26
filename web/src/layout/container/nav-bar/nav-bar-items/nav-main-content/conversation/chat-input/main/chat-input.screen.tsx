@@ -5,13 +5,9 @@ import './chat-input.scss';
 import ChatInputAdapter from './chat-input.adapter';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
-import {ReactComponent as IconSmileCircle} from '../../../../../../../../libraries/Icons/smile-circle.svg'
 import useOutsideClick from '../../../../../../../../libraries/Hooks/useOutsideClick';
+import { IconDeleteDisabled, IconGimFile, IconSendMessage, IconSmileCircle } from '../../../../../../../../libraries/Icons/icon.screen';
 
-// const iconSmileCircle = require('../../../../../../../../libraries/Icons/smile-circle.svg').default;
-const iconGimFile = require('../../../../../../../../libraries/Icons/gim-file.svg').default;
-const iconSendMessage = require('../../../../../../../../libraries/Icons/send-message.svg').default;
-const iconDeleteDisabled = require('../../../../../../../../libraries/Icons/delete-disabled.svg').default;
 
 const styleCustomInput = {
     // backgroundImage:`url('${ iconSmileCircle }')`,
@@ -57,7 +53,8 @@ function ChatInputScreen(props: any){
                                 { showContextRespondedMess() }
                             </p>
                         </div>
-                        <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img>
+                        <IconDeleteDisabled onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></IconDeleteDisabled>
+                        {/* <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img> */}
                     </div>
                 )
             }
@@ -71,7 +68,7 @@ function ChatInputScreen(props: any){
                 )
             }
             <div className="chatinput-main">
-                <img src={ iconGimFile } alt="gim" onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover"></img>
+                <IconGimFile onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover" ></IconGimFile>
 
                 <CustomInputScreen 
                     setValue={ setMessage } 
@@ -93,7 +90,7 @@ function ChatInputScreen(props: any){
                     <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleEmojiPicker(true)} />
                 </div>
                 
-                <img src={ iconSendMessage } alt="send data" onClick={ sendChat } className="cursor-pointer icon-svg--hover"></img>
+                <IconSendMessage onClick={ sendChat } className="cursor-pointer icon-svg--hover" ></IconSendMessage>
             </div>
         </div>
     )
