@@ -1,3 +1,4 @@
+@import "../../../../../../../../libraries/Styles/utils/variables.scss";
 
 .guestchat-container{
     display: flex;
@@ -19,7 +20,8 @@
             line-height: 18px;
             
             color: #757575;
-            margin-left: 28px;
+            // margin-left: 28px;
+            float: right;
         }
     }
 
@@ -42,15 +44,76 @@
     mix-blend-mode: normal;
     opacity: 0.95;
     overflow: auto;
-    width: 100%;
+    width: fit-content;
 }
 
 .guestchat-maincontext:hover .guestchat-icon,
 .guestchat-icon:hover
 {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
+//    .reactions .reactions-counter {
+//     display: flex;
+//     flex-wrap: wrap;
+//    }
+.popup-content  {
+    .emoji-mart {
+        z-index: 999;
+        border: 0 !important;
+        width: auto !important;
+        background-color: $neutral-midnight !important;
+        
+        button::before {
+            background-color: $neutral-midnight !important;
+        }
+    
+        button:hover {
+            background-color: $neutral-midnight;
+        }
+
+        li {
+            width: 52px;
+        }
+
+        span {
+            vertical-align: top !important;
+        }
+
+        span:hover {
+            width: 44px !important;
+            height: 44px !important;
+            top: -6px;
+            right: 4px;
+        }
+      
+        button:focus {
+            background: none;
+        }
+    }
+    .emoji-mart-anchors {
+        display: none;
+    }
+    .emoji-mart-search {
+        display: none;
+    }
+    .emoji-mart-bar {
+        display: none;
+    }
+    .emoji-mart-scroll {
+        overflow: hidden !important;
+        height: 52px !important;
+        background-color: $neutral-midnight !important;
+        border-radius: $border-radius-base;
+    }
+    .emoji-mart-category-label {
+        display: none;
+    }
+}
+
+.background-neutral-midnight {
+    background-color: $neutral-midnight;
+}
 
 /* ------------------------------------------------ RESPONSIVE ----------------------- */
 /* Extra small devices (phones, 600px and down) */

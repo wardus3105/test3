@@ -5,7 +5,7 @@ import CurrentChatServices from "./current-chat.services";
 
 function CurrentChatAdapter(props: ICurrentChat) {
 
-    const { messageId , context , type  , setRespondedMess , roomId , userId , setChatList } = props;
+    const { messageId , context , type  , setRespondedMess , roomId , userId , setChatList , setEditedMess } = props;
 
     const setResponMess = () => {
         setRespondedMess({
@@ -16,7 +16,7 @@ function CurrentChatAdapter(props: ICurrentChat) {
     }
 
     const copyText = () => {
-        props.type === ENUM_KIND_OF_MESSAGE.TEXT && navigator.clipboard.writeText(props.context)
+        type === ENUM_KIND_OF_MESSAGE.TEXT && navigator.clipboard.writeText(props.context)
     }
 
     const removeMessage = async () => {
@@ -42,10 +42,23 @@ function CurrentChatAdapter(props: ICurrentChat) {
         }
     }
 
+    const editMessage = () =>{
+        if(type === ENUM_KIND_OF_MESSAGE.TEXT){
+            setRespondedMess()
+            
+            setEditedMess({
+                messageId,
+                context,
+                type
+            })
+        }
+    }
+
     return {
         setResponMess,
         copyText,
-        removeMessage
+        removeMessage,
+        editMessage
     }
 }
 

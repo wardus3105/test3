@@ -7,5 +7,6 @@ export interface ICurrentChat {
     setRespondedMess:any,
     messageId: string,
     userId: string,
-    setChatList: any
+    setChatList: any,
+    setEditedMess: any
 }

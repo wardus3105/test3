@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CircleAvatarScreen from '../../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
 import MainPopupScreen from '../../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
 import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import './guest-chat.scss';
 import GuestChatAdapter from './guest-chat.adapter';
 import { IGuestChat } from './guest-chat.props';
+import { ReactComponent as IconSmileCircle } from '../../../../../../../../libraries/Icons/smile-circle.svg'
+import { Picker } from 'emoji-mart'
 import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
+import useOutsideClick from '../../../../../../../../libraries/Hooks/useOutsideClick';
 
 
 function GuestChatScreen(props: IGuestChat) {
+    const ref: any = useRef<HTMLInputElement | null>(null)
+
+    const {
+        isVisibleReaction, setVisibleReaction
+    } = GuestChatAdapter(props)
+
+    useOutsideClick(ref, () => {
+        setVisibleReaction(false);
+    });
 
     const { user, children } = props;
 
     const {
         redirectToDetailUser,
         setResponMess,
-        copyText
+        copyText,
+        addReaction
     } = GuestChatAdapter(props);
+
 
     const listEles = [
         {
@@ -36,8 +50,74 @@ function GuestChatScreen(props: IGuestChat) {
         onClosePopup={onClosePopup}
     ></DetailPopupScreen>);
 
+    const customReactionEmojis: any = [
+        {
+            name: '+1',
+            short_names: ['+1'],
+            text: '',
+            emoticons: [],
+            keywords: ['thumbsup'],
+        },
+        {
+            name: 'thumbsdown',
+            short_names: ['thumbsdown'],
+            text: '',
+            emoticons: [],
+            keywords: ['thumbsdown'],
+        },
+        {
+            name: 'grinning',
+            short_names: ['grinning'],
+            text: '',
+            emoticons: [],
+            keywords: ['grinning'],
+        },
+        {
+            name: 'heart',
+            short_names: ['heart'],
+            text: '',
+            emoticons: [],
+            keywords: ['laughing', 'satisfied'],
+        },
+        {
+            name: 'sweat_smile',
+            short_names: ['sweat_smile'],
+            text: '',
+            emoticons: [],
+            keywords: ['sweat_smile'],
+        },
+        {
+            name: 'cry',
+            short_names: ['cry'],
+            text: '',
+            emoticons: [],
+            keywords: ['cry'],
+        },
+        {
+            name: 'rage',
+            short_names: ['rage'],
+            text: '',
+            emoticons: [],
+            keywords: ['rage'],
+        },
+    ]
+
+    const reactionDetailPopup = (onClosePopup: any) => (
+        <Picker
+            onSelect={addReaction}
+            // style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} 
+            showPreview={false}
+            showSkinTones={false}
+            set={'facebook'}
+            include={['custom']}
+            custom={customReactionEmojis}
+            emojiSize={32}
+            emojiTooltip={true}
+        />
+    );
+
     return (
-        <div className="guestchat-container margin-4">
+        <div ref={ref} className="guestchat-container margin-4">
             <CircleAvatarScreen
                 src={user.avatar}
                 class="guestchat-left img-32"
@@ -51,6 +131,18 @@ function GuestChatScreen(props: IGuestChat) {
                 <div className="guestchat-maincontext">
 
                     {children}
+
+                    <MainPopupScreen
+
+                        context={reactionDetailPopup}
+                        offsetY={-100} offsetX={-20}
+                        customStyle={'background-neutral-midnight padding-4'}
+                    >
+                        <div className="guestchat-icon cursor-pointer flex-center img-24"
+                            style={{ opacity: isVisibleReaction ? 1 : 0 }}>
+                            <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleReaction(true)} />
+                        </div>
+                    </MainPopupScreen>
 
                     <MainPopupScreen context={eleDetailPopup}>
                         <div className="guestchat-icon cursor-pointer flex-center img-24">

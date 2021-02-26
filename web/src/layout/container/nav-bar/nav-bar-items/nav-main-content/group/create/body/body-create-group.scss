@@ -1,8 +1,8 @@
-.bodypanel-container.bodycreategroup {
-    height: calc(100% - 150px) !important;
-}
+// .bodypanel-container.bodycreategroup {
+//     height: calc(100% - 150px) !important;
+// }
 .bodycreategroup-container{
-    height: calc(100% - 150px);
+    height: calc(100% - 150px) !important;
 
     .bodycreategroup-footer{
         position: absolute;
@@ -38,7 +38,7 @@
 .bodycreategroup-main{
     position: relative;
     background-color: var(--color-background);
-    width: 100%;
+    width: 600px;
     height: 100%;
     box-shadow: 0px 1px 5px rgba(194, 198, 201, 0.2);
     border-top-left-radius: 8px;

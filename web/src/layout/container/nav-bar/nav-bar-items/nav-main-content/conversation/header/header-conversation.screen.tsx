@@ -45,6 +45,7 @@ function HeaderConversationScreen(props: any){
                 hasSearch && (
                     <div className="headerconversation-search flex-center">
                         <CustomInputScreen
+                        
                             style={styleCustomInput}
                             class=""
                             placeHolder="Tìm kiếm cuộc trò chuyện"

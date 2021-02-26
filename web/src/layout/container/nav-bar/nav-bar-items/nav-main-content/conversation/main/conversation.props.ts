@@ -1,9 +1,15 @@
 
-export interface IResponseMess {
+export interface IRespondedMess {
     messageId: string;
     type: number,
     context: string,   
     userName: string 
+}
+
+export interface IEditedMess {
+    messageId: string;
+    type: number,
+    context: string,   
 }
 
 export interface IConversation{

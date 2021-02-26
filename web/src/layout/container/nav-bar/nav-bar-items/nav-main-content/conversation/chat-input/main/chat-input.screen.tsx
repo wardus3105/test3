@@ -18,7 +18,7 @@ const styleCustomInput = {
 }
 
 function ChatInputScreen(props: any){
-    const ref = useRef<HTMLInputElement | null>(null)
+    const ref: any = useRef<HTMLInputElement | null>(null)
 
     useOutsideClick(ref, () => {
         setVisibleEmojiPicker(false);
@@ -36,7 +36,9 @@ function ChatInputScreen(props: any){
         message , setMessage,
         sendChat,
         setIsFocused,
-        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
+        addEmoji,
+        isVisibleEmojiPicker, setVisibleEmojiPicker,
+        editedMess , setEditedMess
     } = ChatInputAdapter(props)
     
     return (
@@ -68,7 +70,13 @@ function ChatInputScreen(props: any){
                 )
             }
             <div className="chatinput-main">
-                <IconGimFile onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover" ></IconGimFile>
+                {
+                    editedMess ? (
+                        <IconDeleteDisabled onClick={ () => { setEditedMess() } } className="cursor-pointer icon-svg--hover" ></IconDeleteDisabled>
+                    ) : (
+                        <IconGimFile onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover" ></IconGimFile>
+                    )
+                }
 
                 <CustomInputScreen 
                     setValue={ setMessage } 
@@ -82,11 +90,14 @@ function ChatInputScreen(props: any){
                     setIsFocused={ setIsFocused }
                 ></CustomInputScreen>
                 
-                <div ref={ref}>
-                    <Picker onSelect={addEmoji} style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} />
-                </div>
-                
                 <div ref={ref} className="icon-emoji">
+                    <Picker 
+                        onSelect={addEmoji} 
+                        style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} 
+                        showPreview={false}
+                        showSkinTones={false}
+                        set={'facebook'}
+                    />
                     <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleEmojiPicker(true)} />
                 </div>
                 
