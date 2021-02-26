@@ -33,7 +33,8 @@ function ConversationAdapter() {
             
             const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setListMessage(response.data.data)
+                console.log(response.data.data)
+                // setListMessage(response.data.data)
             }
 
             const conversation: IConversation = {

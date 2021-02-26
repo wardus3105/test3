@@ -8,7 +8,6 @@ import InfiniteScrollCompanyMemberListScreen from '../../../../nav-company-membe
 import BodyCreateGroupAdapter from './body-create-group.adapter';
 import './body-create-group.scss';
 
-
 const iconSearchLoupe = require('../../../../../../../../libraries/Icons/search-loupe.svg').default;
 
 const styleCustomInput = {

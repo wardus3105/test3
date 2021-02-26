@@ -5,7 +5,7 @@ import ToggleSwitchScreen from '../../../../../../libraries/Features/toggle-swit
 import TooltipScreen from '../../../../../../libraries/Features/tooltip/tooltip.screen';
 import './header-notification-list.scss';
 
-const iconMoreVertical = require('../../../../../../libraries/Icons/more-vertical.svg').default;
+// const iconMoreVertical = require('../../../../../../libraries/Icons/more-vertical.svg').default;
 const iconTrashDeleteBin = require('../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 const iconSettings = require('../../../../../../libraries/Icons/settings.svg').default;
 const iconCheck = require('../../../../../../libraries/Icons/check.svg').default;

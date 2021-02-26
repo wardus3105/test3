@@ -31,7 +31,6 @@ function InfiniteScrollCompanyMemberListAdapter(props: IInfiniteScrollCompanyMem
                 if(setCompanyMemList){
                     setCompanyMemList((prev: any) => [...prev, ...response.data.data]);
                 }
-
             }
 
             setIsUpdating(false);

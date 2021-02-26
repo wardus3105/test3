@@ -31,7 +31,7 @@ function FileContextChatScreen(props : IFileChat){
             <div className="filechat-maincontext">
                 <div className="filechat-context">
                     <h5 className="width-200 text-overflow-ellipsis">
-                        <a href={ props.context } target="_blank" >
+                        <a href={ props.context } target="_blank" rel="noreferrer">
                             { props.context }
                         </a>
                     </h5>

@@ -15,7 +15,6 @@ import CustomBadgeScreen from '../../../../../../../libraries/Features/custom-ba
 import MainPopupScreen from '../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
 import DetailPopupScreen from '../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import { ENUM_KIND_OF_CONVERSATIONDETAIL } from '../../../../../../../libraries/Enum/conversation-detail';
-import CustomButtonScreen from '../../../../../../../libraries/Features/custom-button/custom-button.screen';
 import ModalScreen from '../../../../../../../libraries/Features/modal/modal.screen';
 import IconCirclePanel from '../../../../../../../libraries/Features/icon-circle-panel/icon-circle-panel.screen';
 import getApiUrl from '../../../../../../../libraries/Functions/get-api-url';

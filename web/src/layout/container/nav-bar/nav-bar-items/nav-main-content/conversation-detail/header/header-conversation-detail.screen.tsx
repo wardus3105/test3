@@ -26,11 +26,13 @@ function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
                 </div>
             </div>
             <div className="headerconversationdetail-main container">
-                <div className="headerconversationdetail-avatar">
+                <div className="headerconversationdetail-avatar flex-center">
                     <CircleAvatarScreen
                         src={ props.srcImage }
                         isOnline={false}
-                        class={"headerconversationdetail-avatar-image img-40"}
+                        class={"headerconversationdetail-avatar-image"}
+                        height="100px"
+                        width="100px"
                     ></CircleAvatarScreen>
                 </div>
                 <div className="headerconversationdetail-option">

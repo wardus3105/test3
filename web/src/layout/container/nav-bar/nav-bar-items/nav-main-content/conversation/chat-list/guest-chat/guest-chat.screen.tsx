@@ -6,7 +6,7 @@ import './guest-chat.scss';
 import GuestChatAdapter from './guest-chat.adapter';
 import { IGuestChat } from './guest-chat.props';
 
-const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
+// const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
 const iconShareArrowLeftLine = require('../../../../../../../../libraries/Icons/share-arrow-left-line.svg').default;
 const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides-square.svg').default;
 const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;

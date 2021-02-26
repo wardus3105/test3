@@ -43,7 +43,14 @@ function TextContextChatScreen(props : any){
                 {
                     respondedMess && (
                         <div className="textcontext-respondedmess">
-                            { respondedMess.context }
+                            <span>
+                                { respondedMess.context }
+                            </span>
+
+                            <span className="chat-time">
+                                {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                                { datetime }
+                            </span>
                         </div>
                     )
                 }

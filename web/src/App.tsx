@@ -11,7 +11,6 @@ import BodyScreen from "./layout/container/body.screen";
 import "font-awesome/css/font-awesome.min.css";
 
 import ReconnectingWebSocket from "reconnecting-websocket";
-import VideoCallsScreen from "./features/video-calls/video-calls.screen";
 
 
 var sockets: ReconnectingWebSocket[] = [];

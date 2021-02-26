@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../libraries/Enum/status-code";
 import useDebounce from "../../../../../../libraries/Hooks/useDebounce";
@@ -82,29 +82,27 @@ function CompanyMemberListAdapter(){
         },
       };
 
-    const createChatRoom = async (userId: any)  => {
-        // eslint-disable-next-line no-restricted-globals
-        let pathList = location.pathname.split("/");
-        const id = pathList[2];
+    // const createChatRoom = async (userId: any)  => {
+    //     // eslint-disable-next-line no-restricted-globals
+    //     let pathList = location.pathname.split("/");
+    //     const id = pathList[2];
     
-        let chatRoomMemberList = [
-            {userId: userId},
-            {userId: id}
-        ];
+    //     let chatRoomMemberList = [
+    //         {userId: userId},
+    //         {userId: id}
+    //     ];
         
-        let chatRoom = {
-            avatar: "url",
-            title: "Chat riêng",
-            slogan: "Room này tạo ra để 2 người chat",
-            type: 0,
-            createdBy: userId,
-            chatRoomMemberList: chatRoomMemberList
-        }
+    //     let chatRoom = {
+    //         avatar: "url",
+    //         title: "Chat riêng",
+    //         slogan: "Room này tạo ra để 2 người chat",
+    //         type: 0,
+    //         createdBy: userId,
+    //         chatRoomMemberList: chatRoomMemberList
+    //     }
     
-        console.log(chatRoom);
-    
-        await CompanyMemberListServices().createChatRoom(chatRoom);
-    }
+    //     await CompanyMemberListServices().createChatRoom(chatRoom);
+    // }
     
     const {
         query , setQuery,
@@ -151,7 +149,7 @@ function CompanyMemberListAdapter(){
         
     const redirectToChatDetail = (id: string) => {
         let kind = "p";
-        const userId: string = localStorage.getItem('userId') || "";
+        // const userId: string = localStorage.getItem('userId') || "";
         // pushStreamService.subChat(userId);
         // createChatRoom(userId);
         history.push(`/${kind}/${id}`);

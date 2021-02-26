@@ -15,7 +15,7 @@ import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess , respondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess } = props;
 
     const {
         userid,
