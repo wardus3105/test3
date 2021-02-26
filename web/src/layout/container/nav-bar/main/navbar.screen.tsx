@@ -12,21 +12,21 @@ function NavbarScreen(props: any) {
     <div className="navbar-container step2">
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.MESSAGES } 
-        eleIcon={ IconChatMessage2LineWhite } 
+        eleIcon={ <IconChatMessage2LineWhite></IconChatMessage2LineWhite> } 
         contextToolTip={"Trò chuyện"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.MESSAGES)} } 
         hasNotification={ true }
       ></IconPanelScreen>
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.COMPANYMEMBER } 
-        eleIcon={ IconUsersGroup1 } 
+        eleIcon={ <IconUsersGroup1></IconUsersGroup1> } 
         contextToolTip={"Thành viên"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.COMPANYMEMBER)} }
         hasNotification={ false }
       ></IconPanelScreen>
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.NOTI } 
-        eleIcon={ IconBellNotificationOnWhite } 
+        eleIcon={ <IconBellNotificationOnWhite></IconBellNotificationOnWhite> } 
         contextToolTip={"Thông báo"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.NOTI)} }
         hasNotification={ false }
@@ -34,7 +34,7 @@ function NavbarScreen(props: any) {
       <div className="navbar-iconpanel-last">
         <IconPanelScreen 
           isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.QUESTIONS } 
-          eleIcon={ IconQuestionCircleWhite } 
+          eleIcon={ <IconQuestionCircleWhite></IconQuestionCircleWhite> } 
           contextToolTip={"Giải đáp"} 
           onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.QUESTIONS)} }
           hasNotification={ false }

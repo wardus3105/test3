@@ -17,7 +17,6 @@ function IconPanelScreen(props : IconPanelModel) {
       >
         <div className="flex-center navbar-iconpanel-icon">
           { props.eleIcon }
-          {/* <img src={ props.srcImg } alt="" className=""></img> */}
         </div>
       </div>
     </TooltipScreen>

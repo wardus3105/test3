@@ -6,7 +6,7 @@ const iconDeleteDisabled = require('../../Icons/delete-disabled.svg').default;
 
 function CircleAvatarScreen(props : ICircleAvatar) {
 
-  let { src , isOnline } = props;
+  let { src , isOnline , notiIcon , onRemove , canRomove , onClick } = props;
 
   if(!src){
     src = "https://cdn.dribbble.com/users/2199928/screenshots/11532918/shot-cropped-1590177932366.png?compress=1&resize=400x300";
@@ -25,14 +25,14 @@ function CircleAvatarScreen(props : ICircleAvatar) {
       <div 
         className={ "circleavatar-container " + props.class + (isOnline ? " isOnline" : "") } 
         style={ styleInline }
-        onClick={ props.onClick && props.onClick }
+        onClick={ onClick && onClick }
       >
         { 
-          props.canRomove && <div className="circleavatar-remove flex-center cursor-pointer" onClick={ props.onRemove }>
+          canRomove && <div className="circleavatar-remove flex-center cursor-pointer" onClick={ onRemove }>
                                 <img src={ iconDeleteDisabled } alt="" />
                               </div>  
         }
-        { props.notiIcon && <img className="circleavatar-online" src={ props.notiIcon } alt="" /> }
+        { notiIcon && <img className="circleavatar-online" src={ notiIcon } alt="" /> }
       </div> 
     </>
   );

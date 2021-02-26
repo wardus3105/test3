@@ -16,6 +16,31 @@ import { ReactComponent as IconBellNotificationOn } from "./bell-notification-on
 import { ReactComponent as IconSmileCircle } from "./smile-circle.svg";
 import { ReactComponent as IconGimFile } from "./gim-file.svg";
 import { ReactComponent as IconSendMessage } from "./send-message.svg";
+import { ReactComponent as IconLink } from "./link.svg";
+import { ReactComponent as IconDownloadSaveUpload } from "./download-save-upload.svg";
+import { ReactComponent as IconShareArrowSquare } from "./share-arrow-square.svg";
+import { ReactComponent as IconUserAdd } from "./users-add.svg";
+import { ReactComponent as IconUsersOut } from "./users-out.svg";
+import { ReactComponent as IconVolumeOff } from "./volume-off.svg";
+import { ReactComponent as IconSignoutRight } from "./signout-right.svg";
+import { ReactComponent as IconInformationInforLine } from "./information-infor-line.svg";
+import { ReactComponent as IconCameraAddWhite } from "./camera-add-white.svg";
+import { ReactComponent as IconCameraAdd } from "./camera-add.svg";
+import { ReactComponent as IconBellNotificationOff } from "./bell-notification-off.svg";
+import { ReactComponent as IconUserLineAdd } from "./user-line-add.svg";
+import { ReactComponent as IconUserLine } from "./user-line.svg";
+import { ReactComponent as IconChatMessage2Line } from "./chat-message-2-line.svg";
+import { ReactComponent as IconEyesShowVisible } from "./eyes-show-visible.svg";
+import { ReactComponent as IconVideoCircleLine } from "./video-circle-line.svg";
+import { ReactComponent as IconPenEdit } from "./pen-edit.svg";
+import { ReactComponent as IconNotiTag } from "./noti-tag.svg";
+import { ReactComponent as IconNotiSignout } from "./noti-signout.svg";
+import { ReactComponent as IconNotiLike } from "./noti-like.svg";
+import { ReactComponent as IconNotiReply } from "./noti-reply.svg";
+import { ReactComponent as IconGridLayout } from "./grid-layout.svg";
+import { ReactComponent as IconLogoColorFull } from './logo-color-full.svg';
+import { ReactComponent as IconUserProfileSquare } from './user-profile-square.svg';
+import { ReactComponent as IconQuestionCircle } from './question-circle.svg';
 
 export {
     IconSearchLoupe,
@@ -36,4 +61,29 @@ export {
     IconSmileCircle,
     IconGimFile,
     IconSendMessage,
+    IconLink,
+    IconDownloadSaveUpload,
+    IconShareArrowSquare,
+    IconUserAdd,
+    IconUsersOut,
+    IconVolumeOff,
+    IconSignoutRight,
+    IconInformationInforLine,
+    IconCameraAddWhite,
+    IconCameraAdd,
+    IconBellNotificationOff,
+    IconUserLineAdd,
+    IconUserLine,
+    IconChatMessage2Line,
+    IconEyesShowVisible,
+    IconVideoCircleLine,
+    IconPenEdit,
+    IconNotiTag,
+    IconNotiSignout,
+    IconNotiLike,
+    IconNotiReply,
+    IconGridLayout,
+    IconLogoColorFull,
+    IconUserProfileSquare,
+    IconQuestionCircle,
 }

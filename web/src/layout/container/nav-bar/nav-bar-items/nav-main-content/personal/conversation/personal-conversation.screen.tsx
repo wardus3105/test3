@@ -5,15 +5,7 @@ import MainPopupScreen from '../../../../../../../libraries/Features/popup/main-
 import TooltipScreen from '../../../../../../../libraries/Features/tooltip/tooltip.screen';
 import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath"
 import ReconnectingWebSocket from 'reconnecting-websocket';
-import { IconSearchLoupe } from '../../../../../../../libraries/Icons/icon.screen';
-
-const iconVolumeOff = require('../../../../../../../libraries/Icons/volume-off.svg').default;
-// const iconMoreVertical = require('../../../../../../../libraries/Icons/more-vertical.svg').default;
-const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
-const iconTrashDeleteBin = require('../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
-const iconVideoCircleLine = require('../../../../../../../libraries/Icons/video-circle-line.svg').default;
-
-
+import { IconSearchLoupe , IconVolumeOff , IconTrashDeleteBin , IconVideoCircleLine } from '../../../../../../../libraries/Icons/icon.screen';
 
 var sockets: ReconnectingWebSocket[] = [];
 var socket: ReconnectingWebSocket;
@@ -64,17 +56,17 @@ function PersonalConversationScreen() {
     const listEles = [
         {
             onClick: null,
-            icon: iconSearchLoupe,
+            icon: <IconSearchLoupe></IconSearchLoupe>,
             text: "Tìm kiếm"
         },
         {
             onClick: null,
-            icon: iconVolumeOff,
+            icon: <IconVolumeOff></IconVolumeOff>,
             text: "Tắt thông báo"
         },
         {
             onClick: null,
-            icon: iconTrashDeleteBin,
+            icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
             text: "Xóa chat"
         }
     ];
@@ -87,14 +79,11 @@ function PersonalConversationScreen() {
     const eleOptionHeader = (onSearch: any) => (
         <>
             <TooltipScreen position={ ['bottom center'] } context="Gọi video">
-                <div onClick={()=>clickCallVideo()}>
-                    <img src={ iconVideoCircleLine } alt="camera" className="cursor-pointer icon-svg--hover"></img>
+                <div onClick={()=>clickCallVideo()} className="cursor-pointer">
+                    <IconVideoCircleLine className="icon-svg--hover"></IconVideoCircleLine>
                 </div>
             </TooltipScreen>
             <TooltipScreen context="Tìm kiếm">
-                {/* <div>
-                    <img src={ iconSearchLoupe } alt="search" onClick={ onSearch } className="cursor-pointer icon-svg--hover"></img>
-                </div> */}
                 <IconSearchLoupe onClick={ onSearch } className="cursor-pointer icon-svg--hover"></IconSearchLoupe>
             </TooltipScreen>
             <MainPopupScreen context={ eleDetailPopup }>
@@ -103,9 +92,6 @@ function PersonalConversationScreen() {
                         <div className="img-24 flex-center cursor-pointer icon-svg--hover">
                             <div className="vertical3dots " ></div>
                         </div>
-                        {/* <div>
-                            <img src={ iconMoreVertical } alt="3 dots" className="cursor-pointer icon-svg--hover"></img>
-                        </div> */}
                     </TooltipScreen>
                 </div>
             </MainPopupScreen>
