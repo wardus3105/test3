@@ -10,8 +10,7 @@ import CreatePersonalAdapter from "./create-personal.adapter";
 
 import "./create-personal.scss";
 
-const iconSearchLoupe = require("../../../../../../../libraries/Icons/search-loupe.svg")
-  .default;
+const iconSearchLoupe = require("../../../../../../../libraries/Icons/search-loupe.svg").default;
 
 const styleCustomInput = {
   backgroundImage: `url('${iconSearchLoupe}')`,

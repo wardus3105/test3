@@ -209,6 +209,7 @@ function ChatListAdapter(props: any) {
         isUpdating,
         clickFirstMessage,
         bottom,
+        setChatList,
         isOpenOverlay,
         mainImage,
         miniImageList,

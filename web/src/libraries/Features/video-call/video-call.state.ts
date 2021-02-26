@@ -1,5 +1,5 @@
 import {useState} from "react";
-import jitsiState from "./video-call.state"
+
 function VideoCallStates() {
     // const [roomName, setRoomName] = useState("");
     // const [width, setWidth] = useState("");

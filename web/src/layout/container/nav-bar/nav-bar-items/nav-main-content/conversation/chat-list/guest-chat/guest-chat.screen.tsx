@@ -5,11 +5,8 @@ import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/
 import './guest-chat.scss';
 import GuestChatAdapter from './guest-chat.adapter';
 import { IGuestChat } from './guest-chat.props';
+import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
 
-const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
-const iconShareArrowLeftLine = require('../../../../../../../../libraries/Icons/share-arrow-left-line.svg').default;
-const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides-square.svg').default;
-const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 
 function GuestChatScreen(props : IGuestChat){
 
@@ -24,17 +21,17 @@ function GuestChatScreen(props : IGuestChat){
     const listEles = [
         {
             onClick: setResponMess,
-            icon: iconShareArrowLeftLine,
+            icon: <IconShareArrowLeftLine></IconShareArrowLeftLine>,
             text: "Trả lời"
         },
         {
             onClick: copyText,
-            icon: iconSlidesSquare,
+            icon: <IconSlidesSquare></IconSlidesSquare>,
             text: "Sao chép"
         },
         {
             onClick: null,
-            icon: iconTrashDeleteBin,
+            icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
             text: "Xóa"
         },
     ];

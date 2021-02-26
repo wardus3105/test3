@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { ICustomInput } from './custom-input.props';
-import CustomInputStates from './custom-input.states';
 
 function CustomInputAdapter(props : ICustomInput) {
     const inputRef = useRef<any>(null);

@@ -20,12 +20,14 @@ function ConversationAdapter() {
         isGroup, setIsGroup,
         listMessage, setListMessage,
         hasUploadImages, setHasUploadImages,
-        respondedMess, setRespondedMess
+        respondedMess, setRespondedMess,
+        editedMess, setEditedMess
     } = ConversationStates()
 
     useEffect(() => {
         !hasSearch && setQuery("");
     },[hasSearch , setQuery])
+
 
     useEffect(() => {
         const getData = async () => {
@@ -73,7 +75,8 @@ function ConversationAdapter() {
         hasUploadImages, setHasUploadImages,
         redirectToDetail,
         respondedMess, setRespondedMess,
-        roomId
+        roomId,
+        editedMess, setEditedMess
     }
 }
 

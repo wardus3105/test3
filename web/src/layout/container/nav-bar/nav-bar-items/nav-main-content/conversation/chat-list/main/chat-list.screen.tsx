@@ -17,7 +17,7 @@ import ConversationDetailScreen from '../../../conversation-detail/main/conversa
 import ImageOverlayScreen from '../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess , setEditedMess } = props;
 
     const {
         userid,
@@ -27,11 +27,11 @@ function ChatListScreen(props: any) {
         handleScroll,
         clickFirstMessage,
         bottom,
+        setChatList,
         isOpenOverlay,
         toggleOverlay,
         mainImage,
         miniImageList
-
     } = ChatListAdapter({ chats, count, page, setPage, isUpdating, roomId, setRespondedMess })
 
 
@@ -88,6 +88,9 @@ function ChatListScreen(props: any) {
                 // if(!haveSameDay){
                 //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 // }
+
+                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null) ;
+
                 const eleContext = (
                     <div className="maincontext">
                         {
@@ -100,18 +103,18 @@ function ChatListScreen(props: any) {
                                     listImage={miniImageList}
                                 ></ImageContextChatScreen>
                             ) : (
-                                    <TextContextChatScreen
-                                        isCurrent={isCurrent}
-                                        context={chat.message}
-                                        datetime={getTimePeriodFromNow(chat.createdAt)}
-                                        shape={shape}
-                                        time={chat.createdAt}
-                                        index={index}
-                                    ></TextContextChatScreen>
-                                )
+                                <TextContextChatScreen
+                                    isCurrent={ isCurrent }
+                                    context={ chat.message }
+                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
+                                    shape={ shape }
+                                    time={ chat.createdAt }
+                                    index={ index }
+                                    respondedMess={ respondedMess }
+                                ></TextContextChatScreen>
+                            )
                         }
                     </div>
-
                 )
                 if (isCurrent) {
                     eleMainContext = (
@@ -121,6 +124,9 @@ function ChatListScreen(props: any) {
                             context={chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
+                            userId={ userid }
+                            setChatList={ setChatList }
+                            setEditedMess={ setEditedMess }
                         >
                             {eleContext}
                         </CurrentChatScreen>
@@ -140,10 +146,10 @@ function ChatListScreen(props: any) {
                     )
                 }
                 return (
-                    <>
+                    <div key={ index }>
                         { eleMainContext}
                         { eleDatetime}
-                    </>
+                    </div>
                 )
             })
         }

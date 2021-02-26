@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CircleAvatarScreen from '../../libraries/Features/circle-avtar/circle-avatar.screen';
 import ModalScreen from '../../libraries/Features/modal/modal.screen';
 import VideoCallsStates from './video-calls.states';

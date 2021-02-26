@@ -1,6 +1,5 @@
 import React from 'react';
 import CircleAvatarScreen from '../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
-import CustomButtonScreen from '../../../../../../../libraries/Features/custom-button/custom-button.screen';
 import CustomInputScreen from '../../../../../../../libraries/Features/custom-input/custom-input.screen';
 import getApiUrl from '../../../../../../../libraries/Functions/get-api-url';
 import './header-conversation.scss';
@@ -46,6 +45,7 @@ function HeaderConversationScreen(props: any){
                 hasSearch && (
                     <div className="headerconversation-search flex-center">
                         <CustomInputScreen
+                        
                             style={styleCustomInput}
                             class=""
                             placeHolder="Tìm kiếm cuộc trò chuyện"

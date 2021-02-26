@@ -13,19 +13,25 @@
         top: 0;
     }
 
-    .datanotfound-icon{
-        width:180px;
-        height:160px;
-        background-repeat: no-repeat;
-    }
+    >div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    h4{
-        margin-top: 1rem;
-        font-weight: var(--fontweight-default2);
-        font-size: 18px;
-        line-height: var(--lineheight-default2);
-        text-align: center;
-        color: $neutral-fiord;
+        .datanotfound-icon{
+            width:180px;
+            height:160px;
+            background-repeat: no-repeat;
+        }
+    
+        span{
+            margin-top: 1rem;
+            font-weight: var(--fontweight-default2);
+            font-size: 18px;
+            line-height: var(--lineheight-default2);
+            text-align: center;
+            color: $neutral-fiord;
+        }
     }
 }
 

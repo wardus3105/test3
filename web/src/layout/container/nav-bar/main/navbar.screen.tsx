@@ -1,12 +1,8 @@
 import React from 'react';
 import { ENUM_KIND_OF_ICONPANEL } from '../../../../libraries/Enum/icon-panel';
+import { IconBellNotificationOnWhite, IconChatMessage2LineWhite, IconQuestionCircleWhite, IconUsersGroup1 } from '../../../../libraries/Icons/icon.screen';
 import IconPanelScreen from './icon-panel/icon-panel.screen';
 import './navbar.scss';
-
-const iconUsersGroup1 = require('../../../../libraries/Icons/users-group-1.svg').default;
-const iconChatMessage2LineWhite = require('../../../../libraries/Icons/chat-message-2-line-white.svg').default;
-const iconBellNotificationOnWhite = require('../../../../libraries/Icons/bell-notification-on-white.svg').default;
-const iconQuestionCircleWhite = require('../../../../libraries/Icons/question-circle-white.svg').default;
 
 function NavbarScreen(props: any) {
 
@@ -16,21 +12,21 @@ function NavbarScreen(props: any) {
     <div className="navbar-container step2">
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.MESSAGES } 
-        srcImg={ iconChatMessage2LineWhite } 
+        eleIcon={ <IconChatMessage2LineWhite></IconChatMessage2LineWhite> } 
         contextToolTip={"Trò chuyện"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.MESSAGES)} } 
         hasNotification={ true }
       ></IconPanelScreen>
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.COMPANYMEMBER } 
-        srcImg={ iconUsersGroup1 } 
+        eleIcon={ <IconUsersGroup1></IconUsersGroup1> } 
         contextToolTip={"Thành viên"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.COMPANYMEMBER)} }
         hasNotification={ false }
       ></IconPanelScreen>
       <IconPanelScreen 
         isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.NOTI } 
-        srcImg={ iconBellNotificationOnWhite } 
+        eleIcon={ <IconBellNotificationOnWhite></IconBellNotificationOnWhite> } 
         contextToolTip={"Thông báo"} 
         onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.NOTI)} }
         hasNotification={ false }
@@ -38,7 +34,7 @@ function NavbarScreen(props: any) {
       <div className="navbar-iconpanel-last">
         <IconPanelScreen 
           isActive={ activedIcon === ENUM_KIND_OF_ICONPANEL.QUESTIONS } 
-          srcImg={ iconQuestionCircleWhite } 
+          eleIcon={ <IconQuestionCircleWhite></IconQuestionCircleWhite> } 
           contextToolTip={"Giải đáp"} 
           onClick={ () =>{setActivedIcon(ENUM_KIND_OF_ICONPANEL.QUESTIONS)} }
           hasNotification={ false }
