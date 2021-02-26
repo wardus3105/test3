@@ -11,7 +11,7 @@ const GroupDetailServices = () => {
             getInforGroupDetail : async (chatRoomId: string) => {
                 return await axios({
                     method:"GET",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.API_CHAT_ROOM}/${chatRoomId}`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_CHATROOM_DETAIL}?ChatRoomId=${chatRoomId}`,
                     timeout:30000  
                 })
                 .then((res)=> res)
@@ -20,7 +20,7 @@ const GroupDetailServices = () => {
             getGroupDetail : async (chatRoomId: string) => {
                 return await axios({
                     method:"GET",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_MEMBER_IN_CONVERSION}/${chatRoomId}?page=1&pageSize=25`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_MEMBER_IN_CONVERSION}?ChatRoomId=${chatRoomId}&page=1&pageSize=25`,
                     timeout:30000  
                 })
                 .then((res)=> res)
@@ -29,7 +29,7 @@ const GroupDetailServices = () => {
             getLinkGroupDetail : async (chatRoomId: string) => {
                 return await axios({
                     method:"GET",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_LINK_IN_ROOMCHAT}/${chatRoomId}?page=1&pageSize=25`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_LINK_IN_ROOMCHAT}?ChatRoomId=${chatRoomId}&page=1&pageSize=25`,
                     timeout:30000  
                 })
                 .then((res)=> res)
@@ -39,7 +39,7 @@ const GroupDetailServices = () => {
             getAttachmentImageGroupDetail : async (chatRoomId: string) => {
                 return await axios({
                     method:"GET",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_ATTACHMENT_IN_ROOMCHAT}/${chatRoomId}/0?page=1&pageSize=25`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_ATTACHMENT_IN_ROOMCHAT}?ChatRoomId=${chatRoomId}&TypeAttachment=${ENUM_KIND_OF_ATTACHMENT.IMAGE}&page=1&pageSize=25`,
                     timeout:30000  
                 })
                 .then((res)=> res)
@@ -48,7 +48,7 @@ const GroupDetailServices = () => {
             getAttachmentFileGroupDetail : async (chatRoomId: string) => {
                 return await axios({
                     method:"GET",
-                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_ATTACHMENT_IN_ROOMCHAT}/${chatRoomId}/${ENUM_KIND_OF_ATTACHMENT.FILE}?page=1&pageSize=25`,
+                    url:`http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.GET_LIST_ATTACHMENT_IN_ROOMCHAT}?ChatRoomId=${chatRoomId}&TypeAttachment=${ENUM_KIND_OF_ATTACHMENT.FILE}&page=1&pageSize=25`,
                     timeout:30000  
                 })
                 .then((res)=> res)
