@@ -8,9 +8,9 @@ import { IGuestChat } from './guest-chat.props';
 import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
 
 
-function GuestChatScreen(props : IGuestChat){
+function GuestChatScreen(props: IGuestChat) {
 
-    const { user , children } = props;
+    const { user, children } = props;
 
     const {
         redirectToDetailUser,
@@ -28,36 +28,31 @@ function GuestChatScreen(props : IGuestChat){
             onClick: copyText,
             icon: <IconSlidesSquare></IconSlidesSquare>,
             text: "Sao chép"
-        },
-        {
-            onClick: null,
-            icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
-            text: "Xóa"
-        },
+        }
     ];
 
-    const eleDetailPopup =(onClosePopup: any) =>(<DetailPopupScreen 
-                                                    listEles={ listEles } 
-                                                    onClosePopup={ onClosePopup }
-                                                ></DetailPopupScreen>);
+    const eleDetailPopup = (onClosePopup: any) => (<DetailPopupScreen
+        listEles={listEles}
+        onClosePopup={onClosePopup}
+    ></DetailPopupScreen>);
 
     return (
         <div className="guestchat-container margin-4">
             <CircleAvatarScreen
-                src={ user.avatar }
+                src={user.avatar}
                 class="guestchat-left img-32"
-                isOnline={ false }
-                onClick={ redirectToDetailUser }
+                isOnline={false}
+                onClick={redirectToDetailUser}
             ></CircleAvatarScreen>
             <div className="guestchat-right margin-left-8">
                 <span className="subtitle-regular margin-left-12">
-                    { user.userName }
+                    {user.userName}
                 </span>
                 <div className="guestchat-maincontext">
-                    
-                    { children }
-                    
-                    <MainPopupScreen context={ eleDetailPopup }> 
+
+                    {children}
+
+                    <MainPopupScreen context={eleDetailPopup}>
                         <div className="guestchat-icon cursor-pointer flex-center img-24">
                             <div className="vertical3dots"></div>
                         </div>

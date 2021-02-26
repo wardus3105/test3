@@ -17,7 +17,7 @@ function ChatInputAdapter(props: any) {
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile,
+        file, setFile,
         isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
@@ -55,23 +55,24 @@ function ChatInputAdapter(props: any) {
             messageSend.message = message;
             messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
             if (respondedMess) {
-                messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
+                messageSend = {
+                    ...messageSend, parentId: respondedMess.messageId, parent: {
                         createdAt: new Date(),
-                        id:  respondedMess.messageId,
+                        id: respondedMess.messageId,
                         message: respondedMess.context,
                         messageStatus: "1",
-                        messageType:respondedMess.type,
+                        messageType: respondedMess.type,
                         parentId: "",
                         status: "0",
-                        user:{ userName:respondedMess.userName}
-                    }   
+                        user: { userName: respondedMess.userName }
+                    }
                 }
             }
 
             const response = await ChatInputServices().getInstance().sendMessage(messageSend);
             if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                 const data = response.data.data;
-                messageSend = { ...messageSend , id: data.id };
+                messageSend = { ...messageSend, id: data.id };
 
                 setMessage("")
                 setRespondedMess()
@@ -108,23 +109,24 @@ function ChatInputAdapter(props: any) {
 
 
                 if (respondedMess) {
-                    messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
-                        createdAt: new Date(),
-                        id:  respondedMess.messageId,
-                        message: respondedMess.context,
-                        messageStatus: "1",
-                        messageType:respondedMess.type,
-                        parentId: "",
-                        status: "0",
-                        user:{ userName:respondedMess.userName}
-                        }   
+                    messageSend = {
+                        ...messageSend, parentId: respondedMess.messageId, parent: {
+                            createdAt: new Date(),
+                            id: respondedMess.messageId,
+                            message: respondedMess.context,
+                            messageStatus: "1",
+                            messageType: respondedMess.type,
+                            parentId: "",
+                            status: "0",
+                            user: { userName: respondedMess.userName }
+                        }
                     }
                 }
 
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const data = response.data.data;
-                    messageSend = { ...messageSend , id: data.id };
+                    messageSend = { ...messageSend, id: data.id };
 
                     setFile(null)
                     setPathFileList([])
@@ -209,7 +211,7 @@ function ChatInputAdapter(props: any) {
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage, sendChat,
+        message, setMessage, sendChat,
         setIsFocused, setListMessage,
         addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
     }

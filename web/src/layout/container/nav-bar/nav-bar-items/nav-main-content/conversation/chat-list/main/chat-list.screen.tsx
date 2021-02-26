@@ -26,7 +26,7 @@ function ChatListScreen(props: any) {
         clickFirstMessage,
         bottom,
         setChatList
-    } = ChatListAdapter({ chats , count , page , setPage , isUpdating , roomId , setRespondedMess })
+    } = ChatListAdapter({ chats, count, page, setPage, isUpdating, roomId, setRespondedMess })
 
     const length = chatList.length;
     const showAllMessages = () => {
@@ -82,7 +82,8 @@ function ChatListScreen(props: any) {
                 //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 // }
 
-                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null) ;
+                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null);
+                console.log("🚀 ~ file: chat-list.screen.tsx ~ line 86 ~ returnlist.map ~ respondedMess", respondedMess)
 
                 const eleContext = (
                     <div className="maincontext">
@@ -94,16 +95,16 @@ function ChatListScreen(props: any) {
                                     datetime={getTimePeriodFromNow(chat.createdAt)}
                                 ></ImageContextChatScreen>
                             ) : (
-                                <TextContextChatScreen
-                                    isCurrent={ isCurrent }
-                                    context={ chat.message }
-                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
-                                    shape={ shape }
-                                    time={ chat.createdAt }
-                                    index={ index }
-                                    respondedMess={ respondedMess }
-                                ></TextContextChatScreen>
-                            )
+                                    <TextContextChatScreen
+                                        isCurrent={isCurrent}
+                                        context={chat.message}
+                                        datetime={getTimePeriodFromNow(chat.createdAt)}
+                                        shape={shape}
+                                        time={chat.createdAt}
+                                        index={index}
+                                        respondedMess={respondedMess}
+                                    ></TextContextChatScreen>
+                                )
                         }
                     </div>
                 )
@@ -115,8 +116,8 @@ function ChatListScreen(props: any) {
                             context={chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
-                            userId={ userid }
-                            setChatList={ setChatList }
+                            userId={userid}
+                            setChatList={setChatList}
                         >
                             {eleContext}
                         </CurrentChatScreen>
@@ -136,7 +137,7 @@ function ChatListScreen(props: any) {
                     )
                 }
                 return (
-                    <div key={ index }>
+                    <div key={index}>
                         { eleMainContext}
                         { eleDatetime}
                     </div>
@@ -146,14 +147,14 @@ function ChatListScreen(props: any) {
     }
     if (length > 0) {
         return (
-            <div 
-                className= { "chatlist-container " + 
-                            (hasSearch ? "chatlist-container-hassearch " : "")
-                        } 
-                onScroll={ handleScroll } 
-                ref={ chatlistRef }
+            <div
+                className={"chatlist-container " +
+                    (hasSearch ? "chatlist-container-hassearch " : "")
+                }
+                onScroll={handleScroll}
+                ref={chatlistRef}
                 style={{ bottom: `${bottom}px` }}
-            >            
+            >
                 {
                     isMainLoading ? (
                         <div className="chatlist-loader">
