@@ -48,6 +48,7 @@ function ChatInputAdapter(props: any) {
 
     useEffect(() => {
         if (editedMess) {
+            console.log(123)
             setEditedMess((prev: any) => ({ ...prev, context: message }));
         } else {
             setEditedMess()
