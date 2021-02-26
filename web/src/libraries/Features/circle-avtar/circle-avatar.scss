@@ -4,7 +4,7 @@
     background-position: center;
     background-size: cover;
     position: relative;
-    
+    margin: auto;
     &.isOnline:after {
         content: "";
         position:absolute;
@@ -51,4 +51,14 @@
         width: 12px !important;
         height: 12px !important;
     }
+}
+
+.div-subheading-semibold{
+    width: 100%;
+    text-align: center;
+}
+
+.div-subtitle-hint{
+    width: 100%;
+    text-align: center;
 }

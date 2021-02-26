@@ -32,6 +32,7 @@ const VideoConference = () => {
    const setStateJitsi = (value: any) => {
       setJitsi(value);
    }
+   
    const data = {
       roomName: roomName,
       width: "100%",
