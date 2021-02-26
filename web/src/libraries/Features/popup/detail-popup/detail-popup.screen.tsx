@@ -14,7 +14,7 @@ function DetailPopupScreen(props : any){
                 return  <ModalScreen  open={ false } headerContent={ "Cài đặt thông báo" } context={ ele.eleContext } hasPadding={ true }  key={ index }>
                             <li onClick={ onClick } >
                                 {
-                                    ele.icon && <img src={ ele.icon } alt="replay"></img>
+                                    ele.icon && ele.icon
                                 }
                                 <span>
                                     { ele.text }
@@ -25,7 +25,7 @@ function DetailPopupScreen(props : any){
             return (
                 <li onClick={ onClick } key={ index }>
                     {
-                        ele.icon && <img src={ ele.icon } alt="replay"></img>
+                        ele.icon && ele.icon
                     }
                     <span>
                         { ele.text }

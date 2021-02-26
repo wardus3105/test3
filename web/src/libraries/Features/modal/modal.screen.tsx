@@ -1,10 +1,8 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
+import { IconDeleteDisabled } from '../../Icons/icon.screen';
 import { IModal } from './modal.props';
 import './modal.scss';
-
-const iconDeleteDisabled = require('../../../libraries/Icons/delete-disabled.svg').default;
-
 
 const ModalScreen = (props: IModal) => (
   <Popup
@@ -24,7 +22,7 @@ const ModalScreen = (props: IModal) => (
             }
           </span>
           <div className="modal-header-close cursor-pointer" onClick={close}>
-            <img src={ iconDeleteDisabled } alt=""></img>
+            <IconDeleteDisabled></IconDeleteDisabled>
           </div>
         </div>
         <div className={ props.hasPadding ? "modal-content-container" : ""}>

@@ -9,7 +9,7 @@ import './header-conversation-detail.scss';
 function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
 
     return (
-        <div className="headerconversationdetail-container">
+        <div className="headerconversationdetail-container padding-16">
             <div className="headerconversationdetail-top">
                 <GoBackButtonScreen></GoBackButtonScreen>
                 <div className="detail-title">
@@ -26,11 +26,13 @@ function HeaderConversationDetailScreen(props : IHeaderConversationDetail) {
                 </div>
             </div>
             <div className="headerconversationdetail-main container">
-                <div className="headerconversationdetail-avatar">
+                <div className="headerconversationdetail-avatar flex-center">
                     <CircleAvatarScreen
                         src={ props.srcImage }
                         isOnline={false}
-                        class={"headerconversationdetail-avatar-image img-40"}
+                        class={"headerconversationdetail-avatar-image"}
+                        height="100px"
+                        width="100px"
                     ></CircleAvatarScreen>
                 </div>
                 <div className="headerconversationdetail-option">

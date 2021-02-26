@@ -9,12 +9,10 @@ import BodyAdapter from './body.adapter';
 import './body.scss';
 import ContentScreen from './nav-bar/nav-bar-items/nav-main-content/main/content.screen';
 import ToastifyScreen from '../../libraries/Features/toastify/toastify.screen';
-import { ENUM_KIND_OF_TOASTIFY } from '../../libraries/Enum/toastify';
 import GetidModalScreen from '../../features/getid-modal/getid-modal.screen';
 import GuidedTourScreen from '../../features/guided-tour/guided-tour.screen';
 import VideoCallsScreen from '../../features/video-calls/video-calls.screen';
 import LossNetworkModalScreen from '../../features/loss-network-modal/loss-network-modal.screen';
-import VideoConference from '../../libraries/Features/video-call/video-call.screen'
 
 function BodyScreen(props : any) {
   const {

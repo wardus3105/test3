@@ -1,3 +1,5 @@
+@import "../../../../../../../../libraries/Styles/utils/variables.scss";
+
 .chatinput-container {
   position: absolute;
   bottom: 0;
@@ -21,18 +23,22 @@
 
   .emoji-mart {
     position: absolute;
-    right: 40px;
-    bottom: 70px;
+    right: 0;
+    bottom: 60px;
 
     .emoji-mart-search-icon {
       display: none;
     }
 
-    .emoji-mart-preview {
-      display: none;
-    }
+    // .emoji-mart-preview {
+    //   display: none;
+    // }
 
     button:hover {
+      background: none;
+    }
+
+    button:focus {
       background: none;
     }
   }

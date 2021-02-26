@@ -65,14 +65,14 @@ const VideoConference = () => {
       //Lấy thông tin người đăng nhập
       (async () => {
          const response=await getUserById(userId);
-         // data.displayName=response.data.lastName + " " + response.data.firstName
+         data.displayName=response.data.lastName + " " + response.data.firstName
          if(response && response.data && response.data.email){
             data.email=response.data.email
          }
        })();   
 
        //Nếu là người tạo cuộc gọi gửi request call video
-      if (isCall == "1") {
+      if (isCall === "1") {
          let messageSend: IChat ={
             message: ENUM_KIND_OF_MESSAGE_VIDEO_CALL.CREATE_CALL_VIDEO,
             messageType: ENUM_KIND_OF_MESSAGE.VIDEO_CALL,

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import PageNotFoundModalState from './page-not-found-modal.state';
 import './loss-network-modal.scss';
-import { ReactComponent as IconWifiOff } from "../../libraries/Icons/wifi-off.svg";
-import { ReactComponent as IconDeleteDisabled } from "../../libraries/Icons/delete-disabled.svg";
+import { IconDeleteDisabled, IconWifiOff } from '../../libraries/Icons/icon.screen';
+
 
 function PageNotFoundModalScreen() {
   

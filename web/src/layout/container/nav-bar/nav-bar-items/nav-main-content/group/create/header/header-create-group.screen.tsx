@@ -2,12 +2,12 @@ import React from 'react';
 import CustomInputScreen from '../../../../../../../../libraries/Features/custom-input/custom-input.screen';
 import GoBackButtonScreen from '../../../../../../../../libraries/Features/goback-button/goback-button.screen';
 import IconCirclePanel from '../../../../../../../../libraries/Features/icon-circle-panel/icon-circle-panel.screen';
+import { IconCameraAddWhite } from '../../../../../../../../libraries/Icons/icon.screen';
 
 import HeaderCreateGroupAdapter from './header-create-group.adapter';
 import { IHeaderCreateGroup } from './header-create-group.props';
 import './header-create-group.scss';
 
-const iconCameraAddWhite = require("../../../../../../../../libraries/Icons/camera-add-white.svg").default;
 const iconCameraAdd = require("../../../../../../../../libraries/Icons/camera-add.svg").default;
 
 const styleCustomInput = {
@@ -47,7 +47,7 @@ function HeaderCreateGroupScreen(props: IHeaderCreateGroup) {
                         {
                             hasHover && (
                                 <div className="headercreategroup-hoveraddedavatar flex-center cursor-pointer" onClick={ handleFileSelect }>
-                                    <img src={ iconCameraAddWhite } alt=""/>
+                                    <IconCameraAddWhite></IconCameraAddWhite>
                                 </div>
                             )
                         }
