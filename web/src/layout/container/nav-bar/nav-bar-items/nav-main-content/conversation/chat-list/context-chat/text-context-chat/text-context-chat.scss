@@ -1,9 +1,9 @@
-.textcontext-container{
+.textcontext-container {
     max-width: 100%;
 
-    .textcontext-respondedmess{
+    .textcontext-respondedmess {
         width: fit-content;
-        background: #F2F3F4;
+        background: #f2f3f4;
         position: relative;
         padding: 12px 12px 28px;
         margin-bottom: -24px;
@@ -12,39 +12,39 @@
         -moz-border-radius: 16px;
         -ms-border-radius: 16px;
         -o-border-radius: 16px;
-
-        span::first-child{
+        z-index: -1;
+        span::first-child {
             font-style: italic;
             font-weight: normal;
             font-size: 14px;
             line-height: 21px;
-            color: #1A2948;
+            color: #1a2948;
             mix-blend-mode: normal;
             opacity: 0.95;
         }
 
-        .chat-time{
+        .chat-time {
             font-weight: normal;
             font-size: 12px;
-            line-height: 18px;    
+            line-height: 18px;
             color: #757575;
             float: right;
             margin-left: 32px;
         }
     }
-    
-    .currentchat-text{
+
+    .currentchat-text {
         position: relative;
 
-        &.currentchat-center{
+        &.currentchat-center {
             border-radius: 16px 0 0 16px !important;
             -webkit-border-radius: 16px 0 0 16px !important;
             -moz-border-radius: 16px 0 0 16px !important;
             -ms-border-radius: 16px 0 0 16px !important;
             -o-border-radius: 16px 0 0 16px !important;
         }
-    
-        &.currentchat-bottom{
+
+        &.currentchat-bottom {
             border-radius: 16px 0 16px 16px !important;
             -webkit-border-radius: 16px 0 16px 16px !important;
             -moz-border-radius: 16px 0 16px 16px !important;
