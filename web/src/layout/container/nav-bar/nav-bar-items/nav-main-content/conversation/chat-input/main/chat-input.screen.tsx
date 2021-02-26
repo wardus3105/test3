@@ -25,7 +25,6 @@ function ChatInputScreen(props: any){
     const ref: any = useRef<HTMLInputElement | null>(null)
 
     useOutsideClick(ref, () => {
-        console.log(ref)
         setVisibleEmojiPicker(false);
     });
 
@@ -89,6 +88,9 @@ function ChatInputScreen(props: any){
                     <Picker 
                         onSelect={addEmoji} 
                         style={{display: isVisibleEmojiPicker ? 'block' : 'none'}} 
+                        showPreview={false}
+                        showSkinTones={false}
+                        set={'facebook'}
                     />
                     <IconSmileCircle className="icon-svg--hover" onClick={() => setVisibleEmojiPicker(true)} />
                 </div>
