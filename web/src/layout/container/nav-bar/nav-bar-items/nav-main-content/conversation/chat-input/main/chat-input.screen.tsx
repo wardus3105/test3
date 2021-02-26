@@ -36,7 +36,9 @@ function ChatInputScreen(props: any){
         message , setMessage,
         sendChat,
         setIsFocused,
-        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
+        addEmoji,
+        isVisibleEmojiPicker, setVisibleEmojiPicker,
+        editedMess , setEditedMess
     } = ChatInputAdapter(props)
     
     return (
@@ -68,7 +70,13 @@ function ChatInputScreen(props: any){
                 )
             }
             <div className="chatinput-main">
-                <IconGimFile onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover" ></IconGimFile>
+                {
+                    editedMess ? (
+                        <IconDeleteDisabled onClick={ () => { setEditedMess() } } className="cursor-pointer icon-svg--hover" ></IconDeleteDisabled>
+                    ) : (
+                        <IconGimFile onClick={ handleFileSelect } className="cursor-pointer icon-svg--hover" ></IconGimFile>
+                    )
+                }
 
                 <CustomInputScreen 
                     setValue={ setMessage } 

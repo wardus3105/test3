@@ -41,6 +41,8 @@ import { ReactComponent as IconGridLayout } from "./grid-layout.svg";
 import { ReactComponent as IconLogoColorFull } from './logo-color-full.svg';
 import { ReactComponent as IconUserProfileSquare } from './user-profile-square.svg';
 import { ReactComponent as IconQuestionCircle } from './question-circle.svg';
+import { ReactComponent as IconPenEdit2 } from "./pen-edit-2.svg";
+
 
 export {
     IconSearchLoupe,
@@ -86,4 +88,5 @@ export {
     IconLogoColorFull,
     IconUserProfileSquare,
     IconQuestionCircle,
+    IconPenEdit2
 }

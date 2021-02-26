@@ -15,7 +15,7 @@ import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess , setEditedMess } = props;
 
     const {
         userid,
@@ -117,6 +117,7 @@ function ChatListScreen(props: any) {
                             messageId={chat.id}
                             userId={ userid }
                             setChatList={ setChatList }
+                            setEditedMess={ setEditedMess }
                         >
                             {eleContext}
                         </CurrentChatScreen>

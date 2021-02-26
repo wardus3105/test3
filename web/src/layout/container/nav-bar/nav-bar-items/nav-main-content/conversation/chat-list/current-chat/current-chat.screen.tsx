@@ -1,7 +1,7 @@
 import React from 'react';
 import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import MainPopupScreen from '../../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
-import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
+import { IconPenEdit2, IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
 import CurrentChatAdapter from './current-chat.adapter';
 import { ICurrentChat } from './current-chat.props';
 import './current-chat.scss';
@@ -11,7 +11,8 @@ function CurrentChatScreen(props: ICurrentChat) {
     const {
         setResponMess,
         copyText,
-        removeMessage
+        removeMessage,
+        editMessage
     } = CurrentChatAdapter(props);
 
     const listEles = [
@@ -24,6 +25,11 @@ function CurrentChatScreen(props: ICurrentChat) {
             onClick: copyText,
             icon: <IconSlidesSquare></IconSlidesSquare>,
             text: "Sao chép"
+        },
+        {
+            onClick: editMessage,
+            icon: <IconPenEdit2></IconPenEdit2>,
+            text: "Chỉnh sửa"
         },
         {
             onClick: removeMessage,
