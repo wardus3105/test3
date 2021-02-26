@@ -24,6 +24,7 @@ export interface IChat{
     attachments?: IAttachment[],
     createdAt: any,
     parentId?: string,
+    statusVideoCall?:string
 }
 
 interface IUser{

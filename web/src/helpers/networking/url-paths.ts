@@ -17,6 +17,11 @@ export const URL_PATHS={
     GET_MEMBER_IN_CONVERSION:"api/chat-room-member/MemberChat",
     GET_LIST_LINK_IN_ROOMCHAT: "api/chat/ListLink",
     GET_LIST_ATTACHMENT_IN_ROOMCHAT: "api/attachment/list-attachment",
+
+    //vinhtq-video
+    POST_PUSH_STREAM_VIDEO_CALL:"api/videocall/push-stream-video-call",
+    POST_GET_USER_BY_ID:"api/user/get-user-by-id",
+    POST_CREATE_MESSGAE_STATUS_VIDEO_CALL:"api/videocall/status-video-call",
 }
 
 
