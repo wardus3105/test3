@@ -30,7 +30,8 @@ export interface IChat{
     attachments?: IAttachment[],
     createdAt: any,
     parentId?: string,
-    statusVideoCall?:string
+    statusVideoCall?:string,
+    timeVideoCall?: any,
 }
 
 interface IUser{

@@ -13,7 +13,7 @@ import GetidModalScreen from '../../features/getid-modal/getid-modal.screen';
 import GuidedTourScreen from '../../features/guided-tour/guided-tour.screen';
 import VideoCallsScreen from '../../features/video-calls/video-calls.screen';
 import LossNetworkModalScreen from '../../features/loss-network-modal/loss-network-modal.screen';
-
+import VideoConference from '../../features/video-calls/video-calls.screen'
 function BodyScreen(props : any) {
   const {
     activedIcon , setActivedIcon,

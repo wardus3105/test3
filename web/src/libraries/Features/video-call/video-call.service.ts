@@ -36,9 +36,25 @@ const videoCallService = () => {
             .catch((err) => err)
     }
     
+    const sendMessageVideo = async (message: IChat) => {
+        return axios({
+            method: "POST",
+            url: `http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_CREATE_MESSGAE_STATUS_VIDEO_CALL}`,
+            headers: {
+                "content-type": 'application/json',
+            },
+            data: message,
+            timeout: 30000
+        })
+            .then((res) => res)
+            .catch((err) => err)
+
+    }
+
     return {
         sendMessage,
-        getUserById        
+        getUserById,
+        sendMessageVideo        
     }
 }
 
