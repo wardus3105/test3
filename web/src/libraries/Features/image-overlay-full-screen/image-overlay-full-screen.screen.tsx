@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { IAttachment } from '../../../layout/container/nav-bar/nav-bar-items/nav-main-content/conversation/main/conversation.props';
 import getApiUrl from '../../Functions/get-api-url';
 import useKeyDown from '../../Hooks/useKeyDown';
+import { IconArrowLeft, IconArrowRight, IconDeleteDisabled, IconDownloadSaveUpload } from '../../Icons/icon.screen';
 import { IImageOverlay, IMiniImage } from './image-overlay-full-screen.props';
 import './image-overlay-full-screen.scss';
-
-const iconwhitecancel = require("../../Icons/iconwhitecancel.svg").default;
-const iconwhitedownload = require("../../Icons/iconwhitedownload.svg").default;
-const iconleftarrow = require("../../Icons/iconleftarrow2.svg").default;
-const iconrightarrow = require("../../Icons/iconrightarrow2.svg").default;
-
 
 function ImageOverlayScreen(props: any) {
     const [amountOfMiniImages, setAmountOfMiniImages] = useState<number>(15);
@@ -114,12 +108,15 @@ function ImageOverlayScreen(props: any) {
                     mainImage.author && mainImage.author
                 }
             </h4>
-            <img src={iconwhitecancel} alt="" className="imageoverlay-cancel" onClick={props.close} />
-            <img src={iconwhitedownload} alt="" className="imageoverlay-download" onClick={downloadImage} />
+
+            <IconDeleteDisabled className="imageoverlay-cancel" onClick={props.close}></IconDeleteDisabled>
+            <IconDownloadSaveUpload className="imageoverlay-download" onClick={downloadImage}></IconDownloadSaveUpload>
+            
             {
                 mainImage.index > 1 && (
                     <div className="imageoverlay-leftarrow imageoverlay-arrow" onClick={() => { setMiniImage(true) }}>
-                        <img src={iconleftarrow} alt="" />
+                        {/* <img src={iconleftarrow} alt="" /> */}
+                        <IconArrowLeft></IconArrowLeft>
                         <div></div>
                     </div>
                 )
@@ -127,7 +124,7 @@ function ImageOverlayScreen(props: any) {
             {
                 mainImage.index < miniImageList[miniImageList.length - 1].index && (
                     <div className="imageoverlay-rightarrow imageoverlay-arrow" onClick={() => { setMiniImage(false) }}>
-                        <img src={iconrightarrow} alt="" />
+                        <IconArrowRight></IconArrowRight>
                         <div></div>
                     </div>
                 )

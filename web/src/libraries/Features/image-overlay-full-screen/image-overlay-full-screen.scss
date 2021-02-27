@@ -20,7 +20,7 @@
         color: $neutral-white;
     }
 
-    img{
+    svg{
         cursor: pointer;
     }
 
@@ -52,11 +52,6 @@
             left: 50%;
             transform: translate(-50% , -50%);
             z-index: -1;
-        }
-
-        img{
-            width: 40px;
-            height: 40px;
         }
     }
 
@@ -95,7 +90,7 @@
             border-radius: 5px;
             object-fit: cover;
             aspect-ratio: 1 / 1;
-
+            cursor: pointer;
     
             &.imageoverlay-miniimage--active{
                 border: 2px solid $primary-cobalt;

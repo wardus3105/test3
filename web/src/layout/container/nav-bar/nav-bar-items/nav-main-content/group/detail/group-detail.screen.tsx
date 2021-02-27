@@ -102,9 +102,6 @@ function GroupDetailScreen() {
                   isAdmin ?
                     <></>
                     : <MainPopupScreen context={eleDetailPopup}>
-                      {/* <div>
-                        <img src={iconMoreVertical} className="descriptionchatlist-icon-penedit" alt="" />
-                      </div> */}
                         <div className="cursor-pointer flex-center img-24">
                           <div className="vertical3dots"></div>
                       </div>
@@ -230,8 +227,6 @@ function GroupDetailScreen() {
         <div className="popupsignoutgroup-button">
           <button onClick={close} className="btn-outline" >Hủy</button>
           <button>Xác nhận</button>
-          {/* <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen> */}
-          {/* <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen> */}
         </div>
       </div>
     )

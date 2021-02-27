@@ -213,9 +213,6 @@ function PersonalDetailScreen() {
         </>
     );
 
-    // const eleSearch: React.ReactElement = (
-    //   <img src={ iconSearchLoupe } alt=""/>
-    // );
 
     const header:IHeaderConversationDetail = {
         name: "Trung Đức",
