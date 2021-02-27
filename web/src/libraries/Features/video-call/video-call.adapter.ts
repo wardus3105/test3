@@ -4,11 +4,11 @@ import { URL_PATHS } from '../../../../src/helpers/networking/url-paths';
 import axios from "axios";
 import { ENUM_KIND_OF_VIDEO_CALL } from '../../Enum/video-call'
 import jitsiState from "./video-call.state"
+import ReconnectingWebSocket from 'reconnecting-websocket';
 import { IChat } from "../../../layout/container/nav-bar/nav-bar-items/nav-main-content/conversation/main/conversation.props"
-
-
 var config = require('./config.js')
 var interfaceConfig = require('./interface_config.js')
+
 const Jitsi = () => {
     const {
         jitsi, setJitsi,
@@ -34,15 +34,11 @@ const Jitsi = () => {
     };
 
     const initialiseJitsi = async (props: any) => {
+        window.onbeforeunload = null;
         const { roomName, width, height, displayName, email, setJitsi } = props;
         if (!window.JitsiMeetExternalAPI) {
             await loadJitsiScript();
         }
-
-        // //const a=window.open("https://meet.hyperlogy.com/" + roomName, "", "width=1000,height=1000");
-        // const a=window.open()
-        // a.document.write("<div id='jitsi-video-container'></div>")
-        // // a.document.getElementById("jitsi-video-container")
 
         const _jitsi = new window.JitsiMeetExternalAPI(ENUM_KIND_OF_VIDEO_CALL.LINK_JITSI_MEET, {
             roomName: roomName,
@@ -57,37 +53,33 @@ const Jitsi = () => {
                 audioOutput: '<deviceLabel>',
                 videoInput: '<deviceLabel>'
             },
-            configOverwrite: { startWithAudioMuted: true },
+            configOverwrite: { startWithAudioMuted: true,enableClosePage:false },
             interfaceConfigOverwrite: interfaceConfig,
             parentNode: document.getElementById("jitsi-container-id")
             //parentNode: a.document.getElementById('jitsi-video-container'),
         });
 
+        //set tên người tham gia phòng chat
         _jitsi.executeCommand('displayName', displayName);
+        //set email người tham gia phòng chat
         _jitsi.executeCommand('email', email);
 
+        //hành động tắt cuộc gọi
+        _jitsi.addEventListener('readyToClose',  function(){      
+            alert('close')    
+        });
+
+        //khi đóng cửa số chat
+        window.addEventListener('beforeunload', (event) => {
+            event.preventDefault();
+            event.returnValue = '';    
+        });
+
         setJitsi(_jitsi);
-    };
-
-    const sendMessage = async (message: IChat) => {
-        return axios({
-            method: "POST",
-            url: `http://${process.env.REACT_APP_IPADDRESS_API}/${URL_PATHS.POST_MESSAGE}`,
-            headers: {
-                "content-type": 'application/json',
-            },
-            data: message,
-            timeout: 30000
-        })
-            .then((res) => res)
-            .catch((err) => console.log(err))
-
-    }
+    }; 
 
     return {
-        sendMessage,
-        initialiseJitsi
-                
+        initialiseJitsi              
     }
 }
 export default Jitsi
