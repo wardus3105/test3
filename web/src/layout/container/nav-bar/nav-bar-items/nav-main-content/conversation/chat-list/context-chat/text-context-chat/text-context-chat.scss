@@ -1,6 +1,11 @@
 .textcontext-container {
     max-width: 100%;
 
+    .textcontext-subtitle{
+        display: flex;
+        align-items: center
+    }
+
     .textcontext-respondedmess {
         width: fit-content;
         background: #f2f3f4;

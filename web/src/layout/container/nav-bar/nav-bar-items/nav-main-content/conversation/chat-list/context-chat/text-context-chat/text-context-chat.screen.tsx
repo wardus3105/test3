@@ -4,6 +4,7 @@ import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/shape_of_message';
 import getApiUrl from '../../../../../../../../../libraries/Functions/get-api-url';
 import getTimePeriodFromNow from '../../../../../../../../../libraries/Functions/get-time-period-from-now';
+import { IconShareArrowLeftSolid } from '../../../../../../../../../libraries/Icons/icon.screen';
 import './text-context-chat.scss';
 
 function TextContextChatScreen(props : any){
@@ -42,31 +43,40 @@ function TextContextChatScreen(props : any){
         return ""
     }
 
-
-
-    const getView = () =>{
+    const showRespondedMess = () =>{
         const url = respondedMess.attachments.length > 0 ? respondedMess.attachments[0].name : respondedMess.message
 
-        return respondedMess.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? (
-            <div className={"imagechat-container cursor-pointer " + ( isCurrent ? "margin-left-auto" : "" )}>
-                <img src={ getApiUrl(url)} alt=""/>
-            </div>
-        ) : (
+        return (
             <>
                 { 
-                    isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
+                    isCurrent && (
+                        <div className="margin-left-20 textcontext-subtitle"> 
+                            <IconShareArrowLeftSolid></IconShareArrowLeftSolid>
+                            <span className="subtitle-regular-2">
+                                Bạn đã trả lời 
+                                <span className="subtitle-bold-2"> { respondedMess.user.userName }</span> 
+                            </span>
+                            
+                        </div>
+                    )
                 }
-                <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
-                    <span className="margin-left-8">
-                        {/* Nội dung phản hồi */}
-                        { respondedMess.message }
-                    </span>
-
-                    <span className="chat-time">
-                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                        { getTimePeriodFromNow(respondedMess.createdAt) }
-                    </span>
-                </div>
+                {
+                    respondedMess.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? (
+                        <div className={"imagechat-container cursor-pointer "}>
+                            <img src={ getApiUrl(url)} className={ isCurrent ? "margin-left-auto" : ""  } alt=""/>
+                        </div>
+                    ) :(
+                        <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
+                            <span className="margin-left-8">
+                                { respondedMess.message }
+                            </span>
+        
+                            <span className="chat-time">
+                                { getTimePeriodFromNow(respondedMess.createdAt) }
+                            </span>
+                        </div>
+                    )
+                }
             </>
         )
     }
@@ -76,7 +86,7 @@ function TextContextChatScreen(props : any){
             <>
                 <div className="textcontext-container">
                     {
-                        respondedMess && getView()
+                        respondedMess && showRespondedMess()
                     }
                 </div>
                 <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>

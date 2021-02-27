@@ -45,6 +45,7 @@ import { ReactComponent as IconPenEdit2 } from "./pen-edit-2.svg";
 import { ReactComponent as IconArrowLeft } from "./arrow-left.svg";
 import { ReactComponent as IconArrowRight } from "./arrow-right.svg";
 import { ReactComponent as IconArrowLeft2 } from "./arrow-left-2.svg";
+import { ReactComponent as IconShareArrowLeftSolid } from "./share-arrow-left-solid.svg";
 
 export {
     IconSearchLoupe,
@@ -94,4 +95,5 @@ export {
     IconArrowLeft,
     IconArrowRight,
     IconArrowLeft2,
+    IconShareArrowLeftSolid,
 }
