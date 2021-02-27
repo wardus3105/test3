@@ -78,15 +78,18 @@ function VideoCallsScreen() {
   });
 
   const start = () => {
+    setVideoCallsIsDisplayed(false)
     if (localStorage.getItem('userId') !== data.value.userId) {
       setVideoCallsIsDisplayed(false)
       window.open(window.location.protocol + "/video-call?roomName=" + data.value.chatRoomId + "&userId=" + data.value.userId + "&isCall=0", "_blank", "width=1000,height=1000");
     }
+    setVideoCallsIsDisplayed(false)
+
   }
 
   const closeCallVideo = () => {
     setVideoCallsIsDisplayed(false)
-   let messageSend: IChat = {
+    let messageSend: IChat = {
         message: ENUM_KIND_OF_MESSAGE_VIDEO_CALL.NOT_LISTEN_CALL_VIDEO,
         messageType: ENUM_KIND_OF_MESSAGE.VIDEO_CALL,
         messageStatus:ENUM_KIND_OF_STATUS.ACTIVE,

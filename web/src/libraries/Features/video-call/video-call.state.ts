@@ -9,14 +9,22 @@ function VideoCallStates() {
     const [roomName, setRoomName] = useState(url.searchParams.get("roomName"));
     const [userId, setUserId] = useState(url.searchParams.get("userId"));
     const [isCall, setIsCall] = useState(url.searchParams.get("isCall"));
-
+    const [isListen, setIsListen] = useState(false);
+    const [loading, setLoading] = useState(true)
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState();
     const [jitsi, setJitsi] = useState({});
+    
     return {
         jitsi, setJitsi,
         roomId,setRoomId,
         roomName,setRoomName,
         userId,setUserId,
-        isCall,setIsCall
+        isCall,setIsCall,
+        isListen,setIsListen,
+        startDate,setStartDate,
+        endDate,setEndDate,
+        loading,setLoading
     }
 }
 

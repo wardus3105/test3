@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router
 } from "react-router-dom";
-
 import NavbarScreen from './nav-bar/main/navbar.screen';
 import NavDetailScreen from '../../features/nav-detail/main/nav-detail.screen';
 import BodyAdapter from './body.adapter';
@@ -14,7 +13,7 @@ import GuidedTourScreen from '../../features/guided-tour/guided-tour.screen';
 import VideoCallsScreen from '../../features/video-calls/video-calls.screen';
 import LossNetworkModalScreen from '../../features/loss-network-modal/loss-network-modal.screen';
 
-function BodyScreen() {
+function BodyScreen(props : any) {
   const {
     activedIcon , setActivedIcon,
     styleInlineBody,
