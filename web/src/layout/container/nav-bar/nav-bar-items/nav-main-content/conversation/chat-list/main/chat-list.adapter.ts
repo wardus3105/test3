@@ -7,7 +7,6 @@ import ChatListStates from "./chat-list.states";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { IMiniImage } from "../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.props";
 import ChatListServices from "./chat-list.services";
-import useKeyDown from "../../../../../../../../libraries/Hooks/useKeyDown";
 
 var sockets: ReconnectingWebSocket[] = [];
 var socket: ReconnectingWebSocket;
@@ -22,7 +21,7 @@ function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
 
     const { chats, count, page, setPage, isUpdating, roomId, setRespondedMess } = props;
-
+    console.log("Count : " + count)
     const {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
@@ -67,7 +66,7 @@ function ChatListAdapter(props: any) {
                 chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight;
             } else {
                 if (!isUpdating) {
-                    chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight / 2;
+                    chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight / 4;
                 }
             }
         }
@@ -80,7 +79,7 @@ function ChatListAdapter(props: any) {
 
     useEffect(() => {
         if (roomId === roomIdz) {
-            setChatList(prev => [...chats, ...prev])
+            setChatList(prev => [ ...prev ,...chats ])
         } else {
             setRoomIdz(roomId);
             setChatList(chats)

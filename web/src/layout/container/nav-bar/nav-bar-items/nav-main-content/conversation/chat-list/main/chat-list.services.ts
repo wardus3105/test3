@@ -15,7 +15,7 @@ function ChatListServices() {
                         ChatRoomId: chatRoomId,
                         TypeAttachment: ENUM_KIND_OF_ATTACHMENT.IMAGE,
                         page:page,
-                        pageSize: process.env.REACT_APP_NUM_ITEMS_PER_PAGE
+                        pageSize: 20
                     },
                     timeout: 30000,
                 })

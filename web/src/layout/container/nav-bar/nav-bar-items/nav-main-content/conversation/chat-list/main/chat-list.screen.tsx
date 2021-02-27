@@ -38,6 +38,7 @@ function ChatListScreen(props: any) {
     const showAllMessages = () => {
         if (chatList && length > 0) {
             const list = [...chatList]
+            console.log(list)
             let datetimeContext = new Date(list[0].createdAt);
 
             return list.map((chat: any, index: number) => {
@@ -179,9 +180,9 @@ function ChatListScreen(props: any) {
                             </div>
                         )
                 }
-                {
+                {/* {
                     isOpenOverlay && (<ImageOverlayScreen close={toggleOverlay} miniImageList={miniImageList} mainMiniImage={mainImage}></ImageOverlayScreen>)
-                }
+                } */}
             </div>
         )
     }
