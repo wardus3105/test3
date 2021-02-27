@@ -14,15 +14,27 @@ import GuidedTourScreen from '../../features/guided-tour/guided-tour.screen';
 import VideoCallsScreen from '../../features/video-calls/video-calls.screen';
 import LossNetworkModalScreen from '../../features/loss-network-modal/loss-network-modal.screen';
 
-function BodyScreen(props : any) {
+function BodyScreen() {
   const {
     activedIcon , setActivedIcon,
-    hasNavbar,
-    styleInline
-  } = BodyAdapter(props);
+    styleInlineBody,
+    styleInlineBodyRight
+  } = BodyAdapter();
 
   return (
     <>
+      <Router>
+        <div className="body-container" style = { styleInlineBody }>
+          <div className="body-left">
+            <NavbarScreen activedIcon={ activedIcon } setActivedIcon={ setActivedIcon }></NavbarScreen>
+          </div>
+          <div className="body-right" style = { styleInlineBodyRight }>
+            <NavDetailScreen  activedIcon={ activedIcon }></NavDetailScreen>
+            <ContentScreen></ContentScreen>
+          </div>
+        </div>
+      </Router>
+
       <ToastifyScreen></ToastifyScreen>
 
       <GetidModalScreen></GetidModalScreen>
@@ -33,20 +45,7 @@ function BodyScreen(props : any) {
 
       <LossNetworkModalScreen></LossNetworkModalScreen>
 
-      <Router>
-        <div className="body-container" style = { styleInline }>
-          <div className={ hasNavbar ? "body-left" : "body-left body-left--hide"}>
-            <NavbarScreen activedIcon={ activedIcon } setActivedIcon={ setActivedIcon }></NavbarScreen>
-          </div>
-          <div className={ hasNavbar ? "body-right--hasnavbar body-right" : "body-right"}>
-            <NavDetailScreen  activedIcon={ activedIcon }></NavDetailScreen>
-            <ContentScreen></ContentScreen>
-          </div>
-        </div>
-      </Router>
     </>
-
-
   );
 }
 

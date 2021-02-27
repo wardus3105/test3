@@ -21,14 +21,6 @@ function GroupDetailAdapter() {
         miniImageList , setMiniImageList
     } = GroupDetailStates();
 
-    const closeImageOverlayByEscKey = (e: KeyboardEvent) => {
-        if (e.keyCode === 27) {
-            setIsOpenOverlay(false);
-        }
-    }
-
-    useKeyDown(closeImageOverlayByEscKey)
-
     const roomId = useIdInPath(3)
 
     useEffect(() => {
@@ -37,14 +29,12 @@ function GroupDetailAdapter() {
             const response = await GroupDetailServices().getInstance().getGroupDetail(roomId);
             if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                 const result = response.data.data;
-                console.log('result: ' + JSON.stringify(result));
                 setMemberInGroup(result);
             }
 
             const response1 = await GroupDetailServices().getInstance().getInforGroupDetail(roomId);
             if (response1 && response1.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                 const result1 = response1.data.data;
-                console.log('Room Detail: ' + JSON.stringify(result1));
                 setGroupDetail(result1[0]);
             }
         }
@@ -67,7 +57,6 @@ function GroupDetailAdapter() {
                 const response2 = await GroupDetailServices().getInstance().getLinkGroupDetail(roomId);
                 if (response2 && response2.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const result2 = response2.data.data;
-                    console.log('result Link: ' + JSON.stringify(result2));
                     setLinkInGroup(result2);
                 }
                 break;
@@ -75,7 +64,6 @@ function GroupDetailAdapter() {
                 const response3 = await GroupDetailServices().getInstance().getAttachmentImageGroupDetail(roomId);
                 if (response3 && response3.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const result3 = response3.data.data;
-                    console.log('result Image: ' + JSON.stringify(result3));
                     setImageInGroup(result3);
                     setMiniImageList(result3);
                 }
@@ -84,7 +72,6 @@ function GroupDetailAdapter() {
                 const response4 = await GroupDetailServices().getInstance().getAttachmentFileGroupDetail(roomId);
                 if (response4 && response4.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const result4 = response4.data.data;
-                    console.log('result Link: ' + JSON.stringify(result4));
                     setFileInGroup(result4);
                 }
                 break;

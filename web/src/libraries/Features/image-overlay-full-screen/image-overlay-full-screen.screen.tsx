@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import getApiUrl from '../../Functions/get-api-url';
 import useKeyDown from '../../Hooks/useKeyDown';
 import { IconArrowLeft, IconArrowRight, IconDeleteDisabled, IconDownloadSaveUpload } from '../../Icons/icon.screen';
-import { IImageOverlay, IMiniImage } from './image-overlay-full-screen.props';
+import { IMiniImage } from './image-overlay-full-screen.props';
 import './image-overlay-full-screen.scss';
 
 function ImageOverlayScreen(props: any) {
@@ -16,8 +16,15 @@ function ImageOverlayScreen(props: any) {
         name: ""
     })
 
-    const { miniImageList, mainMiniImage } = props;
+    const { miniImageList, mainMiniImage , close } = props;
 
+    const closeImageOverlayByEscKey = (e: KeyboardEvent) => {
+        if (e.keyCode === 27) {
+            close()
+        }
+    }
+
+    useKeyDown(closeImageOverlayByEscKey)
 
     useEffect(() => {
         setMainImage(mainMiniImage);
@@ -41,12 +48,6 @@ function ImageOverlayScreen(props: any) {
 
         return () => window.removeEventListener('resize', setAmountMiniImagesByScreen);
     }, [])
-
-    // useEffect(() =>{
-    //     window.addEventListener('keydown', setMiniImageByKeyBoardEvent);
-
-    //     return () => window.removeEventListener('keydown', setMiniImageByKeyBoardEvent);
-    // })
 
     const setAmountMiniImagesByScreen = () => {
         const windowWidth = window.innerWidth;
@@ -90,17 +91,6 @@ function ImageOverlayScreen(props: any) {
         }
     }
 
-    const downloadImage = () => {
-        // var link = document.createElement("a");
-        // // If you don't know the name or want to use
-        // // the webserver default set name = ''
-        // link.setAttribute('download', "123");
-        // link.href = mainImage.srcImage;
-        // document.body.appendChild(link);
-        // link.click();
-        // link.remove();
-    }
-
     return (
         <div className="imageoverlay-container">
             <h4 className="imageoverlay-nameauthor">
@@ -109,8 +99,8 @@ function ImageOverlayScreen(props: any) {
                 }
             </h4>
 
-            <IconDeleteDisabled className="imageoverlay-cancel" onClick={props.close}></IconDeleteDisabled>
-            <IconDownloadSaveUpload className="imageoverlay-download" onClick={downloadImage}></IconDownloadSaveUpload>
+            <IconDeleteDisabled className="imageoverlay-cancel" onClick={ close }></IconDeleteDisabled>
+            <IconDownloadSaveUpload className="imageoverlay-download"></IconDownloadSaveUpload>
             
             {
                 mainImage.index > 1 && (

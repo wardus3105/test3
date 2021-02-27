@@ -5,7 +5,7 @@ import MainPopupScreen from '../../libraries/Features/popup/main-popup/main-popu
 import './header.scss';
 import { IconBellNotificationOn, IconGridLayout, IconLogoColorFull, IconQuestionCircle, IconSignoutRight, IconUserProfileSquare } from '../../libraries/Icons/icon.screen';
 
-function HeaderScreen(props : any) {
+function HeaderScreen() {
 
   const listEles = [
     {

@@ -74,9 +74,8 @@ function GroupDetailScreen() {
       memberInGroup.sort(function (prev, next) { return prev.is_admin + "" === ENUM_KIND_OF_STATUS.ACTIVE ? -1 : next.is_admin + "" === ENUM_KIND_OF_STATUS.ACTIVE ? 1 : 0; });
 
       return memberInGroup.map((member: any, index: number) => {
-        console.log(member);
+
         const isAdmin = member.isAdmin + "" === ENUM_KIND_OF_STATUS.ACTIVE;
-        console.log('member ' + index + ": " + isAdmin)
         return (
           <>
             <div className="bodycreategroup-main-body-selecteduserpanel">

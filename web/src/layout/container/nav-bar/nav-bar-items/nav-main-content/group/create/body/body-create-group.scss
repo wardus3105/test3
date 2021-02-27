@@ -38,11 +38,11 @@
 .bodycreategroup-main{
     position: relative;
     background-color: var(--color-background);
-    width: 600px;
     height: 100%;
     box-shadow: 0px 1px 5px rgba(194, 198, 201, 0.2);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    margin: auto;
 
     &.bodycreategroup-main--hasfooter{
         height: 89% !important;

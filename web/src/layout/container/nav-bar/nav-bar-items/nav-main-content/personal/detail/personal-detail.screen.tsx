@@ -98,22 +98,6 @@ function PersonalDetailScreen() {
       author:"",
       srcImage:"",
     })
-
-    const closeImageOverlayByEscKey = (e: KeyboardEvent) =>{
-      if(e.keyCode === 27){
-        setIsOpenOverlay(false);
-      }
-    }
-
-    useKeyDown(closeImageOverlayByEscKey)
-
-    // useEffect(() =>{
-    //   window.addEventListener('keydown', closeImageOverlayByEscKey );
-
-    //   return() =>{
-    //     window.removeEventListener('keydown', closeImageOverlayByEscKey );
-    //   }
-    // })
     
     const toggleOverlay = (miniImage: IMiniImage) =>{
       setIsOpenOverlay(prev => !prev);

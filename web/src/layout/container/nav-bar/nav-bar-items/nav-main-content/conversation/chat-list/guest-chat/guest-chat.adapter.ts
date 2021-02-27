@@ -25,13 +25,10 @@ function GuestChatAdapter(props : IGuestChat){
         })
     }
 
-    useEffect(() => {
-        console.log(isVisibleReaction)
-     }, [isVisibleReaction]);
 
     const addReaction = (event: any) => {
-        console.log(event);
-        console.log(props.messageId);
+        // console.log(event);
+        // console.log(props.messageId);
     }
 
     const copyText = () =>{
