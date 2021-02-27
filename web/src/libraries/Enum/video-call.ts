@@ -18,4 +18,5 @@ export const ENUM_TYPE_STATUS_VIDEO_CALL = {
     MISSED_CALL_VIDEO  : "2",// Nhỡ cuộc gọi video
     CALL_AWAY_CALL_VIDEO :"3",// Cuộc gọi đi
     INCOMING_CALL_VIDEO :"4",// Cuộc gọi đến
+    CLOSE_CALL_VIDEO :"5",// Cuộc gọi đến
 }

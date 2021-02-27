@@ -180,7 +180,7 @@ var interfaceConfig = {
     SHOW_DEEP_LINKING_IMAGE: false,
     SHOW_JITSI_WATERMARK: true,
     SHOW_POWERED_BY: false,
-    SHOW_PROMOTIONAL_CLOSE_PAGE: true,
+    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
 
     /*
      * If indicated some of the error dialogs may point to the support URL for
