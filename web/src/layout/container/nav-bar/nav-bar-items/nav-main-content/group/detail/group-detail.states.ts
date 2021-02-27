@@ -17,7 +17,7 @@ function GroupDetailStates() {
     const [memberInGroup , setMemberInGroup] = useState<any[]>([]);
     const [activeLi , setActiveLi] = useState<number>(ENUM_KIND_OF_CONVERSATIONDETAIL.MEMBER);
     const [isOpenOverlay , setIsOpenOverlay] = useState<boolean>(false);
-    const [iconnoti , setIconnoti] = useState("");
+    const [hasNoti , setHasNoti] = useState<boolean>(true);
     const [miniImageList , setMiniImageList] = useState<any[]>([]);
     const [mainImage , setMainImage] = useState<IMiniImage>({
       index:-1,
@@ -31,7 +31,7 @@ function GroupDetailStates() {
     return {
         activeLi , setActiveLi,
         isOpenOverlay , setIsOpenOverlay,
-        iconnoti , setIconnoti,
+        hasNoti , setHasNoti,
         mainImage , setMainImage,
         memberInGroup , setMemberInGroup,
         linkInGroup , setLinkInGroup,

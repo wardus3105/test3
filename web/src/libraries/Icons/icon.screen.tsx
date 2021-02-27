@@ -43,7 +43,6 @@ import { ReactComponent as IconUserProfileSquare } from './user-profile-square.s
 import { ReactComponent as IconQuestionCircle } from './question-circle.svg';
 import { ReactComponent as IconPenEdit2 } from "./pen-edit-2.svg";
 
-
 export {
     IconSearchLoupe,
     IconSetupWizard,

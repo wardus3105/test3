@@ -3,8 +3,6 @@ import CircleAvatarScreen from '../../libraries/Features/circle-avtar/circle-ava
 import DetailPopupScreen from '../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import MainPopupScreen from '../../libraries/Features/popup/main-popup/main-popup.screen';
 import './header.scss';
-// import { ReactComponent as IconGridLayout } from '../../libraries/Icons/grid-layout.svg';
-// import { ReactComponent as IconLogoColorFull } from '../../libraries/Icons/logo-color-full.svg';
 import { IconBellNotificationOn, IconGridLayout, IconLogoColorFull, IconQuestionCircle, IconSignoutRight, IconUserProfileSquare } from '../../libraries/Icons/icon.screen';
 
 function HeaderScreen(props : any) {

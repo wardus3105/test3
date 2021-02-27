@@ -13,7 +13,6 @@ import { ENUM_KIND_OF_NOTFOUNDICON } from '../../../../../../../../libraries/Enu
 import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-time-period-between-times';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
-import ConversationDetailScreen from '../../../conversation-detail/main/conversation-detail.screen';
 import ImageOverlayScreen from '../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
 
 function ChatListScreen(props: any) {
@@ -90,7 +89,6 @@ function ChatListScreen(props: any) {
                 // }
 
                 const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null);
-                console.log("🚀 ~ file: chat-list.screen.tsx ~ line 86 ~ returnlist.map ~ respondedMess", respondedMess)
 
                 const eleContext = (
                     <div className="maincontext">
@@ -138,7 +136,7 @@ function ChatListScreen(props: any) {
                             roomId={roomId}
                             type={chat.messageType}
                             user={chat.user}
-                            context={chat.message}
+                            context={chat.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? chat.attachments[0]?.name : chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
                         >

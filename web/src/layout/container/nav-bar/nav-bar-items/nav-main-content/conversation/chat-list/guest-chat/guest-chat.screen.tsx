@@ -5,9 +5,8 @@ import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/
 import './guest-chat.scss';
 import GuestChatAdapter from './guest-chat.adapter';
 import { IGuestChat } from './guest-chat.props';
-import { ReactComponent as IconSmileCircle } from '../../../../../../../../libraries/Icons/smile-circle.svg'
 import { Picker } from 'emoji-mart'
-import { IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
+import { IconShareArrowLeftLine, IconSlidesSquare, IconSmileCircle } from '../../../../../../../../libraries/Icons/icon.screen';
 import useOutsideClick from '../../../../../../../../libraries/Hooks/useOutsideClick';
 
 

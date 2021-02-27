@@ -2,13 +2,13 @@ import React from 'react';
 import CustomInputScreen from '../../../../../../../../libraries/Features/custom-input/custom-input.screen';
 import GoBackButtonScreen from '../../../../../../../../libraries/Features/goback-button/goback-button.screen';
 import IconCirclePanel from '../../../../../../../../libraries/Features/icon-circle-panel/icon-circle-panel.screen';
+import { SrcCameraAdd } from '../../../../../../../../libraries/Icons/icon-src';
 import { IconCameraAddWhite } from '../../../../../../../../libraries/Icons/icon.screen';
 
 import HeaderCreateGroupAdapter from './header-create-group.adapter';
 import { IHeaderCreateGroup } from './header-create-group.props';
 import './header-create-group.scss';
 
-const iconCameraAdd = require("../../../../../../../../libraries/Icons/camera-add.svg").default;
 
 const styleCustomInput = {
     padding:'10px 55px 10px 10px',
@@ -17,6 +17,7 @@ const styleCustomInput = {
 }
 
 function HeaderCreateGroupScreen(props: IHeaderCreateGroup) {
+
     const  {
         avatarTemp,
         hasHover,
@@ -25,7 +26,7 @@ function HeaderCreateGroupScreen(props: IHeaderCreateGroup) {
 
     const { title , setTitle, slogan , setSlogan } = props;
 
-    const srcIcon = avatarTemp.length > 0 ? avatarTemp[0] : iconCameraAdd;
+    const srcIcon = avatarTemp.length > 0 ? avatarTemp[0] : SrcCameraAdd;
 
     return (
         <div className="headercreategroup-container padding-16">
@@ -37,12 +38,13 @@ function HeaderCreateGroupScreen(props: IHeaderCreateGroup) {
                 <div className="headercreategroup-addavatarandname flex-center">
                     <div className="headercreategroup-addedavatar margin-right-8">
                         <IconCirclePanel 
-                        srcIcon={ srcIcon } 
-                        width="64px" 
-                        height="64px" 
-                        padding={ avatarTemp.length > 0 ? "" : "1rem" } 
-                        class={ "" } 
-                        onClick={ handleFileSelect }
+                            icon={ null }
+                            srcIcon={ srcIcon } 
+                            width="64px" 
+                            height="64px" 
+                            padding={ avatarTemp.length > 0 ? "" : "1rem" } 
+                            class={ "" } 
+                            onClick={ handleFileSelect }
                         ></IconCirclePanel>
                         {
                             hasHover && (

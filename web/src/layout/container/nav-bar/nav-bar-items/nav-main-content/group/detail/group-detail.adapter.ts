@@ -7,14 +7,11 @@ import useKeyDown from "../../../../../../../libraries/Hooks/useKeyDown";
 import GroupDetailServices from "./group-detail.services";
 import GroupDetailStates from "./group-detail.states";
 
-const iconBellNotificationOn = require("../../../../../../../libraries/Icons/bell-notification-on.svg").default;
-const iconBellNotificationOff = require("../../../../../../../libraries/Icons/bell-notification-off.svg").default;
-
 function GroupDetailAdapter() {
     const {
         activeLi, setActiveLi,
         isOpenOverlay, setIsOpenOverlay,
-        iconnoti, setIconnoti,
+        hasNoti , setHasNoti,
         mainImage, setMainImage,
         imageInGroup, setImageInGroup,
         memberInGroup, setMemberInGroup,
@@ -54,9 +51,6 @@ function GroupDetailAdapter() {
         getData();
     }, [setMemberInGroup, setGroupDetail, roomId])
 
-    useEffect(() => {
-        setIconnoti(iconBellNotificationOn)
-    }, [setIconnoti])
 
     // useEffect(() =>{
     //     window.addEventListener('keydown', closeImageOverlayByEscKey );
@@ -102,19 +96,11 @@ function GroupDetailAdapter() {
         setMainImage(miniImage);
     }
 
-    const toggleNoti = () => {
-        if (iconnoti === iconBellNotificationOn) {
-            setIconnoti(iconBellNotificationOff)
-        } else {
-            setIconnoti(iconBellNotificationOn)
-        }
-    }
 
     return {
-        toggleNoti,
         activeLi,
         toggleOverlay,
-        iconnoti,
+        hasNoti , setHasNoti,
         isOpenOverlay,
         mainImage,
         onChangeActiveLi,

@@ -1,6 +1,8 @@
 import moment from 'moment';
 import React from 'react';
+import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/message';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../../libraries/Enum/shape_of_message';
+import getApiUrl from '../../../../../../../../../libraries/Functions/get-api-url';
 import getTimePeriodFromNow from '../../../../../../../../../libraries/Functions/get-time-period-from-now';
 import './text-context-chat.scss';
 
@@ -40,42 +42,51 @@ function TextContextChatScreen(props : any){
         return ""
     }
 
+
+
+    const getView = () =>{
+        const url = respondedMess.attachments.length > 0 ? respondedMess.attachments[0].name : respondedMess.message
+
+        return respondedMess.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? (
+            <div className={"imagechat-container cursor-pointer " + ( isCurrent ? "margin-left-auto" : "" )}>
+                <img src={ getApiUrl(url)} alt=""/>
+            </div>
+        ) : (
+            <>
+                { 
+                    isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
+                }
+                <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
+                    <span className="margin-left-8">
+                        {/* Nội dung phản hồi */}
+                        { respondedMess.message }
+                    </span>
+
+                    <span className="chat-time">
+                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                        { getTimePeriodFromNow(respondedMess.createdAt) }
+                    </span>
+                </div>
+            </>
+        )
+    }
+
     if(context){
         return (
             <>
-                {/* <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }> */}
-                    <div className="textcontext-container">
-                        {
-                            respondedMess && (
-                                <>
-                                    {
-                                        isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
-                                    }
-                                    <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
-                                        <span className="margin-left-8">
-                                            {/* Nội dung phản hồi */}
-                                            { respondedMess.message }
-                                        </span>
-
-                                        <span className="chat-time">
-                                            {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                            { getTimePeriodFromNow(respondedMess.createdAt) }
-                                        </span>
-                                    </div>
-                                </>
-
-                            )
-                        }
+                <div className="textcontext-container">
+                    {
+                        respondedMess && getView()
+                    }
+                </div>
+                <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
+                        { showContext() }    
+                        <span className="chat-time">
+                            {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                            { datetime }
+                        </span>
                     </div>
-                    <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
-                            { showContext() }    
-                            <span className="chat-time">
-                                {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                { datetime }
-                            </span>
-                        </div>
-                    <div className={"reaction-icon"}>😀1</div>
-                {/* </div> */}
+                <div className={"reaction-icon"}>😀1</div>
             </>
  
         )
@@ -85,3 +96,5 @@ function TextContextChatScreen(props : any){
 }
 
 export default TextContextChatScreen;
+
+
