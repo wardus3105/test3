@@ -1,8 +1,7 @@
 import React from 'react';
 import './circle-avatar.scss';
 import { ICircleAvatar } from './circle-avatar.props';
-
-const iconDeleteDisabled = require('../../Icons/delete-disabled.svg').default;
+import { IconDeleteDisabled } from '../../Icons/icon.screen';
 
 function CircleAvatarScreen(props : ICircleAvatar) {
 
@@ -29,10 +28,10 @@ function CircleAvatarScreen(props : ICircleAvatar) {
       >
         { 
           canRomove && <div className="circleavatar-remove flex-center cursor-pointer" onClick={ onRemove }>
-                                <img src={ iconDeleteDisabled } alt="" />
+                                <IconDeleteDisabled></IconDeleteDisabled>
                               </div>  
         }
-        { notiIcon && <img className="circleavatar-online" src={ notiIcon } alt="" /> }
+        { notiIcon && <div className="circleavatar-noti">{ notiIcon }</div> }
       </div> 
     </>
   );

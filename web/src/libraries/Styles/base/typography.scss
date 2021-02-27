@@ -188,12 +188,28 @@ h4 {
     color: $neutral-midnight;
 }
 
+.subtitle-bold-2 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    color: $neutral-fiord;
+}
+
 .subtitle-regular {
     font-style: normal;
     // font-weight: bold;
     font-size: 12px;
     line-height: 18px;
     color: $neutral-midnight;
+}
+
+.subtitle-regular-2 {
+    font-style: normal;
+    // font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    color: $neutral-regent-gray;
 }
 
 .subtitle-hint {

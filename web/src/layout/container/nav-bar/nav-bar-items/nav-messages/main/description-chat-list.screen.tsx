@@ -3,17 +3,16 @@ import DescriptionChatScreen from '../description-chat/description-chat.screen';
 import HeaderDescriptionChatListScreen from '../header/header-description-chat-list.screen';
 import './description-chat-list.scss';
 import DescriptionChatListAdapter from './description-chat-list.adapter';
-
 import { IDescriptionChat } from '../description-chat/description-chat.props';
 import { ENUM_KIND_OF_ICONPANEL } from '../../../../../../libraries/Enum/icon-panel';
 import CustomInputScreen from '../../../../../../libraries/Features/custom-input/custom-input.screen';
 import { SearchFieldScreen } from '../../../../../../features/nav-detail/search-field';
 import InfiniteScrollFieldScreen from '../../../../../../libraries/Features/infinity-scroll-field/infinity-scroll-field.screen';
+import { SrcSearchLoupe } from '../../../../../../libraries/Icons/icon-src';
 
-const iconSearchLoupe = require("../../../../../../libraries/Icons/search-loupe.svg").default;
 
 const styleCustomInput = {
-  backgroundImage: `url('${iconSearchLoupe}')`,
+  backgroundImage: `url('${SrcSearchLoupe}')`,
   backgroundPosition: "3% 50%",
   padding: "12px 20px 12px 40px",
   borderRadius: "0.7rem",

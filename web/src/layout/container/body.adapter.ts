@@ -1,21 +1,25 @@
 import useWindowSize from "../../libraries/Hooks/useWindowSize";
 import BodyStates from "./body.states";
 
-function BodyAdapter(props: any){
+function BodyAdapter(){
     const { activedIcon , setActivedIcon } = BodyStates()
-    const { height } = useWindowSize();
-    const { hasNavbar } = props;
+    const { width ,  height } = useWindowSize();
   
     const eleHeader: any = document.querySelector('.header-container');
-    const heightHeader = eleHeader ? eleHeader.offsetHeight : 50
-    const styleInline = {
+    const heightHeader = eleHeader ? eleHeader.offsetHeight : 50;
+
+    const styleInlineBody = {
       height: height- heightHeader
+    }
+
+    const styleInlineBodyRight={
+      height : width < 768 ? height - 100 : ""
     }
 
     return {
         activedIcon , setActivedIcon,
-        hasNavbar,
-        styleInline
+        styleInlineBody,
+        styleInlineBodyRight
     }
 }
 

@@ -3,7 +3,6 @@ import PageNotFoundModalState from './page-not-found-modal.state';
 import './loss-network-modal.scss';
 import { IconDeleteDisabled, IconWifiOff } from '../../libraries/Icons/icon.screen';
 
-
 function PageNotFoundModalScreen() {
   
   const {

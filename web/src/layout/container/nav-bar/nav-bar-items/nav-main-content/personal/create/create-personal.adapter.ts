@@ -25,10 +25,6 @@ function CreatePersonalAdapter(){
     }, [])
 
     useEffect(() => {
-        console.log(companyMemberList)
-    }, [companyMemberList]);
-
-    useEffect(() => {
         if (textSearch !== "") {
             verify(textSearch);
         }

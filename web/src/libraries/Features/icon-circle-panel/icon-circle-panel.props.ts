@@ -1,8 +1,9 @@
 export interface  IIconCirclePanel{
-    srcIcon: string,
+    icon?: any,
     class: string,
     padding:string,
     width?:string,
     height?:string,
     onClick?:any
+    srcIcon?:any
 }

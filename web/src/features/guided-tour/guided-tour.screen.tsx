@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Joyride from 'react-joyride';
 import GuidedTourStates from './guided-tour.states';
 import './guided-tour.scss';
-
 import { IconCelebrationRafiki, IconDeleteDisabled, IconSetupWizard } from '../../libraries/Icons/icon.screen';
 
 const eleFirstStep = (

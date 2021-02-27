@@ -1,6 +1,4 @@
-export const URL_PATHS={
-    API_CHAT_ROOM: "api/chat-rooms",
-     
+export const URL_PATHS={  
     GET_CONVERSATIONLIST:"api/chat-rooms", 
     GET_COMPANYMEMBERLIST:"api/user",
     GET_COMPANYMEMBERLIST_BYQUERY:"search-user",

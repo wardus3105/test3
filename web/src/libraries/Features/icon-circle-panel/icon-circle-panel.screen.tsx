@@ -9,8 +9,11 @@ function IconCirclePanel(props : IIconCirclePanel) {
     height: props.height ? props.height : "",
   }
   return (
-    <div className={ props.class ? ("iconcirclepanel-container " + props.class) : "iconcirclepanel-container"} style={ style } onClick={ props.onClick }>
-      <img src={ props.srcIcon } alt=""/>
+    <div className={ "iconcirclepanel-container " + props.class } style={ style } onClick={ props.onClick }>
+      { props.icon && props.icon }
+      { props.srcIcon && (
+        <img src={ props.srcIcon } alt=""/>
+      )}
     </div>
   );
 }

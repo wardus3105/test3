@@ -21,7 +21,7 @@ function ChatListAdapter(props: any) {
     const chatlistRef = useRef<HTMLInputElement>(null);
 
     const { chats, count, page, setPage, isUpdating, roomId, setRespondedMess } = props;
-
+    console.log("Count : " + count)
     const {
         isMainLoading, setIsMainLoading,
         userid, setUserid,
@@ -41,12 +41,24 @@ function ChatListAdapter(props: any) {
     })
 
     useEffect(() => {
-        console.log('test_init_app...');
-        const userId: string = localStorage.getItem("userId") || "";
-        if (userId) {
-            //   pushStreamService.subChat(userId);
+        const getData = async () => {
+            const response = await ChatListServices().getInstance().getAttachmentImageGroupDetail(roomId , 1);
+            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                const result = response.data.data;
+                setMiniImageList(result);
+            }
         }
-    }, []);
+
+        getData();
+    }, [setMiniImageList, roomId])
+
+    // useEffect(() => {
+    //     const userId: string = localStorage.getItem("userId") || "";
+    //     if (userId) {
+    //         console.log('test_init_app...');
+    //         pushStreamService.subChat(userId);
+    //     }
+    // }, []);
 
     useLayoutEffect(() => {
         if (chatlistRef.current) {
@@ -54,7 +66,7 @@ function ChatListAdapter(props: any) {
                 chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight;
             } else {
                 if (!isUpdating) {
-                    chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight / 2;
+                    chatlistRef.current.scrollTop = chatlistRef.current.scrollHeight / 4;
                 }
             }
         }
@@ -67,7 +79,7 @@ function ChatListAdapter(props: any) {
 
     useEffect(() => {
         if (roomId === roomIdz) {
-            setChatList(prev => [...chats, ...prev])
+            setChatList(prev => [ ...prev ,...chats ])
         } else {
             setRoomIdz(roomId);
             setChatList(chats)
@@ -100,105 +112,76 @@ function ChatListAdapter(props: any) {
     const { handleScroll } = useScroll(page, setPage, count, isUpdating, chatlistRef, true)
 
 
-    // const observer = useRef<any>();
-    // const lastMessageRef = useCallback(node => {
-    //     if (loading) return
-    //     if (observer.current) observer.current.disconnect()
-    //     observer.current = new IntersectionObserver(entries => {
-    //         if (entries[0].isIntersecting && hasMore) {
-    //             console.log(111)
-    //             // setPageNum(prevPageNumber => prevPageNumber + 1)
-    //         }
-    //     })
-    //     if (node) observer.current.observe(node)
-    // }, [loading, hasMore]);
-
-    const pushStreamService = {
-        messageReceived: (message: any, userid: string) => {
-            console.log("-----Message Received-----");
-            const messageReceived = JSON.parse(message)
-
-            if (messageReceived.value.user !== userid) {
-                const chats = [{
-                    chatRoomId: messageReceived.value.chatId,
-                    message: messageReceived.value.text,
-                    messageStatus: "1",
-                    messageType: "1",
-                    user: { userName: "chat.app6", status: "1" },
-                    userId: messageReceived.value.user
-                }]
-
-                setChatList(prev => [...chats, ...prev])
-            }
-
-        },
-
-        subChat: (userId: string) => {
-            console.log("-----Sub chat-----");
-            console.log(`ws://172.20.50.77:31000/ws?Channels=` + userId);
-            socket = new ReconnectingWebSocket(
-                `ws://172.20.50.77:31000/ws?Channels=` + userId,
-                [],
-                options
-            );
-
-            socket.onopen = () => {
-                // connection opened
-                console.log("test_Connected");
-                console.log(`test_ws://172.20.50.77:31000/ws?Channels=` + userId);
-            };
-
-            socket.onmessage = (e) => {
-                console.log("-----on message");
-                pushStreamService.messageReceived(
-                    decodeURIComponent(JSON.parse(e.data).text),
-                    userId
-                );
-            };
-
-            socket.onerror = (e: any) => {
-                // an error occurred
-                console.log("test_socket_err: ", e);
-            };
-
-            socket.onclose = (e: any) => {
-                console.log(
-                    "test_Socket is closed. Reconnect will be attempted in 1 second.",
-                    e.reason
-                );
-            };
-            // sockets.push(ws);
-        },
-        closeSocket: () => {
-            console.log("test_closeSocket");
-            socket.close();
-        },
-        closeAllSocket: () => {
-            console.log("test_closeAllSocket");
-            sockets.map((s) => s.close());
-        },
-    };
     const toggleOverlay = (miniImage: IMiniImage) => {
         setIsOpenOverlay(prev => !prev);
         setMainImage(miniImage);
     }
-    const closeImageOverlayByEscKey = (e: KeyboardEvent) => {
-        if (e.keyCode === 27) {
-            setIsOpenOverlay(false);
-        }
-    }
-    useEffect(() => {
-        const getData = async () => {
-            const response = await ChatListServices().getInstance().getAttachmentImageGroupDetail(roomId);
-            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
-                const result = response.data.data;
-                setMiniImageList(result);
-            }
-        }
-        getData();
-    }, [setMiniImageList, roomId])
 
+    // const pushStreamService = {
+    //     messageReceived: (message: any, userid: string) => {
+    //         console.log("-----Message Received-----");
+    //         const messageReceived = JSON.parse(message)
 
+    //         if (messageReceived.value.user !== userid) {
+    //             const chats = [{
+    //                 chatRoomId: messageReceived.value.chatId,
+    //                 message: messageReceived.value.text,
+    //                 messageStatus: "1",
+    //                 messageType: "1",
+    //                 user: { userName: "chat.app6", status: "1" },
+    //                 userId: messageReceived.value.user
+    //             }]
+
+    //             setChatList(prev => [...chats, ...prev])
+    //         }
+
+    //     },
+
+    //     subChat: (userId: string) => {
+    //         console.log("-----Sub chat-----");
+    //         console.log(`ws://172.20.50.77:31000/ws?Channels=` + userId);
+    //         socket = new ReconnectingWebSocket(
+    //             `ws://172.20.50.77:31000/ws?Channels=` + userId,
+    //             [],
+    //             options
+    //         );
+
+    //         socket.onopen = () => {
+    //             // connection opened
+    //             console.log("test_Connected");
+    //             console.log(`test_ws://172.20.50.77:31000/ws?Channels=` + userId);
+    //         };
+
+    //         socket.onmessage = (e) => {
+    //             console.log("-----on message");
+    //             pushStreamService.messageReceived(
+    //                 decodeURIComponent(JSON.parse(e.data).text),
+    //                 userId
+    //             );
+    //         };
+
+    //         socket.onerror = (e: any) => {
+    //             // an error occurred
+    //             console.log("test_socket_err: ", e);
+    //         };
+
+    //         socket.onclose = (e: any) => {
+    //             console.log(
+    //                 "test_Socket is closed. Reconnect will be attempted in 1 second.",
+    //                 e.reason
+    //             );
+    //         };
+    //         // sockets.push(ws);
+    //     },
+    //     closeSocket: () => {
+    //         console.log("test_closeSocket");
+    //         socket.close();
+    //     },
+    //     closeAllSocket: () => {
+    //         console.log("test_closeAllSocket");
+    //         sockets.map((s) => s.close());
+    //     },
+    // };
 
     return {
         userid,

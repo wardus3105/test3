@@ -18,20 +18,14 @@ import ModalScreen from '../../../../../../../libraries/Features/modal/modal.scr
 import IconCirclePanel from '../../../../../../../libraries/Features/icon-circle-panel/icon-circle-panel.screen';
 import getApiUrl from '../../../../../../../libraries/Functions/get-api-url';
 import ImageOverlayScreen from '../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
-import { IconChatMessage2Line, IconEyesShowVisible, IconTrashDeleteBin, IconUserLine } from '../../../../../../../libraries/Icons/icon.screen';
-
-const iconUserLineAdd = require("../../../../../../../libraries/Icons/user-line-add.svg").default;
-const iconSignoutRight = require("../../../../../../../libraries/Icons/signout-right.svg").default;
-const iconTrashDeleteBin = require("../../../../../../../libraries/Icons/trash-delete-bin.svg").default;
-const iconBellNotificationOn = require("../../../../../../../libraries/Icons/bell-notification-on.svg").default;
+import { IconBellNotificationOff, IconBellNotificationOn, IconChatMessage2Line, IconEyesShowVisible, IconSignoutRight, IconTrashDeleteBin, IconUserLine, IconUserLineAdd } from '../../../../../../../libraries/Icons/icon.screen';
 
 function GroupDetailScreen() {
 
   const {
-    toggleNoti,
     activeLi,
     toggleOverlay,
-    iconnoti,
+    hasNoti , setHasNoti,
     isOpenOverlay,
     mainImage,
     onChangeActiveLi,
@@ -80,9 +74,8 @@ function GroupDetailScreen() {
       memberInGroup.sort(function (prev, next) { return prev.is_admin + "" === ENUM_KIND_OF_STATUS.ACTIVE ? -1 : next.is_admin + "" === ENUM_KIND_OF_STATUS.ACTIVE ? 1 : 0; });
 
       return memberInGroup.map((member: any, index: number) => {
-        console.log(member);
+
         const isAdmin = member.isAdmin + "" === ENUM_KIND_OF_STATUS.ACTIVE;
-        console.log('member ' + index + ": " + isAdmin)
         return (
           <>
             <div className="bodycreategroup-main-body-selecteduserpanel">
@@ -108,9 +101,6 @@ function GroupDetailScreen() {
                   isAdmin ?
                     <></>
                     : <MainPopupScreen context={eleDetailPopup}>
-                      {/* <div>
-                        <img src={iconMoreVertical} className="descriptionchatlist-icon-penedit" alt="" />
-                      </div> */}
                         <div className="cursor-pointer flex-center img-24">
                           <div className="vertical3dots"></div>
                       </div>
@@ -236,8 +226,6 @@ function GroupDetailScreen() {
         <div className="popupsignoutgroup-button">
           <button onClick={close} className="btn-outline" >Hủy</button>
           <button>Xác nhận</button>
-          {/* <CustomButtonScreen onClick={close} text={"Hủy"} class="default"></CustomButtonScreen> */}
-          {/* <CustomButtonScreen onClick={null} text={"Xác nhận"} class="primary"></CustomButtonScreen> */}
         </div>
       </div>
     )
@@ -251,25 +239,30 @@ function GroupDetailScreen() {
     <>
       <ModalScreen open={false} headerContent={"Thêm thành viên"} context={eleContent} hasPadding={false}>
         <div>
-          <IconCirclePanel srcIcon={iconUserLineAdd} class="" padding="0.8rem"></IconCirclePanel>
+          <IconCirclePanel icon={ <IconUserLineAdd></IconUserLineAdd> } class="" padding="0.8rem"></IconCirclePanel>
           <p>Thêm thành viên</p>
         </div>
       </ModalScreen>
       <div>
-        <IconCirclePanel srcIcon={iconnoti} class="" padding="0.8rem" onClick={toggleNoti}></IconCirclePanel>
+        <IconCirclePanel 
+          icon={ hasNoti ? <IconBellNotificationOn></IconBellNotificationOn> : <IconBellNotificationOff></IconBellNotificationOff> } 
+          class="" 
+          padding="0.8rem" 
+          onClick={ () =>{ setHasNoti(prev => !prev) }}
+        ></IconCirclePanel>
         <p>
-          {iconnoti === iconBellNotificationOn ? "Thông báo" : "Tắt thông báo"}
+          {hasNoti ? "Thông báo" : "Tắt thông báo"}
         </p>
       </div>
       <ModalScreen open={false} headerContent={"Xác nhận rời khỏi nhóm"} contextHasClose={eleContextSignout} hasPadding={false}>
         <div>
-          <IconCirclePanel srcIcon={iconSignoutRight} class="" padding="0.8rem"></IconCirclePanel>
+          <IconCirclePanel icon={ <IconSignoutRight></IconSignoutRight> } class="" padding="0.8rem"></IconCirclePanel>
           <p>Thoát nhóm</p>
         </div>
       </ModalScreen>
       <ModalScreen open={false} headerContent={"Xác nhận rời khỏi nhóm"} contextHasClose={eleContextSignout} hasPadding={false}>
         <div>
-          <IconCirclePanel srcIcon={iconTrashDeleteBin} class="" padding="0.8rem"></IconCirclePanel>
+          <IconCirclePanel icon={ <IconTrashDeleteBin></IconTrashDeleteBin> } class="" padding="0.8rem"></IconCirclePanel>
           <p>Xóa nhóm</p>
         </div>
       </ModalScreen>

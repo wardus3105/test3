@@ -13,11 +13,10 @@ import { ENUM_KIND_OF_NOTFOUNDICON } from '../../../../../../../../libraries/Enu
 import haveSameTimePeriod from '../../../../../../../../libraries/Functions/get-time-period-between-times';
 import { ENUM_KIND_OF_SHAPE_OF_MESSAGE } from '../../../../../../../../libraries/Enum/shape_of_message';
 import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/message';
-import ConversationDetailScreen from '../../../conversation-detail/main/conversation-detail.screen';
 import ImageOverlayScreen from '../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess , setEditedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess, setEditedMess } = props;
 
     const {
         userid,
@@ -39,6 +38,7 @@ function ChatListScreen(props: any) {
     const showAllMessages = () => {
         if (chatList && length > 0) {
             const list = [...chatList]
+            console.log(list)
             let datetimeContext = new Date(list[0].createdAt);
 
             return list.map((chat: any, index: number) => {
@@ -89,7 +89,7 @@ function ChatListScreen(props: any) {
                 //     eleDatetime = <DatetimeContextChatScreen datetime={ datetimeContext.format("DD/MM/YYYY") }></DatetimeContextChatScreen>;
                 // }
 
-                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null) ;
+                const respondedMess = chat.parent ? chat.parent : (chat.respondedMess ? chat.respondedMess : null);
 
                 const eleContext = (
                     <div className="maincontext">
@@ -103,16 +103,16 @@ function ChatListScreen(props: any) {
                                     listImage={miniImageList}
                                 ></ImageContextChatScreen>
                             ) : (
-                                <TextContextChatScreen
-                                    isCurrent={ isCurrent }
-                                    context={ chat.message }
-                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
-                                    shape={ shape }
-                                    time={ chat.createdAt }
-                                    index={ index }
-                                    respondedMess={ respondedMess }
-                                ></TextContextChatScreen>
-                            )
+                                    <TextContextChatScreen
+                                        isCurrent={isCurrent}
+                                        context={chat.message}
+                                        datetime={getTimePeriodFromNow(chat.createdAt)}
+                                        shape={shape}
+                                        time={chat.createdAt}
+                                        index={index}
+                                        respondedMess={respondedMess}
+                                    ></TextContextChatScreen>
+                                )
                         }
                     </div>
                 )
@@ -124,9 +124,9 @@ function ChatListScreen(props: any) {
                             context={chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
-                            userId={ userid }
-                            setChatList={ setChatList }
-                            setEditedMess={ setEditedMess }
+                            userId={userid}
+                            setChatList={setChatList}
+                            setEditedMess={setEditedMess}
                         >
                             {eleContext}
                         </CurrentChatScreen>
@@ -137,7 +137,7 @@ function ChatListScreen(props: any) {
                             roomId={roomId}
                             type={chat.messageType}
                             user={chat.user}
-                            context={chat.message}
+                            context={chat.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? chat.attachments[0]?.name : chat.message}
                             setRespondedMess={setRespondedMess}
                             messageId={chat.id}
                         >
@@ -146,7 +146,7 @@ function ChatListScreen(props: any) {
                     )
                 }
                 return (
-                    <div key={ index }>
+                    <div key={index}>
                         { eleMainContext}
                         { eleDatetime}
                     </div>
@@ -180,9 +180,9 @@ function ChatListScreen(props: any) {
                             </div>
                         )
                 }
-                {
+                {/* {
                     isOpenOverlay && (<ImageOverlayScreen close={toggleOverlay} miniImageList={miniImageList} mainMiniImage={mainImage}></ImageOverlayScreen>)
-                }
+                } */}
             </div>
         )
     }

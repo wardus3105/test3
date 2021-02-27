@@ -36,6 +36,7 @@ function ConversationAdapter() {
             const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
                 setListMessage(response.data.data)
+                setCount(response.data.totalPages)
             }
 
             const conversation: IConversation = {
@@ -52,7 +53,7 @@ function ConversationAdapter() {
         }
 
         getData();
-    }, [ setConversation , roomId , page , setCount , setIsUpdating , setIsGroup , setListMessage ]);
+    }, [ setConversation , roomId , page , setCount , setIsUpdating , setIsGroup , setListMessage , setPage ]);
 
     const onSearch = () =>{
         setHasSearch(prev => !prev)
