@@ -111,6 +111,7 @@ function ChatListScreen(props: any) {
                                     time={ chat.createdAt }
                                     index={ index }
                                     respondedMess={ respondedMess }
+                                    reactionList = { chat.reaction }
                                 ></TextContextChatScreen>
                             )
                         }
@@ -139,7 +140,8 @@ function ChatListScreen(props: any) {
                             user={chat.user}
                             context={chat.message}
                             setRespondedMess={setRespondedMess}
-                            messageId={chat.id}
+                            message={chat}
+                            setChatList={ setChatList }
                         >
                             { eleContext}
                         </GuestChatScreen>

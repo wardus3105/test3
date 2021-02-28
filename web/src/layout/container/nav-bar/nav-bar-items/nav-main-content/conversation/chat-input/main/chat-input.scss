@@ -30,9 +30,15 @@
       display: none;
     }
 
-    // .emoji-mart-preview {
-    //   display: none;
-    // }
+    .emoji-mart-scroll {
+      padding: 0 !important;
+    }
+
+    button {
+      height: auto !important;
+      min-width: 0 !important;
+      width: auto !important;
+    }
 
     button:hover {
       background: none;

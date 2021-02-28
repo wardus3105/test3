@@ -28,14 +28,21 @@ function ConversationAdapter() {
         !hasSearch && setQuery("");
     },[hasSearch , setQuery])
 
-
     useEffect(() => {
         const getData = async () => {
             setIsUpdating(true)
             
             const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setListMessage(response.data.data)
+                let listMessage = response.data.data;
+                for (let message of listMessage) {
+                    if (message["reaction"]) {
+                        message["reaction"] = JSON.parse(message["reaction"]);
+                        message["reaction"] = [...message["reaction"]]
+                        console.log(message["reaction"])
+                    }
+                }
+                setListMessage(listMessage)
             }
 
             const conversation: IConversation = {

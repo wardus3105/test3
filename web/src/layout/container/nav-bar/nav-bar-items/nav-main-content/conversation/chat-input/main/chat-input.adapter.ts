@@ -227,8 +227,6 @@ function ChatInputAdapter(props: any) {
     }
 
     const addEmoji = (event: any) => {
-        console.log(event)
-        console.log(event.native)
         let sym = event.unified.split('-')
         let codesArray: any = []
         sym.forEach((el: any) => codesArray.push('0x' + el))

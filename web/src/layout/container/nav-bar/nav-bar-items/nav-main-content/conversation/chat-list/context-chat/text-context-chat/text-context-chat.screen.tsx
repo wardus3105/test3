@@ -5,7 +5,7 @@ import getTimePeriodFromNow from '../../../../../../../../../libraries/Functions
 import './text-context-chat.scss';
 
 function TextContextChatScreen(props : any){
-    const { context , datetime , time , index , respondedMess , isCurrent } = props;
+    let { context , datetime , time , index , respondedMess , isCurrent, reactionList } = props;
 
     const showContext = () =>{
         const rows = context.split("\n");
@@ -40,42 +40,75 @@ function TextContextChatScreen(props : any){
         return ""
     }
 
+    // const showReactionList = () => {
+    //     if (reactionList) {
+    //         if (reactionList.constructor !== [{}].constructor) {
+    //             reactionList = JSON.parse(reactionList);
+    //             let list: any = [];
+    //             if (reactionList.constructor === [{}].constructor) {
+    //                 console.log(reactionList)
+    //                 // return reactionList.map((reaction: any, idx: number) => {
+    //                 //     <div className={"reaction-icon"}>{reaction.key}{reaction.userListId.length}</div>
+    //                 // })
+    //             }
+                    
+                
+    //         } else {
+    //             for (let reaction of reactionList) {
+    //                 // return <div className={"reaction-icon"}>{reaction.key}{reaction.userListId.length}</div>
+    //             }
+    //             // reactionList.map((reaction: any, idx: number) => {
+    //             //     return <div className={"reaction-icon"}>{reaction.key}{reaction.userListId.length}</div>
+    //             // })
+    //         }
+    //     }
+    // }
+
+
+    const showReaction = reactionList ? reactionList.map((reaction: any, idx: number) => {
+        return reaction.userListId ? (reaction.userListId.length > 0 ? ( <div className={"reaction-icon"}>
+                {reaction.key}
+                {reaction.userListId.length}
+            </div>) : '') : ''
+    }) : '';
+
     if(context){
         return (
             <>
-                {/* <div className={ "padding-12 " + (props.isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }> */}
-                    <div className="textcontext-container">
-                        {
-                            respondedMess && (
-                                <>
-                                    {
-                                        isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
-                                    }
-                                    <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
-                                        <span className="margin-left-8">
-                                            {/* Nội dung phản hồi */}
-                                            { respondedMess.message }
-                                        </span>
+                <div className="textcontext-container">
+                    {
+                        respondedMess && (
+                            <>
+                                {
+                                    isCurrent && <p>Bạn đã trời lời { respondedMess.user.userName }</p>
+                                }
+                                <div className={"textcontext-respondedmess "  + ( isCurrent ? "margin-left-auto" : "" )}>
+                                    <span className="margin-left-8">
+                                        {/* Nội dung phản hồi */}
+                                        { respondedMess.message }
+                                    </span>
 
-                                        <span className="chat-time">
-                                            {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                            { getTimePeriodFromNow(respondedMess.createdAt) }
-                                        </span>
-                                    </div>
-                                </>
+                                    <span className="chat-time">
+                                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                                        { getTimePeriodFromNow(respondedMess.createdAt) }
+                                    </span>
+                                </div>
+                            </>
+                        )
+                    }
+                </div>
+                    
+                <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
+                    { showContext() }    
+                    <span className="chat-time">
+                        {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
+                            { datetime }
+                    </span>
+                </div>
 
-                            )
-                        }
-                    </div>
-                    <div className={ "padding-12 " + (isCurrent ? "currentchat-text " : "guestchat-text ") + getClassByShape() }>
-                            { showContext() }    
-                            <span className="chat-time">
-                                {/* { props.shape + " --- " + moment(time).format("YYYY-MM-DD HH:mm:ss") + " --- " + index } */}
-                                { datetime }
-                            </span>
-                        </div>
-                    <div className={"reaction-icon"}>😀1</div>
-                {/* </div> */}
+                {/* {showReactionList()} */}
+
+                {showReaction}
             </>
  
         )
