@@ -3,35 +3,29 @@ import CircleAvatarScreen from '../../libraries/Features/circle-avtar/circle-ava
 import DetailPopupScreen from '../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import MainPopupScreen from '../../libraries/Features/popup/main-popup/main-popup.screen';
 import './header.scss';
+import { IconBellNotificationOn, IconGridLayout, IconLogoColorFull, IconQuestionCircle, IconSignoutRight, IconUserProfileSquare } from '../../libraries/Icons/icon.screen';
 
-const iconBellNotificationOn = require('../../libraries/Icons/bell-notification-on.svg').default;
-const iconQuestionCircle = require('../../libraries/Icons/question-circle.svg').default;
-const iconUserProfileSquare = require('../../libraries/Icons/user-profile-square.svg').default;
-const iconSignoutRight = require('../../libraries/Icons/signout-right.svg').default;
-const iconGridLayout = require('../../libraries/Icons/grid-layout.svg').default;
-const iconLogoColorFull = require('../../libraries/Icons/logo-color-full.svg').default;
-
-function HeaderScreen(props : any) {
+function HeaderScreen() {
 
   const listEles = [
     {
         onClick: null,
-        icon: iconBellNotificationOn,
+        icon: <IconBellNotificationOn></IconBellNotificationOn>,
         text: "Cài đặt thông báo"
     },
     {
         onClick: null,
-        icon: iconUserProfileSquare,
+        icon: <IconUserProfileSquare></IconUserProfileSquare>,
         text: "Hồ sơ của tôi"
     },
     {
         onClick: null,
-        icon: iconQuestionCircle,
+        icon: <IconQuestionCircle></IconQuestionCircle>,
         text: "Trợ giúp"
     },
     {
         onClick: null,
-        icon: iconSignoutRight,
+        icon: <IconSignoutRight></IconSignoutRight>,
         text: "Đăng xuất"
     },
   ];
@@ -64,8 +58,8 @@ function HeaderScreen(props : any) {
 
   return (
     <div className="header-container">
-      <img src={ iconGridLayout } className="header-icon-9dots step1 cursor-pointer" alt="9 dots"></img>
-      <img src={ iconLogoColorFull } className="header-icon-main cursor-pointer" alt="9 dots" ></img>
+      <IconGridLayout className="header-icon-9dots step1 cursor-pointer"></IconGridLayout>
+      <IconLogoColorFull className="header-icon-main cursor-pointer"></IconLogoColorFull>
 
       <div className="header-icon-avatar">
         <MainPopupScreen context={ eleDetailPopup }>

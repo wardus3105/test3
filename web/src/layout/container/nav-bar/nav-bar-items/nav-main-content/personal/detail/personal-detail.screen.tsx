@@ -15,7 +15,6 @@ const iconVideoCircleLine = require("../../../../../../../libraries/Icons/video-
 const iconBellNotificationOn = require("../../../../../../../libraries/Icons/bell-notification-on.svg").default;
 const iconBellNotificationOff = require("../../../../../../../libraries/Icons/bell-notification-off.svg").default;
 const iconChatMessage2LineWhite = require("../../../../../../../libraries/Icons/chat-message-2-line-white.svg").default;
-const iconSearchLoupe = require("../../../../../../../libraries/Icons/search-loupe.svg").default;
 
 const miniImageList :IMiniImage[] =[
   {
@@ -99,22 +98,6 @@ function PersonalDetailScreen() {
       author:"",
       srcImage:"",
     })
-
-    const closeImageOverlayByEscKey = (e: KeyboardEvent) =>{
-      if(e.keyCode === 27){
-        setIsOpenOverlay(false);
-      }
-    }
-
-    useKeyDown(closeImageOverlayByEscKey)
-
-    // useEffect(() =>{
-    //   window.addEventListener('keydown', closeImageOverlayByEscKey );
-
-    //   return() =>{
-    //     window.removeEventListener('keydown', closeImageOverlayByEscKey );
-    //   }
-    // })
     
     const toggleOverlay = (miniImage: IMiniImage) =>{
       setIsOpenOverlay(prev => !prev);
@@ -214,9 +197,6 @@ function PersonalDetailScreen() {
         </>
     );
 
-    // const eleSearch: React.ReactElement = (
-    //   <img src={ iconSearchLoupe } alt=""/>
-    // );
 
     const header:IHeaderConversationDetail = {
         name: "Trung Đức",

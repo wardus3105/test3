@@ -4,17 +4,14 @@ import { ENUM_KIND_OF_STATUS } from "../../../../../../../libraries/Enum/status"
 import CircleAvatarScreen from "../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen";
 import CustomInputScreen from "../../../../../../../libraries/Features/custom-input/custom-input.screen";
 import GoBackButtonScreen from "../../../../../../../libraries/Features/goback-button/goback-button.screen";
+import { SrcSearchLoupe } from "../../../../../../../libraries/Icons/icon-src";
 import { ICompanyMember } from "../../../nav-company-members/company-member/company-member.props";
 import InfiniteScrollCompanyMemberListScreen from "../../../nav-company-members/infinite-scroll/infinite-scroll-company-member-list.screen";
 import CreatePersonalAdapter from "./create-personal.adapter";
-
 import "./create-personal.scss";
 
-const iconSearchLoupe = require("../../../../../../../libraries/Icons/search-loupe.svg")
-  .default;
-
 const styleCustomInput = {
-  backgroundImage: `url('${iconSearchLoupe}')`,
+  backgroundImage: `url('${SrcSearchLoupe}')`,
   backgroundPosition: "2% 50%",
   padding: "12px 20px 12px 40px",
   borderRadius: "0.7rem",

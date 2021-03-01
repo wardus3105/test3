@@ -22,18 +22,20 @@
     }
 
     &.hasNotification {
-        span {
+        
+        div {
             position:relative;
-        }
-        span:after {
-            content: "";
-            position: absolute;
-            width:9px;
-            height:9px;
-            border-radius: 50%;
-            background-color: #FF4D54;
-            top:-1.5px;
-            right:-2.5px;
+
+            :after {
+                content: "";
+                position: absolute;
+                width:9px;
+                height:9px;
+                border-radius: 50%;
+                background-color: #FF4D54;
+                top:-1.5px;
+                right:-2.5px;
+            }
         }
     }
 

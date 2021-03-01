@@ -1,12 +1,11 @@
 import React from 'react';
 import './circle-avatar.scss';
 import { ICircleAvatar } from './circle-avatar.props';
-
-const iconDeleteDisabled = require('../../Icons/delete-disabled.svg').default;
+import { IconDeleteDisabled } from '../../Icons/icon.screen';
 
 function CircleAvatarScreen(props : ICircleAvatar) {
 
-  let { src , isOnline } = props;
+  let { src , isOnline , notiIcon , onRemove , canRomove , onClick } = props;
 
   if(!src){
     src = "https://cdn.dribbble.com/users/2199928/screenshots/11532918/shot-cropped-1590177932366.png?compress=1&resize=400x300";
@@ -15,8 +14,8 @@ function CircleAvatarScreen(props : ICircleAvatar) {
   const styleInline = { 
     backgroundImage : `url(${src})` , 
     backgroundColor:"#d7e4e2",
-    width: props.width , 
-    height: props.height,
+    minWidth: props.width , 
+    minHeight: props.height,
     cursor: props.hasCursor ? "pointer" : "initial"
   };
 
@@ -25,14 +24,14 @@ function CircleAvatarScreen(props : ICircleAvatar) {
       <div 
         className={ "circleavatar-container " + props.class + (isOnline ? " isOnline" : "") } 
         style={ styleInline }
-        onClick={ props.onClick && props.onClick }
+        onClick={ onClick && onClick }
       >
         { 
-          props.canRomove && <div className="circleavatar-remove flex-center cursor-pointer" onClick={ props.onRemove }>
-                                <img src={ iconDeleteDisabled } alt="" />
+          canRomove && <div className="circleavatar-remove flex-center cursor-pointer" onClick={ onRemove }>
+                                <IconDeleteDisabled></IconDeleteDisabled>
                               </div>  
         }
-        { props.notiIcon && <img className="circleavatar-online" src={ props.notiIcon } alt="" /> }
+        { notiIcon && <div className="circleavatar-noti">{ notiIcon }</div> }
       </div> 
     </>
   );

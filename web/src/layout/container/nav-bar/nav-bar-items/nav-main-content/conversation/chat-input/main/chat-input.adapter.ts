@@ -1,23 +1,23 @@
 import { ENUM_KIND_OF_ATTACHMENT } from './../../../../../../../../libraries/Enum/attachment';
 import { ENUM_KIND_OF_STATUS_CODE } from '../../../../../../../../libraries/Enum/status-code';
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { ENUM_KIND_OF_MESSAGE } from "../../../../../../../../libraries/Enum/message";
 import buildFileSelector from "../../../../../../../../libraries/Functions/build-file-selector";
-import { IAttachment, IChat } from "../../main/conversation.props";
+import { IAttachment } from "../../main/conversation.props";
 import ChatInputServices from "./chat-input.services";
 import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
 
 function ChatInputAdapter(props: any) {
-    const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess } = props;
+    const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess, editedMess, setEditedMess } = props;
 
     const {
         pathFileList, setPathFileList,
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile,
+        file, setFile,
         isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
@@ -33,11 +33,31 @@ function ChatInputAdapter(props: any) {
         setHasUploadImages(false);
         setFile(null)
         setPathFileList([])
+
     }, [roomId])
+
+    useEffect(() => {
+        if (editedMess) {
+            setMessage(editedMess.context)
+            setVisibleEmojiPicker(false)
+            setFile(null)
+            setPathFileList([])
+            setRespondedMess()
+        }
+    }, [editedMess, setMessage, setVisibleEmojiPicker, setPathFileList, setFile, setRespondedMess])
+
+    useEffect(() => {
+        if (editedMess) {
+
+            setEditedMess((prev: any) => ({ ...prev, context: message }));
+        } else {
+            setEditedMess()
+        }
+    }, [message, setEditedMess])
 
     const sendChat = async () => {
         const userId = localStorage.getItem('userId') || "";
-        let messageSend: IChat = {
+        let messageSend: any = {
             message: '',
             messageType: '',
             messageStatus: "1",
@@ -49,22 +69,51 @@ function ChatInputAdapter(props: any) {
             },
             chatRoomId: roomId,
             createdAt: new Date(),
-            attachments: [],
+            attachments: []
         }
         if (message) {
             messageSend.message = message;
             messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
             if (respondedMess) {
-                messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                messageSend = {
+                    ...messageSend, parentId: respondedMess.messageId, parent: {
+                        createdAt: new Date(),
+                        id: respondedMess.messageId,
+                        message: respondedMess.context,
+                        messageStatus: "1",
+                        messageType: respondedMess.type,
+                        parentId: "",
+                        status: "0",
+                        user: { userName: respondedMess.userName }
+                    }
+                }
             }
 
-            const response = await ChatInputServices().getInstance().sendMessage(messageSend);
-            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
-                setMessage("")
-                setRespondedMess()
+            if (editedMess) {
+                messageSend = { ...messageSend, id: editedMess.messageId }
 
-                setListMessage([messageSend]);
+                const response = await ChatInputServices().getInstance().editMessage(messageSend);
+                if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                    setListMessage((prev: any) => prev.map((message: any) => {
+                        if (message.id === editedMess.messageId) {
+                            return { ...message, message: messageSend.message }
+                        }
+                        return message;
+                    }));
 
+                    setEditedMess()
+                    setMessage("")
+                }
+            } else {
+                const response = await ChatInputServices().getInstance().sendMessage(messageSend);
+                if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                    const data = response.data.data;
+                    messageSend = { ...messageSend, id: data.id };
+
+                    setMessage("")
+                    setRespondedMess()
+                    setListMessage([messageSend]);
+                }
             }
         }
 
@@ -94,27 +143,28 @@ function ChatInputAdapter(props: any) {
                 }
                 messageSend.messageType = ENUM_KIND_OF_MESSAGE.ATTACHMENT;
                 messageSend.attachments = attachments;
-                // let messageSend: IChat = {
-                //     message: "",
-                //     messageType: ENUM_KIND_OF_MESSAGE.ATTACHMENT,
-                //     messageStatus: "1",
-                //     userId: userId,
-                //     user: {
-                //         userName: "Test 1",
-                //         status: "1",
-                //         id:userId
-                //     },
-                //     chatRoomId: roomId,
-                //     createdAt: new Date(),
-                //     attachments:attachments,
-                // }
+
 
                 if (respondedMess) {
-                    messageSend = { ...messageSend, parentId: respondedMess.messageId }
+                    messageSend = {
+                        ...messageSend, parentId: respondedMess.messageId, parent: {
+                            createdAt: new Date(),
+                            id: respondedMess.messageId,
+                            message: respondedMess.context,
+                            messageStatus: "1",
+                            messageType: respondedMess.type,
+                            parentId: "",
+                            status: "0",
+                            user: { userName: respondedMess.userName }
+                        }
+                    }
                 }
 
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                    const data = response.data.data;
+                    messageSend = { ...messageSend, id: data.id };
+
                     setFile(null)
                     setPathFileList([])
                     setHasUploadImages(false)
@@ -134,8 +184,10 @@ function ChatInputAdapter(props: any) {
     const fileSelector = buildFileSelector(true, cb, setFile)
 
     const handleFileSelect = (e: any) => {
-        e.preventDefault();
-        fileSelector.click();
+        if (!editedMess) {
+            e.preventDefault();
+            fileSelector.click();
+        }
     }
 
     const removePathFile = (pathFilez: string) => {
@@ -178,15 +230,11 @@ function ChatInputAdapter(props: any) {
     }
 
     const addEmoji = (event: any) => {
-        console.log(event)
-
         let sym = event.unified.split('-')
         let codesArray: any = []
         sym.forEach((el: any) => codesArray.push('0x' + el))
         let emoji: string = String.fromCodePoint(...codesArray)
         setMessage((prev) => prev + emoji);
-
-        console.log(message + emoji)
     }
 
     return {
@@ -198,9 +246,11 @@ function ChatInputAdapter(props: any) {
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage, sendChat,
+        message, setMessage, sendChat,
         setIsFocused, setListMessage,
-        addEmoji, isVisibleEmojiPicker, setVisibleEmojiPicker
+        addEmoji,
+        isVisibleEmojiPicker, setVisibleEmojiPicker,
+        editedMess, setEditedMess
     }
 }
 

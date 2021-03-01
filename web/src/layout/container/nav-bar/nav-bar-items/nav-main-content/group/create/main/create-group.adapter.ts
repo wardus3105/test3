@@ -27,12 +27,12 @@ function CreateGroupAdapter(){
 
     
     const createChatRoom = async () =>{
-        if(!avatar){
-            return warning("Bạn chưa tải ảnh lên")
-        }
-        if(!slogan){
-            return warning("Bạn chưa nhập slogan của nhóm")
-        }
+        // if(!avatar){
+        //     return warning("Bạn chưa tải ảnh lên")
+        // }
+        // if(!slogan){
+        //     return warning("Bạn chưa nhập slogan của nhóm")
+        // }
         if(!createBy){
             return warning("Bạn chưa nhập userid")
         }

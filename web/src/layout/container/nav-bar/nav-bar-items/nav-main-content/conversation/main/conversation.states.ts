@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IChat, IConversation, IResponseMess } from "./conversation.props";
+import { IChat, IConversation, IRespondedMess , IEditedMess } from "./conversation.props";
 
 function ConversationStates() {
     const [page , setPage] = useState<number>(1);
@@ -11,7 +11,9 @@ function ConversationStates() {
     const [hasSearch , setHasSearch] = useState<boolean>(false);
     const [conversation , setConversation] = useState<IConversation>();
     const [listMessage, setListMessage] = useState<IChat[]>([]);
-    const [respondedMess, setRespondedMess] = useState<IResponseMess>();
+    const [respondedMess, setRespondedMess] = useState<IRespondedMess>();
+    const [editedMess, setEditedMess] = useState<IEditedMess>();
+    const [memberInGroup , setMemberInGroup] = useState<any[]>([]);
     
     return {
         page , setPage,
@@ -23,7 +25,9 @@ function ConversationStates() {
         isGroup, setIsGroup,
         listMessage, setListMessage , 
         hasUploadImages, setHasUploadImages,
-        respondedMess, setRespondedMess
+        respondedMess, setRespondedMess,
+        editedMess, setEditedMess,
+        memberInGroup , setMemberInGroup
     }
 }
 

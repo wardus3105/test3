@@ -1,38 +1,43 @@
 import React from 'react';
 import DetailPopupScreen from '../../../../../../../../libraries/Features/popup/detail-popup/detail-popup.screen';
 import MainPopupScreen from '../../../../../../../../libraries/Features/popup/main-popup/main-popup.screen';
+import { IconPenEdit2, IconShareArrowLeftLine, IconSlidesSquare, IconTrashDeleteBin } from '../../../../../../../../libraries/Icons/icon.screen';
 import CurrentChatAdapter from './current-chat.adapter';
 import { ICurrentChat } from './current-chat.props';
 import './current-chat.scss';
 
-// const iconMoreHorizontal = require('../../../../../../../../libraries/Icons/more-horizontal.svg').default;
-const iconShareArrowLeftLine = require('../../../../../../../../libraries/Icons/share-arrow-left-line.svg').default;
-const iconSlidesSquare = require('../../../../../../../../libraries/Icons/slides-square.svg').default;
-const iconTrashDeleteBin = require('../../../../../../../../libraries/Icons/trash-delete-bin.svg').default;
 function CurrentChatScreen(props: ICurrentChat) {
 
     const {
         setResponMess,
-        copyText
+        copyText,
+        removeMessage,
+        editMessage
     } = CurrentChatAdapter(props);
 
     const listEles = [
         {
             onClick: setResponMess,
-            icon: iconShareArrowLeftLine,
+            icon: <IconShareArrowLeftLine></IconShareArrowLeftLine>,
             text: "Trả lời"
         },
         {
             onClick: copyText,
-            icon: iconSlidesSquare,
+            icon: <IconSlidesSquare></IconSlidesSquare>,
             text: "Sao chép"
         },
         {
-            onClick: null,
-            icon: iconTrashDeleteBin,
+            onClick: editMessage,
+            icon: <IconPenEdit2></IconPenEdit2>,
+            text: "Chỉnh sửa"
+        },
+        {
+            onClick: removeMessage,
+            icon: <IconTrashDeleteBin></IconTrashDeleteBin>,
             text: "Xóa"
         },
     ];
+    
     const eleDetailPopup = (onClosePopup: any) => (<DetailPopupScreen
         listEles={listEles}
         onClosePopup={onClosePopup}

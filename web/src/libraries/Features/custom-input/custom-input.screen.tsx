@@ -1,10 +1,8 @@
-import { ReactComponent } from '*.svg';
 import React, { ChangeEvent } from 'react';
+import { IconDeleteDisabled } from '../../Icons/icon.screen';
 import CustomInputAdapter from './custom-input.adapter';
 import { ICustomInput } from './custom-input.props';
 import './custom-input.scss';
-
-const iconDeleteDisabled = require('../../Icons/delete-disabled.svg').default;
 
 function CustomInputScreen(props : ICustomInput) {
   const {
@@ -48,7 +46,7 @@ function CustomInputScreen(props : ICustomInput) {
       }
       {
         (props.hasClearText && value) && (
-          <img src={ iconDeleteDisabled } alt="" onClick={ (e:any) =>{ clearText(e)} } className="custominput-icon-cleartext cursor-pointer"/>
+          <IconDeleteDisabled onClick={ (e:any) =>{ clearText(e)} } className="custominput-icon-cleartext cursor-pointer"></IconDeleteDisabled>
         )
       }
     </div>

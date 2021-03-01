@@ -8,6 +8,9 @@ export default function getTimePeriodFromNow(time:string){
     
         const daysBetween2Dates = duration.asDays();
         if(daysBetween2Dates >= 1){
+            if(lastTime.year() === now.year()){
+                return lastTime.format("DD/MM");
+            }
             return lastTime.format("DD/MM/YYYY");
         }
         const hour = Math.floor(duration.asHours());

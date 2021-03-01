@@ -61,11 +61,6 @@ function DescriptionChatScreen(props: IDescriptionChatComp) {
               lastMessage ? lastMessage : ""
             }
           </p>
-          {/* {
-            !hasRead && (
-              <img src={iconUnread} className="descriptionchat-icon-unread" alt="" />
-            )
-          } */}
         </div>      
       </div>
     </div>

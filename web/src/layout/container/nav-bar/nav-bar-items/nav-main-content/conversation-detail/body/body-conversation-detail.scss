@@ -19,11 +19,12 @@
                 text-align: center;
                 color: var(--color-text--gray);
                 cursor: pointer;
-                padding: 1rem 1.4rem;
+                padding: 16px 24px;
 
                 &.bodyconversationdetail-main-header-li--active{
                     color: var(--color-main) !important;
-                    border-bottom: 2px solid var(--color-main)
+                    position: relative;
+                    border-bottom: 3px solid var(--color-main)
                 }
             }
         } 

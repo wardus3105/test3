@@ -5,6 +5,7 @@ import useIdInPath from "../../../../../../../libraries/Hooks/useIdInPath";
 import ConversationServices from "./conversation.services";
 import ConversationStates from "./conversation.states";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../libraries/Enum/status-code";
+import GroupDetailServices from "../../group/detail/group-detail.services";
 
 function ConversationAdapter() {
     const history = useHistory();
@@ -20,7 +21,9 @@ function ConversationAdapter() {
         isGroup, setIsGroup,
         listMessage, setListMessage,
         hasUploadImages, setHasUploadImages,
-        respondedMess, setRespondedMess
+        respondedMess, setRespondedMess,
+        editedMess, setEditedMess,
+        memberInGroup , setMemberInGroup
     } = ConversationStates()
 
     useEffect(() => {
@@ -33,7 +36,16 @@ function ConversationAdapter() {
             
             const response = await ConversationServices().getInstance().getConversationList(roomId , page);
             if(response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS){
-                setListMessage(response.data.data)
+                let listMessage = response.data.data;
+                for (let message of listMessage) {
+                    if (message["reaction"]) {
+                        message["reaction"] = JSON.parse(message["reaction"]);
+                        message["reaction"] = [...message["reaction"]]
+                    }
+                }
+                setListMessage(listMessage)
+                // setListMessage(response.data.data)
+                setCount(response.data.totalPages)
             }
 
             const conversation: IConversation = {
@@ -50,7 +62,21 @@ function ConversationAdapter() {
         }
 
         getData();
-    }, [ setConversation , roomId , page , setCount , setIsUpdating , setIsGroup , setListMessage ]);
+    }, [ setConversation , roomId , page , setCount , setIsUpdating , setIsGroup , setListMessage , setPage ]);
+
+    // get list group member
+    useEffect(() => {
+        const getData = async () => {
+            
+            const response = await GroupDetailServices().getInstance().getGroupDetail(roomId);
+            if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
+                const result = response.data.data;
+                setMemberInGroup(result);
+            }
+
+        }
+        getData();
+    }, [roomId]);
 
     const onSearch = () =>{
         setHasSearch(prev => !prev)
@@ -73,7 +99,9 @@ function ConversationAdapter() {
         hasUploadImages, setHasUploadImages,
         redirectToDetail,
         respondedMess, setRespondedMess,
-        roomId
+        roomId,
+        editedMess, setEditedMess,
+        memberInGroup
     }
 }
 

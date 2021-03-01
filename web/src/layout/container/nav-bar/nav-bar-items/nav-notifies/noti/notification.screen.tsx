@@ -4,13 +4,9 @@ import CircleAvatarScreen from '../../../../../../libraries/Features/circle-avta
 import decodeHTML from '../../../../../../libraries/Functions/decode-html';
 import getTimePeriodFromNow from '../../../../../../libraries/Functions/get-time-period-from-now';
 import useWindowSize from '../../../../../../libraries/Hooks/useWindowSize';
+import { IconNotiLike, IconNotiReply, IconNotiSignout, IconNotiTag } from '../../../../../../libraries/Icons/icon.screen';
 import { INotification } from './notification.props';
 import './notification.scss';
-
-const iconNotiTag = require("../../../../../../libraries/Icons/noti-tag.svg").default;
-const iconNotiSignout = require("../../../../../../libraries/Icons/noti-signout.svg").default;
-const iconNotiLike = require("../../../../../../libraries/Icons/noti-like.svg").default;
-const iconNotiReply = require("../../../../../../libraries/Icons/noti-reply.svg").default;
 
 function NotificationScreen(props: INotification) {
     const { width } = useWindowSize();
@@ -33,13 +29,13 @@ function NotificationScreen(props: INotification) {
     const icon = () =>{
         switch (props.status) {
             case ENUM_KIND_OF_NOTIFICATION.REPLY:
-                return iconNotiReply;
+                return <IconNotiReply></IconNotiReply>;
             case ENUM_KIND_OF_NOTIFICATION.KICKED:
-                return iconNotiSignout;
+                return <IconNotiSignout></IconNotiSignout>;
             case ENUM_KIND_OF_NOTIFICATION.LIKE:
-                return iconNotiLike
+                return <IconNotiLike></IconNotiLike>
             case ENUM_KIND_OF_NOTIFICATION.TAG:
-                return iconNotiTag;
+                return <IconNotiTag></IconNotiTag>;
         }
     }
 

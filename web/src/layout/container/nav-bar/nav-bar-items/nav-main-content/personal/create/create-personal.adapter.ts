@@ -1,5 +1,4 @@
-import { setupMaster } from "cluster";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ENUM_KIND_OF_STATUS_CODE } from "../../../../../../../libraries/Enum/status-code";
 import CreatePersonalService from "./create-personal.services";
@@ -24,10 +23,6 @@ function CreatePersonalAdapter(){
     useEffect(() => {
         getData();
     }, [])
-
-    useEffect(() => {
-        console.log(companyMemberList)
-    }, [companyMemberList]);
 
     useEffect(() => {
         if (textSearch !== "") {
