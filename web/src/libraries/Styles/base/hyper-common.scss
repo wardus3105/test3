@@ -381,8 +381,12 @@
     fill: $state-bg-2;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor:  pointer !important; 
+}
+
+.cursor-default {
+    cursor: default !important;
 }
 
 .flex-center{
@@ -435,4 +439,12 @@
         position: absolute;
         bottom: 8px;       
     }
+}
+
+.color-neutral-white {
+    color: $neutral-white !important;
+}
+
+.color-neutral-midnight {
+    color: $neutral-midnight !important;
 }

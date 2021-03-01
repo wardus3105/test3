@@ -35,6 +35,7 @@
             color: #757575;
             float: right;
             margin-left: 32px;
+            float: right;
         }
     }
 
@@ -72,3 +73,13 @@
     margin-top: -8px;
     margin-right: 4px;
 }
+
+.detail-popup-reaction li:hover {
+    background: none !important;
+}
+
+.detail-popup-reaction {
+    max-height: 200px;
+    overflow-y: auto;
+}
+

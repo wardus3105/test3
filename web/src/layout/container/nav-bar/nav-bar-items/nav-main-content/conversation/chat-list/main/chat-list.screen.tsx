@@ -16,7 +16,7 @@ import { ENUM_KIND_OF_MESSAGE } from '../../../../../../../../libraries/Enum/mes
 import ImageOverlayScreen from '../../../../../../../../libraries/Features/image-overlay-full-screen/image-overlay-full-screen.screen';
 
 function ChatListScreen(props: any) {
-    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess, setEditedMess } = props;
+    const { chats, count, page, setPage, isUpdating, roomId, hasSearch, setRespondedMess, setEditedMess, memberInGroup } = props;
 
     const {
         userid,
@@ -103,16 +103,18 @@ function ChatListScreen(props: any) {
                                     listImage={miniImageList}
                                 ></ImageContextChatScreen>
                             ) : (
-                                    <TextContextChatScreen
-                                        isCurrent={isCurrent}
-                                        context={chat.message}
-                                        datetime={getTimePeriodFromNow(chat.createdAt)}
-                                        shape={shape}
-                                        time={chat.createdAt}
-                                        index={index}
-                                        respondedMess={respondedMess}
-                                    ></TextContextChatScreen>
-                                )
+                                <TextContextChatScreen
+                                    isCurrent={ isCurrent }
+                                    context={ chat.message }
+                                    datetime={ getTimePeriodFromNow(chat.createdAt) }
+                                    shape={ shape }
+                                    time={ chat.createdAt }
+                                    index={ index }
+                                    respondedMess={ respondedMess }
+                                    reactionList = { chat.reaction }
+                                    memberInGroup={memberInGroup}
+                                ></TextContextChatScreen>
+                            )
                         }
                     </div>
                 )
@@ -139,7 +141,8 @@ function ChatListScreen(props: any) {
                             user={chat.user}
                             context={chat.messageType === ENUM_KIND_OF_MESSAGE.ATTACHMENT ? chat.attachments[0]?.name : chat.message}
                             setRespondedMess={setRespondedMess}
-                            messageId={chat.id}
+                            message={chat}
+                            setChatList={ setChatList }
                         >
                             { eleContext}
                         </GuestChatScreen>
