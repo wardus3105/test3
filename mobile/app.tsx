@@ -11,12 +11,14 @@ import colors from 'res/colors';
 import MainNavigation from 'routers/main-navigation';
 import NavigationService from 'routers/navigation-service';
 import FlashMessage from 'react-native-flash-message';
+import { chatRoomService } from 'hyper-core/packages/mobile';
 
 interface Props {}
 
 export default class App extends React.PureComponent<Props> {
   constructor(props: Props) {
     super(props);
+      chatRoomService.printResult();
   }
   loadingRef: any = null;
   dropDownAlertRef: any = null;

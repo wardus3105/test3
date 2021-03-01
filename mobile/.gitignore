@@ -45,6 +45,8 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+*.swp
+*.swo
 *.xcuserstate
 project.xcworkspace
 

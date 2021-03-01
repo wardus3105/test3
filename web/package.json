@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.2.2",
-    "@types/node": "^14.14.10",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.3",
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/react-router-dom": "^5.1.7",
     "@types/requirejs": "^2.1.32",
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
     "emoji-mart": "^3.0.1",
     "env-cmd": "^10.1.0",
     "font-awesome": "^4.7.0",
+    "hyper-core": "file:../hyper-core",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
@@ -32,13 +33,13 @@
     "redux-logger": "^3.0.6",
     "sass-loader": "^11.0.1",
     "styled-components": "^5.2.1",
-    "typescript": "^4.1.2",
+    "typescript": "^4.2.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "start:dev": "env-cmd -f .env.development react-scripts start",
+    "start:dev": "REACT_APP_FOUNDA=WEB env-cmd -f .env.development react-scripts start",
     "start:test": "env-cmd -f .env.test react-scripts start",
     "start:prod": "env-cmd -f .env.production react-scripts start",
     "build:dev": "env-cmd -f .env.development react-scripts build",
@@ -67,6 +68,6 @@
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.4",
-    "@types/react-redux": "^7.1.11"
+    "@types/react-redux": "^7.1.16"
   }
 }

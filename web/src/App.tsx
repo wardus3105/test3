@@ -9,7 +9,7 @@ import VideoConference from "./libraries/Features/video-call/video-call.screen";
 import HeaderScreen from "./layout/header/header.screen";
 import BodyScreen from "./layout/container/body.screen";
 import "font-awesome/css/font-awesome.min.css";
-
+import { chatRoomService } from 'hyper-core/packages/mobile';
 import ReconnectingWebSocket from "reconnecting-websocket";
 import VideoCallsScreen from "./features/video-calls/video-calls.screen";
 
@@ -26,7 +26,7 @@ const options = {
 function App() {
   const [hasNavbar, setHasNavbar] = useState<boolean>(true);
   const [hasVideo, setHasVideo] = useState<boolean>(false);
-
+    chatRoomService.printResult();
   useEffect(() =>{
       console.log(window.location.pathname)
       if (window.location.pathname.indexOf('video-call')>-1){
