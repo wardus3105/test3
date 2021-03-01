@@ -18,7 +18,8 @@ interface Props {}
 export default class App extends React.PureComponent<Props> {
   constructor(props: Props) {
     super(props);
-      chatRoomService.printResult();
+      console.log(1);
+    chatRoomService.printResult();
   }
   loadingRef: any = null;
   dropDownAlertRef: any = null;
