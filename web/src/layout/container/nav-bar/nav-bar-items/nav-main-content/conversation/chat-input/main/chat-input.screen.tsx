@@ -56,7 +56,6 @@ function ChatInputScreen(props: any){
                             </p>
                         </div>
                         <IconDeleteDisabled onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></IconDeleteDisabled>
-                        {/* <img src={ iconDeleteDisabled } alt="gim" onClick={ () => { props.setRespondedMess() } } className="chatinput-responseMess-icon-cancel cursor-pointer"></img> */}
                     </div>
                 )
             }

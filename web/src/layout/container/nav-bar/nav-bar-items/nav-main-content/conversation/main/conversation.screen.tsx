@@ -24,7 +24,8 @@ function ConversationScreen(){
         redirectToDetail,
         respondedMess, setRespondedMess,
         roomId,
-        editedMess, setEditedMess
+        editedMess, setEditedMess,
+        memberInGroup
     } = ConversationAdapter();
 
     let eleOptionHeader = null;
@@ -66,6 +67,7 @@ function ConversationScreen(){
                 isUpdating={ isUpdating }
                 setRespondedMess={ setRespondedMess }
                 setEditedMess={ setEditedMess }
+                memberInGroup={memberInGroup}
             ></ChatListScreen>
             
             <ChatInputScreen 

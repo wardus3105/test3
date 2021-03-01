@@ -1,7 +1,6 @@
+import { IconArrowLeft2 } from "../../Icons/icon.screen";
 import GoBackButtonAdapter from "./goback-button.adapter";
 import "./goback-button.scss";
-
-const iconArrowLeft = require("../../Icons/arrow-left.svg").default;
 
 function GoBackButtonScreen(){
     const {
@@ -11,7 +10,7 @@ function GoBackButtonScreen(){
     return (
         <div className="gobackbutton-container cursor-pointer">
             <div onClick={ redirectToLastPage }>
-                <img src={ iconArrowLeft } alt="" ></img>
+                <IconArrowLeft2></IconArrowLeft2>
                 <span className="margin-left-8">Quay lại</span>
             </div>
         </div>

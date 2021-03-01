@@ -23,7 +23,6 @@ const options = {
 };
 
 function App() {
-  const [hasNavbar, setHasNavbar] = useState<boolean>(true);
   const [hasVideo, setHasVideo] = useState<boolean>(false);
 
   useEffect(() =>{
@@ -100,10 +99,6 @@ function App() {
     },
   };
 
-  const toggleNavbar = () => {
-    setHasNavbar((prev) => !prev);
-  };
-
   // useEffect(() => {
   //   console.log('test_init_app...');
   //   // localStorage.setItem('userId', "189cbce2-4532-4c0e-9e68-2e4fec9351e2");
@@ -149,11 +144,9 @@ function App() {
   }
   return (
     <>
-      <HeaderScreen toggleNavbar={toggleNavbar}></HeaderScreen>
+      <HeaderScreen></HeaderScreen>
 
-      <BodyScreen
-        hasNavbar={hasNavbar}
-      ></BodyScreen>
+      <BodyScreen></BodyScreen>
     </>
   );
 }

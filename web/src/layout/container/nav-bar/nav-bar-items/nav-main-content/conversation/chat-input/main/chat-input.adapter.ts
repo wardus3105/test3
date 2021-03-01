@@ -10,14 +10,14 @@ import ChatInputStates from "./chat-input.states";
 import useKeyDown from '../../../../../../../../libraries/Hooks/useKeyDown';
 
 function ChatInputAdapter(props: any) {
-    const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess , editedMess , setEditedMess } = props;
+    const { respondedMess, setListMessage, hasUploadImages, setHasUploadImages, roomId, setRespondedMess, editedMess, setEditedMess } = props;
 
     const {
         pathFileList, setPathFileList,
         isMultilineText, setIsMultilineText,
         message, setMessage,
         isFocused, setIsFocused,
-        file , setFile,
+        file, setFile,
         isVisibleEmojiPicker, setVisibleEmojiPicker
     } = ChatInputStates()
 
@@ -33,26 +33,27 @@ function ChatInputAdapter(props: any) {
         setHasUploadImages(false);
         setFile(null)
         setPathFileList([])
-        
+
     }, [roomId])
 
     useEffect(() => {
-        if(editedMess){
+        if (editedMess) {
             setMessage(editedMess.context)
             setVisibleEmojiPicker(false)
             setFile(null)
             setPathFileList([])
             setRespondedMess()
-        } 
-    }, [editedMess , setMessage , setVisibleEmojiPicker , setPathFileList , setFile , setRespondedMess])
+        }
+    }, [editedMess, setMessage, setVisibleEmojiPicker, setPathFileList, setFile, setRespondedMess])
 
     useEffect(() => {
-        if(editedMess){
-            setEditedMess((prev: any) => ({ ...prev , context:message }));
-        } else{
+        if (editedMess) {
+
+            setEditedMess((prev: any) => ({ ...prev, context: message }));
+        } else {
             setEditedMess()
         }
-    }, [message , setEditedMess])
+    }, [message, setEditedMess])
 
     const sendChat = async () => {
         const userId = localStorage.getItem('userId') || "";
@@ -74,27 +75,28 @@ function ChatInputAdapter(props: any) {
             messageSend.message = message;
             messageSend.messageType = ENUM_KIND_OF_MESSAGE.TEXT;
             if (respondedMess) {
-                messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
+                messageSend = {
+                    ...messageSend, parentId: respondedMess.messageId, parent: {
                         createdAt: new Date(),
-                        id:  respondedMess.messageId,
+                        id: respondedMess.messageId,
                         message: respondedMess.context,
                         messageStatus: "1",
-                        messageType:respondedMess.type,
+                        messageType: respondedMess.type,
                         parentId: "",
                         status: "0",
-                        user:{ userName:respondedMess.userName}
-                    }   
+                        user: { userName: respondedMess.userName }
+                    }
                 }
             }
 
-            if(editedMess){
-                messageSend = { ...messageSend, id: editedMess.messageId }  
-                
+            if (editedMess) {
+                messageSend = { ...messageSend, id: editedMess.messageId }
+
                 const response = await ChatInputServices().getInstance().editMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
-                    setListMessage((prev: any) => prev.map((message:any) => {
-                        if(message.id === editedMess.messageId){
-                            return { ...message , message:messageSend.message }
+                    setListMessage((prev: any) => prev.map((message: any) => {
+                        if (message.id === editedMess.messageId) {
+                            return { ...message, message: messageSend.message }
                         }
                         return message;
                     }));
@@ -102,12 +104,12 @@ function ChatInputAdapter(props: any) {
                     setEditedMess()
                     setMessage("")
                 }
-            } else{
+            } else {
                 const response = await ChatInputServices().getInstance().sendMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const data = response.data.data;
-                    messageSend = { ...messageSend , id: data.id };
-    
+                    messageSend = { ...messageSend, id: data.id };
+
                     setMessage("")
                     setRespondedMess()
                     setListMessage([messageSend]);
@@ -144,23 +146,24 @@ function ChatInputAdapter(props: any) {
 
 
                 if (respondedMess) {
-                    messageSend = { ...messageSend, parentId: respondedMess.messageId , parent:{
-                        createdAt: new Date(),
-                        id:  respondedMess.messageId,
-                        message: respondedMess.context,
-                        messageStatus: "1",
-                        messageType:respondedMess.type,
-                        parentId: "",
-                        status: "0",
-                        user:{ userName:respondedMess.userName}
-                        }   
+                    messageSend = {
+                        ...messageSend, parentId: respondedMess.messageId, parent: {
+                            createdAt: new Date(),
+                            id: respondedMess.messageId,
+                            message: respondedMess.context,
+                            messageStatus: "1",
+                            messageType: respondedMess.type,
+                            parentId: "",
+                            status: "0",
+                            user: { userName: respondedMess.userName }
+                        }
                     }
                 }
 
                 response = await ChatInputServices().getInstance().sendMessage(messageSend);
                 if (response && response.status === ENUM_KIND_OF_STATUS_CODE.SUCCESS) {
                     const data = response.data.data;
-                    messageSend = { ...messageSend , id: data.id };
+                    messageSend = { ...messageSend, id: data.id };
 
                     setFile(null)
                     setPathFileList([])
@@ -181,7 +184,7 @@ function ChatInputAdapter(props: any) {
     const fileSelector = buildFileSelector(true, cb, setFile)
 
     const handleFileSelect = (e: any) => {
-        if(!editedMess){
+        if (!editedMess) {
             e.preventDefault();
             fileSelector.click();
         }
@@ -243,11 +246,11 @@ function ChatInputAdapter(props: any) {
         handleFileSelect,
         removePathFile,
         setIsMultilineText,
-        message , setMessage, sendChat,
+        message, setMessage, sendChat,
         setIsFocused, setListMessage,
         addEmoji,
         isVisibleEmojiPicker, setVisibleEmojiPicker,
-        editedMess , setEditedMess
+        editedMess, setEditedMess
     }
 }
 

@@ -17,11 +17,11 @@
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
-            line-height: 18px;
+            line-height: 20px;
             
             color: #757575;
-            // margin-left: 28px;
-            float: right;
+            margin-left: 32px;
+            float: right
         }
     }
 
@@ -44,7 +44,7 @@
     mix-blend-mode: normal;
     opacity: 0.95;
     overflow: auto;
-    width: fit-content;
+    // width: fit-content;
 }
 
 .guestchat-maincontext:hover .guestchat-icon,

@@ -13,6 +13,7 @@ function ConversationStates() {
     const [listMessage, setListMessage] = useState<IChat[]>([]);
     const [respondedMess, setRespondedMess] = useState<IRespondedMess>();
     const [editedMess, setEditedMess] = useState<IEditedMess>();
+    const [memberInGroup , setMemberInGroup] = useState<any[]>([]);
     
     return {
         page , setPage,
@@ -25,7 +26,8 @@ function ConversationStates() {
         listMessage, setListMessage , 
         hasUploadImages, setHasUploadImages,
         respondedMess, setRespondedMess,
-        editedMess, setEditedMess
+        editedMess, setEditedMess,
+        memberInGroup , setMemberInGroup
     }
 }
 

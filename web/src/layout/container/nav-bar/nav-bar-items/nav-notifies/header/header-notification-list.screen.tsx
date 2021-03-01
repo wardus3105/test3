@@ -59,7 +59,6 @@ function HeaderNotificationListScreen(props: any) {
                                 <div className="img-24 flex-center cursor-pointer icon-svg--hover">
                                     <div className="vertical3dots"></div>
                                 </div>
-                                {/* <img src={ iconMoreVertical } className="descriptionchatlist-icon-penedit cursor-pointer icon-svg--hover" alt=""/> */}
                             </TooltipScreen>
                         </div>
                     </MainPopupScreen>

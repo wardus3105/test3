@@ -2,12 +2,11 @@ import React from 'react';
 import CircleAvatarScreen from '../../../../../../../libraries/Features/circle-avtar/circle-avatar.screen';
 import CustomInputScreen from '../../../../../../../libraries/Features/custom-input/custom-input.screen';
 import getApiUrl from '../../../../../../../libraries/Functions/get-api-url';
+import { SrcSearchLoupe } from '../../../../../../../libraries/Icons/icon-src';
 import './header-conversation.scss';
 
-const iconSearchLoupe = require('../../../../../../../libraries/Icons/search-loupe.svg').default;
-
 const styleCustomInput = {
-    backgroundImage: `url('${iconSearchLoupe}')`,
+    backgroundImage: `url('${SrcSearchLoupe}')`,
     backgroundPosition: "14px 50%",
     padding: "12px 20px 12px 40px",
     borderRadius: "0.7rem",

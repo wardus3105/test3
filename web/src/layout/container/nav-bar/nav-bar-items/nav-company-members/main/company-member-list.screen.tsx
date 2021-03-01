@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchFieldScreen } from '../../../../../../features/nav-detail/search-field';
 import { ENUM_KIND_OF_ICONPANEL } from '../../../../../../libraries/Enum/icon-panel';
 import CustomInputScreen from '../../../../../../libraries/Features/custom-input/custom-input.screen';
-
+import { SrcSearchLoupe } from '../../../../../../libraries/Icons/icon-src';
 import { ICompanyMember } from '../company-member/company-member.props';
 import CompanyMemberScreen from '../company-member/company-member.screen';
 import InfiniteScrollCompanyMemberListScreen from '../infinite-scroll/infinite-scroll-company-member-list.screen';
@@ -10,10 +10,9 @@ import FriendListAdapter from './company-member-list.adapter';
 
 import './company-member-list.scss';
 
-const iconSearchLoupe = require("../../../../../../libraries/Icons/search-loupe.svg").default;
 
 const styleCustomInput = {
-  backgroundImage: `url('${iconSearchLoupe}')`,
+  backgroundImage: `url('${SrcSearchLoupe}')`,
   backgroundPosition: "3% 50%",
   padding: "12px 20px 12px 40px",
   borderRadius: "0.7rem",
